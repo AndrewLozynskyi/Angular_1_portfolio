@@ -1,0 +1,142 @@
+.target-popup {
+    width: 450px;
+    max-width: 450px;
+    md-toolbar {
+        font-size: 12px;
+        color: #3b414b;
+        background: #22242b;
+        md-icon {
+            color: #3b414b;
+        }
+    }
+    md-checkbox.md-checked {
+        .md-icon {
+            background: $m-teal;
+            &:after {
+                border-color: #ffffff;
+            }
+        }
+    }
+    .md-dialog-content {
+        .target-title {
+            color: $content-font-color;
+            font-size: 17px;
+        }
+        .date {
+            color: #414651;
+            font-size: 13px;
+        }
+        .select-year-container {
+            margin-bottom: 30px;
+            .select-year {
+                margin-top: 20px;
+                border: 1px solid #1c1e23;
+                display: inline-block;
+                border-radius: 5px;
+                .md-button {
+                    width: 60px;
+                    min-width: 50px;
+                    border-right: 1px solid #1c1e23;
+                    color: #414651;
+                    padding: 0;
+                    margin: 0;
+                    &:hover {
+                        background: #34373d;
+                        color: #c9c9ca;
+                    }
+                    &.active {
+                        background: #22242b;
+                        color: $m-teal;
+                    }
+                    &:last-child {
+                        border: none;
+                    }
+                }
+            }
+            .all-year {
+                float: right;
+                color: $content-font-color;
+                font-size: 14px;
+                margin-top: 25px;
+                margin-bottom: 0;
+                .md-icon {
+                    border-width: 1px;
+                }
+                .md-container {
+                    right: 0;
+                    left: auto;
+                }
+                .md-label {
+                    left: -30px;
+                }
+            }
+        }
+        md-input-container {
+            margin: 5px;
+            width: 50px;
+            text-align: center;
+            font-size: 14px;
+            label {
+                color: #414651;
+                padding-left: 0 !important;
+                margin-bottom: 5px;
+                &:focus {
+                    margin-top: 0px;
+                }
+            }
+            input {
+                border-bottom: 2px solid #1c1e23;
+                color: #17a9a8; /* cursor color */
+                text-shadow: 0px 0px 0px #b8b8b8; /* text color */
+                -webkit-text-fill-color: transparent;
+            }
+            &.md-input-focused {
+                label {
+                    color: $m-teal;
+                    text-align: left;
+                    margin-bottom: 0;
+                }
+            }
+            &.md-input-has-value {
+                label {
+                    color: #414651;
+                    text-align: left;
+                    margin-bottom: 0;
+                }
+            }
+            &.md-input-focused.md-input-has-value {
+                label {
+                    color: $m-teal;
+                    text-align: left;
+                    margin-bottom: 0;
+                }
+            }
+        }
+        .notification {
+            color: $content-font-color;
+            font-size: 14px;
+            margin-top: 25px;
+            margin-bottom: 0;
+            .md-icon {
+                border-width: 1px;
+            }
+            .md-container {
+                left: 0;
+                right: auto;
+            }
+        }
+    }
+    md-dialog-actions {
+        background: $bg-gray;
+        padding-bottom: 15px;
+        color: $content-font-color;
+        .target-cancel {
+            background: $bg-gray;
+            color: $content-font-color;
+        }
+        .target-save {
+            background: #245256;
+            color: $content-font-color;
+        }
+    }
+}

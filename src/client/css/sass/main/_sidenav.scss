@@ -1,0 +1,569 @@
+app-leftmenu {
+    overflow: visible!important;
+    z-index: 10;
+}
+
+md-sidenav {
+    transition: all ease 0.3s;
+    height: 100%;
+    background-color: #1d1f25;
+}
+
+.md-sidenav-left {
+    width: $sidenav-left-width;
+    .logo {
+        font-weight: bold;
+        padding: 0 10px;
+    }
+    overflow: visible;
+    text-transform: uppercase;
+    @media all and (max-width: $break-xsmall) {
+        min-width: 180px;
+    }
+    .client-logo {
+        position: relative;
+        padding: 21px 0 21px 0;
+        font: bold 11px Roboto;
+        color: $sidenav-color;
+        &.shadow {
+            width: 100%;
+            text-align: center;
+            color: #343539;
+            letter-spacing: 0.7px;
+            font-size: 15px;
+            .clientLogoEditBtn{
+                display: inline;
+                i{
+                    color:#fff;
+                    margin-left: 10px;
+                }
+            }
+        }
+        &:after {
+            display: block;
+            content: '';
+            height: 0;
+            width: 100%;
+            border-top: 1px solid #0c0d0f;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    }
+    md-content {
+        color: $sidenav-color !important;
+        overflow: visible;
+        font-size: 12px;
+        background-color: #1d1f25;
+    }
+    md-icon {
+        color: $sidenav-color;
+    }
+    .bold {
+        font-weight: 700;
+    }
+    md-toolbar, .shadow {
+        box-shadow: 4px 0 4px 0px rgba(0, 0, 0, 0.4);
+    }
+    md-list-item {
+        min-height: 80px;
+        padding: 0;
+        box-shadow: 4px 0 4px 0px rgba(0, 0, 0, 0.4);
+        &._md-button-wrap > div.md-button:first-child {
+            padding: 16px 0 16px 35px;
+            opacity: 0.9;
+        }
+        .md-list-item-text {
+            z-index: -1;
+            md-icon {
+                &.large-img {
+                    &:before {
+                        font-size: 20px;
+                    }
+                }
+                span {
+                    font-weight: 600;
+                }
+            }
+        }
+        .md-button {
+            transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .md-button:not([disabled]):hover {
+            color: #95a1ab;
+            background-color: rgba(55, 57, 62, 0.4);
+            md-icon {
+                color: #777f88;
+            }
+        }
+        &:after {
+            display: block;
+            content: '';
+            height: 0;
+            width: 100%;
+            border-top: 1px solid #0c0d0f;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        &.active {
+            color: $primary-color;
+            background-color: $bg-gray;
+            box-shadow: none;
+            a {
+                border-left: 4px solid $primary-color;
+            }
+            md-icon {
+                color: $primary-color !important;
+            }
+        }
+    }
+    .left-menu-title {
+        font: 700 16px fontawesome;
+        .cloud-logo {
+            position: relative;
+            height: 31.6px;
+            width: 33.9px;
+            padding-left: 0.4px;
+        }
+        img {
+            width: 138px;
+        }
+    }
+    .left-menu-title {
+        &.one {
+            position: absolute;
+        }
+    }
+}
+
+md-backdrop.md-opaque {
+    opacity: 0;
+    background-color: transparent;
+}
+
+md-backdrop {
+    transition: opacity 0ms;
+}
+
+.md-sidenav-right {
+    width: $sidenav-right-width !important;
+    right: 0;
+    overflow-y: scroll;
+    overflow-x: overlay;
+    md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+        min-height: 1200px;
+    }
+    .md-active {
+        md-icon {
+            color: $sidenav-color-icon;
+        }
+    }
+    .sidenav-right-icon {
+        &:before {
+            font-size: 20px;
+        }
+    }
+    .mb0 {
+        margin-bottom: 0!important;
+    }
+    md-tabs {
+        md-tabs-wrapper {
+            box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.4);
+            background-color: #22242b;
+            height: 80px;
+            md-tabs-canvas {
+                height: 80px;
+                md-pagination-wrapper {
+                    height: 80px;
+                    md-tab-item {
+                        height: 80px;
+                        display: flex;
+                        flex-direction: column-reverse;
+                        span {
+                            margin-bottom: 5px;
+                        }
+                    }
+                }
+            }
+        }
+        .title-maintenance {
+            font-family: Roboto;
+            color: #bfbfbf;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 30px;
+        }
+        md-switch.activeDisabled .md-container > div {
+            cursor: default;
+            background: #1d1f27;
+            .md-ink-ripple {
+                color: #2cdbd9;
+            }
+        }
+        md-switch.activeDisabled .md-container > div > div {
+            background: #2cdbd9;
+        }
+        md-switch .md-container > div {
+            cursor: default;
+            background: #1d1f27;
+        }
+        md-switch .md-container > div > div {
+            background: #505662;
+        }
+        md-tabs-content-wrapper {
+            background-color: #292c33;
+            box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.4);
+            height: 1338px;
+            margin-top: 32px;
+            md-tab-content {
+                .ng-isolate-scope {
+                    text-transform: none;
+                    md-tabs-content-wrapper {
+                        margin-top: 32px;
+                    }
+                    .md-padding {
+                        background-color: #292c33;
+                        padding-right: 0px;
+                        padding-bottom: 0px;
+                        .table_notifications {
+                            position: relative;
+                            width: 100%;
+                            margin-top: 12px;
+                            tbody {
+                                tr {
+                                    .td_notifications {
+                                        display: flex;
+                                        justify-content: space-between;
+                                        padding: 15px 0px 0px 0px;
+                                        div {
+                                            margin-left: 5px;
+                                            margin-right: 5px;
+                                            .status-icon {
+                                                margin-left: -12px;
+                                                margin-top: -31px;
+                                                border: 2px solid #20232a;
+                                                border-radius: 50%;
+                                                width: 16px;
+                                                height: 16px;
+                                                background-color: #cdec10;
+                                            }
+                                            div {
+                                                .contacts-name {
+                                                    color: #c4ccd4;
+                                                    font-family: roboto;
+                                                    font-size: 18px;
+                                                }
+                                                .shadow-title {
+                                                    color: #6e6e77;
+                                                    font-family: roboto;
+                                                    font-size: 12px;
+                                                    max-width: 170px;
+                                                    word-break: break-all;
+                                                }
+                                            }
+                                        }
+                                        .last_time_visite {
+                                            font-family: roboto;
+                                            color: #969698;
+                                        }
+                                        md-menu {
+                                            button {
+                                                height: 15px;
+                                                width: 15px;
+                                                padding: 0px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    md-card {
+                        md-card-title {
+                            padding: 9px 0 9px 16px;
+                            md-card-title-text {
+                                .title {
+                                    color: #474d59;
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    line-height: 25px;
+                                    margin-top: 10px;
+                                }
+                                .group-title {
+                                    font-family: Roboto;
+                                    color: #bfbfbf;
+                                    font-size: 16px;
+                                    font-weight: 400;
+                                    line-height: 25px;
+                                    text-align: left;
+                                }
+                                .group-description {
+                                    font-family: Roboto;
+                                    color: #474d59;
+                                    font-size: 13px;
+                                    font-weight: 400;
+                                    line-height: 20px;
+                                    text-align: left;
+                                    margin-bottom: 25px;
+                                }
+                                .upper {
+                                    text-transform: uppercase;
+                                    margin-bottom: 15px;
+                                }
+                                .date {
+                                    font-size: 25px;
+                                    color: #bebebe;
+                                    font-weight: 400;
+                                }
+                                .notifications {
+                                    font-size: 23px;
+                                    color: #bebebe;
+                                    font-weight: 400;
+                                }
+                            }
+                        }
+                        .notif-switch {
+                            display: flex;
+                            justify-content: space-between;
+                            .notif-dropdown {
+                                width: 317px;
+                            }
+                            md-switch:last-of-type {
+                                margin-left: inherit;
+                                margin-right: 0;
+                                padding-right: 12px;
+                                margin-top: 0;
+                            }
+                            .switch {
+                                margin-top: 0;
+                                padding-right: 12px;
+                            }
+                        }
+                        .today {
+                            border-bottom: 1px solid #474d59;
+                            margin-left: -8px;
+                            margin-right: -8px;
+                            padding-bottom: 5px;
+                        }
+                        /*settings-page*/
+                        .settings {
+                            border-bottom: 1px solid #474d59;
+                            margin-left: -8px;
+                            margin-right: -8px;
+                            padding-bottom: 5px;
+                            md-card-title-text {
+                                .title {
+                                    color: #474d59;
+                                    font-size: 14px;
+                                    font-weight: 400;
+                                    line-height: 25px;
+                                    margin-top: 10px;
+                                }
+                                .info-block {
+                                    width: 80%;
+                                    position: relative;
+
+                                    .group-title {
+                                        font-family: Roboto;
+                                        color: #bfbfbf;
+                                        font-size: 16px;
+                                        font-weight: 400;
+                                        line-height: 25px;
+                                        text-align: left;
+                                    }
+                                    .group-description {
+                                        font-family: Roboto;
+                                        color: #474d59;
+                                        font-size: 13px;
+                                        font-weight: 600;
+                                        line-height: 20px;
+                                        text-align: left;
+                                        margin-bottom: 25px;
+                                    }
+                                }
+                                .info-block-menu {
+                                    display: flex;
+                                    width: 100%;
+                                    justify-content: space-between;
+                                    position: relative;
+
+                                    .group-title {
+                                        font-family: Roboto;
+                                        color: #bfbfbf;
+                                        font-size: 16px;
+                                        font-weight: 400;
+                                        line-height: 25px;
+                                        text-align: left;
+                                        md-icon {
+                                            &:before {
+                                                color:#bfbfbf;
+                                            }
+                                        }
+                                    }
+                                    .group-description {
+                                        font-family: Roboto;
+                                        color: #474d59;
+                                        font-size: 13px;
+                                        font-weight: 600;
+                                        line-height: 20px;
+                                        text-align: left;
+                                        margin-bottom: 25px;
+                                    }
+
+                                }
+                                .history {
+                                    margin-top: -20px;
+                                }
+                                .upper {
+                                    text-transform: uppercase;
+                                    margin-bottom: 15px;
+                                }
+                                .date {
+                                    font-size: 25px;
+                                    color: #bebebe;
+                                    font-weight: 400;
+                                }
+                                .notifications {
+                                    font-size: 19px;
+                                    color: #bebebe;
+                                    font-weight: 400;
+                                }
+                            }
+                            .notif-switch {
+                                display: flex;
+                                justify-content: space-between;
+                                position: relative;
+                                width: 100%;
+                                md-icon {
+                                    &:before {
+                                        color:#bfbfbf;
+                                    }
+                                }
+                                .open-menu {
+                                    color: $test-color;
+                                }
+                                .open-menu-admin {
+                                    color: $test-color;
+                                    margin: 0px;
+                                }
+                                .switch-block {
+                                    position: absolute;
+                                    width: 20%;
+                                    right: 0;
+                                    height: 100%;
+                                    .switch {
+                                        margin: 0;
+                                        padding-left: 20px;
+                                        padding-right: 9px;
+                                    }
+                                }
+                                .notifiaction-switch {
+                                    padding-right: 9px;
+                                    margin-top: 0;
+                                }
+                            }
+                            .show-more {
+                                cursor: pointer;
+                            }
+                        }
+                        /*currency-page*/
+                        .currency-list {
+                            margin-left: -8px;
+                            margin-right: -8px;
+                            padding-bottom: 5px;
+                            .currency-item {
+                                padding-left: 18px;
+                                .currency-name  {
+                                    font-family: Roboto;
+                                    color: #bfbfbf;
+                                    font-size: 16px;
+                                    font-weight: 400;
+                                    line-height: 25px;
+                                    text-align: left;
+                                }
+                                .currency-symbol {
+                                    margin-left: 40px;
+                                    font-family: Roboto;
+                                    color: #bfbfbf;
+                                    font-size: 16px;
+                                    font-weight: 400;
+                                    line-height: 25px;
+                                    text-align: left;
+                                }
+                                .currency-radio {
+                                    margin: 0 0 0 auto;
+                                }
+                            }
+                        }
+                        .alert-me {
+                            font-family: Roboto;
+                            color: #474d59;
+                            font-size: 13px;
+                            font-weight: 600;
+                            line-height: 20px;
+                            text-align: left;
+                        }
+                        .notif-select {
+                            margin-left: 25px;
+                            margin-bottom: 0px;
+                        }
+                        .select-active {
+                            width: 317px;
+                            .md-select-value {
+                                border-bottom-color: black !important;
+                                span {
+                                    color: #474d59;
+                                }
+                                .md-text {
+                                    color: #474d59;
+                                }
+                                .md-select-icon {
+                                    &:after {
+                                        color: #17a9a8;
+                                    }
+                                }
+                            }
+                        }
+                        .mt0 {
+                            margin-top: 0;
+                        }
+                        .alerts {
+                            background: #2fdcda;
+                            .back-btn {
+                                .ng-scope {
+                                    color: white !important;
+                                }
+                            }
+                            .title-details {
+                                padding-top: 8px;
+                                padding-left: 5px;
+                                font-family: Roboto;
+                                font-size: 22px;
+                                font-weight: 400;
+                                line-height: 25px;
+                                text-align: left;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#select_container_17 {
+    .md-text {
+        color: #474d58;
+    }
+}
+
+.md-toolbar-tools > .md-button:last-child {
+    margin-right: -14px;
+}
+
+.md-toolbar-tools > .md-button:first-child {
+    margin-left: 12px;
+}

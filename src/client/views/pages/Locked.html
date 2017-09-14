@@ -1,0 +1,47 @@
+<div class="locked-sesion">
+    <md-card class="login-user">
+        <div class="first-block">
+            <md-card-avatar> 
+                <md-user-avatar class="first-logo">
+                    <img src="/img/icons/logo2.png"/>
+                </md-user-avatar>
+            </md-card-avatar>
+        </div>
+        <div class="second-block">
+            <form ng-submit="login()" name="form" validate ng-class="{ 'ng-invalid ng-dirty': error.code == 1 }">
+                <md-icon class="show-avatar">
+                    <img class="avatar" src="/img/icons/locked.png"/>
+                </md-icon>
+                <md-card-header-text>
+                    <md-title>
+                        Your sesion is locked
+                    </md-title>
+                    <p class="subhead"><span>brooks_m,</span>due to inactivity,your session is locked.Enter your password to continue.</p>
+                </md-card-header-text>
+                <md-card-content class="container">
+                    <md-input-container class="information" ng-class="{ 'md-input-invalid': error.code == 1 }">
+                        <input  name="password"
+                                    ng-model="newUser.password"
+                                    ng-class="{ 'ng-invalid ng-dirty': error.code == 1 }"
+                                    class="user-password" 
+                                    placeholder="Password" 
+                                    type="password" 
+                                    ng-maxlength="50">
+                        <div class="errors" ng-show="error.code == 1">
+                            <div class="error-min">&nbsp; Wrong password</div>
+                        </div>
+                        <md-icon class="image-container">
+                            <img class="avatar" src="/img/profile-pics/lock.png"/>
+                        </md-icon>
+                    </md-input-container>
+                </md-card-content>
+                <md-card-actions class="login-btn mt20">
+                    <md-button ng-click="login()" type="submit" class="login" ng-disabled="isDisabled">LOGIN</md-button>
+                </md-card-actions>
+                <div class="link">
+                    <a href="#"><p class="forgot-account">It's not my account</p></a>
+                </div>
+            </form>
+        </div>
+    </md-card>
+</div>

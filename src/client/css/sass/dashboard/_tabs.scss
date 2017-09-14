@@ -1,0 +1,25 @@
+md-tabs {
+    .md-tab {
+        color: $tabs-color;
+        text-transform: capitalize;
+        &.md-active {
+            color: #dfdfdf;
+        }
+        .md-ripple-container {
+            color: $primary-color;
+        }
+        span {
+            font: 500 14px roboto;
+            @media (max-width: 500px) {
+                font-size: 3vmin;
+            }
+            @media (max-width: 390px) {
+                font-size: 3.6vw;
+            }
+        }
+    }
+    md-ink-bar {
+        color: $primary-color;
+        background: $primary-color;
+    }
+}

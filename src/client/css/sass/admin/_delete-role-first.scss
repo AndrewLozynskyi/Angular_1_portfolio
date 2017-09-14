@@ -1,0 +1,51 @@
+.delete-role {
+    overflow: visible;
+    min-width: 580px;
+    .delete-role-popup {
+        width: 580px;
+        position: relative;
+        md-card-header-text {
+            h3 {
+                text-align: center;
+                color: rgb(169, 169, 169);
+                font: 400 25px Roboto;
+            }
+            md-subhead {
+                position: absolute;
+                right: 20px;
+                top: 20px;
+                color: rgb(169, 169, 169);
+                font-size: 18px;
+                cursor: pointer;
+            }
+        }
+        .informations {
+            font: 400 17px Roboto;
+            text-align: center;
+            margin: 0 7%;
+            line-height: 25px;
+            color: rgb(169, 169, 169);
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 16px;
+            margin-bottom: 40px;
+            .delete-btn {
+                background-color: rgb(245, 129, 26);
+                padding: 9px;
+                margin-right: 20px;
+                min-width: 105px;
+                color: #bfbfbf;
+                font: 400 17px Roboto;
+            }
+            .cancel-btn {
+                background-color: rgb(43, 46, 53);
+                padding: 9px;
+                margin-left: 20px;
+                width: 105px;
+                color: #bfbfbf;
+                font: 400 17px Roboto;
+            }
+        }
+    }
+}

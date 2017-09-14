@@ -1,0 +1,80 @@
+
+<md-card-title class="mt20 mb20 customer">
+    <md-card-title-text>
+        <div class="customer-header ml10">
+            <div>
+                <md-button class="back-btn md-icon-button md-button md-ink-ripple" ng-click="pc.back()">
+                    <md-icon flex="none" md-font-set="md">arrow_back</md-icon>
+                </md-button>
+                <span class="header-title">Customer service UK Team</span>
+            </div>
+        </div>
+    </md-card-title-text>
+    <md-card-title-media></md-card-title-media>
+
+</md-card-title>
+
+<div class="md-whiteframe-3dp ml20 mr10 bg-gray customer-body">
+    <div>
+        <md-tabs flex md-dynamic-height="">
+            <md-tab label="REVIEW">
+                <md-content class="review">
+                    <div class="mb50">
+                        <md-list>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text" layout="row">
+                                    <md-icon class="icon" md-font-set="fa fa-building-o"></md-icon>
+                                    <h3 class="title">Company</h3>
+                                    <p class="description">Somatic</p>
+                                    <h3 class="title updated">Last updated:</h3>
+                                    <p class="description">25.05.2017</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text" layout="row">
+                                    <md-icon class="icon" md-font-set="fa fa-globe"></md-icon>
+                                    <h3 class="title">Location</h3>
+                                    <p class="description">Italy (Milan), UK (London), Ukraine (Lviv, Kiev)</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text" layout="row">
+                                    <md-icon class="icon" md-font-set="fa fa-calendar-o"></md-icon>
+                                    <h3 class="title">Creatind date</h3>
+                                    <p class="description">August 15, 2015 - Presenr (1 year 5 months)</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text" layout="row">
+                                    <h3 class="title descr">Description</h3>
+                                    <div>
+                                        <p class="description">All togather.</p>
+                                        <p class="description">If any text required it has tolook like this paragraph</p>
+                                    </div>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                    <span class="total-description">Total and Average measurements of the team in comparison with all department</span>
+                    <div layout="row">
+                        <total-linear></total-linear>
+                        <avarage-age></avarage-age>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="SPAN OF CONTROL">
+                <md-content>
+                    <div class="bottom-button">
+                        <md-button ng-click="assign=false;permissions=true" class="md-raised cancel">
+                            Cancel
+                        </md-button>
+                        <md-button ng-click="assign=true" class="md-raised save">
+                            Save
+                        </md-button>
+                    </div>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </div>
+
+</div>

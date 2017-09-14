@@ -1,0 +1,51 @@
+<div class="total-finance-table">
+    <div class="table-header">
+        Total finance for {{ date | date:'LLLL yyyy'}}
+    </div>
+    <div class="table">
+        <table>
+            <tr>
+                <td class="header-country">
+                    Country
+                </td>
+                <td>
+                    Revenue
+                </td>
+                <td>
+                    Human cost
+                </td>
+                <td>
+                    Headcount
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   Total
+                </td>
+                <td>
+                    {{ revenueTotal | percent }}
+                </td>
+                <td>
+                    &#8364; {{ humanCostTotal }}
+                </td>
+                <td>
+                    {{ HeadcountTotal }}
+                </td>
+            </tr>
+            <tr ng-repeat="data in data">
+                <td>
+                    {{ data.country }}
+                </td>
+                <td>
+                    {{ data.revenue | percent }}
+                </td>
+                <td>
+                    &#8364; {{ data.humanCost  }}
+                </td>
+                <td>
+                    {{ data.headcount }}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

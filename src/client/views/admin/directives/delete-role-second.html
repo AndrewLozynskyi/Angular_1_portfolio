@@ -1,0 +1,21 @@
+
+<md-card class="delete-role-popup">
+    <md-card-header>
+        <md-card-header-text class="information-header">
+            <md-title>
+                <h3>Delete Role</h3>
+                <md-subhead ng-click="drt.close()">X</md-subhead>
+            </md-title>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card-title>
+        <md-card-title-text>
+            <md-headline class="informations">There is <span>1 active User Account</span> assigning to role Super User.To be deleted this role has to not contain any active accounts</md-headline>
+            <p class="subhead">Would you like to review existing accounts?</p>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-actions class="btn-container">
+        <md-button class="delete-btn">Review Accounts</md-button>
+        <md-button class="cancel-btn" ng-click="drt.cancel()">Cancel</md-button>
+    </md-card-actions>
+</md-card>

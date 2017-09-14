@@ -1,0 +1,26 @@
+
+<md-toolbar>
+    <span>Edit Mode entrance</span>
+    <span flex></span>
+    <md-button class="md-icon-button" ng-click="pec.cancel()">
+        <md-icon aria-label="Close dialog">close</md-icon>
+    </md-button>
+</md-toolbar>
+
+<md-dialog-actions>
+    <form autocomplete="off" ng-submit="pec.confirm()">
+        <div class="nick-name"><span>Nick Name: </span>{{ pec.login }}</div>
+        <div class="input-action">
+            <span>Password:</span>
+            <input  type="password" class="password-input" ng-model="pec.password" md-autofocus>
+        </div>
+        <div class="action-buttons">
+            <md-button class="ok-btn" type="submit">
+                <span>OK</span>
+            </md-button>
+            <md-button class="cancel-btn md-raised" ng-click="pec.cancel()">
+                <span>Cancel</span>
+            </md-button>
+        </div>
+    </form>
+</md-dialog-actions>

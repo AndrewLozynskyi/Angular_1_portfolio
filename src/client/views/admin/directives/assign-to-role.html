@@ -1,0 +1,42 @@
+
+<md-card class="mobile-add-to-group-btn">
+    <md-card-header>
+        <md-card-header-text class="header">
+            <md-title>
+                <p>Ussign user to role</p>
+                <md-subhead><i class="fa fa-times" aria-hidden="true" ng-click="atr.cancel()"></i></md-subhead>
+            </md-title>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card>
+        <form name="form" validate>
+            <md-input-container>
+                <p>Role:</p>
+                <md-select  ng-model="atr.selectedRoles"
+                            ng-change="atr.change( atr.selectedRoles, {{ atr.selectedRoles }} )"
+                            aria-label="..."
+                            placeholder="Select Role"
+                            multiple>
+
+                    <md-chips class="style-scroll"
+                              ng-show="atr.selectedRoles.length > 0"
+                              ng-model="atr.selectedRoles"
+                              readonly="atr.readonly">
+                    </md-chips>
+
+                    <md-content class="style-scroll">
+                        <md-option class="hover-group" ng-value="role.name" ng-repeat="role in atr.rolesList">
+                            {{ role.name }}
+                        </md-option>
+                    </md-content>
+                </md-select>
+            </md-input-container>
+        </form>
+    </md-card>
+
+    <md-card-actions class="btn-container">
+        <md-button class="save-btn" ng-click="atr.save()">Save</md-button>
+        <md-button class="cancel-btn" ng-click="atr.cancel()">Cancel</md-button>
+    </md-card-actions>
+
+</md-card>

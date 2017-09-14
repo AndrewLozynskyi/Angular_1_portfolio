@@ -1,0 +1,19 @@
+<md-card class="delete-role-popup">
+    <md-card-header>
+        <md-card-header-text class="information-header">
+            <md-title>
+                <h3>Close window</h3>
+                <md-subhead ng-click="cap.cancel()">X</md-subhead>
+            </md-title>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card-title>
+        <md-card-title-text>
+            <md-headline class="informations">The changes were not saved.Do you really want to close the window?</md-headline>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-actions class="btn-container">
+        <md-button class="close-btn" ng-click="cap.close()">Close</md-button>
+        <md-button class="cancel-btn" ng-click="cap.cancel()">Cancel</md-button>
+    </md-card-actions>
+</md-card>

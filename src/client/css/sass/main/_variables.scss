@@ -1,0 +1,28 @@
+$sidenav-left-width: 190px;
+$sidenav-right-width: 400px;
+$sidenav-color: #4a5a68;
+$tabs-color: #4a5a68;
+$bg-gray: #292c33;
+$primary-color: #17a9a8;
+$sidenav-color-icon: #dfdfdf !important;
+$content-font-color: #bfbfbf ;
+$font-icon-md: 'Material-Design-Iconic-Font';
+$table-border-color: #f0f0f0;
+$m-teal: #009688;
+$m-amber: #FFC107;
+$slider-color: #72929c;
+$break-xsmall: 600px;
+$test-color: #bfbfbf !important;
+
+@mixin activeMonth($count) {
+    .circle {
+        @for $i from 1 through $count {
+            &:nth-child(#{$i}) {
+                background-color: $slider-color;
+                span {
+                    color: $slider-color;
+                }
+            }
+        }
+    }
+}

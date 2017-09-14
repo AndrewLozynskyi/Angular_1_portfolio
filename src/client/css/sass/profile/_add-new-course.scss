@@ -1,0 +1,108 @@
+
+add-new-course {
+    padding-left: 15px;
+    right: 15px;
+    min-height: 260px;
+    .acGroup {
+        display: flex;
+        flex-direction: column;
+        .head {
+            margin-top: 10px;
+            .acTitle {
+                float: left;
+                margin-left: 10px;
+                margin-top: 5px;
+                color: #b8b8b8;
+                font-size: 24px;
+            }
+            .close-btn {
+                float: right;
+                margin-right: 30px;
+                margin-top: 10px;
+                md-icon {
+                    color: #b8b8b8;
+                }
+            }
+        }
+        .main {
+            margin-top: 10px;
+            margin-left: 10px;
+            .course-row {
+                display: flex;
+                flex-direction: row;
+                margin-top: 10px;
+                .course-name {
+                    font-size: 20px;
+                    color: #b8b8b8;
+                }
+                .provider {
+                    font-size: 20px;
+                    margin-top: 7px;
+                    color: #b8b8b8;
+                }
+                .web-site {
+                    font-size: 20px;
+                    color: #b8b8b8;
+                }
+                .fished {
+                    font-size: 20px;
+                    color: #b8b8b8;
+                }
+                .name-input {
+                    margin: 0;
+                    margin-left: 10px;
+                    min-width: 50%;
+                    input {
+                        border: 0;
+                        outline: 0;
+                        background: transparent;
+                        border-bottom: 1px solid #1c1e25;
+                    }
+                }
+                .provider-input {
+                    margin: 0;
+                    margin-left: 51px;
+                    min-width: 50%;
+                    input {
+                        border: 0;
+                        outline: 0;
+                        background: transparent;
+                        border-bottom: 1px solid #1c1e25;
+                    }
+                }
+            }
+        }
+        .status-menu {
+            padding-left: 33px;
+        }
+        .footer-btn {
+            margin-top: 25px;
+            .attach-btn {
+                background-color: #474c58;
+                width: 220px;
+                i {
+                    color: #b8b8b8;
+                    padding: 2px;
+                }
+                span {
+                    color: #b8b8b8;
+                    padding: 2px;
+                }
+            }
+            .save-btn {
+                background-color: rgb(32, 106, 109);
+                float: right;
+                margin-right: 20px;
+                width: 220px;
+                i {
+                    color: #b8b8b8;
+                    padding: 2px;
+                }
+                span {
+                    color: #b8b8b8;
+                    padding: 2px;
+                }
+            }
+        }
+    }
+}

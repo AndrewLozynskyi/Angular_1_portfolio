@@ -1,0 +1,74 @@
+
+absences-widget {
+    margin: 0;
+    display: block;
+    width: 100%;
+    .md-list-absences {
+        top: -30px;
+        position: static;
+        .absences-widget {
+            width:100%;
+            display: block;
+            margin-top: 20px;
+            md-card-title {
+                display: flex;
+                float: left;
+                padding: 0px;
+                width: 19%;
+                .charts {
+                    display: flex;
+                    margin: auto;
+                    .charts-block{
+                        .absences {
+                            margin: 0px;
+                            display: inline-block;
+                        }
+                        .tp {
+                            display: block;
+                            position: absolute;
+                            .tooltip {
+                                width: 200px;
+                                .line-block {
+                                    position: absolute;
+                                    display: block;
+                                    width: 100%;
+                                    .line {
+                                        left: 94px;
+                                        display: flex;
+                                        position: absolute;
+                                        margin: 0 auto;
+                                        width: 1px;
+                                        height: 42px;
+                                        top: 12px;
+                                        background: #17a9a8;
+                                    }
+                                    .dot {
+                                        display: block;
+                                        position: absolute;
+                                        width: 5px;
+                                        margin: auto;
+                                        height: 5px;
+                                        background: #17a9a8;
+                                        border-radius: 50%;
+                                        right: 101px;
+                                        top: 50px;
+                                    }
+                                }
+                            }
+                        }
+                        .circle-text {
+                            width:84px;
+                            color: #4a5a68;
+                            font-size: 12px;
+                            word-wrap: break-word;
+                            text-align: center;
+                            margin-top: -10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+

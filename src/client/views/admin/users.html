@@ -1,0 +1,424 @@
+<md-card class="users">
+
+    <md-card-title class="mt30" ng-hide="ua.selectedGroup">
+        <md-card-title-text layout="row" class="title-text">
+            <md-button aria-label="Open demo menu" class="md-icon-button menu-popup-arrow" ng-click="ua.slideLeftMenu = false; ua.showPopupMenu.enable = true">
+                <md-icon md-font-set="md">forward</md-icon>
+            </md-button>
+                All Users
+            <md-icon hide-xs ng-show="ua.editGroup" md-font-set="fa fa-pencil-square-o" class="mr20 ml30 top-icon"></md-icon>
+            <md-icon hide-xs ng-show="ua.editGroup" md-font-set="fa fa-trash" class=" top-icon"></md-icon>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-title class="mt30" ng-show="ua.selectedGroup">
+        <md-button class="back-btn md-icon-button md-button md-ink-ripple pl0" ng-click="ua.selectUsersFromGroup(false)">
+            <md-icon flex="none" md-font-set="md">arrow_back</md-icon>
+        </md-button>
+        <md-card-title-text layout="row" class="title-text mt5" >{{ua.groupName}}
+            <md-icon hide-xs ng-show="ua.editGroup"  md-font-set="fa fa-pencil-square-o" class="mr20 ml20 top-icon"></md-icon>
+            <md-icon hide-xs ng-show="ua.editGroup"  md-font-set="fa fa-trash" class=" top-icon"></md-icon>
+        </md-card-title-text>
+    </md-card-title>
+
+    <div class="left-menu" ng-hide="ua.slideLeftMenu" ng-click="ua.slideLeftMenu = true;ua.showPopupMenu.enable = false"></div>
+
+    <md-card role="list" layout="column" class="users-department left-bar-mobile-menu layout-column animate-hide" ng-hide="ua.slideLeftMenu">
+
+        <md-card-title-text layout="row" class="title-text">
+            <md-button aria-label="Open demo menu" class="md-icon-button menu-popup-arrow" ng-click="ua.slideLeftMenu = true;ua.showPopupMenu.enable = false">
+                <md-icon md-font-set="md">forward</md-icon>
+            </md-button>
+                All Users
+            <md-icon hide-xs ng-show="ua.editGroup" md-font-set="fa fa-pencil-square-o" class="mr20 ml30 top-icon"></md-icon>
+            <md-icon hide-xs ng-show="ua.editGroup" md-font-set="fa fa-trash" class=" top-icon"></md-icon>
+        </md-card-title-text>
+
+        <div class="scroll-block style-scroll">
+
+            <md-list role="list" layout="column">
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === false }" ng-click="ua.selectUsersFromGroup(false)">
+                    <span >All Users</span>
+                    <span class="md-secondary data">{{ ua.generalInfo.allCount }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.active.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.active.groupId, 'Active' )">
+                    <span>Active</span>
+                    <span class="md-secondary data">{{ ua.generalInfo.main.active.count }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.inactive.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.inactive.groupId, 'Inactive' )">
+                    <span>lnactive</span>
+                    <span class="md-secondary inactive data">{{ ua.generalInfo.main.inactive.count }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.expiredsoon.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.expiredsoon.groupId, 'Expiredsoon' )">
+                    <span>Expired Soon</span>
+                    <span class="md-secondary exp-soon data">{{ ua.generalInfo.main.expiredsoon.count }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.expired.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.expired.groupId, 'Expired' )">
+                    <span>Expired</span>
+                    <span class="md-secondary expired data">{{ ua.generalInfo.main.expired.count }}</span>
+                </md-list-item>
+            </md-list>
+
+            <md-list role="list" layout="column">
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.newcomers.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.newcomers.groupId, 'Newcomers' )">
+                    <span>Newcomers</span>
+                    <span class="md-secondary newcomers data">{{ ua.generalInfo.main.newcomers.count }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.activated.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.activated.groupId, 'Activated' )">
+                    <span>Activated</span>
+                    <span class="md-secondary data">{{ ua.generalInfo.main.activated.count }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.deactivated.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.deactivated.groupId, 'Deactivated' )">
+                    <span>Deactivated</span>
+                    <span class="md-secondary data">{{ ua.generalInfo.main.deactivated.count }}</span>
+                </md-list-item>
+            </md-list>
+
+            <md-list role="list" layout="column">
+                <md-list-item class="title-contacts group-title">
+                    <span class="title">GROUPS</span>
+                </md-list-item>
+                <div class="users-groups style-scroll">
+                    <md-list-item class="users-item group-name" ng-repeat="item in ua.generalInfo.groups" ng-class="{ active: ua.selectedGroup === item.groupId }" ng-click="ua.selectUsersFromGroup( item.groupId, item.name )">
+                        <span>{{ item.name }}</span>
+                        <span class="md-secondary data">{{ item.count }}</span>
+                    </md-list-item>
+                    <md-list-item ng-click="createGroup()" ng-show="!newGroup"  class="users-item create-group">
+                        <span>+ Create Group</span>
+                    </md-list-item>
+                    <md-list-item ng-show="newGroup" layout="column">
+                        <md-input-container>
+                            <label>New Group Name</label>
+                            <input type="text"  ng-model="newGroupName" class="addNewGroupInput" autofocus="newGroup">
+                        </md-input-container>
+                        <md-card-title >
+                            <md-button class="ok" ng-click="saveGroup( newGroupName )"  type="submit">
+                                Save
+                            </md-button>
+                            <md-button class="cancel" ng-click="cancel()">
+                                Cancel
+                            </md-button>
+                        </md-card-title>
+                    </md-list-item> 
+                </div>
+            </md-list>
+        </div>
+    </md-card>
+
+    <md-card-content class="user">
+
+        <md-card role="list" layout="column" class="users-department left-bar layout-column">
+            <md-list role="list" layout="column">
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === false }" ng-click="ua.selectUsersFromGroup(false)">
+                    <span>All Users</span>
+                    <span class="md-secondary">{{ ua.generalInfo.allCount }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.active.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.active.groupId, 'Active' )">
+                    <span>Active</span>
+                    <span class="md-secondary">{{ ua.generalInfo.main.active.count }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.inactive.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.inactive.groupId, 'Inactive' )">
+                    <span>lnactive</span>
+                    <span class="md-secondary inactive">{{ ua.generalInfo.main.inactive.count }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.expiredsoon.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.expiredsoon.groupId, 'Expiredsoon' )">
+                    <span>Expired Soon</span>
+                    <span class="md-secondary exp-soon">{{ ua.generalInfo.main.expiredsoon.count }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.expired.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.expired.groupId, 'Expired' )">
+                    <span>Expired</span>
+                    <span class="md-secondary expired">{{ ua.generalInfo.main.expired.count }}</span>
+                </md-list-item>
+            </md-list>
+
+            <md-list role="list" layout="column">
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.newcomers.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.newcomers.groupId, 'Newcomers' )">
+                    <span>Newcomers</span>
+                    <span class="md-secondary newcomers">{{ ua.generalInfo.main.newcomers.count }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.activated.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.activated.groupId, 'Activated' )">
+                    <span>Activated</span>
+                    <span class="md-secondary">{{ ua.generalInfo.main.activated.count }}</span>
+                </md-list-item>
+                <md-list-item class="users-item" ng-class="{ active: ua.selectedGroup === ua.generalInfo.main.deactivated.groupId }" ng-click="ua.selectUsersFromGroup( ua.generalInfo.main.deactivated.groupId, 'Deactivated' )">
+                    <span>Deactivated</span>
+                    <span class="md-secondary">{{ ua.generalInfo.main.deactivated.count }}</span>
+                </md-list-item>
+            </md-list>
+
+            <md-list role="list" layout="column">
+                <md-list-item class="title-contacts group-title">
+                    <span class="title">GROUPS</span>
+                </md-list-item>
+                <div class="users-groups style-scroll">
+                    <md-list-item class="users-item group-name" ng-repeat="item in ua.generalInfo.groups" ng-class="{ active: ua.selectedGroup === item.groupId }" ng-click="ua.selectUsersFromGroup( item.groupId, item.name )">
+                        <span>{{ item.name }}</span>
+                        <span class="md-secondary">{{ item.count }}</span>
+                    </md-list-item>
+                    <md-list-item ng-click="createGroup()" ng-show="!newGroup"  class="users-item create-group">
+                        <span>+ Create Group</span>
+                    </md-list-item>
+                    <md-list-item ng-show="newGroup" layout="column">
+                        <md-input-container>
+                            <label>New Group Name</label>
+                            <input type="text"  ng-model="newGroupName" class="addNewGroupInput" autofocus="newGroup">
+                        </md-input-container>
+                        <md-card-title >
+                            <md-button class="ok" ng-click="saveGroup( newGroupName )"  type="submit">
+                                Save
+                            </md-button>
+                            <md-button class="cancel" ng-click="cancel()">
+                                Cancel
+                            </md-button>
+                        </md-card-title>
+                    </md-list-item> 
+                </div>
+            </md-list>
+        </md-card>
+
+        <md-card-title-media class="actions-btn">
+            <div layout="row" class="group-btn mb15">
+                <md-button class="action" type="button" ng-click="ua.addToGroup($event)" ng-disabled="disableAdd">
+                    <i class="fa fa-users"></i>&nbsp; <span class="txt">Add to Group</span>
+                </md-button>
+                <md-button ng-show="ua.editGroup" class="action" type="button" ng-disabled="disableRemove" ng-click = "ua.removeGroup()">
+                    <i class="fa fa-user-times"></i>&nbsp; <span class="txt">Remove from group</span>
+                </md-button>
+                <md-button class="action" ng-click="ua.showUploadDialogue($event)" type="button">
+                    <i class="fa fa-user-plus"></i>&nbsp;  <span class="txt">Upload main dataset</span>
+                </md-button>
+                <md-button class="action assign-to-role" type="button" ng-click="ua.assignToRole( $event )" ng-disabled="disableAdd">
+                    <i class="fa fa-anchor"></i>&nbsp; <span class="txt">Assign to role</span>
+                </md-button>
+                <md-menu class="show-dropdown" aria-label="Show by">
+                    <md-button class="status" aria-label="Open menu" ng-click="$mdOpenMenu($event)" ng-disabled="disableAdd">
+                        <span class="value">Status</span>
+                        <md-icon md-font-set="fa fa-caret-down"></md-icon>
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button class="select-dropdown-btn" ng-class="{{ ( ua.statusPerPage == 'Status' ) ? 'active' : '' }}" ng-click="ua.setStatusPerPage('Status')">
+                                <span class="ng-scope">Status</span><i class="fa fa-caret-up status" aria-hidden="true"></i>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button class="select-dropdown-btn" ng-class="{{ ( ua.statusPerPage == 'active' ) ? 'active' : '' }}" ng-click="ua.setStatusPerPage('active')">
+                                <span class="ng-scope">Activated</span><i class="fa fa-check activated" aria-hidden="true"></i>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button class="select-dropdown-btn" ng-class="{{ ( ua.statusPerPage == 'inactive' ) ? 'active' : '' }}" ng-click="ua.setStatusPerPage('inactive')">
+                                <span class="ng-scope">Deactivated</span><i class="fa fa-lock " aria-hidden="true"></i>
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+                <div class="input-block" layout="column">
+                    <div class="search">
+                        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input ng-model="ua.findUser" ng-change="ua.searchUser()" class="search-contacts" type="text" placeholder="Search">
+                    </div>
+                </div>
+            </div>
+        </md-card-title-media>
+
+        <md-card class="users md-whiteframe-3dp mt10">
+
+        <md-card class="users">
+        <div layout="row">
+            <div class="table-wrapper style-scroll left-table">
+                <table class="users-table">
+                    <thead>
+                        <th>
+                            <div class="head-row" layout="row">
+                                <md-checkbox class="check md-icon header" ng-disabled="!ua.users.length" aria-label="true" ng-model="ua.allUsersSelected" ng-click="ua.toggleAllSelection()"></md-checkbox>
+                                <div class="ml10 select" layout="row">
+                                    <div class="contacts-name">Login</div>
+                                    <i class="fa fa-sort-desc" ng-class="{ sorting : ua.sortQuery !== 'Login'}" ng-click="ua.sortItems( 'username' )" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </th>
+                        
+                    </thead>
+                    <tbody id="elem">
+                        <tr ng-repeat="user in ua.users" ng-mouseover="rowselected($index)" 
+      ng-class="{selected : $index == rowNumber}" class="rows">
+                            <td class="users-data left-height">
+                                <div layout="row" layout-align="start" style="align-items: center;">
+                                    <md-checkbox class="check md-icon" aria-label="..." ng-model="user.selected" ng-change="ua.toggleUserSelection()"></md-checkbox>
+                                    <div class="ml10">
+                                        <div class="users-name">{{ user.username }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-wrapper style-scroll right-table">
+                <table class="users-table">
+                    <thead>
+                        
+                        <th>
+                            <div class="head-row" layout="row">
+                                <div class="ml10 select" layout="row">
+                                    <div class="contacts-name">Full Name</div>
+                                    <i class="fa fa-sort-desc" ng-class="{ sorting : ua.sortQuery !== 'fullName'}" ng-click="ua.sortItems( 'fullName' )" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="head-row" layout="row">
+                                <div class="ml10 select" layout="row">
+                                    <div layout="row" class="contacts-name">Start date</div>
+                                    <i class="fa fa-sort-desc" ng-class="{ sorting : ua.sortQuery !== 'StartDate'}" ng-click="ua.sortItems( 'StartDate' )" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="head-row" layout="row">
+                                <div class="ml10 select" layout="row">
+                                    <div layout="row" class="contacts-name">Termination date</div>
+                                    <i class="fa fa-sort-desc" ng-class="{ sorting : ua.sortQuery !== 'TerminationDate'}" ng-click="ua.sortItems( 'TerminationDate' )" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="head-row" layout="row">
+                                <div class="ml10 select" layout="row">
+                                    <div class="contacts-name">Status</div>
+                                    <i class="fa fa-sort-desc" ng-class="{ sorting : ua.sortQuery !== 'Status'}" ng-click="ua.sortItems( 'status' )" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="head-row" layout="row">
+                                <div class="ml10 select" layout="row">
+                                    <div class="contacts-name">Country</div>
+                                    <i class="fa fa-sort-desc" ng-class="{ sorting : ua.sortQuery !== 'Country'}" ng-click="ua.sortItems( 'country' )" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="head-row" layout="row">
+                                <div class="ml10 select" layout="row">
+                                    <div class="contacts-name">Department</div>
+                                    <i class="fa fa-sort-desc" ng-class="{ sorting : ua.sortQuery !== 'Department'}" ng-click="ua.sortItems( 'Department' )" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="head-row" layout="row">
+                                <div class="ml10">
+                                    <div class="contacts-name">UID</div>
+                                </div>
+                            </div>
+                        </th>
+                        <th></th>
+                    </thead>
+                    <tbody id="elem">
+                        <tr ng-repeat="user in ua.users" ng-mouseover="rowselected($index)" 
+      ng-class="{selected : $index == rowNumber}" class="rows">
+                            
+                            <td class="users-data right-height">
+                                <div layout="row" layout-align="start" style="align-items: center;">
+                                    <div class="ml10">
+                                        <div class="users-name">{{ user.employee.firstName + ' ' + user.employee.lastName }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="users-data right-height">
+                                <div layout="row" layout-align="start" style="align-items: center;">
+                                    <div class="ml10">
+                                        <div class="date-range">
+                                            {{ ( user.employee.startDate ) ? user.employee.startDate : 'No data' }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="users-data right-height">
+                                <div layout="row" layout-align="start" style="align-items: center;">
+                                    <div class="ml10">
+                                        <div class="date-range">
+                                            {{ ( user.employee.terminationDate ) ? user.employee.terminationDate : 'To date' }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="users-data right-height">
+                                <div layout="row" layout-align="start" style="align-items: center;">
+                                    <div class="ml10">
+                                        <div ng-hide="user.status !== 'active'" class="users-name"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div ng-hide="user.status == 'active'" class="users-name"><i class="fa fa-lock" aria-hidden="true"></i></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="users-data right-height">
+                                <div layout="row" layout-align="start" style="align-items: center;">
+                                    <div class="ml10">
+                                        <div class="users-name">{{ user.employee.country }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="users-data right-height">
+                                <div layout="row" layout-align="start" style="align-items: center;">
+                                    <div class="ml10">
+                                        <div class="users-name">{{ user.employee.department }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="users-data right-height">
+                                <div layout="row" layout-align="start" style="align-items: center;">
+                                    <div class="ml10">
+                                        <div class="users-name">{{ user.employee.eid }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="users-data right-height">
+                                <div flex class="flex"></div>
+                                <md-card-title-media class="selects-option">
+                                    <md-menu md-offset="-199 -2">
+                                        <md-button class="md-icon-button" type="button" ng-click="$mdOpenMenu($event)" aria-label="...">
+                                            <md-icon>
+                                                <img class="dots" src="/img/icons/3dot.png"/>
+                                            </md-icon>
+                                        </md-button>
+                                        <md-menu-content width="4">
+                                            <md-menu-item>
+                                                <md-button onmouseover="this.style.backgroundColor='#35383e';" onmouseout="this.style.backgroundColor='#292c33';" data-ui-sref="profile" aria-label="User">
+                                                    <md-icon class="bla" style="color: #bfbfbf;" md-font-set="fa fa-user" aria-hidden="true"><span style="font: 400 14px roboto;" class="dot-menu-item">&nbsp; View Profile</span></md-icon>
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button ng-click="ua.showTargetDialogue($event)" aria-label="Comments">
+                                                    <md-icon md-font-set="fa fa-comments" aria-hidden="true"><span class="dot-menu-item">&nbsp; Write a message</span></md-icon>
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button ng-click="ua.showTargetDialogue($event)" aria-label="Comments">
+                                                    <md-icon md-font-set="fa fa-pencil-square-o" aria-hidden="true"><span class="dot-menu-item">&nbsp; Edit</span></md-icon>
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button ng-click="ua.showTargetDialogue($event)" aria-label="Comments">
+                                                    <md-icon md-font-set="fa fa-envelope-o" aria-hidden="true"><span class="dot-menu-item">&nbsp; Send invite</span></md-icon>
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button ng-click="ua.showTargetDialogue($event)" aria-label="Comments">
+                                                    <md-icon md-font-set="fa fa-power-off" aria-hidden="true"><span class="dot-menu-item">&nbsp; Deactivate</span></md-icon>
+                                                </md-button>
+                                            </md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
+                                </md-card-title-media>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        </md-card>
+    </md-card-content>
+<md-card>

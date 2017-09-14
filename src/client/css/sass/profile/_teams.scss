@@ -1,0 +1,301 @@
+.teams {
+        min-width: 97%;
+    
+    md-card {
+        display: initial;
+    }
+    margin-bottom: 100px;
+    md-card-title {
+        md-card-title-text {
+            .md-headline {
+                color: #bfbfbf;
+            }
+            .teams-header {
+                padding-left: 4px;
+                float: left;
+                font-size: 22px;
+                font-weight: 400;
+                margin-right: 10px;
+                margin-bottom: -12px;
+                opacity: 0.8;
+                .back-btn {
+                    padding-left: 0;
+                    padding-right: 20px;
+                }
+                .page-title {
+                    color: #bfbfbf;
+                }
+            }
+        }
+    }
+    .header-item {
+        height: 52px;
+        align-items: center;
+        border-bottom: 1px solid #16181c;
+        padding: 0;
+        background-color: #23252b;
+        .empty-block {
+            visibility: collapse;
+            margin-left: 10%;
+        }
+        @media (max-width: 960px) {
+            md-card-title-text {
+                &:nth-child(2) {
+                    margin-left: 30px;
+                    text-align: start;
+                    align-items: flex-start;
+                }
+                &:nth-child(1) {
+                    min-width: 135px;
+                    max-width: 135px;
+                    margin-left: 0;
+                    text-align: start;
+                    .md-label {
+                        .check-text {
+                            font-size: 12px;
+                            .subheader {
+                                font-size: 11px !important;
+                                margin-left: 0px;
+                            }
+                        }
+                    }
+                }
+                .md-headline {
+                    font-size: 12px;
+                    text-align: start;
+                    .subheader {
+                        font-size: 11px !important;
+                        margin-left: 0px;
+                    }
+                }
+                .members-line {
+                    text-align: center;
+                    font-size: 12px;
+                }
+            }
+            .empty-block {
+                margin: 0;
+                .moore-details {
+                    &:before {
+                        color: #55575b;
+                    }
+                }
+            }
+        }
+        md-card-title-text {
+            &:nth-child(1) {
+                flex: 1;
+                flex-direction: column;
+                display: flex;
+                padding: 0;
+                .team-title {
+                    padding-left: 23px;
+                }
+            }
+            &:nth-child(2) {
+                margin-left: 30px;
+                text-align: start;
+                align-items: flex-start;
+            }
+            .members-line {
+                text-align: center;
+                line-height: 1.5em;
+            }
+            .md-headline {
+                line-height: 1.5em;
+                text-align: start;
+                .subheader {
+                    color: #646669;
+                    font-size: 12px;
+                    display: block;
+                    line-height: 1em;
+                    font-weight: 500;
+                    margin-left: 0;
+                    text-align: start;
+                }
+                .members-line {
+                    text-align: center;
+                }
+            }
+            span {
+                color: #bfbfbf;
+                text-align: center;
+                font-family: Roboto;
+                font-size: 14px;
+                font-weight: 400;
+            }
+        }
+        /*.md-headline {
+            font-family: Roboto;
+            color: $content-font-color;
+            font-size: 13.3px;
+            font-weight: 500;
+            &.first-collum {
+                line-height: 60px;
+            }
+            .subheader {
+                margin-left: 10%;
+            }
+        }*/
+    }
+    .item {
+        height: 70px;
+        align-items: center;
+        border-bottom: 1px solid #16181c;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 0;
+        background-color: $bg-gray;
+        &:hover {
+            background-color: #34373d;
+            cursor: default;
+        }
+        @media (max-width: 960px) {
+            md-card-title-text {
+                &:nth-child(2) {
+                    margin-left: 30px;
+                }
+                &:nth-child(1) {
+                    min-width: 135px;
+                    max-width: 135px;
+                    margin-left: 0;
+                    text-align: start;
+                    .md-label {
+                        .check-text {
+                            font-size: 12px;
+                        }
+                    }
+                }
+                .show-info {
+                    font-size: 12px!important;
+                    .subheader {
+                        font-size: 11px!important;
+                        margin-left: 0px;
+                    }
+                }
+                .under-line {
+                    background-color: black;
+                    margin-top: 9px;
+                    height: 3px;
+                }
+                .up-line {
+                    background-color: red;
+                    margin-top: -3px;
+                    height: 3px;
+                }
+            }
+            .pt5 {
+                margin-left: 0;
+            }
+        }
+        md-card-title-text {
+            .check-text-right {
+                color: #6e8d96;
+                margin-top: 25px;
+                text-align: center;
+                font-family: Roboto;
+                font-size: 14px;
+                font-weight: 400;
+            }
+            &:nth-child(1) {
+                flex-direction: row;
+                display: flex;
+                align-items: center;
+                height: 100%;
+                padding: 0;
+                span {
+                    margin-left: 20px;
+                }
+            }
+            &:nth-child(2) {
+                margin-left: 30px;
+            }
+            .under-line {
+                background-color: black;
+                margin-top: 9px;
+                height: 3px;
+            }
+            .up-line {
+                background-color: red;
+                margin-top: -3px;
+                height: 3px;
+            }
+            md-checkbox {
+                margin: auto 0 auto 20px;
+                &.check {
+                    float: left;
+                    margin-top: 25px;
+                    margin-left: 15px;
+                    .md-icon {
+                        border-width: 1px;
+                        border-color: rgb(86, 88, 93);
+                        border-radius: 0px;
+                    }
+                    .md-ink-ripple {
+                        color: white;
+                    }
+                }
+                &.md-default-theme.md-checked .md-icon {
+                    background-color: #17a9a8;
+                    border: transparent;
+                    &:after {
+                        border-color: white;
+                        left: 7px;
+                        top: 2px;
+                    }
+                    .md-ink-ripple {
+                        color: white;
+                    }
+                }
+                &.md-checked .md-icon {
+                    background-color: #17a9a8;
+                    border: transparent;
+                    &:after {
+                        border-color: white;
+                        left: 7px;
+                        top: 2px;
+                    }
+                    .md-ink-ripple {
+                        color: white;
+                    }
+                }
+            }
+            md-checkbox.md-checked.md-focused .md-container:before {
+                background-color: transparent;
+            }
+            .show-info {
+                flex-direction: column;
+                display: flex;
+                font-family: Roboto;
+                color: $content-font-color;
+                font-size: 13px;
+                font-weight: 400;
+                opacity: 0.9;
+                &.first-collum {
+                    line-height: 70px;
+                }
+                .subheader {
+                    color: #646669;
+                    font-size: 13px;
+                    display: block;
+                    margin: 0 0 0 0;
+                }
+            }
+        }
+        md-card-title-media {
+            margin-left: 10%;
+            .open-more {
+                display: flex;
+                justify-content: center;
+                i {
+                    &:before {
+                        color: #55575b;
+                    }
+                }
+            }
+        }
+    }
+    md-tabs {
+        padding-top: 10px;
+        background-color: #23252b;
+    }
+}

@@ -1,0 +1,38 @@
+<div class="trends" >
+    <div  class="filters" ng-cloak>
+        <span  layout="row"  class="trends-span">
+            <span flex hide-gt-xs></span>
+            <md-icon class="set-opacity" flex="none" md-font-set="md" ng-class="aw.generalInfo.attritionTrends.month < 0 ? 'rotate45' : aw.generalInfo.attritionTrends.month > 0 ? 'rotate225' : 'double-rotate45' ">arrow_upward</md-icon>
+            <md-icon flex="none" ng-show="aw.generalInfo.attritionTrends.month === 0" md-font-set="md" class="double-arrow set-opacity">arrow_upward</md-icon>
+            <span class="set-opacity md-headline rotate-gray">{{ aw.generalInfo.attritionTrends.total }}&ensp;</span>
+
+            <span layout="column" class="mr20">
+                <sup ng-class="aw.generalInfo.attritionTrends.month < 0 ? 'rotate-red' : aw.generalInfo.attritionTrends.month > 0 ? 'rotate-green' : 'rotate-gray'">{{ aw.generalInfo.attritionTrends.month }} from {{ selectedDate | date:'MMMM' }}</sup>
+                <sub>{{ aw.generalInfo.attritionTrends.year }} in January</sub>
+            </span>
+            <!-- <span flex hide-gt-xs></span> -->
+        </span>
+    </div>
+</div>
+<div class="attrition-pie">
+
+    <section layout="row" class="age-list">
+    
+        <md-grid-list class="finance-chart" md-cols="5" md-gutter="10px" md-row-height="120px;" ng-cloak>
+            <md-grid-tile md-colspan="1" md-colspan-xs="2">
+                <div id="donut-chart-voluntary" class="donut"></div>
+            </md-grid-tile>
+        </md-grid-list>
+
+        <div flex class="legend" layout="row" >
+            <md-list id='age-item' >
+                <md-list-item ng-repeat="item in legend" class="legend-age" layout="row" >
+                    <div class="circle" ng-style="{background: item.color}"></div>
+                    <div class="avarage-title md-secondary">{{ item.title }}</div>
+                </md-list-item>
+            </md-list>
+        </div>
+        
+    </section>
+
+</div>

@@ -1,0 +1,309 @@
+
+<md-card-title-text class="widgets">
+
+    <div layout="row" class="flex-container" >
+
+        <% if permissions.dashboard.home.headcountWidget %>
+        <md-list id="headcountWidget" class="flex-item md-whiteframe-3dp sectionCard">
+            <md-list-item class="md-2-line">
+                <md-card-title layout="row" class=" mrb40">
+                    <md-card-title-text>
+                        <md-list-item class="">
+                            <div class="md-list-item-text">
+                                <h3>Headcount</h3>
+                            </div>
+                        </md-list-item>
+                    </md-card-title-text>
+                    <md-card-title-media layout="column">
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="openBirthdayWindow()">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-list-item>
+<!--             <line-chart title-chart="YTD Headcount in selected areas for {{selectedDate | date:'MMMM yyyy'}}"
+                        class="mt50mb25" set-date="selectedDate" set-data="hc.dataLineChart()"></line-chart> -->
+            <headcount-widget set-data="hmc.generalInfo" set-date="selectedDate"></headcount-widget>
+
+        </md-list>
+        <% endif %>
+
+        <% if permissions.dashboard.home.financeWidget %>
+        <md-list id="financeWidget" class="flex-item md-whiteframe-3dp sectionCard">
+            <md-list-item class="md-2-line">
+                <md-card-title layout="row" class=" mrb40">
+                    <md-card-title-text>
+                        <md-list-item class="">
+                            <div class="md-list-item-text">
+                                <h3>Finance</h3>
+                            </div>
+                        </md-list-item>
+                    </md-card-title-text>
+                    <md-card-title-media layout="column">
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-list-item>
+            <finance-widget set-data="hmc.generalInfo" set-date="selectedDate"></finance-widget>
+        </md-list>
+        <% endif %>
+
+
+
+        <% if permissions.dashboard.home.workforceWidget %>
+        <md-list id="workforceWidget" class="flex-item md-whiteframe-3dp sectionCard">
+            <md-list-item id="workforce-item" class="md-2-line " >
+                <md-card-title id="titleHeight" layout="row" class=" mrb40">
+                    <md-card-title-text>
+                        <md-list-item class="">
+                            <div class="md-list-item-text">
+                                <h3>Workforce</h3>
+                            </div>
+                        </md-list-item>
+                    </md-card-title-text>
+                    <md-card-title-media layout="column">
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-list-item>
+
+            <workforce-widget set-data="hmc.generalInfo" set-date="selectedDate"></workforce-widget>
+
+        </md-list>
+        <% endif %>
+
+        <% if permissions.dashboard.home.attritionWidget %>
+        <md-list id="attritionWidget" class="flex-item md-whiteframe-3dp sectionCard">
+            <md-list-item class="md-2-line">
+                <md-card-title layout="row" class=" mrb40">
+                    <md-card-title-text>
+                        <md-list-item class="">
+                            <div class="md-list-item-text">
+                                <h3>Attrition</h3>
+                            </div>
+                        </md-list-item>
+                    </md-card-title-text>
+                    <md-card-title-media layout="column">
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-list-item>
+            <attrition-widget set-data="hc.getGeneralInfo()" set-date="selectedDate"></attrition-widget>
+        </md-list>
+        <% endif %>
+
+        
+        <% if permissions.dashboard.home.salaryWidget %>
+        <md-list class="flex-item md-whiteframe-3dp sectionCard">
+            <md-list-item class="md-2-line">
+                <md-card-title layout="row" class=" mrb40">
+                    <md-card-title-text>
+                        <md-list-item class="">
+                            <div class="md-list-item-text">
+                                <h3>Salary</h3>
+                            </div>
+                        </md-list-item>
+                    </md-card-title-text>
+                    <md-card-title-media layout="column">
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-list-item>
+        </md-list>
+        <% endif %>
+
+        <!-- <% if permissions.dashboard.home.weatherWidget %>
+        <md-list class="flex-item md-whiteframe-3dp sectionCard">
+            <md-list-item class="md-2-line">
+                <md-card-title layout="row" class="titleHeight mrb40">
+                    <md-card-title-text>
+                        <md-list-item class="">
+                            <div class="md-list-item-text">
+                                <h3>Weather</h3>
+                            </div>
+                        </md-list-item>
+                    </md-card-title-text>
+                    <md-card-title-media layout="column">
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-list-item>
+        </md-list>
+        <% endif %> -->
+
+        <md-list id="absencesWidget" class="flex-item md-whiteframe-3dp sectionCard absence-wdgt">
+            <md-list-item class="md-2-line">
+                <md-card-title layout="row" class=" mrb40">
+                    <md-card-title-text>
+                        <md-list-item class="">
+                            <div class="md-list-item-text">
+                                <h3>Absences</h3>
+                            </div>
+                        </md-list-item>
+                    </md-card-title-text>
+                    <md-card-title-media layout="column">
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-list-item>
+            <absences-widget></absences-widget>
+        </md-list>
+
+        <% if permissions.dashboard.home.resourcingWidget %>
+        <md-list class="flex-item md-whiteframe-3dp sectionCard">
+            <md-list-item class="md-2-line">
+                <md-card-title layout="row" class=" mrb40">
+                    <md-card-title-text>
+                        <md-list-item class="">
+                            <div class="md-list-item-text">
+                                <h3>Resourcing</h3>
+                            </div>
+                        </md-list-item>
+                    </md-card-title-text>
+                    <md-card-title-media layout="column">
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-list-item>
+        </md-list>
+        <% endif %>
+
+        <% if permissions.dashboard.home.eodWidget %>
+        <md-list class="flex-item md-whiteframe-3dp sectionCard">
+            <md-list-item class="md-2-line">
+                <md-card-title layout="row" class=" mrb40">
+                    <md-card-title-text>
+                        <md-list-item class="">
+                            <div class="md-list-item-text">
+                                <h3>E&OD</h3>
+                            </div>
+                        </md-list-item>
+                    </md-card-title-text>
+                    <md-card-title-media layout="column">
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-list-item>
+        </md-list>
+        <% endif %>
+
+    </div>
+
+</md-card-title-text>
+
+<section layout="row" class="ml30 home-calendar layout-wrap layout-align-start-stretch layout-row">
+
+    <% if permissions.dashboard.home.calendarWidget %>
+
+        <md-card ng-controller="calendar.controller as cc" class="md-whiteframe-3dp calendar-widget">
+            <md-card-header>
+                <md-card-title-text>
+                    <span class="md-subhead">Calendar</span>
+                    <span class="md-headline">{{ cc.day }}, {{ cc.d }}<sup>{{ cc.sufix }}</sup>{{ cc.month }}</span>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <md-menu>
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                        <md-menu-content>
+                            <md-menu-item ng-repeat="item in [1, 2, 3]">
+                                <md-button ng-click="null">
+                                    Option {{ item }}
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-card-title-media>
+            </md-card-header>
+            <md-button class="md-fab md-primary plus-btn" aria-label="Add event" ng-click="cc.showAdvanced($event)">
+                <md-icon md-font-set="md">add</md-icon>
+            </md-button>
+            <div id="calendar-widget" data-full-calendar></div>
+<!--             <md-button class="ok-btn" aria-label="Add event" ng-click="null">
+                <span>OK</span>
+            </md-button> -->
+        </md-card>
+
+    <% endif %>
+
+        <md-card class="md-whiteframe-3dp location-widget">
+            <md-card-header>
+                <md-card-title-text>
+                    <span class="md-subhead">Contacts</span>
+                    <span class="md-headline">3 office locations</span>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <md-menu>
+                        <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                            <md-icon class="container-dot">
+                                <img class="dots" src="/img/icons/3dot.png"/>
+                            </md-icon>
+                        </md-button>
+                        <md-menu-content>
+                            <md-menu-item ng-repeat="item in [1, 2, 3]">
+                                <md-button ng-click="null">
+                                    Option {{ item }}
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-card-title-media>
+            </md-card-header> 
+            <div id="map"></div>
+            <md-card-content>
+                <md-button class="md-fab md-primary plus-btn first-btn" aria-label="Add event" ng-click="null">
+                    <img src="http://lorempixel.com/45/45"/>
+                </md-button>
+                <md-button class="md-fab md-primary plus-btn second-btn" aria-label="Add event" ng-click="null">
+                    <img src="http://lorempixel.com/45/45"/>
+                </md-button>
+                <md-button class="md-fab md-primary plus-btn third-btn" aria-label="Add event" ng-click="null">
+                    <img src="http://lorempixel.com/45/45"/>
+                </md-button>
+
+                <md-button class="show-details" aria-label="Add event" ng-click="null">
+                    <span>Show details</span>
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </md-button>
+            </md-card-content>
+        </md-card>
+
+</section>
+

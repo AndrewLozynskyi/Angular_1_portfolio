@@ -1,0 +1,64 @@
+
+<div ng-controller="slider.controller">
+
+    <section class="bg-gray pt5">
+
+        <div class="mb50 pb5 mr20 ml20">
+            <div class="downloadCatalogue" ng-show="$state.current.name === 'dashboard.home'">
+                <md-button ng-click="createEditRole( item.roleId, 'edit' )">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </md-button>
+            </div>
+            <div class="timeLine" ng-show="$state.current.name !== 'dashboard.home'">
+                <div class="slider-header">Choose Date</div>
+                <div class="select-data">
+                    <div class="slider-years">
+                        <md-button class="year-button" ng-repeat="year in years" ng-click="clickedYear(year, $event)" ng-init="lastYear(this)">{{ year }}</md-button>
+                    </div>
+                    <div class="calendar-block">
+                        <md-button class="md-icon-button calendar-btn" type="button" aria-label="Change date">
+                            <md-icon class="calendar" md-font-set="md">
+                                <img class="dots" src="/img/icons/particular-date-icon.png"/>
+                            </md-icon>
+                        </md-button>
+                    </div>
+                    <md-datepicker class="blink" ng-model="date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+                    <span class="particular-date">Particular Date</span>
+                </div>
+                <div layout="row">
+                    <div flex id="date-filter" ng-class="currentMonth">
+                        <div class="date-line"></div>
+                        <div class="slider" flex layout="row" layout-align="space-between center">
+                            <div ng-repeat="month in months" class="circle"
+                                 ng-class="{currentMonth: isActiveMonth(month)}" ng-click="clickedMonth( month, $event )">
+                                <div class="hover"></div>
+                                <span>{{ month }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <md-button aria-label="refresh time-line filter" id="dashboard-button-refresh" class="md-icon-button md-button md-ink-ripple refresh-icon" ng-click="refresh()">
+                        <md-icon md-font-set="fa fa-refresh" aria-hidden="true" ></md-icon>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+
+        <md-tabs flex>
+            <md-tab label="Home" md-active="$state.current.name === 'dashboard.home'" ui-sref="dashboard.home"></md-tab>
+            <md-tab label="Headcount" md-active="$state.current.name === 'dashboard.headcount'" ui-sref="dashboard.headcount"></md-tab>
+            <md-tab label="Workforce" md-active="$state.current.name === 'dashboard.workforce'" ui-sref="dashboard.workforce"></md-tab>
+            <md-tab label="Attrition" md-active="$state.current.name === 'dashboard.attrition'" ui-sref="dashboard.attrition"></md-tab>
+            <md-tab label="Salary" md-active="$state.current.name === 'dashboard.salary'" ui-sref="dashboard.salary"></md-tab>
+            <md-tab label="Finance" md-active="$state.current.name === 'dashboard.finance'" ui-sref="dashboard.finance"></md-tab>
+            <md-tab label="Absences" md-active="$state.current.name === 'dashboard.absences'" ui-sref="dashboard.absences"></md-tab>
+            <md-tab label="Resourcing" md-active="$state.current.name === 'dashboard.resourcing'" ui-sref="dashboard.resourcing"></md-tab>
+            <md-tab label="E&OD" md-active="$state.current.name === 'dashboard.eod'" ui-sref="dashboard.eod"></md-tab>
+        </md-tabs>
+
+    </section>
+
+    <!-- <filter-list ng-hide="$state.current.name === 'dashboard.home' || filtersEnabled !== true "></filter-list> -->
+
+    <ui-view layout-margin></ui-view>
+
+</div>

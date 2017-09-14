@@ -1,0 +1,133 @@
+
+@import "libs/angular-material.scss";
+@import "libs/croppie.scss";
+@import "libs/font-awesome.scss";
+
+@import "libs/demo";
+@import "libs/intlTelInput";
+
+@import "main/variables";
+@import "main/base";
+@import "main/header";
+@import "main/sidenav";
+@import "main/footer";
+@import "main/toaster-notificator.scss";
+
+
+@import "main/login-user.scss";
+@import "main/login-maintenance.scss";
+@import "main/error-404.scss";
+@import "main/locked-sesion.scss";
+@import "main/notification-menu.scss";
+@import "main/client-logo-popup.scss";
+@import "main/happy-birthday.scss";
+
+@import "main/password-reset.scss";
+@import "main/password-recover.scss";
+
+@import "tools/fullCalendar";
+@import "tools/tooltip";
+@import "tools/pagination";
+@import "tools/dropdown-chips";
+
+@import "dashboard/tabs";
+
+@import "dashboard/slider";
+@import "dashboard/geocharts";
+@import "dashboard/line-charts";
+@import "dashboard/line-charts-mini";
+@import "dashboard/salary-line-charts-mini";
+@import "dashboard/area-charts";
+@import "dashboard/pie-charts";
+@import "dashboard/treemap-charts";
+@import "dashboard/geo-circles-chart";
+@import "dashboard/donut-charts";
+@import "dashboard/attrition-department-stats.scss";
+@import "dashboard/attrition-donut-charts";
+@import "dashboard/salary-donut-charts";
+@import "dashboard/rectangular-chart";
+@import "dashboard/gradient-chart";
+@import "dashboard/department-status";
+@import "dashboard/headcount-table";
+@import "dashboard/attrition-country-table";
+@import "dashboard/employee-table";
+@import "dashboard/departments-list-table";
+@import "dashboard/tab-title";
+@import "dashboard/target-popup.scss";
+@import "dashboard/contacts.scss";
+@import "dashboard/upload-files.scss";
+@import "dashboard/filter-list.scss";
+@import "dashboard/filter-popup.scss";
+@import "dashboard/new-filter-popup.scss";
+@import "dashboard/list-of-offices.scss";
+@import "dashboard/add-to-group.scss";
+@import "dashboard/home.scss";
+@import "dashboard/avarage-salary.scss";
+@import "dashboard/absences.scss";
+@import "dashboard/avarage-annualised.scss";
+@import "dashboard/radial-charts.scss";
+@import "dashboard/linear-chart.scss";
+@import "dashboard/finance.scss";
+@import "dashboard/total-finance-table.scss";
+@import "dashboard/headcount-widget.scss";
+@import "dashboard/workforce-widget.scss";
+@import "dashboard/attrition-widget.scss";
+@import "dashboard/absences-widget.scss";
+@import "dashboard/finance-widget.scss";
+@import "dashboard/dynamic-salary-table.scss";
+@import "dashboard/simple-chart-dynamic-table.scss";
+@import "dashboard/avarage-annualized-salary-table.scss";
+@import "dashboard/avarage-annulized-salary-chart.scss";
+@import "dashboard/salary-line-chart";
+
+@import "profile/profile.scss";
+@import "profile/about.scss";
+@import "profile/wall.scss";
+@import "profile/userpic-popup.scss";
+@import "profile/close-window.scss";
+@import "profile/salary-graph.scss";
+@import "profile/teams.scss";
+@import "profile/team-details.scss";
+@import "profile/details.scss";
+@import "profile/add-new-course.scss";
+@import "profile/grades-team.scss";
+@import "profile/team-users-table.scss";
+@import "profile/contacts.scss";
+@import "profile/add-social-network.scss";
+@import "profile/total-linear.scss";
+@import "profile/team-line-chart.scss";
+
+@import "admin/admin.scss";
+@import "admin/home.scss";
+@import "admin/roles.scss";
+@import "admin/create-role.scss";
+@import "admin/delete-role-first.scss";
+@import "admin/delete-role-second.scss";
+@import "admin/permissions.scss";
+@import "admin/roles-details.scss";
+@import "admin/roles-dropdown.scss";
+@import "admin/users.scss";
+@import "admin/permission-edit-confirm.scss";
+@import "admin/settings.scss";
+@import "admin/customer.scss";
+
+@for $i from 1 through 10 {
+    // vertical
+    .mt#{$i*5} {margin-top: 5px * $i !important;}
+    .mb#{$i*5} {margin-bottom: 5px * $i !important;}
+    .mt-#{$i*5} {margin-top: -5px * $i !important;}
+    .mb-#{$i*5} {margin-bottom: -5px * $i !important;}
+    .pt#{$i*5} {padding-top: 5px * $i !important;}
+    .pb#{$i*5} {padding-bottom: 5px * $i !important;}
+    .pt-#{$i*5} {padding-top: -5px * $i !important;}
+    .pb-#{$i*5} {padding-bottom: -5px * $i !important;}
+    // horizontal
+    .ml#{$i*5} {margin-left: 5px * $i !important;}
+    .mr#{$i*5} {margin-right: 5px * $i !important;}
+    .ml-#{$i*5} {margin-left: -5px * $i !important;}
+    .mr-#{$i*5} {margin-right: -5px * $i !important;}
+    .pl#{$i*5} {padding-left: 5px * $i !important;}
+    .pr#{$i*5} {padding-right: 5px * $i !important;}
+    .pl-#{$i*5} {padding-left: -5px * $i !important;}
+    .pr-#{$i*5} {padding-right: -5px * $i !important;}
+}

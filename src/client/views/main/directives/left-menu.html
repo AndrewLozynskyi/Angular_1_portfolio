@@ -1,0 +1,75 @@
+<md-sidenav md-component-id="left" id="left-menu-bar" md-is-locked-open="$mdMedia('gt-md')" md-disable-backdrop class="md-sidenav-left">
+
+    <md-toolbar class="md-primary md-hue-1">
+        <div class="md-toolbar-tools text-uppercase logo">
+            <div class="left-menu-title one" flex><img class="cloud-logo" src="/img/svg/Logo_Sign_Dashboard.svg"></div>
+            <div class="left-menu-title" flex><img ng-show="sidenav.open" src="/img/svg/Logo_Dashboard.svg"></div>
+            <md-button class="md-icon-button sidenav-arrow" aria-label="Settings" ng-click="sidenav.toggle();">
+                <md-icon md-svg-src="/img/svg/backburger.svg"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <div class="client-logo shadow">
+        <span>Client logo</span>
+        <div class="clientLogoEditBtn"ng-click="uploadCompanyLogo($event)">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </div>
+    </div>
+
+    <md-content>
+        <md-list>
+            <% if permissions.dashboard.moduleEnabled %>
+            <md-list-item ui-sref-active="active" ui-sref="dashboard" ng-click="sidenav.close()">
+                <div class="md-list-item-text">
+                    <md-icon md-font-set="fa fa-home large-img"></md-icon>
+                    <span class="bold" ng-show="sidenav.open">DASHBOARD</span>
+                </div>
+            </md-list-item>
+            <% endif %>
+            <% if permissions.contacts.moduleEnabled %>
+            <md-list-item ui-sref-active="active" ui-sref="contacts" ng-click="sidenav.close()">
+                <div class="md-list-item-text">
+                    <md-icon md-font-set="fa fa-envelope"></md-icon>
+                    <span class="bold" ng-show="sidenav.open">CONTACTS</span>
+                </div>
+            </md-list-item>
+            <% endif %>
+            <% if permissions.chat.moduleEnabled %>
+           <!--  <md-list-item  ui-sref-active="active" ui-sref="chat" ng-click="sidenav.close()">
+                <div class="md-list-item-text">
+                    <md-icon md-font-set="fa fa-comments"></md-icon>
+                    <span class="bold" ng-show="sidenav.open">CHAT</span>
+                </div>
+            </md-list-item> -->
+            <% endif %>
+            <% if permissions.admin.moduleEnabled %>
+                <md-list-item  ui-sref-active="active" ui-sref="admin" ng-click="sidenav.close()">
+                    <div class="md-list-item-text">
+                        <md-icon md-font-set="fa fa-suitcase"></md-icon>
+                        <span class="bold" ng-show="sidenav.open">ADMIN</span>
+                    </div>
+                </md-list-item>
+            <% endif %>
+            <% if permissions.onOffBoarding.moduleEnabled %>
+            <!-- <md-list-item  ui-sref-active="active" ui-sref="boarding" ng-click="sidenav.close()">
+                <div class="md-list-item-text">
+                    <md-icon md-font-set="fa fa-adjust large-img"></md-icon>
+                    <span class="bold" ng-show="sidenav.open">ON/OFF BOARDING</span>
+                </div>
+            </md-list-item> -->
+            <% endif %>
+            <% if permissions.api.moduleEnabled %>
+            <!-- <md-list-item  ui-sref-active="active" ui-sref="api" ng-click="sidenav.close()">
+                <div class="md-list-item-text">
+                    <md-icon md-font-set="fa fa-code"></md-icon>
+                    <span class="bold" ng-show="sidenav.open">API</span>
+                </div>
+            </md-list-item> -->
+            <% endif %>
+        </md-list>
+    </md-content>
+
+    <div flex class="shadow"></div>
+
+</md-sidenav>

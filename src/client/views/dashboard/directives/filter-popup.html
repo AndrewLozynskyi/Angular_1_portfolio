@@ -1,0 +1,29 @@
+
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <span>Filter Builder</span>
+        <span flex></span>
+        <span class="filter-name">Women in Tech 2016</span>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="up.cancel()">
+            <md-icon aria-label="Close dialog">close</md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-dialog-content>
+    <div id="builder"></div>
+    <div class="formula-wrapper">
+        <span class="formula-name">Filter's Formula</span>
+        <md-button aria-label="refresh filter" class="md-icon-button md-button md-ink-ripple refresh-icon" ng-click="up.refresh()">
+            <md-icon md-font-set="fa fa-refresh" aria-hidden="true"></md-icon>
+        </md-button>
+        <div id="builder-formula" class="formula"></div>
+    </div>
+</md-dialog-content>
+
+<md-dialog-actions>
+    <span flex></span>
+    <md-button class="md-raised target-cancel" ng-click="up.cancel()">Cancel</md-button>
+    <md-button class="target-save" ng-click="null">Apply Filter</md-button>
+</md-dialog-actions>

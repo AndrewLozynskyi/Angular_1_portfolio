@@ -1,0 +1,36 @@
+<div class="trends" >
+    <div  class="filters" ng-cloak>
+        <span flex="none" layout="row" layout-align="" class="trends-span">
+            <span flex hide-gt-xs></span>
+            <md-icon flex="none" md-font-set="md" ng-class="fw.generalInfo.headcountTrends.month < 0 ? 'rotate45' : fw.generalInfo.headcountTrends.month > 0 ? 'rotate225' : 'double-rotate45' ">arrow_upward</md-icon>
+            <md-icon flex="none" ng-show="fw.generalInfo.headcountTrends.month === 0" md-font-set="md" class="double-arrow">arrow_upward</md-icon>
+            
+            <span class="dot"></span>
+            <span layout="column" >
+                <span class="md-headline rotate-gray">{{ fw.generalInfo.headcountTrends.total }}&ensp;</span>
+                <sub class="left">Revenue</sub>
+            </span>
+            <span flex hide-gt-xs></span>
+        </span>
+    </div>
+</div>
+<div class="second-trends" >
+    <div  class="filters" ng-cloak>
+        <span flex="none" layout="row" layout-align="start center" class="trends-span">
+            <span flex hide-gt-xs></span>
+            <md-icon flex="none" md-font-set="md" ng-class="fw.generalInfo.headcountTrends.month < 0 ? 'rotate45' : fw.generalInfo.headcountTrends.month > 0 ? 'rotate225' : 'double-rotate45' ">arrow_upward</md-icon>
+            <md-icon flex="none" ng-show="fw.generalInfo.headcountTrends.month === 0" md-font-set="md" class="double-arrow">arrow_upward</md-icon>
+            
+                <span class="dot"></span>
+            
+            <span layout="column" >
+               <span class="md-headline rotate-gray">{{ fw.generalInfo.headcountTrends.total }}&ensp;</span>
+                <sub class="left">Human cost</sub>
+            </span>
+            <span flex hide-gt-xs></span>
+        </span>
+    </div>
+</div>
+<section fullscreen="isFullscreenLine">
+    <div class="fin-line-chart-mini"></div>
+</section>

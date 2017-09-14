@@ -1,0 +1,151 @@
+md-toolbar {
+    min-height: 60px;
+}
+
+.header {
+    font-size: 14px;
+    .avatar {
+        max-height: 30px;
+        border-radius: 50%;
+        vertical-align: baseline;
+    }
+    .md-toolbar-tools {
+        font: 400 14px roboto;
+        height: 60px;
+        max-height: 80px;
+        .toolbar-search {
+            font: 300 14px roboto;
+        }
+        .toolbar-language {
+            font: 700 12px roboto;
+        }
+    }
+}
+
+.tour {
+    border: 1px solid #fff;
+}
+
+app-header {
+    position: relative;
+    right: 17px;
+}
+
+.status-menu {
+    padding-left: 0px;
+    padding-right: 0px;
+    .status-btn {
+        width: 140px;
+        .status-container {
+            float: left;
+            margin-left: 5px;
+            .set-right {
+                text-align: end;
+                margin: 0 20px;
+            }
+        }
+    }
+}
+
+.saved-data {
+    padding-left: 0px;
+    padding-right: 0px;
+    .saved-btn {
+        width: 140px;
+        .saved-container {
+            .saved-data-img {
+                margin-right: 10px;
+                margin-left: 6px;
+                .set-right {
+                    margin-left: -4px;
+                }
+            }
+        }
+    }
+}
+
+#dropdown-btn {
+    color: currentColor;
+    &:hover {
+        color: currentColor;
+        background-color: #34373d;
+    }
+    &:focus {
+        color: currentColor;
+        background-color: #34373d;
+    }
+}
+
+.status-icon {
+    margin-right: 9px;
+}
+.user-profile-icons {
+    margin-left: -3px;
+    margin-right: 10px;
+}
+.saved-data-arrow {
+    margin-left: -4px;
+}
+
+.targets {
+    padding-left: 0px;
+    padding-right: 0px;
+    .fa-crosshairs {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .fa-caret-right {
+        text-align: end;
+        margin-left: 12px;
+        margin-right: 5px;
+    }
+}
+
+.filters {
+    padding-left: 0px;
+    padding-right: 0px;
+    .fa-filter {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .fa-caret-right {
+        text-align: end;
+        margin-left: 21px;
+        margin-right: 5px;
+    }
+}
+
+.avatar-status {
+    margin-left: -18px;
+    margin-top: 9px;
+    border:1px solid #17A9A8;
+    border-radius: 50%;
+}
+
+.circle-status {
+    margin-left: -10px;
+    margin-top: -21px;
+    border: 2px solid #17a9a8;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    position: relative;
+}
+.online {
+    background: #9dbf04;
+}
+.away {
+    background: #ff860f;
+}
+.do-not-disturb {
+    background: #ff0000;
+}
+.invisible {
+    background: #ffffff;
+}
+.offline {
+    background: #ffffff;
+}
+.status-icon {
+    margin-right: 9px;
+}

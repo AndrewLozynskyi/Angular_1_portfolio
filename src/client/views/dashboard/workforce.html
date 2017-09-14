@@ -1,0 +1,131 @@
+<div id="dashboard-card">
+    <md-progress-circular ng-if="showBackground" md-diameter="40px"></md-progress-circular>
+</div>
+
+<md-card class="dashboard-card md-whiteframe-3dp ml20 mr10 bg-gray">
+
+    <md-card-title class="mt20 mb15">
+        <tab-title active-params="wc.activeParams" select-countries="wc.selectCountries" select-departments="wc.selectDepartments" tab-title="'Workforce'" selected-date="selectedDate" get-countries="wc.getCountries", get-departments="wc.getDepartments"></tab-title>
+        <md-card-title-media class="pt5">
+            <md-menu md-offset="-220 0">
+                <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                    <md-icon class="container-dot">
+                        <img class="dots" src="/img/icons/3dot.png"/>
+                    </md-icon>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Refresh">
+                            <md-icon md-font-set="fa fa-refresh" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Refresh</span>
+                        </md-button>
+                    </md-menu-item>
+                    <% if permissions.dashboard.home.setTarget %>
+                        <md-menu-item>
+                            <md-button ng-click="wc.showTargetDialogue($event)" aria-label="Target">
+                                <md-icon md-font-set="fa fa-crosshairs" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Target..</span>
+                            </md-button>
+                        </md-menu-item>
+                    <% endif %>
+                    <% if permissions.dashboard.home.setFilter %>
+                        <md-menu-item>
+                            <md-button ng-click="wc.showFilters()" aria-label="Add filter">
+                                <md-icon md-font-set="fa fa-filter" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Add Filter</span>
+                            </md-button>
+                        </md-menu-item>
+                    <% endif %>
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Show on Home">
+                            <md-icon md-font-set="fa fa-eye" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Show on Homepage</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Hide on Home">
+                            <md-icon md-font-set="fa fa-eye-slash" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Hide from Homepage</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="wc.showUploadDialogue($event)" aria-label="Upload">
+                            <md-icon md-font-set="fa fa-upload" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Upload</span>
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </md-card-title-media>
+    </md-card-title>
+
+    <md-divider class="ml15 mr15"></md-divider>
+
+    <md-card-content class="ml15" layout-align="space-between">
+
+        <div layout="row" class="filters">
+            <span flex="none" layout="row" layout-align="start center" class="trends-span">
+                <span flex hide-gt-xs></span>
+                <md-icon flex="none" md-colors="{ color: 'warn-500' }" md-font-set="md" class="rotate45">arrow_upward</md-icon>
+                <span class="md-headline">{{ wc.trends.total }}&ensp;</span>
+                <span layout="column">
+                    <sup md-colors="{ color: 'warn-500' }">{{ wc.trends.month }} from {{ selectedDate | date:'MMMM' }}</sup>
+                    <sub>{{ wc.trends.year }} in January</sub>
+                </span>
+                <span flex hide-gt-xs></span>
+            </span>
+            <span flex class="ml20">
+                <country-dropdown active-params="wc.activeParams" country-list="wc.getCountries()" get-countries="wc.getCountries" select-countries="wc.selectCountries"></country-dropdown>
+                <department-dropdown active-params="wc.activeParams" department-list="wc.getDepartments()" get-departments="wc.getDepartments" select-departments="wc.selectDepartments"></department-dropdown>
+            </span>
+        </div>
+
+        <% if permissions.dashboard.workforce.donutWidget %>
+        <donut-charts   ng-if="activeParams.countries.length == 0 && activeParams.departments.length == 0"
+                        set-data="wc.dataLineChart()"></donut-charts>
+        <% endif %>
+
+        <% if permissions.dashboard.workforce.mapWidget %>
+        <section ng-if="activeParams.countries.length == 0 && activeParams.departments.length == 0">
+            <header>
+                <div layout-align="start center" class="chart-title">
+                    <div class="title">Workforce in selected areas for {{ selectedDate | date:'MMMM yyyy' }}</div>
+                    <div flex></div>
+                </div>
+            </header>
+            <div class="ml20">
+                <geo-circles-chart ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="chart in wc.getChartStatistic()"   set-data="chart" color="#17a9a8" color-range-min="#FFF454" color-range-max="#FD351F"></geo-circles-chart >
+            </div>
+        </section>
+        <% endif %>
+
+        <% if permissions.dashboard.workforce.headcountTable %>
+        <headcount-table    ng-if="activeParams.countries.length == 0 && activeParams.departments.length == 0"
+                            select-cell="wc.selectCountryPersonType"
+                            set-data="wc.dataTable()"></headcount-table>
+        <% endif %>
+
+        <% if permissions.dashboard.workforce.pieChart %>
+        <pie-chart  ng-if="activeParams.countries.length != 0 || activeParams.departments.length != 0"
+                    set-data="wc.dataPieChart()"></pie-chart>
+        <% endif %>
+
+        <% if permissions.dashboard.workforce.departmentsTable %>
+        <departments-list-table ng-if="wc.activeParams.departments.length > 1 || ( wc.activeParams.departments.length == 0 && wc.activeParams.countries.length > 0 )"
+                                set-data="wc.getDepartmentsStats()"
+                                table-params="wc.tableParams"
+                                select-departments="wc.selectDepartments"
+                                active-params="wc.activeParams"></departments-list-table>
+
+        <department-stats   ng-if="activeParams.departments.length == 1"
+                            title="'Workforce'"
+                            class="pr10"
+                            department-data="wc.getDepartmentsStats()"
+                            get-employees="wc.setDepartmentUsers";
+                            employees-data="wc.employeesData()"
+                            table-params="wc.tableParams"
+                            active-params="wc.activeParams"></department-stats>
+        <% endif %>
+
+        <% if permissions.dashboard.workforce.generalChart %>
+        <line-chart title-chart="YTD Workforce in selected areas for {{ selectedDate | date:'MMMM yyyy' }}"
+                    class="mt50mb25" set-date="selectedDate" set-data="wc.dataLineChart()"></line-chart>
+        <% endif %>
+
+    </md-card-content>
+
+</md-card>

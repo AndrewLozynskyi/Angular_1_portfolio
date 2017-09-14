@@ -1,0 +1,63 @@
+.close-window {
+	overflow: hidden;
+	max-width: 600px;
+    .delete-role-popup {
+    	width: 580px;
+    	position: relative;
+    	md-card-title {
+    		padding-bottom: 0;
+    		padding-left: 0;
+    	}
+    	md-card-header-text {
+    		h3 {
+    			text-align: center;
+    			color: rgb(169, 169, 169);
+    			font: 400 25px Roboto;
+    		}
+    		md-subhead {
+    			position: absolute;
+			    right: 20px;
+			    top: 20px;
+			    color: rgb(169, 169, 169);
+			    font-size: 18px;
+			    cursor: pointer;
+    		}
+    	}
+    	.informations {
+    		font: 400 18px Roboto;
+		    text-align: center;
+		    margin: 0 5%;
+		    line-height: 25px;
+		    color: rgb(169, 169, 169);
+		    span {
+		    	color: #bfbfbf;
+		    	font: 600 18px Roboto;
+		    }
+    	}
+    	.btn-container {
+    		text-align: center;
+		    margin-top: 5px;
+		    margin-bottom: 31px;
+		    margin-top: 31px;
+		    .close-btn {
+		    	background-color: rgb(43, 46, 53);
+		    	padding: 9px;
+			    margin: 0 12px;
+			    color: #bfbfbf;
+			    font: 400 17px Roboto;
+			    &:first-child {
+			    	padding-left: 15px;
+			    	padding-right: 15px;
+			    }
+		    }
+		    .cancel-btn {
+		    	background-color: rgb(245, 129, 26);
+		    	padding: 9px;
+			    width: 105px;
+			    color: #bfbfbf;
+			    font: 400 17px Roboto;
+			    margin: 0 12px;
+		    }
+    	}
+    }
+}

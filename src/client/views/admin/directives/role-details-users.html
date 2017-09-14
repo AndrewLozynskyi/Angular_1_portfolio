@@ -1,0 +1,176 @@
+
+<md-content>
+
+    <md-card class="users-card">
+        <div class="header-title">
+            <md-card-title class="mt30">
+                <md-card-title-media class="actions-btn">
+                    <div layout="row" class="group-btn mb15">
+                        <md-button class="action" type="button" ng-click="rdu.addToGroup($event)" ng-disabled="isDisabled" title="not done"><i class="fa fa-users"></i>&nbsp; Add to Group</md-button>
+                        <md-button class="action" type="button" ng-click="rdu.remove($event)" ng-disabled="isDisabled" title="not done"><i class="fa fa-user-times"></i>&nbsp; Remove</md-button>
+                        <md-button class="action" type="button" ng-click="rdu.assignToRole( $event )" ng-disabled="isDisabled" title="not done"><i class="fa fa-user-plus"></i>&nbsp; Add to role</md-button>
+                        <md-menu class="show-dropdown" aria-label="Show by">
+                            <md-button class="status" aria-label="Open menu" ng-click="$mdOpenMenu($event)" ng-disabled="isDisabled">
+                                <span class="value" hide-xs >Status</span>
+                                <md-icon hide-xs md-font-set="fa fa-caret-down"></md-icon>
+                            </md-button>
+                            <md-menu-content>
+                                <md-menu-item>
+                                    <md-button class="select-dropdown-btn" ng-class="{{ ( rdu.statusPerPage == 'Status' ) ? 'active' : '' }}" ng-click="rdu.setStatusPerPage('Status')">
+                                        <span class="ng-scope">Status</span><i class="fa fa-caret-up status" aria-hidden="true"></i>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button class="select-dropdown-btn" ng-class="{{ ( rdu.statusPerPage == 'Activated' ) ? 'active' : '' }}" ng-click="rdu.setStatusPerPage('active')">
+                                        <span class="ng-scope">Active</span><i class="fa fa-check activated" aria-hidden="true"></i>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button class="select-dropdown-btn" ng-class="{{ ( rdu.statusPerPage == 'Inactivated' ) ? 'active' : '' }}" ng-click="rdu.setStatusPerPage('inactive')">
+                                        <span class="ng-scope">Inactive</span><i class="fa fa-minus " aria-hidden="true"></i>
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </div>
+                </md-card-title-media>
+                <div class="input-block">
+                    <div class="search">
+                        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input ng-model="rdu.findUser" ng-change="rdu.searchUser()" class="search-contacts" type="text" placeholder="Search">
+                    </div>
+                </div>
+            </md-card-title>
+        </div>
+        <md-card class="users-card">
+            <table class="users-table">
+                <thead>
+                    <th>
+                        <div class="head-row" layout="row">
+                            <md-checkbox class="check md-icon header" aria-label="true" ng-model="rdu.allUsersSelected" ng-click="rdu.toggleAllSelection()"></md-checkbox>
+                            <div class="select">
+                                <div class="contacts-name">User Login<i class="fa fa-sort-desc" aria-hidden="true" ng-click="rdu.sortItems( 'username' )"></i></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="head-row" layout="row">
+                            <div class="select">
+                                <div class="contacts-name">Full Name<i class="fa fa-sort-desc" aria-hidden="true" ng-click="rdu.sortItems( 'fullName' )"></i></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="head-row" layout="row">
+                            <div class="select">
+                                <div class="contacts-name">Start date<i class="fa fa-sort-desc" aria-hidden="true" ng-click="rdu.sortItems( 'StartDate' )"></i></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="head-row" layout="row">
+                            <div class="select">
+                                <div class="contacts-name">Termination date<i class="fa fa-sort-desc" aria-hidden="true" ng-click="rdu.sortItems( 'TerminationDate' )"></i></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="head-row" layout="row">
+                            <div class="select">
+                                <div class="contacts-name">Status<i class="fa fa-sort-desc" aria-hidden="true" ng-click="rdu.sortItems( 'status' )"></i></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="head-row" layout="row">
+                            <div class="select">
+                                <div class="contacts-name">Country<i class="fa fa-sort-desc" aria-hidden="true" ng-click="rdu.sortItems( 'country' )"></i></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="head-row" layout="row">
+                            <div class="select">
+                                <div class="contacts-name">Department<i class="fa fa-sort-desc" aria-hidden="true" ng-click="rdu.sortItems( 'department' )"></i></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="head-row" layout="row">
+                            <div class="ml10">
+                                <div class="contacts-name">EmployeeID</div>
+                            </div>
+                        </div>
+                    </th>
+                </thead>
+                <tbody id="elem-users">
+                    <tr ng-repeat="user in rdu.users" class="rows">
+                        <td class="users-data">
+                            <div layout="row" layout-align="start" style="align-items: center;">
+                                <md-checkbox class="check md-icon" aria-label="..." ng-model="user.selected" ng-change="rdu.toggleUserSelection()"></md-checkbox>
+                                <div class="ml10">
+                                    <div class="users-name">{{ user.username }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="users-data">
+                            <div layout="row" layout-align="start" style="align-items: center;">
+                                <div class="ml10">
+                                    <div class="users-name">{{ user.employee.firstName + ' ' + user.employee.lastName }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="users-data">
+                            <div layout="row" layout-align="start" style="align-items: center;">
+                                <div class="ml10">
+                                    <div class="users-name">
+                                        {{ ( user.employee.startDate ) ? user.employee.startDate : 'No data' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="users-data">
+                            <div layout="row" layout-align="start" style="align-items: center;">
+                                <div class="ml10">
+                                    <div class="users-name">
+                                        {{ ( user.employee.terminationDate ) ? user.employee.terminationDate : 'To date' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="users-data">
+                            <div layout="row" layout-align="start" style="align-items: center;">
+                                <div class="ml10">
+                                    <div ng-hide="user.status !== 'active'" class="users-name"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                    <div ng-hide="user.status == 'active'" class="users-name"><i class="fa fa-lock" aria-hidden="true"></i></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="users-data">
+                            <div layout="row" layout-align="start" style="align-items: center;">
+                                <div class="ml10">
+                                    <div class="users-name">{{ user.employee.country }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="users-data">
+                            <div layout="row" layout-align="start" style="align-items: center;">
+                                <div class="ml10">
+                                    <div class="users-name">{{ user.employee.department }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="users-data">
+                            <div layout="row" layout-align="start" style="align-items: center;">
+                                <div class="ml10">
+                                    <div class="users-name">{{ user.employee.eid }}</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-card>
+    </md-card>
+
+</md-content>

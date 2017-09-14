@@ -1,0 +1,21 @@
+
+<section>
+
+    <header>
+        <div layout-align="start center" class="chart-title">
+        <div class="title-select">{{ titleChart }}</div>
+        <div flex></div>
+        <div ng-init=" close = '/img/icons/full-screen-icon.png'; open = '/img/icons/full-screen-exit-icon.png' ">
+            <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="isFullscreenLine = !isFullscreenLine">
+                <md-icon class="container-dot">
+                    <img class="dots" ng-src="{{isFullscreenLine ? open : close}}">
+                </md-icon>
+            </md-button>
+        </div>
+        </div>
+        <div class="legend" layout-align="center center"></div>
+    </header>
+
+    <div class="line-chart" fullscreen="isFullscreenLine"></div>
+
+</section>

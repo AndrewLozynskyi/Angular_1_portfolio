@@ -1,0 +1,22 @@
+<section>
+<div class="trends" >
+    <div  class="filters" ng-cloak>
+        <span flex="none" layout="row" layout-align="start center" class="trends-span">
+            <span flex hide-gt-xs></span>
+            <md-icon flex="none" md-font-set="md" ng-class="hw.generalInfo.headcountTrends.month < 0 ? 'rotate45' : hw.generalInfo.headcountTrends.month > 0 ? 'rotate225' : 'double-rotate45' ">arrow_upward</md-icon>
+            <md-icon flex="none" ng-show="hw.generalInfo.headcountTrends.month === 0" md-font-set="md" class="double-arrow">arrow_upward</md-icon>
+            <span class="md-headline rotate-gray">{{ hw.generalInfo.headcountTrends.total }}&ensp;</span>
+
+            <span layout="column" >
+                <sup ng-class="hw.generalInfo.headcountTrends.month < 0 ? 'rotate-red' : hw.generalInfo.headcountTrends.month > 0 ? 'rotate-green' : 'rotate-gray'">{{ hw.generalInfo.headcountTrends.month }} from {{ selectedDate | date:'MMMM' }}</sup>
+                <sub>{{ hw.generalInfo.headcountTrends.year }} in January</sub>
+            </span>
+            <span flex hide-gt-xs></span>
+        </span>
+    </div>
+</div>
+<!-- <section fullscreen="isFullscreenLine"> -->
+    <div class="line-chart-mini"></div>
+<!-- </section> -->
+
+</section>

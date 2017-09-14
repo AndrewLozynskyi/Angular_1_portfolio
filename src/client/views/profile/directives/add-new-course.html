@@ -1,0 +1,74 @@
+<div class="acGroup">
+    <div class="head">
+        <span class="acTitle">Add course</span>
+        <md-button class="md-icon-button close-btn" ng-click="anc.close()">
+            <md-icon aria-label="Close dialog">close</md-icon>
+        </md-button>
+    </div>
+    <div class="main">
+        <div class="course-row">
+            <span class="course-name">Leaving reason</span>
+            <md-input-container class="md-block name-input" md-no-float>
+                <label></label>
+                <input type="text" ng-model="course.name" class="input-course-name" placeholder="Reason">
+            </md-input-container>
+        </div>
+        <div class="course-row">
+            <span class="provider">Status flag</span>
+<!--             <md-input-container class="md-block provider-input" md-no-float>
+                <label></label>
+                <input type="text" ng-model="course.provider" class="input-course-provides" placeholder="Education platform name">
+            </md-input-container> -->
+            <md-menu class="status-menu">
+                <md-button ng-click="$mdMenu.open()" class="status-btn">
+                    <div class="status-container">
+                        <img class="status-icon" src="{{ statusIconSrs }}"/>
+                        <span>{{ status }}</span>
+                        <!-- <md-icon hide-xs  md-font-set="fa fa-caret-right" class="set-right"></md-icon> -->
+                    </div>
+                </md-button>
+                <md-menu-content>
+                    <md-menu-item>
+                        <md-button ng-click="setStatus( 'Online' )" >
+                            <img class="status-icon" src="/img/icons/online-icon.png">
+                            <span>Online</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="setStatus( 'Away' )" >
+                            <img class="status-icon" src="/img/icons/notavaliable-icon.png">
+                            <span>Away</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="setStatus( 'Do not Disturb' )">
+                            <img class="status-icon" src="/img/icons/not-disturb-icon.png">
+                            <span>Do not Disturb</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="setStatus( 'Invisible' )" >
+                            <img class="status-icon" src="/img/icons/offline-icon.png">
+                            <span>Invisible</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="setStatus( 'Offline' )" >
+                            <img class="status-icon" src="/img/icons/offline-icon.png">
+                            <span>Offline</span>
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    <div class="footer-btn">
+        <md-button class="md-raised attach-btn" aria-label="button" ng-click="anc.attachCertificate()">
+            <i class="fa fa-upload" aria-hidden="true"></i>
+            <span>Attach Certificate</span>
+        </md-button>
+        <md-button class="md-raised save-btn" aria-label="button" ng-click="anc.saveCource()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            <span>Save</span>
+        </md-button>
+    </div>
+</div>

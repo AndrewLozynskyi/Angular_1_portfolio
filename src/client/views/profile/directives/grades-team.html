@@ -1,0 +1,129 @@
+<div class="grade-title">Team Pay Strycture</div>
+<md-card class="team">
+    <table class="team-table">
+        <thead>
+            <th>
+                <div class="head-row" layout="row">
+                    <div layout="row">
+                        <div class="contacts-name">Grade/Team name</div>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div class="contacts-name">Salary Minimum</div>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div layout="row" class="contacts-name">Salary Median</div>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div class="contacts-name">Salary Maximun</div>
+                    </div>
+                </div>
+            </th>
+        </thead>
+        <tbody id="elem">
+            <tr ng-repeat="item in gtc.teamData" class="rows">
+                <td class="team-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div>
+                            <div class="team-name">{{item.count + ' &nbsp '}}{{ item.name }}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="team-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="team-name">${{ item.minimum | number }}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="team-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="team-name">
+                                ${{ item.median | number }}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="team-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="team-name">
+                                ${{ item.maximum | number }}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</md-card>
+
+<div class="grade-title mt40">Grades vs Team Total</div>
+
+<md-card class="team">
+    <table class="team-table">
+        <thead>
+            <th>
+                <div class="head-row" layout="row">
+                    <div layout="row">
+                        <div class="contacts-name">Grade/Team name</div>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div class="contacts-name">% of Team</div>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div layout="row" class="contacts-name">Salary Median</div>
+                    </div>
+                </div>
+            </th>
+        </thead>
+        <tbody id="elem">
+            <tr ng-repeat="item in gtc.teamData" class="rows">
+                <td class="team-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div>
+                            <div class="team-name">{{item.count + ' &nbsp '}}{{ item.name }}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="team-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="team-name">{{ item.avarage }}%</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="team-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="team-name">
+                                ${{ item.median | number }}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</md-card>
+    

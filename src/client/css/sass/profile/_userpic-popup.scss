@@ -1,0 +1,349 @@
+
+.profile-photo {
+    width: 685px;
+    max-width: 685px;
+    background: #292c33;
+    overflow: hidden;
+    #file-input {
+        display: none;
+    }
+   .profile-popup {
+        width: 685px;
+        max-width: 685px;
+        background: #292c33;
+        overflow: hidden;
+        height: 100%;
+        .header-block-profile {
+            color: #c9c9ca;
+            background: #22242b;
+            height: 65px;
+            .upload-profile-header {
+                margin: 12px 0;
+                .cloud {
+                    float: left;
+                    position: relative;
+                    margin-right: 20px;
+                    margin-left: 26px;
+                    margin-top: 8px;
+                    color: rgb(191, 191, 191);
+                }
+                span {
+                    position: relative;
+                    float: left;
+                    font-size: 16px;
+                    margin-top: 10px;
+                    color: rgb(191, 191, 191);
+                }
+                .md-icon-button {
+                    position: relative;
+                    float: right;
+                    color: rgb(96, 98, 103);
+                }
+            }
+        }
+        .img-container {
+            background: $bg-gray;
+            position: relative;
+            width: 100%;
+            height: 300px;
+            bottom: 0px;
+            padding: 0;
+            .drop-avatar {
+                margin-right: 242px;
+                margin-bottom: 125px;
+                z-index: 1;
+            }
+            .drag-cont.dragover {
+                border-color: #aaa;
+                .upload-link {
+                    display: none;
+                }
+                .drop {
+                    position: absolute;
+                    display: table;
+                    z-index: 2;
+                    bottom: 0px;
+                    left: 50%;
+                    transform: translateX( -50% );
+                    font-size: 14px;
+                    color: #bfbfbf;
+                    padding: 5px;
+                    display: block;
+                }
+            }
+            .drag-cont {
+                position: fixed;
+                top: 228px;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 90%;
+                height: 235px;
+                background-color: #22242c;
+                border-color: #1a1c21;
+                border-radius: 10px;
+                border-width: 2px;
+                border-style: dashed;
+                .drop {
+                    display: none;
+                }
+                .image-border {
+                    border-color: #1a1c21;
+                    border-radius: 50%;
+                    border-width: 2px;
+                    border-style: dashed;
+                }
+                .drag-title {
+                    z-index: 2;
+                    position: fixed;
+                    top: 17%;
+                    left: 20%;
+                    font-size: 16px;
+                    color: #bfbfbf;
+                }
+                .upload-link {
+                    position: absolute;
+                    display: table;
+                    z-index: 2;
+                    bottom: 0px;
+                    left: 50%;
+                    transform: translateX( -50% );
+                    font-size: 14px;
+                    color: #bfbfbf;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+                .img-block {
+                    position: relative;
+                    text-align: center;
+                    display: inline-block;
+                    height: 100%;
+                    width: 100%;
+                    padding: 21px 0;
+                    .drag-avatar {
+                        width: 184.986px;
+                        height: 184.986px;
+                        margin: 0 auto;
+                        background: #22242c;
+                        border-color: #1a1c21;
+                        border-radius: 50%;
+                        border-width: 3px;
+                        border-style: dashed;
+                        md-icon {
+                            margin-top: 43%;
+                            margin-right: 35%;
+                            &:before {
+                                font-size: 110px;
+                                line-height: 22px;
+                                color: #292c33;
+                            }
+                        }
+                    }
+                    #cropper {
+                        .cr-boundary {
+                            border-radius: 50%;
+                            .cr-viewport {
+                                border: none;
+                            }
+                        }
+                        .cr-slider-wrap {
+                                margin-left: 297px;
+                                margin-top: 63px;
+                            .cr-slider {
+                                cursor: pointer;
+                                width: 263px;
+                            }
+                        }
+                    }
+                    img {
+                        position: relative;
+                        width: 185px;
+                        border-radius: 100px;
+                        cursor: all-scroll;
+                    }
+                }
+            }
+        }
+        .scale-block {
+                width: 100%;
+                height: 60px;
+                display: inline-block;
+                padding: 0 34px;
+                border-bottom: 1px solid rgb(28, 30, 34);
+            p {
+                float: left;
+                margin-left: 13px;
+                color: rgb(89, 91, 95);
+                font-size: 17px;
+                font-family: inherit;
+                margin-bottom: 0;
+                line-height: 43px;
+            }
+            .zoom-image {
+                float: right;
+                width: 55%;
+                overflow: inherit;
+                margin-right: 15px;
+                .minus-profile-btn {
+                    float: left;
+                    position: relative;
+                    font-size: 30px;
+                    color: rgb(86, 88, 93);
+                    margin-right: 9px;
+                    padding: 1px;
+                    line-height: 1.2em;
+                }
+                .plus-profile-btn {
+                    float: right;
+                    position: relative;
+                    font-size: 30px;
+                    color: rgb(86, 88, 93);
+                    padding: 1px;
+                    line-height: 1.2em;
+                }
+                .line {
+                    width: 78%;
+                    margin: 0 auto;
+                    border-top: 1px solid rgb(28, 30, 34);
+                    border-bottom: 1px solid rgb(86, 88, 93);
+                    display: inline-block;
+                    vertical-align: bottom;
+                    cursor: pointer;
+                }
+            }
+        }
+        .footer-container {
+            position: relative;
+            top: -5px;
+            border-top: 1px solid #56585d;
+            width: 100%;
+            overflow: hidden;
+            padding: 21px 45px;
+            .left-block {
+                span {
+                    position: relative;
+                    float: left;
+                    font-size: 16px;
+                    margin-top: 10px;
+                    color: #bfbfbf;
+                }
+                md-progress-circular {
+                    position: absolute;
+                    left: 135px;
+                    top: 30px;
+                    svg {
+                        path {
+                            stroke-width: 1.5px !important;
+                        }
+                    }
+                }
+                .background {
+                    svg {
+                        path {
+                            stroke: rgb(32,35,42);
+                        }
+                    }
+                }
+                .background-white {
+                    position: absolute;
+                    top: 6px;
+                    left: 6px;
+                    width: 17px;
+                    height: 17px;
+                    background-color: white;
+                    border-radius: 3px;
+                    z-index: -1;
+                }
+                .close-background {
+                    position: absolute;
+                    top: 3px;
+                    left: 3px;
+                    width: 15px;
+                    height: 13px;
+                    background-color: white;
+                    border-radius: 3px;
+                    z-index: -1;
+                }
+                .md-close-button {
+                    position: absolute;
+                    min-height: 23px;
+                    height: 23px;
+                    min-width: 23px;
+                    width: 23px;
+                    /*margin: 0px;*/
+                    padding: 0;
+                    line-height: 25px;
+                    border-radius: 50%;
+                    .close-icon {
+                        /*margin: 0px;*/
+                        &:before {
+                            font-size: 27px;
+                            color: #c47985;
+                            font-weight: 600;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+                .md-check-btn {
+                    position: absolute;
+                    min-height: 23px;
+                    height: 23px;
+                    min-width: 23px;
+                    width: 23px;
+                    /*margin: 0px;*/
+                    padding: 0;
+                    z-index: 1;
+                    line-height: 25px;
+                    border-radius: 50%;
+                    .check-icon {
+                        position: absolute;
+                        left: -3px;
+                        top: -3px;
+                        margin: 0px;
+                        color: #5ac289;
+                        font-size: 29px;
+                    }
+                }
+                .md-help-btn {
+                    position: absolute;
+                    min-height: 23px;
+                    height: 23px;
+                    min-width: 23px;
+                    width: 23px;
+                    /*margin: 0px;*/
+                    padding: 0;
+                    z-index: 1;
+                    line-height: 25px;
+                    border-radius: 50%;
+                    .help-icon {
+                        position: absolute;
+                        left: -3px;
+                        top: -3px;
+                        /*margin: 0px;*/
+                        color: #f57f19;
+                        font-size: 29px;
+                    }
+                }
+            }
+            .right-block {
+                position: relative;
+                display: inline-flex;
+                float: right;
+                color: #bfbfbf;
+                .try-again {
+                    background-color: #1a1c1f;
+                    padding: 2px;
+                    min-width: 118px;
+                    border-radius: 5px;
+                }
+                .apply {
+                    background-color: #1aa9a8;
+                    min-width: 110px;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+}

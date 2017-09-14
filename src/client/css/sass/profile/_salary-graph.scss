@@ -1,0 +1,101 @@
+
+salary-graph {
+    display: block;
+    width: 100%;
+    background: inherit;
+    min-height: 295px;
+    .md-icon-button.dot {
+        float: right;
+        position: relative;
+        right: 0;
+    }
+    header {
+        position: relative;
+        margin-bottom: 13px;
+        .md-icon-button.dot {
+            float: right;
+            position: relative;
+            right: 0;
+            .container-dot {
+                display: inline;
+                .dots {
+                    width: 16px;
+                    position: relative;
+                    margin: 0 auto;
+                    top: -6px;
+                }
+            }
+        }
+        .fullscreen {
+            position: absolute;
+            margin: 0;
+            top: -10px;
+            right: 0px;
+        }
+        .legend {
+            float: right;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-right: 20px;
+            text-transform: capitalize;
+            font: 300 12px roboto;
+            color: $content-font-color;
+        }
+        .chart-title {
+            font: 400 16px roboto;
+            color: $content-font-color;
+            display: flex;
+        }
+        @media(max-width: 750px) {
+            .chart-title {
+                font: 400 12px/20px roboto;
+            }
+        }
+    }
+    section {
+        width: 100%;
+        background: inherit;
+    }
+    .axis {
+        path, line {
+            fill: none;
+            stroke: $slider-color;
+        }
+        text {
+            fill: $slider-color;
+        }
+        &.y text {
+            fill: $content-font-color;
+        }
+    }
+    .line {
+        fill: none;
+        stroke: gray;
+        stroke-width: 1px;
+    }
+    .tick {
+        text {
+            font-size: 12px;
+        }
+        line {
+            opacity: 0.2;
+        }
+    }
+    .circle {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        box-shadow: 1px 1px 1px #000;
+        margin-left: 20px;
+        margin-right: 5px;
+        vertical-align: bottom;
+    }
+    .tooltip {
+        transform: translate( 15px, -20px );
+    }
+    .area {
+        fill: url(#salary-gradient);
+        stroke-width: 0;
+    }
+}

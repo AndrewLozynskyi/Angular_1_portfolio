@@ -1,0 +1,34 @@
+<md-card class="delete-role-popup">
+    <md-card-header>
+        <md-card-header-text class="information-header">
+            <md-title>
+                <h3>Delete Role</h3>
+                <md-subhead ng-click="dr.cancel()">X</md-subhead>
+            </md-title>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card-title>
+        <md-card-title-text ng-show='dr.noUsers'>
+            <md-headline class="informations">
+                Do you really want to delete role <span ng-repeat="name in dr.roleName">{{name | limitTo:25}}  ... </span> ?<br>
+                (or whatever outher role under your permission)
+            </md-headline>
+        </md-card-title-text>
+        <md-card-title-text ng-show='dr.oneUser'>
+            <md-headline class="informations">There is <span>{{dr.userCount[0]}} active User Account</span> assigning to role <span ng-repeat="name in dr.roleName">{{name}}. To be deleted this role has to not contain any active accounts<p class="subhead">Would you like to review existing accounts?</p></md-headline>
+        </md-card-title-text>
+        <md-card-title-text ng-show='dr.manyUsers'>
+            <md-headline class="informations">There is {{dr.tempCount.length}} role has active User Account.
+            Please try to remove one role.</md-headline>
+        </md-card-title-text>
+        <md-card-title-text ng-show='dr.permanent'>
+            <md-headline class="informations">You have no permission to delete this role.</md-headline>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-actions class="btn-container">
+        <md-button ng-show="dr.oneUser" class="delete-btn">Review Accounts</md-button>
+        <md-button ng-show="dr.noUsers" class="delete-btn" ng-click="dr.delete()">Delete</md-button>
+        <md-button ng-hide="dr.manyUsers" class="cancel-btn" ng-click="dr.cancel()">Cancel</md-button>
+        <md-button ng-show="dr.manyUsers" class="delete-btn" ng-click="dr.cancel()">OK</md-button>
+    </md-card-actions>
+</md-card>

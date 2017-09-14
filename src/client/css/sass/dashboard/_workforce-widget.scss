@@ -1,0 +1,185 @@
+workforce-widget {
+    .trends {
+        margin-top: 20px;
+        .filters {
+            .trends-span {
+                margin:0;
+                margin-left: 30px;
+                margin-right: 0;
+                margin-top: -30px;
+                .double-arrow {
+                    font-size: 20px;
+                    margin-left: -10px;
+                }
+                .double-rotate45 {
+                    font-size: 20px;
+                }
+                .md-headline {
+                    font-family: Roboto;
+                    color:  #bfbfbf;
+                    font-size: 19.68px;
+                    font-weight: 300;
+                    line-height: 25px;
+                    text-align: left;
+                    transform: scaleY(1.0163);
+                }
+            }
+        }
+    }
+    .tooltip-workf {
+        transform: translate(-50%, -120%);
+        z-index: 1;
+        width: 215px;
+        border-radius: 5px;
+        position: absolute;
+        color: #fff;
+        opacity: 0.95;
+        font-size: 12px;
+        padding: 5px;
+        background: linear-gradient(0deg, #17a0a9 0%, rgba(84, 65, 120, 0.8) 100%);
+        box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-top: transparent;
+        border-width: 1px;
+        font-family: roboto !important;
+        &:before {
+            content: '';
+            width: 0;
+            height: 0;
+            border: 7px solid transparent;
+            border-right-color: #3091b0;
+            border-bottom-color: #3091b0;
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: rotate(45deg);
+            margin-left: -7px;
+            margin-top: -7px;
+        }
+        table {
+            tbody {
+                tr {
+                    &:before {
+                        display: none;
+                    } 
+                }
+                tr:nth-child(2) {
+                    height: 10px;
+                }
+            }
+        } 
+        .line {
+            left: 106px;
+            display: flex;
+            position: absolute;
+            margin: 0 auto;
+            width: 1px;
+            height: 42px;
+            top: 63px;
+            background: #17a9a8;
+            opacity: 0.9;
+        } 
+        .dot {
+            display: block;
+            position: absolute;
+            width: 7px;
+            margin: auto;
+            height: 7px;
+            background: #17a9a8;
+            border-radius: 50%;
+            right: 103px;
+            top: 103px;
+        }
+    }
+    .workforce-pie {
+        .arrow-down-icon {
+            font-size: 20px;
+            margin-right: 0;
+            margin-left: 0;
+        }
+        .arrow-number {
+            font-size: 8px;
+            margin-left: -15px;
+            color: #bfbfbf;
+            line-height: 11px;
+            font-weight: 700;
+        }
+        .avarage-title {
+            color: #bfbfbf;
+            font-size: 14px;
+            padding: 0px 0 0px 25px;
+            font-family: Roboto;
+            color: #4a5a68;
+            font-size: 11.81px;
+            font-weight: 300;
+            line-height: 20.563px;
+            text-align: left;
+            margin-left: 20px;
+        }
+        .avarage-circle {
+            display: flex;
+            justify-content: space-between;
+            .circle {
+                border-radius: 50%;
+                margin-top: 3px;
+                width: 5px;
+                height: 5px;
+            }
+            .age-count {
+                color: #bfbfbf;
+            }
+        }
+        .age-list {
+            .legend {
+                #age-item {
+                    .legend-age {
+                        min-height: 20px;
+                        max-height: 20px;
+                    }
+                }
+            }
+        }
+        .pie-chart {
+            margin-top: -10px;
+            .slice {
+                &:hover {
+                    .hover {
+                        fill: rgba(36, 169, 136, 0.1);
+                    }
+                }
+            }
+            .hover {
+                fill: transparent;
+                -moz-transition: all 0.3s;
+                -o-transition: all 0.3s;
+                -webkit-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+            section {
+                width: 100%;
+                background: inherit;
+            }
+            .tooltip {
+                width: 210px;
+                transform: translate(-50%, -120%);
+            }
+        }
+        .circle {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 20px;
+            margin-right: -5px;
+            margin-top: 5px;
+            position: absolute;
+        }
+        .selected {
+            background: #33363d;
+        }
+        .un-selected {
+            background: transparent;
+        }
+    }
+}

@@ -1,0 +1,23 @@
+
+<section fullscreen="isFullscreenLine" flex>
+
+    <md-grid-list md-cols="4" md-gutter="10px" md-row-height="120px;" ng-cloak>
+        <md-grid-tile md-colspan="1" md-colspan-xs="2">
+            <div id="donut-chart-attrition" class="donut"></div>
+            <div class="donut-label">Attrition</div>
+        </md-grid-tile>
+        <md-grid-tile md-colspan="1" md-colspan-xs="2">
+            <div id="donut-chart-voluntary" class="donut"></div>
+            <div class="donut-label">Voluntary <br> Attrition</div>
+        </md-grid-tile>
+        <md-grid-tile md-colspan="1" md-colspan-xs="2">
+            <div id="donut-chart-involuntary" class="donut"></div>
+            <div class="donut-label">Inoluntary <br> Attrition</div>
+        </md-grid-tile>
+        <md-grid-tile md-colspan="1" md-colspan-xs="2">
+            <div id="donut-chart-target" class="donut"></div>
+            <div class="donut-label" ng-click="popupTarget($event)">Current <br> Headcount</div>
+        </md-grid-tile>
+    </md-grid-list>
+
+</section>

@@ -1,0 +1,132 @@
+<div id="dashboard-card">
+    <md-progress-circular ng-if="showBackground" md-diameter="40px"></md-progress-circular>
+</div>
+
+<md-card class="dashboard-card md-whiteframe-3dp ml10 mr10 bg-gray" style="overflow: hidden;">
+
+    <md-card-title class="mt20 mb15">
+        <tab-title active-params="hc.activeParams" select-countries="hc.selectCountries" select-departments="hc.selectDepartments" tab-title="'Headcount'" selected-date="selectedDate" get-countries="hc.getCountries", get-departments="hc.getDepartments"></tab-title>
+        <md-card-title-media class="pt5" class="open-menu-block-wrapper">
+            <md-menu md-offset="-220 0">
+                <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                    <md-icon class="container-dot">
+                        <img class="dots" src="/img/icons/3dot.png"/>
+                    </md-icon>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Refresh">
+                            <md-icon md-font-set="fa fa-refresh" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Refresh</span>
+                        </md-button>
+                    </md-menu-item>
+                    <% if permissions.dashboard.home.setTarget %>
+                    <md-menu-item>
+                        <md-button ng-click="hc.showTargetDialogue($event)" aria-label="Target">
+                            <md-icon md-font-set="fa fa-crosshairs" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Target..</span>
+                        </md-button>
+                    </md-menu-item>
+                    <% endif %>
+                    <% if permissions.dashboard.home.setFilter %>
+                    <md-menu-item>
+                        <md-button ng-click="hc.showFilters()" aria-label="Add filter">
+                            <md-icon md-font-set="fa fa-filter" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Add Filter</span>
+                        </md-button>
+                    </md-menu-item>
+                    <% endif %>
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Show on Home">
+                            <md-icon md-font-set="fa fa-eye" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Show on Homepage</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Hide on Home">
+                            <md-icon md-font-set="fa fa-eye-slash" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Hide from Homepage</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="hc.showUploadDialogue($event)" aria-label="Upload">
+                            <md-icon md-font-set="fa fa-upload" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Upload</span>
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </md-card-title-media>
+    </md-card-title>
+
+    <md-divider class="ml15 mr15"></md-divider>
+
+    <md-card-content class="ml15 mr15" layout-align="space-between">
+
+        <div layout="row" class="filters" ng-cloak>
+            <span flex="none" layout="row" layout-align="start center" class="trends-span">
+                <span flex hide-gt-xs></span>
+                <md-icon flex="none" md-font-set="md" ng-class="hc.trends.month < 0 ? 'rotate45' : hc.trends.month > 0 ? 'rotate225' : 'double-rotate45' ">arrow_upward</md-icon>
+                <md-icon flex="none" ng-show="hc.trends.month === 0" md-font-set="md" class="double-arrow">arrow_upward</md-icon>
+                <span class="md-headline rotate-gray">{{ hc.trends.total }}&ensp;</span>
+                <span layout="column" >
+                    <sup ng-class="hc.trends.month < 0 ? 'rotate-red' : hc.trends.month > 0 ? 'rotate-green' : 'rotate-gray'">{{ hc.trends.month }} from {{ selectedDate | date:'MMMM' }}</sup>
+                    <sub>{{ hc.trends.year }} in January</sub>
+                </span>
+                <span flex hide-gt-xs></span>
+            </span>
+            <span flex class="dropdown-inputs ml20">
+                <country-dropdown active-params="hc.activeParams" country-list="hc.getCountries()" get-countries="hc.getCountries | limitTo  : 3" select-countries="hc.selectCountries"></country-dropdown>
+                <department-dropdown active-params="hc.activeParams" department-list="hc.getDepartments()" get-departments="hc.getDepartments" select-departments="hc.selectDepartments"></department-dropdown>
+            </span>
+        </div>
+
+        <% if permissions.dashboard.headcount.donutWidget %>
+            <donut-charts set-data="hc.dataLineChart()" popup-target="hc.showTargetDialogue"></donut-charts>
+        <% endif %>
+
+        <% if permissions.dashboard.headcount.mapWidget %>
+            <geo-chart  selected-date="selectedDate"
+                        set-data="hc.dataGeoChart()"
+                        color-range-min="#FFF454" tooltip-title="{{ selectedDate | date:'MMM yyyy' }}"
+                        color-range-max="#FD351F"
+                        active-params="hc.activeParams"
+                        class="pt20pb20" md-colors="{color: 'background-A200'}"></geo-chart>
+        <% endif %>
+
+        <% if permissions.dashboard.headcount.headcountTable %>
+            <headcount-table    ng-if="hc.activeParams.countries.length == 0 && hc.activeParams.departments.length == 0"
+                                select-cell="hc.selectCountryDepartment"
+                                set-data="hc.dataTable()"></headcount-table>
+        <% endif %>
+
+        <% if permissions.dashboard.headcount.departmentsTable %>
+            <departments-list-table ng-if="hc.activeParams.countries.length == 0 && hc.activeParams.departments.length > 1"
+                                    set-data="hc.getDepartmentsStats()"
+                                    table-params="hc.tableParams"
+                                    select-departments="hc.selectDepartments"
+                                    active-params="hc.activeParams"></departments-list-table>
+
+            <department-stats   ng-if="hc.activeParams.countries.length == 0 && hc.activeParams.departments.length == 1"
+                                class="pr10"
+                                title="'Headcount'"
+                                department-data="hc.getDepartmentsStats()"
+                                get-employees="hc.setDepartmentUsers";
+                                employees-data="hc.employeesData()"
+                                table-params="hc.tableParams"
+                                active-params="hc.activeParams"></department-stats>
+        <% endif %>
+
+        <% if permissions.dashboard.headcount.employeeTable %>
+            <employee-table ng-if="( hc.activeParams.countries.length != 0 && hc.activeParams.departments.length != 0 ) || (hc.activeParams.countries.length != 0 && hc.activeParams.departments.length == 0 )"
+                            class="pr10"
+                            title="'Headcount'"
+                            active-params="hc.activeParams"
+                            set-sidebar-data="hc.getCountriesDepartments()"
+                            set-employees-data="hc.employeesData()"
+                            set-departments="hc.getDepartmentsStats()"
+                            select-departments="hc.selectDepartments"></employee-table>
+        <% endif %>
+
+        <% if permissions.dashboard.headcount.generalChart %>
+            <line-chart title-chart="YTD Headcount in selected areas for {{selectedDate | date:'MMMM yyyy'}}"
+                        class="mt50mb25" set-date="selectedDate" set-data="hc.dataLineChart()"></line-chart>
+        <% endif %>
+
+    </md-card-content>
+
+</md-card>

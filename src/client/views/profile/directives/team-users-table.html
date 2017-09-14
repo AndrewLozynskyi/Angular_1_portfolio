@@ -1,0 +1,121 @@
+<div layout="row" class="ml10 mr10">
+
+    <md-list role="list" class="left-bar" flex="20" layout="column">
+        <md-list-item class="item-title">
+            <span class="title"></span>
+        </md-list-item>
+        <md-list-item ng-class="{ active: tableParams.type === item }" ng-repeat="item in tuc.setSidebarData" ng-click="ds.selectEmployeeType( item )">
+            <span style="text-transform: capitalize;">{{ item.name }}</span>
+            <span class="md-secondary data">{{ item.total }}</span>
+        </md-list-item>
+        <!-- <md-list-item ng-class="{ active: tableParams.type === 'all' }" ng-click="ds.selectEmployeeType('all')">
+            <span>All</span>
+            <span class="md-secondary data">{{ ds.departmentData.total }}</span>
+        </md-list-item> -->
+    </md-list>
+
+    <div flex class="right-bar">
+
+        <div class="title">
+            Team Headcount from Jan 2017
+        </div>
+
+        <div class="schedule-block">
+            <team-line-chart set-data="tuc.lineChart" full-graph="true"></team-line-chart>
+        </div>
+
+        <table class="employee-table">
+            <thead>
+                <tr class="employee-header">
+                    <th>
+                        <div layout="row">
+                            <div>
+                                Name
+                                <div class="shadow-title">Experiance</div>
+                            </div>
+                            <md-button class="md-icon-button">
+                                <md-icon md-font-set="md" class="rotate90">arrow_drop_down</md-icon>
+                            </md-button>
+                        </div>
+                    </th>
+                    <th>
+                        <div layout="row">
+                            <div>
+                                Company
+                                <div class="shadow-title">Country</div>
+                            </div>
+                            <md-button class="md-icon-button">
+                                <md-icon md-font-set="md" class="rotate90">arrow_drop_down</md-icon>
+                            </md-button>
+                        </div>
+                    </th>
+                    <th>
+                        <div layout="row">
+                            <div>
+                                Job Title
+                                <div class="shadow-title">Manager Name</div>
+                            </div>
+                            <md-button class="md-icon-button">
+                                <md-icon md-font-set="md" class="rotate90">arrow_drop_down</md-icon>
+                            </md-button>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in tuc.employeesData.employees" class="employee-data">
+                    <td>
+                        <div layout="row" layout-align="start center">
+                            <!-- <img class="avatar" src="/img/profile-pics/user-icon.png"/> -->
+                            <ng-letter-avatar class="avatar" width="40" height="40" fontSize="13" charCount="2" data="{{ employee.userpic ? 'http://' + window.location.host + employee.userpic : employee.userName }}" shape="round"></ng-letter-avatar>
+                            <div class="ml10">
+                                <div class="employee-name">{{ employee.firstName }} {{ employee.lastName }}</div>
+                                <div class="shadow-title">{{ employee.dateDiff }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div layout="row" layout-align="start center">
+                            <div class="ml10">
+                                <div class="employee-name">{{ employee.company }}</div>
+                                <div class="shadow-title">{{ employee.city }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div layout="row" layout-align="start center">
+                            <div class="ml10">
+                                <div class="employee-name">{{ employee.jobTitle }}</div>
+                                <div class="shadow-title">{{ employee.supervisor }}</div>
+                            </div>
+                            <md-card-title-media class="pt5">
+                                <md-menu md-offset="-200 0">
+                                    <md-button aria-label="Open more menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                                        <md-icon class="container-dot" md-font-set="md">
+                                            <img class="dots" src="/img/icons/3dot.png"/>
+                                        </md-icon>
+                                    </md-button>
+                                    <md-menu-content width="4">
+                                        <md-menu-item>
+                                            <md-button ng-click="cc.getContactStats(item.uid)" onmouseover="this.style.backgroundColor='#35383e';" onmouseout="this.style.backgroundColor='#292c33';" ui-sref="profile.about({username:item.username})" aria-label="View profile">
+                                                <md-icon class="bla" style="color: #bfbfbf;" md-font-set="fa fa-user" aria-hidden="true"><span style="font: 400 14px roboto;" class="dot-menu-item">&nbsp; View Profile</span></md-icon>
+                                            </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button ng-click="null">
+                                                <md-icon md-font-set="fa fa-user-plus" aria-hidden="true"  aria-label="Add to contacts">
+                                                    <span class="dot-menu-item">&nbsp;   Add To Contacts</span>
+                                                </md-icon>
+                                            </md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </md-card-title-media>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

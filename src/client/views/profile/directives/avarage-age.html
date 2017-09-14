@@ -1,0 +1,26 @@
+
+<div class="avarage-age">
+
+    <div layout="row" class="mb30">
+        <md-icon class="arrow-down-icon" md-font-set="fa fa-long-arrow-down"></md-icon>
+        <div layout="column">
+            <span class="arrow-number">1</span>
+            <span class="arrow-number">9</span>
+        </div>
+        <span class="avarage-title">Avarage age</span>
+    </div>
+    
+    <section layout="row" class="age-list">
+        <div flex class="legend" layout="row" layout-align="center start">
+            <md-list id='age-item' flex="75">
+                <md-list-item ng-repeat="item in legend" class="legend-age" layout="row" layout-align="center center">
+                    <div class="circle" ng-style="{background: item.color}"></div>
+                    <div class="avarage-title" flex>{{ item.diapazone }}</div>
+                    <div class="avarage-title md-secondary">{{ item.total }}</div>
+                </md-list-item>
+            </md-list>
+        </div>
+        <div flex class="pie-chart"></div>
+    </section>
+
+</div>

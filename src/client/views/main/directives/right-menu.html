@@ -1,0 +1,519 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp"  md-component-id="right" >
+    <div>
+
+        <md-tabs flex  md-no-pagination="true">
+
+            <md-tab label="TODAY">
+                <md-tab-label>
+                    TODAY
+                    <md-icon class="sidenav-right-icon" md-font-set="fa fa-dashboard large-img"></md-icon>
+                </md-tab-label>
+                <md-tab-body class="today">
+                    <md-card>
+                        <md-card-title class="today">
+                            <md-card-title-text>
+                                <span class="title upper">Today</span>
+                                <span class="date">{{ sidenav.weekday }}</span>
+                                <span class="date">{{ sidenav.day }} {{ sidenav.prefix }} {{ sidenav.month }}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-title layout="column" class="today">
+                            <md-card-title-text>
+                                <span class="title mb25">Events</span>
+                            </md-card-title-text>
+                            <md-card-title-text>
+                                  <span class="group-title">Group meeting</span>
+                                  <span class="group-description">In 32 Minutes, Room 18</span>
+                            </md-card-title-text>
+                            <md-card-title-text>
+                                  <span class="group-title">Group meeting</span>
+                                  <span class="group-description">In 32 Minutes, Room 18</span>
+                            </md-card-title-text>
+                            <md-card-title-text>
+                                  <span class="group-title">Group meeting</span>
+                                  <span class="group-description">In 32 Minutes, Room 18</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-title layout="column" class="today">
+                            <md-card-title-text>
+                                <span class="title mb25">Notes</span>
+                            </md-card-title-text>
+                            <md-card-title-text>
+                                <span class="group-title">Group meeting</span>
+                                <span class="group-description">In 32 Minutes, Room 18</span>
+                            </md-card-title-text>
+                        </md-card-title>
+
+                        <md-card-title layout="column" class="today">
+                            <md-card-title-text>
+                                <span class="title mb25">Quick settings</span>
+                            </md-card-title-text>
+                            <md-card-title-text  layout="row" class=" notif-switch mb20">
+                                <span class="notifications">Notifications</span>
+                                <md-switch ng-class="{activeDisabled: sidenav.data.cb1}" class="switch" ng-model="sidenav.data.cb1" aria-label="Switch 1"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text  layout="row" class="notif-switch ">
+                                <span class="notifications">Notifications</span>
+                                <md-switch ng-class="{activeDisabled: sidenav.data.cb2}"  ng-model="sidenav.data.cb2" aria-label="Switch 1"></md-switch>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </md-tab-body>
+            </md-tab>
+
+            <md-tab label="CHAT">
+                <md-tab-label>
+                    CHAT
+                    <md-icon class="sidenav-right-icon" md-font-set="fa fa-comments large-img"></md-icon>
+                </md-tab-label>
+                <md-tab-body></md-tab-body>
+            </md-tab>
+
+            <md-tab label="ACTIVITY">
+                <md-tab-label>
+                    ACTIVITY
+                    <md-icon class="sidenav-right-icon" md-font-set="fa fa-line-chart large-img"></md-icon>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="md-padding">
+                        <table class="table_notifications">
+                            <tbody>
+                                <tr ng-repeat="item in [1, 2, 3, 4, 5, 6, 7, 8]">
+                                    <td class="td_notifications">
+                                        <div layout="row" layout-align="start" style="align-items: center;">
+                                            <img class="avatar ng-scope" ng-if="item.userpic" src="../../usersData/{{item.uid}}/{{item.userpic}}"/>
+                                            <img class="avatar ng-scope" ng-if="!item.userpic" src="/img/profile-pics/user-icon.png"/>
+                                            <div class="circle-status status-icon"
+                                                    ng-class="{'online':item.status === 'Online', 'away':item.status === 'Away', 'do-not-disturb':item.status === 'Do not Disturb', 'invisible':item.status === 'Invisible', 'offline':item.status === 'Offline' }">
+                                            </div>
+                                            <div>
+                                                <div class="contacts-name">Alice Lee</div>
+                                                <div class="shadow-title">Changed position!</div>
+                                            </div>
+                                        </div>
+                                        <div class="last_time_visite">
+                                            <span>20 min ago</span>
+                                            <md-menu md-offset="-220 0">
+                                                <md-button aria-label="Open more menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                                                    <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+                                                </md-button>
+                                                <md-menu-content width="4">
+                                                    <md-menu-item>
+                                                        <md-button ng-click="null">
+                                                            <span>Hide post</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                    <md-menu-item>
+                                                        <md-button ng-click="null">
+                                                            <span>Unfollow Alice</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                    <md-menu-item>
+                                                        <md-button ng-click="null">
+                                                            <span>Stop seeing posts but stay friends</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                    <md-menu-item>
+                                                        <md-button ng-click="null">
+                                                            <span>turn off notifivation about this post</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                </md-menu-content>
+                                            </md-menu>
+                                        </div>
+                                    </td>                                    
+                                </tr>          
+                            <tbody>
+                        </table>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+
+            <md-tab label="SETTINGS">
+                <md-tab-label>
+                    SETTINGS
+                    <md-icon class="sidenav-right-icon" md-font-set="fa fa-cog large-img"></md-icon>
+                </md-tab-label>
+                <md-tab-body class="settings">
+                    <md-card ng-hide="sidenav.showDetails">
+                        <md-card-title layout="column" class="settings">
+                            <md-card-title-text>
+                                <span class="title mb25">SYSTEM SETTINGS</span>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch mb20 show-more" ng-click="sidenav.openDetails('alerts')" layout="row">
+                                <div class="info-block-menu">
+                                    <span class="group-title">
+                                        <md-icon md-font-set="fa fa-exclamation-triangle"></md-icon>
+                                        Alerts
+                                    </span>
+                                    <md-icon class="open-menu-admin" md-font-set="fa fa-angle-right"></md-icon>
+                                </div>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch mb20 show-more" ng-click="sidenav.openDetails('notifications')" layout="row">
+                                <div class="info-block-menu">
+                                    <span class="group-title">
+                                        <md-icon md-font-set="fa fa-trello"></md-icon>
+                                        Notifications
+                                    </span>
+                                    <md-icon class="open-menu-admin" md-font-set="fa fa-angle-right"></md-icon>
+                                </div>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch mb20 show-more" ng-click="sidenav.openDetails('email')" layout="row">
+                                <div class="info-block-menu">
+                                    <span class="group-title">
+                                        <md-icon md-font-set="fa fa-envelope-square"></md-icon>
+                                        Email notifications
+                                    </span>
+                                    <md-icon class="open-menu-admin" md-font-set="fa fa-angle-right"></md-icon>
+                                </div>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch mb20 show-more" ng-click="sidenav.openDetails('warnings')" layout="row">
+                                <div class="info-block-menu">
+                                    <span class="group-title">
+                                        <md-icon md-font-set="fa fa-bullhorn"></md-icon>
+                                        Warnings
+                                    </span>
+                                    <md-icon class="open-menu-admin" md-font-set="fa fa-angle-right"></md-icon>
+                                </div>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-title layout="column" class="settings">
+                            <md-card-title-text>
+                                <span class="title mb25">PREFERENCES</span>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch" layout="row">
+                                <span class="group-title">
+                                    <md-icon md-font-set="fa fa-map-marker"></md-icon>
+                                    Location
+                                </span>
+                                <md-switch ng-class="{activeDisabled: settings.location}" ng-change="sidenav.save()" ng-model="settings.location" aria-label="Switch 6" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text layout="row">
+                                <div layout="column" class="notif-switch mb20 show-more">
+                                    <div class="info-block-menu">
+                                        <span class="group-title">
+                                            <md-icon md-font-set="fa fa-paint-brush"></md-icon>
+                                            Color schemes
+                                        </span>
+                                        <md-icon class="open-menu-admin" md-font-set="fa fa-angle-right"></md-icon>
+                                    </div>
+                                    <span layout="column" class="group-description pl25 mb0">Darck sceme selected.</span>
+                                </div>
+                            </md-card-title-text>
+
+                            <md-card-title-text layout="row" ng-click="sidenav.openDetails('currency')">
+                                <div layout="column" class="notif-switch mb20 show-more">
+                                    <div class="info-block-menu">
+                                        <span class="group-title">
+                                            <md-icon md-font-set="fa fa-money"></md-icon>
+                                            Currency
+                                        </span>
+                                        <md-icon class="open-menu-admin" md-font-set="fa fa-angle-right"></md-icon>
+                                    </div>
+                                    <span layout="column" class="group-description pl25">Euro</span>
+                                </div>
+                            </md-card-title-text>
+
+                        </md-card-title>
+                        <md-card-title layout="column" class="settings">
+                            <md-card-title-text>
+                                <span class="title mb25">ADMIN SETTINGS</span>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch mb20" layout="row">
+                                <span class="group-title">Search engine friendly URLs</span>
+                                <md-switch ng-class="{activeDisabled: data.cb8}"  ng-model="data.cb8" aria-label="Switch 7" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch mb20" layout="row">
+                                <span class="group-title">Use URL rewritting</span>
+                                <md-switch ng-class="{activeDisabled: data.cb8}"  ng-model="data.cb8" aria-label="Switch 7" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text layout="row" class="notif-switch show-more" ng-click="sidenav.openDetails('maintenance')">
+                                <div layout="column" class="notif-switch mb20 show-more">
+                                    <div class="info-block-menu">
+                                        <span class="group-title">
+                                            On maintenance page
+                                        </span>
+                                        <md-icon class="open-menu-admin" md-font-set="fa fa-angle-right"></md-icon>
+                                    </div>
+                                    <span layout="column" class="group-description">Switched off/ Time to long off all users is 5 min</span>
+                                </div>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch mb20" layout="row">
+                                <span class="group-title">Api enabled</span>
+                                <md-switch ng-class="{activeDisabled: data.cb8}"  ng-model="data.cb8" aria-label="Switch 7" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch mb20" layout="row">
+                                <span class="group-title">Auto apdates</span>
+                                <md-switch ng-class="{activeDisabled: data.cb8}"  ng-model="data.cb8" aria-label="Switch 7" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch mb20" layout="column">
+                                <div class="info-block-menu">
+                                    <span class="group-title">Save history</span>
+                                    <md-switch ng-class="{activeDisabled: data.cb8}"  ng-model="data.cb8" aria-label="Switch 7" class="notifiaction-switch"></md-switch>
+                                </div>
+                                <span layout="column" class="group-description history">Explanation should be here</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+
+                    <!-- alerts settings  -->
+
+                    <md-card ng-show="sidenav.alerts" style="margin: 0px">
+                        <md-card-title ng-click="sidenav.hideDetails()" class="alerts">
+                            <md-button class="back-btn md-icon-button md-button md-ink-ripple pl0">
+                                <md-icon flex="none" md-font-set="md">arrow_back</md-icon>
+                            </md-button>
+                            <md-card-title-text layout="row">
+                                <span class="title-details">
+                                    Alerts
+                                </span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span layout="column" class="pb0 mt20 alert-me">Alert me about</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-title layout="column" class="settings">
+                            <md-card-title-text class="notif-switch pl10  mb20" layout="row">
+                                <span class="group-title">Unrecognized logins</span>
+                                <md-switch ng-class="{activeDisabled: settings.alerts.unrecognizedLogins}"  ng-change="sidenav.save()" ng-model="settings.alerts.unrecognizedLogins" aria-label="Switch 6" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl10 mb20" layout="row">
+                                <span class="group-title">Activation of User Profile is needed</span>
+                                <md-switch ng-class="{activeDisabled: settings.alerts.userActivationNeeded}"  ng-change="sidenav.save()" ng-model="settings.alerts.userActivationNeeded" aria-label="Switch 6" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl10 mb20" layout="row">
+                                <span class="group-title">Wrong file format uploaded to the system</span>
+                                <md-switch ng-class="{activeDisabled: settings.alerts.wrongFileFormatUploaded}"  ng-change="sidenav.save()" ng-model="settings.alerts.wrongFileFormatUploaded" aria-label="Switch 6" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl10 mb20" layout="column">
+                                <div class="info-block-menu">
+                                    <span class="group-title">User account is not active</span>
+                                    <md-switch ng-class="{activeDisabled: settings.alerts.userAccountIsNotActive}"  ng-change="sidenav.save()" ng-model="settings.alerts.userAccountIsNotActive" aria-label="Switch 7" class="notifiaction-switch"></md-switch>
+                                </div>
+                                <div layout="row">
+                                    <md-select ng-selected="true" ng-change="sidenav.save()" ng-model="settings.alerts.userAccountIsNotActiveDuration" placeholder="More than {{settings.alerts.userAccountIsNotActiveDuration}} hours" class="md-no-underline pl35 mt0 select-active">
+                                        <md-option value="24">More than 24 hours</md-option>
+                                        <md-option value="48">More than 48 hours</md-option>
+                                    </md-select>
+                                </div>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl10 mb20" layout="column">
+                                <div class="info-block-menu">
+                                    <span class="group-title">Systen errors</span>
+                                    <md-switch ng-class="{activeDisabled: settings.alerts.systemErrors}"  ng-change="sidenav.save()" ng-model="settings.alerts.systemErrors" aria-label="Switch 7" class="notifiaction-switch"></md-switch>
+                                </div>
+                                <span layout="column" class="group-description history">Can't be turned off</span>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl10 mb20" layout="row">
+                                <span class="group-title">Receive Notifications about critical figures from targets</span>
+                                <md-switch ng-class="{activeDisabled: settings.alerts.criticalFiguresFromTargets}"  ng-change="sidenav.save()" ng-model="settings.alerts.criticalFiguresFromTargets" aria-label="Switch 6" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+
+                    <!-- notifications settings -->
+
+                    <md-card ng-show="sidenav.notifications" style="margin: 0px">
+                        <md-card-title ng-click="sidenav.hideDetails()" class="alerts">
+                            <md-button class="back-btn md-icon-button md-button md-ink-ripple pl0">
+                                <md-icon flex="none" md-font-set="md">arrow_back</md-icon>
+                            </md-button>
+                            <md-card-title-text layout="row">
+                                <span class="title-details">
+                                    Notifications
+                                </span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-title layout="column" class="settings mt20">
+                            <md-card-title-text class="notif-switch pl10  mb20" layout="row">
+                                <span class="group-title">
+                                    <md-icon md-font-set="fa fa-crosshairs"></md-icon>
+                                    Receive notifications for target
+                                </span>
+                                <md-switch ng-class="{activeDisabled: settings.notifications.forTargets}"  ng-change="sidenav.save()" ng-model="settings.notifications.forTargets" aria-label="Switch 6" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl10 mb20" layout="column">
+                                <div class="info-block-menu">
+                                    <span class="group-title">
+                                        <md-icon md-font-set="fa fa-user"></md-icon>
+                                        Receive notifications for employee changes
+                                    </span>
+                                </div>
+                                <div layout="column" class="notif-dropdown">
+                                    <md-select ng-model="weapon" placeholder="Eccept specific Contacts" class="md-no-underline mt0 select-active notif-select">
+                                        <md-option value="axe">Eccept specific Contacts</md-option>
+                                        <md-option value="sword">Eccept specific Contacts</md-option>
+                                        <md-option value="wand">Eccept specific Contacts</md-option>
+                                        <md-option value="pen">Eccept specific Contacts</md-option>
+                                    </md-select>
+                                    <span layout="column" class="group-description pl25 mt5">Alice Lee</span>
+                                </div>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl10  mb20" layout="row">
+                                <span class="group-title">
+                                    <md-icon md-font-set="fa fa-volume-down"></md-icon>
+                                    Play a sound when message is received
+                                </span>
+                                <md-switch ng-class="{activeDisabled: settings.notifications.soundOnMessageReceive}"  ng-change="sidenav.save()" ng-model="settings.notifications.soundOnMessageReceive" aria-label="Switch 6" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl10 mb20" layout="column">
+                                <div class="info-block-menu">
+                                    <span class="group-title">
+                                        <md-icon md-font-set="fa fa-gift"></md-icon>
+                                        Birthday of your coleagues
+                                    </span>
+                                </div>
+                                <div layout="column" class="notif-dropdown">
+                                    <md-select ng-change="sidenav.save()" ng-model="settings.notifications.birthdayOfColeagues" placeholder="All my contacts {{settings.notifications.birthdayOfColeagues}}" class="md-no-underline mt0 select-active notif-select">
+                                        <md-option value="0">0 my contacts</md-option>
+                                        <md-option value="5">5 my contacts</md-option>
+                                        <md-option value="10">10 my contacts</md-option>
+                                    </md-select>
+                                </div>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+
+                    <!-- email settings -->
+
+                    <md-card ng-show="sidenav.email" style="margin: 0px">
+                        <md-card-title ng-click="sidenav.hideDetails()" class="alerts">
+                            <md-button class="back-btn md-icon-button md-button md-ink-ripple pl0">
+                                <md-icon flex="none" md-font-set="md">arrow_back</md-icon>
+                            </md-button>
+                            <md-card-title-text layout="row">
+                                <span class="title-details">
+                                    Email notifications
+                                </span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span layout="column" class="pb0 mt20 alert-me">Notify me about</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-title layout="column" class="settings">
+                            <md-card-title-text class="notif-switch pl10  mb20" layout="row">
+                                <span class="group-title">My account, sequrity and privacy</span>
+                                <md-switch ng-class="{activeDisabled: settings.emailNotifications.accountSequriteAndPrivacy}" ng-change="sidenav.save()" ng-model="settings.emailNotifications.accountSequriteAndPrivacy" aria-label="Switch 6" class="notifiaction-switch"></md-switch>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl10 mb20" layout="column">
+                                <div class="info-block-menu">
+                                    <span class="group-title">Subscription period ending</span>
+                                    <md-switch ng-class="{activeDisabled: settings.emailNotifications.subscriptionPeriodEnding}" ng-change="sidenav.save()" ng-model="settings.emailNotifications.subscriptionPeriodEnding" aria-label="Switch 7" class="notifiaction-switch"></md-switch>
+                                </div>
+                                <div layout="row">
+                                    <md-select ng-model="settings.emailNotifications.subscriptionPeriod" placeholder="{{settings.emailNotifications.subscriptionPeriod}} days before" class="md-no-underline pl35 mt0 select-active">
+                                        <md-option value="5">5 days before</md-option>
+                                        <md-option value="10">10 days before</md-option>
+                                        <md-option value="15">15 days before</md-option>
+                                        <md-option value="20">20 days before</md-option>
+                                    </md-select>
+                                </div>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+
+                    <!-- currency settings -->
+
+                    <md-card ng-show="sidenav.currency" style="margin: 0px">
+                        <md-card-title ng-click="sidenav.hideDetails()" class="alerts">
+                            <md-button class="back-btn md-icon-button md-button md-ink-ripple pl0">
+                                <md-icon flex="none" md-font-set="md">arrow_back</md-icon>
+                            </md-button>
+                            <md-card-title-text layout="row">
+                                <span class="title-details">
+                                    Currency
+                                </span>
+                            </md-card-title-text>
+                        </md-card-title>
+
+                        <md-radio-group ng-model="settings.currency">
+                          <div ng-repeat='item in settings.currencyList' class="currency-list">
+                            <div flex layout='row' layout-padding layout-align="start center" class="currency-item">
+
+                              <span class="currency-name">
+                                {{item.name}}
+                              </span>
+                              <span class="currency-symbol">
+                                {{item.symbol}}
+                              </span>
+                              <md-radio-button aria-label="currency" ng-click="sidenav.save()" ng-model="settings.currency" value="{{item.name}}"
+                                  class="md-primary currency-radio" >
+                              </md-radio-button>
+
+                            </div>
+                          </div>
+                        </md-radio-group>
+                    </md-card>
+
+                    <!-- maintenance settings -->
+
+                    <md-card ng-show="sidenav.maintenance" style="margin: 0px">
+                        <md-card-title ng-click="sidenav.hideDetails()" class="alerts">
+                            <md-button class="back-btn md-icon-button md-button md-ink-ripple pl0">
+                                <md-icon flex="none" md-font-set="md">arrow_back</md-icon>
+                            </md-button>
+                            <md-card-title-text layout="row">
+                                <span class="title-details">
+                                    On maintenance page
+                                </span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-title-text class="notif-switch pt30 pl40 mb40 title-maintenance" layout="row">
+                            <span class="group-title">Activate the maintenance page</span>
+                            <md-switch ng-class="{activeDisabled: settings.maintenanceNotifications.subscriptionPeriodEnding}" ng-change="sidenav.save()" ng-model="settings.maintenanceNotifications.subscriptionPeriodEnding" aria-label="Switch 10" class="notifiaction-switch"></md-switch>
+                        </md-card-title-text>
+                        <md-card-title-text class="pl10 pr10 mb20 title-maintenance" layout="row">
+                            <div class="info-block-menu">
+                                <span class="group-title">
+                                    <md-icon md-font-set="fa fa-clock-o"></md-icon>
+                                        Time to long off all users:
+                                </span>
+                            </div>
+                        </md-card-title-text>
+                        <md-card-title layout="column">
+                            <md-card-title-text class="notif-switch pl25 pr10 mb20" layout="row">
+                                <span class="group-title">1 minute</span>
+                                <md-radio-group ng-model="select" layout="row">
+                                    <md-radio-button layout="row" class="md-primary" ng-value="1" aria-label="1"></md-radio-button>
+                                </md-radio-group>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl25 pr10 mb20" layout="row">
+                                <span class="group-title">2 minutes</span>
+                                <md-radio-group ng-model="select" layout="row">
+                                    <md-radio-button layout="row" class="md-primary" ng-value="2" aria-label="2"></md-radio-button>
+                                </md-radio-group>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl25 pr10 mb20" layout="row">
+                                <span class="group-title">3 minutes</span>
+                                <md-radio-group ng-model="select" layout="row">
+                                    <md-radio-button layout="row" class="md-primary" ng-value="3" aria-label="3"></md-radio-button>
+                                </md-radio-group>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl25 pr10 mb20" layout="row">
+                                <span class="group-title">4 minutes</span>
+                                <md-radio-group ng-model="select" layout="row">
+                                    <md-radio-button layout="row" class="md-primary" ng-value="4" aria-label="4"></md-radio-button>
+                                </md-radio-group>
+                            </md-card-title-text>
+                            <md-card-title-text class="notif-switch pl25 pr10 mb20" layout="row">
+                                <span class="group-title">5 minutes</span>
+                                <md-radio-group ng-model="select" layout="row">
+                                    <md-radio-button layout="row" class="md-primary" ng-value="5" aria-label="5"></md-radio-button>
+                                </md-radio-group>
+                            </md-card-title-text>
+                        </md-card-title>
+
+                    </md-card>
+
+                </md-tab-body>
+            </md-tab>
+
+        </md-tabs>
+
+    </div>
+
+</md-sidenav>

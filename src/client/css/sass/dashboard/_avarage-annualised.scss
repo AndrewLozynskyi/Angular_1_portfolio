@@ -1,0 +1,106 @@
+
+.avarage-annualised {
+    background-color: #292c33;
+    .avarage-table {
+        width: 97%;
+        margin: 0px auto;
+        border-bottom: 1px solid black;
+        margin-right: 20px;
+        thead {
+            background: #23252c;
+            border-bottom: 1px solid #1c1c1c;
+
+            th {
+                text-align: center;
+                padding: 18px 10px;
+                font-size: 15px;
+                font-weight: 500;
+                color: #bfbfbf;
+                position: relative;
+                .head-row {
+                   align-items: center;
+                   .center-pos {
+                        margin: 0 auto;
+                   }
+                }
+            }
+            th:first-child {
+                border-right: 1px solid #1c1c1c;
+            }
+        }
+        tbody {
+            td:first-child {
+                border-right: 1px solid #1c1c1c;
+                width: 20%;
+            }
+            tr {
+                border-bottom: 1px solid #1c1c1c;
+                td {
+                }
+            }
+            tr:first-child {
+                background: #23252c;
+                td {
+                    padding: 4px 10px;
+                    font-size: 12px;
+                    font-weight: 300;
+                    color: #bfbfbf;
+                    position: relative;
+                    .head-row {
+                        justify-content: center;
+                    }
+                }
+                td:first-child {
+                    width: 20%;
+                   .head-row {
+                        font-size: 14px;
+                        justify-content: flex-start;
+                    } 
+                }
+            }
+        }
+        .red {
+            color: red;
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 40px;
+            text-align: center;
+        }
+        .green {
+            font-family: Roboto;
+            color:  #06c502;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 40px;
+            text-align: center;
+        }
+        .empty-data {
+            width: 60px;
+        }
+        .rows {
+            background-color: #292c33;
+            height: 35px;
+            &:hover {
+                background-color:#35383e;
+                cursor: pointer;
+            }
+            .avarage-data {
+                padding: 4px 9px;
+                font-size: 13px;
+                position: relative;
+                .center-pos {
+                    margin: 0 auto;
+                }
+                .country-name {
+                    font-size: 14px;
+                    color: #72929c;
+                }
+                .avarage-name {
+                    font-size: 12px;
+                    color: $content-font-color;
+                }
+            }
+        }
+    }
+}

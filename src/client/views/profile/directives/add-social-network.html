@@ -1,0 +1,31 @@
+
+<div class="snGroup">
+    <div class="head">
+        <div class="closeButton" ng-click="nsn.close()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <span class="SNheader">Add Social Network</span>
+    </div>
+    <div class="allItems" ng-hide="nsn.showInput">
+        <div ng-repeat="( key, value ) in nsn.socialLinks" class="networks" ng-if="nsn.socialLinks[ key ].enable === false">
+            <span class="tooltipText">{{ nsn.socialLinks[ key ].name }}</span>
+            <div class="itemInArray">
+                <div class="nwItem" ng-click="nsn.setItem( key )">
+                    <i ng-class="nsn.socialLinks[ key ].icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="newItem" ng-show="nsn.showInput">
+        <span class="itemName">{{ nsn.selecteditem.name }}</span><br>
+        <div class="itemLogo">
+            <i ng-class="nsn.selecteditem.icon"></i>
+        </div>
+        <input class='inputNewItem' type="text">
+        <button ng-click='nsn.save()' class="saveButton">
+            <i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i> Save
+        </button>
+    </div>
+
+</div>

@@ -1,0 +1,187 @@
+
+<md-toolbar ng-click="ripple($event)" class="md-primary header">
+    <div class="md-toolbar-tools">
+
+        <md-button class="md-icon-button" aria-label="Settings" ng-click="sidenav.toggle()" hide-gt-md
+            style="transform: rotate(180deg);">
+            <md-icon md-svg-src="/img/svg/backburger.svg"></md-icon>
+        </md-button>
+
+        <md-button class="toolbar-search">
+            <md-icon md-font-set="fa fa-search"></md-icon> Search
+        </md-button>
+
+        <span flex></span>
+
+        <center hide-xs flex>
+            <md-button class="tour">
+                Tour
+            </md-button>
+        </center>
+
+        <span flex></span>
+        <md-divider hide-xs vertical></md-divider>
+
+        <md-menu>
+            <md-button layout="row" aria-label="Open demo menu" ng-click="$mdOpenMenu($event)">
+                <ng-letter-avatar dynamic="true" width="32" height="32" fontSize="13" charCount="2" data="{{ userpic ? 'http:' + window.location.host + userpic : curUser }}" shape="round"></ng-letter-avatar>
+                <div class="circle-status status-icon" ng-class="{'online':status === 'Online', 'away':status === 'Away', 'do-not-disturb':status === 'Do not Disturb', 'invisible':status === 'Invisible', 'offline':status === 'Offline' }">
+                </div>
+                <span hide-xs>
+                    {{ getHeader() }}
+                </span>
+                <md-icon hide-xs  md-font-set="fa fa-caret-down"></md-icon>
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ng-click="null" ui-sref="profile.about({ username: curUser })" id="dropdown-btn"><i class="fa fa-user user-profile-icons" aria-hidden="false"></i> My profile</md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-menu class="status-menu">
+                        <md-button ng-click="$mdMenu.open()" class="status-btn">
+                            <div class="status-container">
+                                <img class="status-icon" src="{{ statusIconSrs }}"/>
+                                <span>{{ status }}</span>
+                                <md-icon hide-xs  md-font-set="fa fa-caret-right" class="set-right"></md-icon>
+                            </div>
+                        </md-button>
+                        <md-menu-content>
+                            <md-menu-item>
+                                <md-button ng-click="setStatus( 'Online' )" >
+                                    <img class="status-icon" src="/img/icons/online-icon.png">
+                                    <span>Online</span>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="setStatus( 'Away' )" >
+                                    <img class="status-icon" src="/img/icons/notavaliable-icon.png">
+                                    <span>Away</span>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="setStatus( 'Do not Disturb' )">
+                                    <img class="status-icon" src="/img/icons/not-disturb-icon.png">
+                                    <span>Do not Disturb</span>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="setStatus( 'Invisible' )" >
+                                    <img class="status-icon" src="/img/icons/offline-icon.png">
+                                    <span>Invisible</span>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="setStatus( 'Offline' )" >
+                                    <img class="status-icon" src="/img/icons/offline-icon.png">
+                                    <span>Offline</span>
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-item>
+
+                <md-menu-item>
+                    <md-menu class="saved-data">
+                        <md-button ng-click="$mdMenu.open()" class="saved-btn">
+                            <div class="saved-container">
+                                <i class="fa fa-database saved-data-img" aria-hidden="true"></i>
+                                <span>Saved Data</span>
+                                <md-icon hide-xs  md-font-set="fa fa-caret-right" class="saved-data-arrow"></md-icon>
+                            </div>
+                        </md-button>
+                        <md-menu-content>
+                            <md-menu-item>
+                                <md-menu class="targets">
+                                    <md-button ng-click="$mdOpenMenu()">
+                                        <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                                        <span>Targets</span>
+                                        <md-icon hide-xs  md-font-set="fa fa-caret-right"></md-icon>
+                                    </md-button>
+                                    <md-menu-content>
+                                        <md-menu-item>
+                                            <md-button>
+                                                <span>Headcount austria sales, CEO, Management 2017</span>
+                                            </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button>
+                                                <span>Salary Austria All</span>
+                                            </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button>
+                                                <span>Salary Belgium all departments 2016</span>
+                                            </md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-menu class="filters">
+                                    <md-button ng-click="$mdOpenMenu()">
+                                        <i class="fa fa-filter" aria-hidden="false"></i>
+                                        <span>Filters</span>
+                                        <md-icon hide-xs  md-font-set="fa fa-caret-right"></md-icon>
+                                    </md-button>
+                                    <md-menu-content>
+                                        <md-menu-item>
+                                            <md-button>
+                                                <span>Women in 2008 year</span>
+                                            </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button>
+                                                <span>The best managers</span>
+                                            </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button>
+                                                <span>High salaruies according to 2016</span>
+                                            </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button>
+                                                <span>Filter name</span>
+                                            </md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button><i class="fa fa-cog user-profile-icons" aria-hidden="false"></i> My Settings</md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="sidenav.logout()"><i class="fa fa-power-off user-profile-icons" aria-hidden="false"></i> Sign Out</md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+
+        <md-divider hide-xs vertical></md-divider>
+
+        <notification-menu></notification-menu>
+
+        <md-divider hide-xs vertical></md-divider>
+
+        <md-menu hide-xs class="toolbar-language">
+            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                EN
+            </md-button>
+            <md-menu-content>
+                <md-menu-item ng-repeat="item in [1, 2, 3]">
+                    <md-button ng-click="null">
+                        Option {{item}}
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+
+        <md-divider vertical></md-divider>
+
+        <md-button class="md-icon-button" aria-label="Settings" ng-click="sidenav.toggleRight()">
+            <md-icon md-font-set="md">list</md-icon>
+        </md-button>
+    </div>
+</md-toolbar>

@@ -1,0 +1,82 @@
+
+<div class="mr20 headcount-table-wrapper">
+
+    <div class="arrow-left" ng-click="tc.moveTableHorisontal( -1 )"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+    <div class="arrow-right" ng-click="tc.moveTableHorisontal( 1 )"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+    <table class="main-table">
+        <thead>
+            <tr class="head-table">
+                <th ng-repeat="title in tc.titles track by $index" ng-click="tc.selectCell( title, false )">
+                    {{ title }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="upperCase">Total</span>
+                    <span class="second-container">{{ tc.departmentsSum[ 'Total' ] }}</span>
+                </td>
+                <td ng-repeat="totalItem in tc.total track by $index" ng-click="tc.selectCell( tc.titles[ $index + 1 ], false )">
+                    {{ totalItem }}
+                </td>
+            </tr>
+            <tr ng-repeat="department in tc.departments">
+                <td ng-click="tc.selectCell( false, department[0] )">
+                    {{ department[0] }}
+                    <span class="second-container">{{ tc.departmentsSum[ department[0] ] }}</span>
+                </td>
+                <td ng-if="$index > 0" ng-repeat="item in department track by $index" ng-click="tc.selectCell( tc.titles[ $index ], department[0] )">
+                    {{ item }}
+                </td>
+            </tr>
+            <tr>
+                <td ng-repeat="td in tc.showData[0]"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="table-footer">
+
+        <div class="search" ng-hide="true">
+            <span><i class="fa fa-search" aria-hidden="true"></i></span>
+            <input type="text" ng-model="searchKeyword" placeholder="Search by key word" md-colors="{color: 'primary-400'}">
+        </div>
+
+        <pagination ng-show="tc.maxPages > 1"
+                    class="pagination" flex
+                    cl-pages="tc.maxPages"
+                    cl-steps="3"
+                    cl-page-changed="tc.changePage()"
+                    cl-align="center center"
+                    cl-current-page="tc.currentPage"></pagination>
+
+        <md-menu class="showby-dropdown" aria-label="Show by">
+            <md-button aria-label="Open menu" ng-click="$mdOpenMenu($event)">
+                <span class="value" hide-xs >Show {{ ( tc.itemsPerPage == 'all' ) ? 'All' : 'by ' + tc.itemsPerPage }}</span>
+                <md-icon hide-xs  md-font-set="fa fa-caret-down"></md-icon>
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ng-class="{{ ( tc.itemsPerPage == 10 ) ? 'active' : '' }}" ng-click="tc.setItemsPerPage(10)">
+                        Show by 10
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-class="{{ ( tc.itemsPerPage == 20 ) ? 'active' : '' }}" ng-click="tc.setItemsPerPage(20)">
+                        Show by 20
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-class="{{ ( tc.itemsPerPage == 50 ) ? 'active' : '' }}" ng-click="tc.setItemsPerPage(30)">
+                        Show by 50
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+
+        <div style="clear: both;"></div>
+
+    </div>
+
+</div>

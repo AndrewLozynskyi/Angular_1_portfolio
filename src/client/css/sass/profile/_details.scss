@@ -1,0 +1,293 @@
+.user-details {
+	background-color: rgb(41, 44, 51);
+	md-card {
+		width: 100%;
+		margin: 0;
+		md-card-title {
+	        padding: 10px 0 10px 20px;
+	        .title-text {
+	            font-family: Roboto;
+			    color: #bfbfbf;
+			    font-size: 21px;
+			    font-weight: 300;
+	        }
+	    }
+	    .title-h {
+	    	color: #474d59;
+		    font-size: 13.5px;
+		    margin-left: 20px;
+		    font-family: roboto;
+		    font-weight: 500;
+		    letter-spacing: 0.2px;
+	    }
+	    .first-block {
+	    	margin-left: 20px;
+	    	display: inline-block;
+	    	md-input-container {
+	    		width: 220px;
+	    		float: left;
+	    		label {
+	    			font-size: 17.8px;
+				    font-weight: 500;
+				    font-family: roboto;
+				    letter-spacing: 0.5px;
+				    color: rgb(91, 92, 96);
+	    		}
+	    		input {
+	    			border-bottom: 1px solid rgb(22,24,28);
+	    			width: 99.5%;
+	    		}
+	    		&:after {
+	    			display: block;
+				    width: 100%;
+				    border-bottom: 1px solid #fff;
+				    opacity: 0.1;
+	    		}
+	    	}
+	    	.employee-block {
+	    		padding: 8px 0;
+			    line-height: 18px;
+			    margin: 0 40px;
+			    float: left;
+			    .info-block {
+			    	.group-title {
+			    		color: #535559;
+					    font-family: roboto;
+					    font-weight: 400;
+					    letter-spacing: 0.2px;
+					    font-size: 14px;
+			    	}
+			    	.group-description {
+						color: #bfbfbf;
+						font-family: roboto;
+						font-weight: 400;
+						letter-spacing: 0.2px;
+						font-size: 15px;
+			    	}
+			    }
+	    	}
+	    	.account-block {
+	    		padding: 25px 0;
+			    margin: 0 10px 0px 40px;
+			    float: left;
+			    .info-block {
+			    	.group-description {
+						color: #bfbfbf;
+						font-family: roboto;
+						font-weight: 400;
+						letter-spacing: 0.2px;
+						font-size: 15px;
+			    	}
+			    }
+	    	}
+	    	.inactive-block {
+	    		padding: 25px 0;
+    			margin: 0 20px;
+    			float: left;
+			    .info-block {
+			    	.group-description {
+						color: rgb(102, 110, 101);
+					    font-family: roboto;
+					    font-weight: 400;
+					    letter-spacing: 0.2px;
+					    font-size: 14px;
+						i {
+							display: flex;
+    						margin: 0 10px;
+        					align-items: center;
+						}
+			    	}
+			    }
+	    	}
+	    	md-switch {
+	    		margin: 19px 0;
+	    		float: left;
+	    	}
+	    	md-switch.activeDisabled .md-container > div {
+	            cursor: default;
+	            background: #1d1f27;
+	            .md-ink-ripple {
+	                color: #2cdbd9;
+	            }
+	        }
+	        md-switch.activeDisabled .md-container > div > div {
+	            background: #2cdbd9;
+	        }
+	        md-switch .md-container > div {
+	            cursor: default;
+	            background: #1d1f27;
+	        }
+	        md-switch .md-container > div > div {
+	            background: #505662;
+	        }
+	    }
+	    .second-block {
+	    	md-card-title-text {
+	    		color: #bfbfbf;
+	    	}
+	    	.roles-assigned {
+	    		.group-description {
+	    			display: flex;
+				    align-items: center;
+				    i {
+				    	display: flex;
+					    align-items: center;
+					    margin-right: 15px;
+					    font-size: 16px;
+				    }
+				    .role {
+						display: flex;
+					    font-size: 15px;
+					    font-weight: 500;
+					    font-family: roboto;
+					    height: 17px;
+					    margin-right: 25px;
+					}
+	    		}
+		    	md-input-container {
+			    	margin: 0;
+			    	width: 380px;
+			    	/*min-width: 80px;*/
+			    	.fa {
+			    		flex-direction: row;
+					    float: right;
+					    position: absolute;
+					    right: 0px;
+					    padding: 6px 0;
+					    font-size: 18px;
+					    color: #525763;
+					    font-weight: 100;
+			    	}
+			    	input {
+			    		border-bottom: 1px solid rgb(22,24,28);
+			    		font-size: 15px;
+					    font-family: roboto;
+					    font-weight: 300;
+					    width: 99.5%;
+					    &:focus {
+					    	border-color: rgb(23,169,168);
+					    }
+			    	}
+			    	&:after {
+			    		display: block;
+						width: 100%;
+						border-bottom: 1px solid #fff;
+						opacity: 0.1;
+			    	}
+			    }
+	    	}
+	    	.groups-block {
+	    		.group-description {
+	    			display: flex;
+				    align-items: center;
+				    i {
+				    	display: flex;
+					    align-items: center;
+					    margin-right: 15px;
+					    font-size: 16px;
+				    }
+				    .role {
+						display: flex;
+					    font-size: 15px;
+					    font-weight: 500;
+					    font-family: roboto;
+					    height: 17px;
+					    margin-right: 25px;
+					}
+	    		}
+		    	md-input-container {
+			    	margin: 0;
+			    	width: 295px;
+			    	padding: 0;
+			    	/*min-width: 80px;*/
+			    	.fa {
+			    		flex-direction: row;
+					    float: right;
+					    position: absolute;
+					    right: 0px;
+					    padding: 6px 0;
+					    font-size: 18px;
+					    color: #525763;
+					    font-weight: 100;
+			    	}
+			    	.md-select-icon {
+			    		color: #2fdcda;
+			    	}
+			    	md-select {
+			    		width: 100%;
+					
+						.md-select-value {
+							border-bottom-color: rgb(22,24,28);
+						}
+			    	}
+			    	&:after {
+						display: block;
+						width: 100%;
+						border-bottom: 1px solid #fff;
+						opacity: 0.1;
+					}
+					md-select:not([disabled]):focus .md-select-value {
+						border-bottom-color: rgb(23,169,168);
+					}
+			    }
+	    	}
+	    	.edit-block {
+	    		.primary {
+	    			display: inline-block;
+				    background-color: #474d58;
+				    color: #f6f6f6;
+				    margin: 0;
+				    padding: 5px 20px;
+				    height: 40px;
+				    margin-right: 25px;
+				    width: 220px;
+				    border-radius: 5px;
+				    i {
+				    	margin-right: 15px;
+				    	span {
+				    		font-size: 14px;
+						    font-family: roboto;
+						    font-weight: 400;
+				    	}
+				    }
+	    		}
+	    		p {
+	    			font-size: 14px;
+				    font-family: roboto;
+				    color: #535559;
+				    font-weight: 400;
+				    width: 385px;
+	    		}
+	    	}
+	    }
+	    .table-block {
+	    	p {
+	    		color: #bfbfbf;
+			    font-size: 15px;
+			    font-family: roboto;
+			    font-weight: 400;
+	    	}
+	    	.add-event-block {
+	    		.primary {
+	    			display: inline-block;
+				    background-color: #1aaaa9;
+				    color: #f6f6f6;
+				    margin: 0;
+				    padding: 5px 20px;
+				    height: 40px;
+				    margin-right: 25px;
+				    width: 220px;
+				    border-radius: 5px;
+				    i {
+				    	margin-right: 15px;
+				    	span {
+				    		font-size: 14px;
+						    font-family: roboto;
+						    font-weight: 400;
+				    	}
+				    }
+	    		}
+	    	}
+	    }
+	}
+}

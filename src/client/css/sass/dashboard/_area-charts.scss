@@ -1,0 +1,30 @@
+area-chart {
+    display: block;
+    section {
+        width: 100%;
+        background: inherit;
+    }
+    .axis {
+        path, line {
+            fill: none;
+            stroke: #4b5764;
+        }
+        text {
+            fill: #4b5764;
+        }
+        &.y text {
+            fill: $content-font-color;
+        }
+    }
+    .line {
+        fill: none;
+    }
+    .marker {
+        font-size: 12px;
+        fill: #fff;
+    }
+    .tooltip {
+        width:150px;
+        transform: translateY(-100%);
+    }
+}

@@ -1,0 +1,81 @@
+<div class="user-details mt30 md-whiteframe-3dp ml20 mr10" layout="row">
+
+    <md-card>
+
+        <md-card-title class="mt20">
+            <md-card-title-text class="title-text">User details</md-card-title-text>
+        </md-card-title>
+
+        <h4 class="title-h mt20">ACCOUNT</h4>
+
+        <div class="first-block mt20" layout="row">
+            <md-input-container>
+                <label>Username</label>
+                <input placeholder="robdow">
+            </md-input-container>
+            <md-card-title-text class="employee-block" layout="column">
+                <div class="info-block">
+                    <span class="group-title">Employee number</span>
+                    <span class="group-description" layout="column">will be shown here</span>
+                </div>
+            </md-card-title-text>
+            <md-card-title-text class="account-block" layout="column">
+                <div class="info-block">
+                    <span class="group-description" layout="column">Account status</span>
+                </div>
+            </md-card-title-text>
+            <md-card-title-text class="inactive-block" layout="column">
+                <div class="info-block">
+                    <span class="group-description" layout="row"><i class="fa fa-lock" aria-hidden="true"></i>Inactive</span>
+                </div>
+            </md-card-title-text>
+            <div class="switch-block">
+                <md-switch ng-class="{activeDisabled: sa.settings.userManagement.loginWithUsername}"  ng-model="sa.settings.userManagement.loginWithUsername" aria-label="Switch 3" class="notifiaction-switch">
+                </md-switch>
+            </div>
+        </div>
+
+        <h4 class="title-h mt40">ASSIGNMENT</h4>
+
+        <div class="second-block mt15 ml20" layout="column">
+            <md-card-title-text class="roles-assigned" layout="row">
+                <span class="group-description" layout="row"><i class="fa fa-anchor" aria-hidden="true"></i><span class="role">Roles assigned:</span></span>
+                <md-input-container md-no-float class="md-block" layout="column">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <input layout="column" placeholder="Manager,Owner">
+                </md-input-container>
+            </md-card-title-text>
+            <md-card-title-text class="groups-block mt20" layout="row">
+                <span class="group-description" layout="row"><i class="fa fa-users" aria-hidden="true"></i><span class="role">Groups(belonging to admin)</span></span>
+                <md-input-container class="filter">
+                    <md-select  ng-model="activeParams.departments"
+                                    aria-label="Country filter">
+                        <md-content class="style-scroll">
+                            <md-option value="all">All Departments</md-option>
+                            <md-option value="all">CEO</md-option>
+                            <md-option value="all">HR</md-option>
+                            <md-option value="all">Sales</md-option>
+                        </md-content>
+                    </md-select>
+                </md-input-container>
+            </md-card-title-text>
+            <div class="edit-block mt40" layout="row">
+                <md-button class="md-primary primary md-whiteframe-3dp" layout="column"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit user details</md-button>
+                <p layout="column">Alows to edit employee's work information such as Salary,Manager,Position history on the timeline in the Wizard.</p>
+            </div>
+        </div>
+
+        <h4 class="title-h mt40">CAREER TIMELINE</h4>
+
+        <div class="table-block mt15 ml20" layout="column">
+            <md-card-title-text class="groups-block" layout="row">
+                <p>Career timeline from start working day till today.</p>
+            </md-card-title-text>
+            <div class="add-event-block mt40 mb50" layout="row">
+                <md-button class="md-primary primary md-whiteframe-3dp" layout="column"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>Add new event</md-button>
+            </div>
+        </div>
+
+    </md-card>
+
+</div>

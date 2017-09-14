@@ -1,0 +1,28 @@
+
+<md-input-container>
+
+    <md-select  ng-model="activeParams.countries"
+                ng-change="cd.change( activeParams.countries, {{ activeParams.countries }} );"
+                aria-label="Countries filter"
+                multiple
+                placeholder="Select Country">
+
+            <md-chips   class="style-scroll"
+                        ng-show="cd.one"
+                        ng-model="activeParams.countries" 
+                        readonly="cd.readonly"
+                        ng-change="cd.change( activeParams.countries, {{ activeParams.countries }} );"
+                        ng-click="cd.getSelectedChipIndex( activeParams.countries ); cd.change( activeParams.countries, activeParams.countries  )"></md-chips>
+                            
+            <md-content class="style-scroll" ng-class="{'border' : cd.one}">
+
+                <md-option value="all">All Countries</md-option>
+                <md-option ng-repeat="country in countryList" ng-value="country">
+                    {{ country }}
+                </md-option>
+
+            </md-content>
+
+    </md-select>
+
+</md-input-container>

@@ -1,0 +1,391 @@
+.downloadCatalogue{
+    height: 175px;
+    margin-top: -10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: -25px;
+    background-image: url(/img/icons/temp.png);
+    background-size: 100% 175px;
+    background-repeat: no-repeat;
+    button{
+        min-width: 26px;
+    }
+}
+
+.timeLine {
+    .md-datepicker-input-container {
+        visibility: hidden;
+        width: 0px;
+        margin: 0;
+    }
+    .refresh-icon {
+        width: 35px;
+        height: 35px;
+        outline: none;
+        box-shadow: 0 0 black;
+        border: 1px groove #17191e;
+        border-radius: 50%;
+        margin-left: 15px;
+        padding: 0;
+        color:black;
+        md-icon {
+            color: #17191e;
+            &:before {
+                font-size: 14px;
+                line-height: 24px;
+            }
+        }
+    }
+    .refreshing-button-animation {
+        cursor: pointer;
+        animation: blinker 1s infinite alternate;
+        & > md-icon {
+            animation-duration: 1s;
+            animation-direction: alternate;
+            animation-name: blinker;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-out;
+        }
+    }
+    .select-data {
+        position: relative;
+        .slider-years {
+            display: inline-block;
+            padding-top: 20px;
+            margin-left: -15px;
+        }
+        .calendar-block {
+            position: absolute;
+            left: 203px;
+            top: 0px;
+            padding-top: 22.8px;
+            @media(max-width: 740px) {
+                left: 198px;
+            }
+            .calendar-btn {
+                .calendar {
+                    color: #474d59;
+                    display: inline-block;
+                    line-height: 0;
+                    padding-top: 1px;
+                }
+            }
+        }
+        .blink {
+            padding: 0;
+            margin: 0;
+            @media(max-width: 740px) {
+                position: absolute;
+                padding-top: 22.8px;
+            }
+        }
+        .particular-date {
+            color:#72929c;
+            font-size:14px;
+            @media(max-width: 740px) { 
+                display: none;
+            }
+        }
+    }
+    .slider-header {
+        padding-top: 20px;
+        color: #dfdfdf;
+        font-size: 16px;
+    }
+    .year-button {
+        padding-right: 0;
+        min-width: 55px !important;
+        font-size: 13px;
+        color: #4a5a68;
+        span {
+            font: 300 13px roboto;
+        }
+        &.active-year {
+            span {
+                font: 500 13px roboto;
+            }
+        }
+    }
+    .active-year {
+        color: #dfdfdf !important;
+    }
+}
+.add-shadow {
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 80;
+    top: 0px;
+    overflow: hidden;
+    margin: 0px;
+}
+.add-shadow-scroll {
+    overflow-y: scroll;
+}
+.add-shadow-position {
+    position: fixed;
+}
+.hide-shadow {
+    display: none;
+}
+
+@keyframes hover {
+    to {
+        border-width: 20px;
+    }
+}
+
+@keyframes blinker {
+    from {
+        border-color:transparent;
+        color: transparent;
+    }
+    to {
+        border-color: #6fe9e9;
+        color: #6fe9e9;
+    }
+}
+
+#date-filter {
+    margin: auto 0;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    .date-line {
+        height: 2px;
+    }
+    .slider {
+        transform: translateY(-50%);
+        .circle {
+            background-color: #000;
+            margin-right: 1%;
+            margin-left: 1%;
+            margin-top: -1px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            position: relative;
+            &:focus {
+                outline: none;
+                span, .hover {
+                    outline: none;
+                }
+            }
+            span {
+                display: block;
+                margin-top: 10px;
+                color: #16181c;
+                transform: translate(-50%, 50%);
+                font-weight: 300;
+                cursor: pointer;
+                font-size: 12px;
+                @media all and (max-width: $break-xsmall) {
+                    font-size: 3vw;
+                }
+            }
+            .hover {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                border-radius: 50%;
+                width: 8px;
+                height: 8px;
+                transform: translate(-50%, -50%);
+                box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+            }
+            &:hover {
+                .hover {
+                    width: 12px;
+                    height: 12px;
+                    transform: translate(-50%, -50%);
+                    background-color: rgba(111, 233, 233, 1);
+                }
+                span {
+                    color: #2fdcda !important;
+                }
+                &:before, &:after {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    display: block;
+                    cursor: pointer;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                }
+                &:before {
+                    border: 0px solid rgba(111, 233, 233, 0.1);
+                    animation-name: hover;
+                    animation-duration: 1s;
+                    animation-iteration-count: infinite;
+                    z-index: 2;
+                }
+                &:after {
+                    border: 0px solid rgba(111, 233, 233, 0.05);
+                    animation-name: hover;
+                    animation-duration: 1s;
+                    animation-delay: 0.5s;
+                    animation-iteration-count: infinite;
+                    z-index: 1;
+                }
+            }
+            &.currentMonth {
+                .hover {
+                    background-color: white;
+                }
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    display: block;
+                    cursor: pointer;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                    border: 4px solid rgba(255, 255, 255, 0.3);
+                }
+                span {
+                    color: #ffffff !important;
+                }
+            }
+            &.selectedMonth {
+                .hover {
+                    width: 14px;
+                    height: 14px;
+                    background-color: white;
+                }
+                span {
+                    color: #ffffff !important;
+                }
+            }
+        }
+    }
+    &.Jan {
+        .date-line {
+            background-color: $slider-color;
+            width: 1.5%
+        }
+        @include activeMonth(1);
+    }
+
+    &.Feb {
+        .date-line {
+            background-color: $slider-color;
+            width: 10.5%;
+        }
+        @include activeMonth(2);
+    }
+
+    &.Mar {
+        .date-line {
+            background-color: $slider-color;
+            width: 19%;
+        }
+        @include activeMonth(3);
+    }
+
+    &.Apr {
+        .date-line {
+            background-color: $slider-color;
+            width: 28%;
+        }
+        @include activeMonth(4);
+    }
+
+    &.May {
+        .date-line {
+            background-color: $slider-color;
+            width: 37%;
+        }
+        @include activeMonth(5);
+    }
+    &.Jun {
+        .date-line {
+            background-color: $slider-color;
+            width: 45.5%;
+        }
+        @include activeMonth(6);
+    }
+    &.Jul {
+        .date-line {
+            background-color: $slider-color;
+            width: 54.5%;
+        }
+        @include activeMonth(7);
+    }
+
+    &.Aug {
+        .date-line {
+            background-color: $slider-color;
+            width: 63.5%;
+        }
+        @include activeMonth(8);
+    }
+    &.Sep {
+        .date-line {
+            background-color: $slider-color;
+            width: 72%;
+        }
+        @include activeMonth(9);
+    }
+
+    &.Oct {
+        .date-line {
+            background-color: $slider-color;
+            width: 81%;
+        }
+        @include activeMonth(10);
+    }
+
+    &.Nov {
+        .date-line {
+            background-color: $slider-color;
+            width: 90%;
+        }
+        @include activeMonth(11);
+    }
+
+    &.Dec {
+        .date-line {
+            background-color: $slider-color;
+            width: 100%;
+        }
+        @include activeMonth(12);
+    }
+}
+
+md-datepicker md-icon {
+    color: rgba(0,0,0,0) !important;
+}
+md-datepicker-open .md-datepicker-calendar-icon {
+    fill:rgba(0,0,0,0);
+}
+.md-calendar-day-header {
+    background-color: rgb(23,169,168);
+    color: #dfdfdf;
+}
+.md-calendar-date.md-focus .md-calendar-date-selection-indicator {
+    background: rgb(23,169,168);
+    color: #dfdfdf;
+}
+
+.md-calendar-date-selection-indicator {
+    &:hover {
+        background: rgb(23,169,168);
+        color: rgb(255,255,255);
+        border-color: transparent;
+    }
+}
+.md-calendar-date.md-calendar-date-today .md-calendar-date-selection-indicator {
+    border: none;
+}

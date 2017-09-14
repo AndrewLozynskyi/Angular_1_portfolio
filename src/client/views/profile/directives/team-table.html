@@ -1,0 +1,71 @@
+
+<md-card-title class="mt20 mb20">
+    <md-card-title-text>
+        <div class="teams-header">
+            <div>
+                <span class="page-title">Teams</span>
+            </div>
+        </div>
+    </md-card-title-text>
+    <md-card-title-media></md-card-title-media>
+</md-card-title>
+
+<md-card-title class="header-item ml20 mr10 md-whiteframe-3dp">
+    <md-card-title-text >
+        <span class="md-headline team-title">Team Name
+            <span class="subheader">Type</span>
+        </span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="md-headline">Project
+        </span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="md-headline ">Manager</span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="members-line">Members in comparison to current department</span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="md-headline pl30">Description</span>
+    </md-card-title-text>
+    <md-card-title-media hide-xs class="empty-block">
+        <md-menu md-offset="-220 0">
+            <md-button aria-label="Open more menu" class="open-more md-icon-button" ng-click="$mdOpenMenu($event)">
+                <i class="more-details fa fa-chevron-right" aria-hidden="true"></i>
+            </md-button>
+            <md-menu-content>
+            </md-menu-content>
+        </md-menu>
+    </md-card-title-media>
+</md-card-title>
+
+<md-card-title class="item ml20 mr10 md-whiteframe-3dp" ng-repeat="item in tt.dataTable" >
+    <md-card-title-text ng-style="tt.setColor(item.color)" layout="row">
+        <span class="show-info" >{{ item.name }}</span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="show-info">{{ item.project ? item.project : 'no project' }}</span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="show-info">{{ item.manager ? item.manager : 'no manager' }}</span>
+    </md-card-title-text>
+    <md-card-title-text  layout="column">
+        <span class="show-info">{{ item.currentMembers }} / {{ item.totalMembers }}</span>
+        <span ng-style="tt.setTotalWidth()" class="under-line"></span>
+        <span ng-style="tt.setCurrentWidth(item.currentMembers, item.totalMembers, item.color )" class="up-line"></span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="show-info pl30">{{ item.description ? item.description : 'No description' }}</span>
+    </md-card-title-text>
+
+    <md-card-title-media hide-xs class="pt5 ">
+        <md-menu md-offset="-110 0">
+            <md-button ng-click="tt.showDetails(item)" aria-label="Open more menu" class="open-more md-icon-button" >
+                <i class=" fa fa-chevron-right" aria-hidden="true"></i>
+            </md-button>
+            <md-menu-content>
+            </md-menu-content>
+        </md-menu>
+    </md-card-title-media>
+</md-card-title>

@@ -1,0 +1,66 @@
+
+<div id="customerBody" class="md-whiteframe-3dp ml10 mt30 mr10 bg-gray customer-body">
+    <div class="review">
+        <div class="customer-header pt20 ml10">
+            <div layout="column">
+                <div layout="row">
+                    <md-button class="back-btn md-icon-button md-button md-ink-ripple" ng-click="td.back()">
+                        <md-icon flex="none" md-font-set="md">arrow_back</md-icon>
+                    </md-button>
+                    <span class="header-title">Customer service UK Team</span>
+                </div>
+                <div layout="row" class="date">
+                    <span class="title updated">Last updated:</span>
+                    <span class="description">25.05.2017</span>
+                </div>
+                <hr class="date-line">
+            </div>
+        </div>
+        <div class="mb50">
+            <md-list>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="row">
+                        <md-icon class="icon" md-font-set="fa fa-building-o"></md-icon>
+                        <h3 class="title">Company</h3>
+                        <p class="description">{{td.teamData.company}}</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="row">
+                        <md-icon class="icon" md-font-set="fa fa-globe"></md-icon>
+                        <h3 class="title">Location</h3>
+                        <p class="description">{{td.teamData.location}}</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="row">
+                        <md-icon class="icon" md-font-set="fa fa-calendar-o"></md-icon>
+                        <h3 class="title">Creatind date</h3>
+                        <p class="description">{{td.teamData.date}}</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="row">
+                        <h3 class="title descr">Description</h3>
+                        <div>
+                            <p class="description">{{td.teamData.description}}</p>
+                            <!-- <p class="description">If any text required it has tolook like this paragraph</p> -->
+                        </div>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </div>
+        <span class="total-description">Total and Average measurements of the team in comparison with all department</span>
+        <div layout="row">
+            <total-linear team-total-data="td.teamData"></total-linear>
+            <avarage-age team-age-data="td.teamData"></avarage-age>
+        </div>
+        <div layout="row" class="pb50">
+            <nationality-chart team-nationality="td.teamData" class="nationality-chart"></nationality-chart>
+            <ethnicity ethnicity-data="td.teamData"></ethnicity>
+            <gender gender-data="td.teamData"></gender>
+        </div>
+        <grades-team grades-data="td.teamData"></grades-team>
+        <team-users-table employees-table="td.employeesData"></team-users-table>
+    </div>
+</div>

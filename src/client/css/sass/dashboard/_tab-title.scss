@@ -1,0 +1,76 @@
+tab-title {
+    color: $content-font-color;
+    width: 100%;
+    .back-btn {
+        float: left;
+        padding-top: 0!important;
+    }
+    .page-title {
+        float: left;
+    }
+    .headcount-header {
+        float: left;
+        font-size: 22px;
+        font-weight: 400;
+        margin-right: 10px;
+        margin-bottom: 3px;
+    }
+    .title-cont-divider, .cont-dep-divider {
+        display: inline;
+        padding: 0px 5px 0px 5px;
+        width: 31px;
+        height: 35px;
+        font-size: 21px;
+        margin: 0 8px;
+        position: relative;
+        vertical-align: middle;
+        font-family: arial;
+        span {
+            font-size: 16px;
+        }
+    }
+    .country-list, .department-list {
+        display: inline;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    .country-item, .department-item {
+        display: inline-block;
+        padding: 3px 2px 3px 2px;
+        cursor: pointer;
+        font-size: 17px;
+        font-family: roboto;
+        font-weight: 300;
+        background-color: #23252B;
+        margin-top: -4px;
+        .wrapper {
+            padding: 5px 5px 5px 5px;
+            .close-icon {
+                margin-right: 0px;
+                float: right;
+                font-family: 'Material Icons';
+                cursor: pointer;
+                font-size: 15px;
+                vertical-align: middle;
+                padding: 3px;
+            }
+            &:hover {
+                background-color: #2d2f35;
+                border-radius: 7px;
+                cursor: pointer;
+                span {
+                    color: rgb(168, 45, 50);
+                }
+            }
+        }
+    }
+    .md-subhead {
+      font: 300 13px roboto;
+      color: $content-font-color;
+      text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+      opacity: 0.5;
+      padding-top: 0 !important;
+    }
+}

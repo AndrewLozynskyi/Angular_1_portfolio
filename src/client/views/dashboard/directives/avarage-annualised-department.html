@@ -1,0 +1,183 @@
+<div  class="avarage-title">Avarage Annualised Salary by Department for June 2016</div>
+<md-card class="avarage-annualised">
+    <table class="avarage-table">
+        <thead>
+            <th>
+                <div class="head-row" layout="row">
+                    <div layout="row">
+                        <div class="contacts-name">Department</div>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div class="contacts-name">Current <br>Headcount</div>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div layout="row" class="contacts-name">% from <br>Jun 2016</div>
+                    </div>
+                </div>
+            </th>
+            <th class="empty-data">
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div class="contacts-name">Avarage <br>Salary &euro;</div>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div layout="row" class="contacts-name">% from <br>Jun 2016</div>
+                    </div>
+                </div>
+            </th>
+            <th class="empty-data">
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div class="contacts-name">Total Salary <br>Bill &euro;</div>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div layout="row" class="contacts-name">% from <br>Jun 2016</div>
+                    </div>
+                </div>
+            </th>
+        </thead>
+        <tbody id="elem">
+            <tr>
+                <td>
+                    <div class="head-row" layout="row">
+                        <div layout="row">
+                            <div class="contacts-name">TOTAL</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="head-row" layout="row">
+                        <div class="center-pos" layout="row">
+                            <div class="avarage-name">{{adc.total.salary.headcount}}</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="head-row" layout="row">
+                        <div class="center-pos" layout="row">
+                            <div layout="row" class="avarage-per" ng-class="{red:adc.total.salary.headcountVsJan, green: adc.total.salary.headcountVsJan <= 0}">{{adc.total.salary.headcountVsJan}}%</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="empty-data">
+                </td>
+                <td>
+                    <div class="head-row" layout="row">
+                        <div class="center-pos" layout="row">
+                            <div class="avarage-name">{{adc.total.salary.avgSalary | number}}</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="head-row" layout="row">
+                        <div class="center-pos" layout="row">
+                            <div layout="row" class="avarage-per" ng-class="{red:adc.total.salary.avgSalaryVsJan, green: adc.total.salary.avgSalaryVsJan <= 0}">{{adc.total.salary.avgSalaryVsJan}}%</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="empty-data">
+                </td>
+                <td>
+                    <div class="head-row" layout="row">
+                        <div class="center-pos" layout="row">
+                            <div class="avarage-name">{{adc.total.salary.totalSalary | number}}&euro;</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="head-row" layout="row">
+                        <div class="center-pos" layout="row">
+                            <div layout="row" class="avarage-per" ng-class="{red:adc.total.salary.totalSalaryVsJan, green: adc.total.salary.totalSalaryVsJan <= 0}">{{adc.total.salary.totalSalaryVsJan}}%</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-repeat="item in adc.avarageData" class="rows">
+                <td class="avarage-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div>
+                            <div class="country-name">{{item.department}}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="avarage-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="avarage-name">{{ item.salary.headcount }}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="avarage-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="avarage-per" ng-class="{red:item.salary.headcountVsJan, green: item.salary.headcountVsJan <= 0}">
+                                {{item.salary.headcountVsJan}}%
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="empty-data">
+                </td>
+                <td class="avarage-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="avarage-name">
+                                {{item.salary.avgSalary | number}}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="avarage-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="avarage-per" ng-class="{red:item.salary.avgSalaryVsJan, green: item.salary.avgSalaryVsJan <= 0}">
+                                {{ item.salary.avgSalaryVsJan }}%
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="empty-data">
+                </td>
+                <td class="avarage-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="avarage-name">
+                                {{ item.salary.totalSalary | number }}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="avarage-data">
+                    <div layout="row" layout-align="start" style="align-items: center;">
+                        <div class="center-pos">
+                            <div class="avarage-per" ng-class="{red:item.salary.totalSalaryVsJan, green: item.salary.totalSalaryVsJan <= 0}" >
+                                {{item.salary.totalSalaryVsJan}}%
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</md-card>
+

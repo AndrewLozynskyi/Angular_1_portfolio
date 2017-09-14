@@ -1,0 +1,103 @@
+<div id="dashboard-card">
+    <md-progress-circular ng-if="showBackground" md-diameter="40px"></md-progress-circular>
+</div>
+
+<md-card class="dashboard-card md-whiteframe-3dp ml20 mr10 bg-gray">
+
+    <md-card-title class="mt20 mb15">
+        <tab-title active-params="ac.activeParams" select-countries="ac.selectCountries" select-departments="ac.selectDepartments" tab-title="'Attrition'" selected-date="selectedDate" get-countries="ac.getCountries", get-departments="ac.getDepartments"></tab-title>
+        <md-card-title-media class="pt5">
+            <md-menu md-offset="-220 0">
+                <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                    <md-icon class="container-dot">
+                        <img class="dots" src="/img/icons/3dot.png"/>
+                    </md-icon>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Refresh">
+                            <md-icon md-font-set="fa fa-refresh" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Refresh</span>
+                        </md-button>
+                    </md-menu-item>
+                    <% if permissions.dashboard.home.setTarget %>
+                        <md-menu-item>
+                            <md-button ng-click="ac.showTargetDialogue($event)" aria-label="Target">
+                                <md-icon md-font-set="fa fa-crosshairs" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Target..</span>
+                            </md-button>
+                        </md-menu-item>
+                    <% endif %>
+                    <% if permissions.dashboard.home.setFilter %>
+                        <md-menu-item>
+                            <md-button ng-click="ac.showFilters()" aria-label="Add filter">
+                                <md-icon md-font-set="fa fa-filter" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Add Filter</span>
+                            </md-button>
+                        </md-menu-item>
+                    <% endif %>
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Show on Home">
+                            <md-icon md-font-set="fa fa-eye" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Show on Homepage</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Hide on Home">
+                            <md-icon md-font-set="fa fa-eye-slash" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Hide from Homepage</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="ac.showUploadDialogue($event)" aria-label="Upload">
+                            <md-icon md-font-set="fa fa-upload" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Upload</span>
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </md-card-title-media>
+    </md-card-title>
+
+    <md-divider class="ml15 mr15"></md-divider>
+
+    <md-card-content class="ml15" layout-align="space-between">
+
+        <div layout="row" class="filters">
+            <span flex="none" layout="row" layout-align="start center" class="trends-span">
+                <span flex hide-gt-xs></span>
+                <md-icon flex="none" md-colors="{ color: 'warn-500' }" md-font-set="md" class="rotate45">arrow_upward</md-icon>
+                <span class="md-headline">{{ ac.trends.total }}%&ensp;</span>
+                <span layout="column">
+                    <sup md-colors="{ color: 'warn-500' }">{{ ac.trends.month }}% from {{ selectedDate | date:'MMMM' }}</sup>
+                    <sub>{{ ac.trends.year }}% in January</sub>
+                </span>
+                <span flex hide-gt-xs></span>
+            </span>
+            <span flex class="ml20">
+                <country-dropdown active-params="ac.activeParams" country-list="ac.getCountries()" get-countries="ac.getCountries" select-countries="ac.selectCountries"></country-dropdown>
+                <department-dropdown active-params="ac.activeParams" department-list="ac.getDepartments()" get-departments="ac.getDepartments" select-departments="ac.selectDepartments"></department-dropdown>
+            </span>
+        </div>
+
+        <attrition-donut-charts set-data="ac.dataLineChart()"></attrition-donut-charts>
+
+        <rectangular-chart color-range-middle="#c3ee04" color-range-min="#2fdcda" color-range-max="#fe8500" active-params="ac.activeParams" set-data="ac.getCountryData()"></rectangular-chart>
+
+        <attrition-country-table    ng-if="activeParams.countries.length == 0 && activeParams.departments.length == 0"
+                                    class="pr10"
+                                    select-cell="ac.selectCountryPersonType"
+                                    set-data="ac.getCountryData()"></attrition-country-table>
+
+        <departments-list-table ng-if="activeParams.departments.length > 1 || ( activeParams.departments.length == 0 && activeParams.countries.length > 0 )"
+                                set-data="ac.getDepartmentsStats()"
+                                table-params="ac.tableParams"
+                                select-departments="ac.selectDepartments"
+                                active-params="activeParams"></departments-list-table>
+
+        <attrition-department-stats ng-if="activeParams.departments.length == 1"
+                            title="'Attrition'"
+                            class="pr10"
+                            department-data="ac.getDepartmentStats()"
+                            get-employees="ac.setDepartmentUsers";
+                            employees-data="ac.employeesData()"
+                            table-params="ac.tableParams"
+                            active-params="ac.activeParams"></attrition-department-stats>
+
+    </md-card-content>
+
+</md-card>

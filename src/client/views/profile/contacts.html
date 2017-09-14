@@ -1,0 +1,354 @@
+<div id="profile-card">
+    <md-progress-circular ng-if="pcc.showBackground" md-diameter="40px"></md-progress-circular>
+</div>
+<md-card class="contacts mb35">
+
+    <md-card-title class="mt30">
+        <md-card-title-text class="title-text">
+            <md-button aria-label="Open demo menu" class="md-icon-button menu-popup-arrow" ng-click="pcc.slideLeftMenu = false; pcc.showPopupMenu.enable = true">
+                <md-icon md-font-set="md">forward</md-icon>
+            </md-button>
+            Contacts
+        </md-card-title-text>
+        <md-card-title-media class="action-btn">
+            
+            <md-button class="" ng-show="pcc.selectedContacts" ng-class="{'disable-button': pcc.disableAdd}" type="button" ng-click="pcc.addContactsToGroup($event)" ng-disabled="pcc.disableAdd"><i class="fa fa-user-plus"></i>&nbsp;  Add to Group</md-button>
+            <md-button class="" ng-show="pcc.selectedContacts" ng-class="{'disable-button': pcc.disableRemove}" type="button" ng-click="pcc.removeUser()" ng-disabled="pcc.disableRemove"><i class="fa fa-user-times"></i>&nbsp;  Remove</md-button>
+            <md-button class="" ng-show="pcc.selectedGroup" ng-class="{'disable-button': pcc.disableGrRemove}" type="button" ng-click="pcc.removeFromGroup()" ng-disabled="pcc.disableGrRemove"><i class="fa fa-user-times"></i>&nbsp;  Remove From Group</md-button>
+            
+        </md-card-title-media>
+        <div class="right-block">
+            <div class="search">
+                <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                <input class="search-contacts" type="text" ng-model="pcc.findUser" ng-change="pcc.searchUser()" placeholder="Search in Contacts" md-colors="{color: 'primary-400'}">
+            </div>
+            <md-card-title-media class="toggle-btn">
+                <md-button class="md-icon-button md-button md-ink-ripple" ng-click="pcc.toggleUserLayout('grid')" aria-label="..." type="button">
+                    <md-icon md-font-set="md" class="ng-scope material-icons">apps</md-icon>
+                </md-button>        
+                <md-button class="md-icon-button md-button md-ink-ripple" type="button"  ng-click="pcc.toggleUserLayout('list')" aria-label="..." type="button">
+                    <md-icon md-font-set="md" class="ng-scope material-icons">menu</md-icon>
+                </md-button>
+            </md-card-title-media>
+        </div>
+    </md-card-title>
+
+    <div layout="row" class="mobile-btn mb15">
+        <md-button class="action create" type="button" ng-click="addContactsToGroup($event)"><i class="fa fa-refresh"></i>&nbsp; Add to Group</md-button>
+        <md-button class="action" type="button"><i class="fa fa-user-times"></i>&nbsp;  Remove</md-button>
+    </div>
+
+    <div class="left-menu-profile-background" ng-hide="pcc.slideLeftMenu" ng-click="pcc.slideLeftMenu = true;pcc.showPopupMenu.enable = false"></div>
+
+    <md-card role="list" layout="column" class="contacts-department bar-mobile-menu layout-column animate-hide" ng-hide="pcc.slideLeftMenu">
+
+        <md-card-title-text class="title-text">
+            <md-button aria-label="Open demo menu" class="md-icon-button menu-popup-arrow" ng-click="pcc.slideLeftMenu = true;pcc.showPopupMenu.enable = false">
+                <md-icon md-font-set="md">forward</md-icon>
+            </md-button>
+            Contacts
+        </md-card-title-text>
+
+        <div class="scroll-block style-scroll">
+
+            <md-list role="list" layout="column">
+                <md-list-item class="title-contacts" ng-click="cc.getGroupContacts( false, 'current' )" ng-class="{ active: cc.allContacts === true }">
+                    <span class="title">ALL CONTACTS</span>
+                    <span class="md-secondary data">{{ cc.contactsStats.allContactsCount }}</span>
+                </md-list-item>
+                <md-list-item class="contacts-item" ng-class="{active:cc.query === 'current'}" ng-click="cc.selectContactsType('current')">
+                    <span>Current</span>
+                    <span class="md-secondary">{{ cc.contactsStats.contactsCount }}</span>
+                </md-list-item>
+                <md-list-item class="contacts-item" ng-class="{active:cc.query === 'recent'}" ng-click="cc.selectContactsType('recent')">
+                    <span>Recent</span>
+                    <span class="md-secondary">{{ cc.contactsStats.recentCount }}</span>
+                </md-list-item>
+                <md-list-item class="contacts-item" ng-class="{active:cc.query === 'people you may know'}" ng-click="cc.selectContactsType('people you may know')">
+                    <span>People you may know</span>
+                    <span class="md-secondary ">{{ cc.contactsStats.peopleYouMayKnowCount }}</span>
+                </md-list-item>
+            </md-list>
+
+            <md-list role="list" layout="column">
+                <md-list-item class="contacts-item" ng-class="{active:cc.query === 'following'}" ng-click="cc.selectContactsType('following')">
+                    <span>Following</span>
+                    <span class="md-secondary">{{ cc.contactsStats.followingCount }}</span>
+                </md-list-item>
+                <md-list-item class="contacts-item" ng-class="{active:cc.query === 'followers'}" ng-click="cc.selectContactsType('followers')">
+                    <span>Followers</span>
+                    <span class="md-secondary">{{ cc.contactsStats.followersCount }}</span>
+                </md-list-item>
+            </md-list>
+
+            <md-list role="list" layout="column">
+                <md-list-item class="title-contacts">
+                    <span class="title">GROUPS</span>
+                </md-list-item>
+
+                <md-list-item  ng-repeat="item in cc.contactsStats.groups" class="contacts-item" ng-class="{ active: cc.selectedGroup === item.groupId }" ng-click="cc.getGroupContacts( item.groupId )">
+                    <span>{{ item.name }}</span>
+                    <span class="md-secondary">{{ item.count }}</span>
+                </md-list-item>
+
+                <md-list-item ng-show="cc.showAddGroupInput" layout="column">
+                    <md-input-container>
+                        <label>New Group Name</label>
+                        <input type="text"  ng-model="cc.newGroupName" class="addNewGroupInput" autofocus="newGroup">
+                    </md-input-container>
+                    <md-card-title >
+                        <md-button class="ok" ng-click="cc.addNewGroup()"  type="submit">
+                                Save
+                        </md-button>
+                        <md-button class="cancel" ng-click="cc.showAddGroupInput=false;cc.showAddLink=true">
+                                Cancel
+                        </md-button>
+                    </md-card-title>
+                </md-list-item>
+
+                <md-list-item  ng-show="cc.showAddLink"  ng-click="cc.showAddLink=false;cc.showAddGroupInput=true" class="contacts-item create-group" ng-class="{active:ds.activeContactsType === 'project-contributors'}" ng-click="ds.selectContactsType('project-contributors')">
+                    <span>+ Create New Group</span>
+                </md-list-item>
+
+            </md-list>
+
+        </div>
+
+    </md-card>
+
+    <md-card-content class="contents">
+
+        <md-card role="list" layout="column" class="contacts-department left-bar layout-column">
+
+            <md-list role="list" layout="column">
+                <!--<md-list-item class="title-contacts" ng-click="pcc.getGroupContacts( false )" ng-class="{ active: pcc.selectedGroup === false }">
+                    <span class="title">ALL CONTACTS</span>
+                    <span class="md-secondary data">{{ pcc.contactsStats.contactsCount }}</span>
+                </md-list-item>-->
+                <md-list-item class="contacts-item" ng-class="{active: pcc.currentStatus === true }" ng-click="pcc.getGroupContacts( false )">
+                    <span>Current</span>
+                    <span class="md-secondary">{{ pcc.contactsStats.contactsCount }}</span>
+                </md-list-item>
+                <md-list-item class="contacts-item" ng-class="{active:pcc.query === 'recent'}" ng-click="pcc.selectContactsType('recent')">
+                    <span>Recent</span>
+                    <span class="md-secondary">{{ pcc.contactsStats.recentCount }}</span>
+                </md-list-item>
+                <md-list-item class="contacts-item" ng-class="{active:ds.query === 'people you may know'}" ng-click="ds.selectContactsType('people you may know')">
+                    <span>People you may know</span>
+                    <span class="md-secondary ">{{ pcc.contactsStats.peopleYouMayKnowCount }}</span>
+                </md-list-item>
+            </md-list>
+
+            <md-list role="list" layout="column">
+                <md-list-item class="contacts-item" ng-class="{active:pcc.query === 'following'}" ng-click="pcc.selectContactsType('following')">
+                    <span>Following</span>
+                    <span class="md-secondary">{{ pcc.contactsStats.followingCount }}</span>
+                </md-list-item>
+                <md-list-item class="contacts-item" ng-class="{active:pcc.query === 'followers'}" ng-click="pcc.selectContactsType('followers')">
+                    <span>Followers</span>
+                    <span class="md-secondary">{{ pcc.contactsStats.followersCount }}</span>
+                </md-list-item>
+            </md-list>
+
+            <md-list role="list" layout="column">
+                <md-list-item class="title-contacts">
+                    <span class="title">GROUPS</span>
+                </md-list-item>
+
+                <md-list-item  ng-repeat="item in pcc.contactsStats.groups" class="contacts-item" ng-class="{ active: pcc.selectedGroup === item.groupId }" ng-click="pcc.getGroupContacts( item.groupId )">
+                    <span>{{ item.name }}</span>
+                    <span class="md-secondary">{{ item.count }}</span>
+                </md-list-item>
+
+                <md-list-item ng-show="pcc.showAddGroupInput" layout="column">
+                    <md-input-container>
+                        <label>New Group Name</label>
+                        <input type="text"  ng-model="pcc.newGroupName" class="addNewGroupInput" autofocus="newGroup">
+                    </md-input-container>
+                    <md-card-title >
+                        <md-button class="ok" ng-click="pcc.addNewGroup()"  type="submit">
+                            Save
+                        </md-button>
+                        <md-button class="cancel" ng-click="pcc.showAddGroupInput=false;pcc.showAddLink=true">
+                            Cancel
+                        </md-button>
+                    </md-card-title>
+                </md-list-item> 
+
+                <md-list-item  ng-show="pcc.showAddLink"  ng-click="pcc.showAddLink=false;pcc.showAddGroupInput=true" class="contacts-item create-group" ng-class="{active:ds.activeContactsType === 'project-contributors'}" ng-click="ds.selectContactsType('project-contributors')">
+                    <span>+ Create New Group</span>
+                </md-list-item>
+            </md-list>
+
+        </md-card>
+
+        <md-card class="contacts">
+
+            <md-card-header-text ng-hide="pcc.layout === 'grid'">
+                <md-title role="list" layout="row" class="contacts-department right-bar">
+                    <md-subhead class="sub">
+                        <md-card-title-text class="mobile-filter ml20 mr20">
+                            <md-checkbox  class="check md-icon" aria-label="..."></md-checkbox>
+                            <span class="check-text">Filtered by:</span>
+                        </md-card-title-text>
+                        <md-checkbox ng-disabled="!pcc.contacts.length" class="global-check md-icon" aria-label="..." ng-model="pcc.allUsersSelected" ng-click="pcc.toggleAllSelection()"></md-checkbox>
+                        <span class="drop-title">Name</span>
+                        <md-button class="md-icon-button md-button md-ink-ripple btn-pc" type="button"  aria-label="...">
+                            <md-icon md-font-set="md" ng-click="pcc.sortItems( 'fullName' )" class="sel-option ng-scope material-icons">arrow_drop_down</md-icon>
+                        </md-button>
+                    </md-subhead>
+                    <md-subhead class="sub">
+                        <span class="drop-title">Company</span>
+                        <md-button class="md-icon-button md-button md-ink-ripple btn-pc" type="button"  aria-label="...">
+                            <md-icon md-font-set="md" ng-click="pcc.sortItems( 'company' )" class="sel-option ng-scope material-icons">arrow_drop_down</md-icon>
+                        </md-button>
+                    </md-subhead>
+                    <md-subhead class="sub">
+                        <span class="drop-title">Job Title</span>
+                        <md-button class="md-icon-button md-button md-ink-ripple btn-pc" type="button"  aria-label="...">
+                            <md-icon md-font-set="md" ng-click="pcc.sortItems( 'jobTitle' )" class="sel-option ng-scope material-icons">arrow_drop_down</md-icon>
+                        </md-button>
+                    </md-subhead>
+                </md-title>
+            </md-card-header-text>
+
+            <div layout="row" layout-wrap layout-align="left" ng-show="pcc.layout === 'grid'">
+                <md-card class="information-blocks" ng-repeat="item in pcc.contacts">
+                    <md-card-header class="contact-header-btn">
+                        <md-checkbox ng-model="item.selected" ng-change="pcc.toggleUserSelection()" class="check md-icon" aria-label="..."></md-checkbox>
+                        <md-card-title-media class="selects-option">
+                            <md-menu>
+                                <md-button class="md-icon-button md-button right"  type="button" ng-click="$mdOpenMenu($event)" aria-label="...">
+                                    <md-icon>
+                                        <img class="dots" src="/img/icons/3dot.png"/>
+                                    </md-icon>
+                                </md-button>
+                                <md-menu-content width="4">
+                                    <md-menu-item>
+                                        <md-button ng-click="pcc.getContactStats(item.uid)" onmouseover="this.style.backgroundColor='#35383e';" onmouseout="this.style.backgroundColor='#292c33';" ui-sref="profile.about({username:item.username})" aria-label="User">
+                                            <md-icon class="bla" style="color: #bfbfbf;" md-font-set="fa fa-user" aria-hidden="true"><span style="font: 400 14px roboto;" class="dot-menu-item">&nbsp; View Profile</span></md-icon>
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item  ng-hide="pcc.selectedGroup || !pcc.checkId">
+                                        <md-button  ng-click="pcc.removeUser( item.uid )" aria-label="Comments">
+                                            <md-icon md-font-set="fa fa-user-times" aria-hidden="true"><span class="dot-menu-item">&nbsp; Remove From Contacts</span></md-icon>
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item ng-show="pcc.selectedGroup">
+                                        <md-button ng-click="pcc.removeFromGroup( item.uid )" aria-label="Comments">
+                                            <md-icon md-font-set="fa fa-user-times" aria-hidden="true"><span class="dot-menu-item">&nbsp; Remove From Group</span></md-icon>
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item ng-show="pcc.query === 'following'">
+                                        <md-button ng-click="pcc.unfollow( item.uid )" aria-label="Comments">
+                                            <md-icon md-font-set="fa fa-user-times" aria-hidden="true"><span class="dot-menu-item">&nbsp; Unfollow</span></md-icon>
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </md-card-title-media>
+                    </md-card-header>
+                    <md-user-avatar>
+                        <!--<img class="avatar-grid ng-scope" ng-if="item.userpic" src="../../usersData/{{item.uid}}/{{item.userpic}}"/>
+                        <img class="avatar-grid ng-scope" ng-if="!item.userpic" src="/img/profile-pics/user-icon.png"/>-->
+                        <ng-letter-avatar class="avatar-grid" width="115" height="115" fontSize="19" charCount="2" data="{{ item.userpic ? 'http://' + window.location.host + item.userpic : item.username }}" shape="round"></ng-letter-avatar>
+                        <div class="circle-status status-icon" 
+                             ng-class="{'online':item.status === 'Online', 'away':item.status === 'Away', 'Do not Disturb':item.status === 'Do not Disturb', 'invisible':item.status === 'Invisible', 'offline':item.status === 'Offline' }">
+                        </div>
+                    </md-user-avatar>
+                    <md-card-footer>
+                        <div class="information-contacts-block">
+                            <h3>{{ ( ! item.fullName ) ? item.username : item.fullName }}</h3>
+                            <p><span>{{ item.duration }}</span></p>
+                        </div>
+                        <div class="information-contacts-block">
+                            <p>{{ item.company }} <span>| {{ item.city }}</span></p>
+                            <p>{{ item.jobTitle }} <span>| {{ item.manager }}</span></p>
+                        </div>
+                    </md-card-footer>
+                </md-card>
+            </div>
+
+            <table class="contacts-table profile-card" ng-show="pcc.layout === 'list'">
+                <tbody id="elem">
+                    <tr ng-repeat="item in pcc.contacts">
+                        <td class="contacts-data">
+                            <div layout="row" layout-align="start" style="align-items: center;">
+                                <md-checkbox class="check md-icon" aria-label="..." ng-model="item.selected" ng-change="pcc.toggleUserSelection()"></md-checkbox>
+                                    <!--<img class="avatar ng-scope" ng-if="item.userpic" src="../../usersData/{{item.uid}}/{{item.userpic}}"/>
+                                    <img class="avatar ng-scope" ng-if="!item.userpic" src="/img/profile-pics/user-icon.png"/>-->
+                                    <ng-letter-avatar class="avatar" width="40" height="40" fontSize="13" charCount="2" data="{{ item.userpic ? 'http://' + window.location.host + item.userpic : item.username }}" shape="round"></ng-letter-avatar>
+                                    <div class="circle-status status-icon" 
+                                    ng-class="{'online':item.status === 'Online', 'away':item.status === 'Away', 'do-not-disturb':item.status === 'Do-not-disturb', 'invisible':item.status === 'Invisible', 'offline':item.status === 'Offline' }"></div>
+                                <div class="ml10">
+                                    <div class="contacts-name">{{ ( ! item.fullName ) ? item.username : item.fullName }}</div>
+                                    <div class="shadow-title">{{ item.duration }}</div>
+                                </div>
+                                <md-card-title-media class="s-option">
+                                    <md-button class="md-icon-button" type="button" ng-click="$mdOpenMenu($event)" aria-label="...">
+                                        <md-icon>
+                                            <img class="dots" src="/img/icons/3dot.png"/>
+                                        </md-icon>
+                                    </md-button>
+                                </md-card-title-media>
+                            </div>
+                        </td>
+                        <td class="contacts-data">
+                            <div layout="row" layout-align="start">
+                                <div class="ml10">
+                                    <div class="contacts-name">{{ item.company }}</div>
+                                    <div class="shadow-title">{{ item.city }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="contacts-data">
+                            <div layout="row" layout-align="start">
+                                <div class="ml10">
+                                    <div class="contacts-name">{{ item.jobTitle }}</div>
+                                    <div class="shadow-title">{{ item.manager }}</div>
+                                </div>
+                                <md-card-title-media class="selects-option">
+                                    <md-menu>
+                                        <md-button class="md-icon-button"  type="button" ng-click="$mdOpenMenu($event)" aria-label="...">
+                                            <md-icon>
+                                                <img class="dots" src="/img/icons/3dot.png"/>
+                                            </md-icon>
+                                        </md-button>
+                                        <md-menu-content width="4">
+                                            <md-menu-item>
+                                                <md-button ng-click="pcc.getContactStats(item.uid)" onmouseover="this.style.backgroundColor='#35383e';" onmouseout="this.style.backgroundColor='#292c33';" ui-sref="profile.about({username:item.username})" aria-label="User">
+                                                    <md-icon class="bla" style="color: #bfbfbf;" md-font-set="fa fa-user" aria-hidden="true"><span style="font: 400 14px roboto;" class="dot-menu-item">&nbsp; View Profile</span></md-icon>
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item ng-hide="pcc.selectedGroup || !pcc.checkId">
+                                                <md-button  ng-click="pcc.removeUser( item.uid )" aria-label="Comments">
+                                                    <md-icon md-font-set="fa fa-user-times" aria-hidden="true"><span class="dot-menu-item">&nbsp; Remove From Contacts</span></md-icon>
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item ng-show="pcc.selectedGroup">
+                                                <md-button ng-click="pcc.removeFromGroup( item.uid )" aria-label="Comments">
+                                                    <md-icon md-font-set="fa fa-user-times" aria-hidden="true"><span class="dot-menu-item">&nbsp; Remove From Group</span></md-icon>
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item ng-show="pcc.query === 'following'">
+                                                <md-button ng-click="pcc.unfollow( item.uid )" aria-label="Comments">
+                                                    <md-icon md-font-set="fa fa-user-times" aria-hidden="true"><span class="dot-menu-item">&nbsp; Unfollow</span></md-icon>
+                                                </md-button>
+                                            </md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
+                                </md-card-title-media>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div>
+                <md-progress-circular class="spinner" ng-if="pcc.showSpinner" md-diameter="40px"></md-progress-circular>
+            </div>
+        </md-card>
+
+    </md-card-content>
+
+</md-card>

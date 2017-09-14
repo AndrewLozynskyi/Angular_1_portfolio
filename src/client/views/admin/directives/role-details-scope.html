@@ -1,0 +1,108 @@
+
+<md-content>
+
+    <md-card class="scope-card">
+
+        <md-radio-group ng-model="basedOn" layout="column">
+            <div class="info-block">
+                <md-radio-button ng-click="changeBasedOn()" ng-disabled="!editMode" layout="row" class="md-primary" value="no-restriction" aria-label="no-restriction">
+                    No restriction
+                </md-radio-button>
+            </div>
+            <div class="info-block">
+                <md-radio-button ng-click="changeBasedOn()" ng-disabled="!editMode" layout="row" class="md-primary" value="hierarchy" aria-label="hierarchy">
+                    Supervisory hierarchy based
+                </md-radio-button>
+            </div>
+            <div class="info-block">
+                <md-radio-button ng-disabled="!editMode" layout="row" class="md-primary" value="country" aria-label="country">
+                    Country based
+                </md-radio-button>
+            </div>
+            <div class="info-block">
+                <md-radio-button ng-click="changeBasedOn()" ng-disabled="!editMode" layout="row" class="md-primary" value="department" aria-label="department">
+                    Department based
+                </md-radio-button>
+            </div>
+            <div class="info-block">
+                <md-radio-button ng-click="changeBasedOn()" ng-disabled="!editMode" layout="row" class="md-primary" value="country-department" aria-label="country-department">
+                    Country / Department based
+                </md-radio-button>
+            </div>
+        </md-radio-group>
+
+        <md-input-container layout="column" class="filter" ng-show="basedOn === 'country' || basedOn === 'country-department'">
+            <md-select  ng-disabled="!editMode"
+                        ng-model="selectedCountries"
+                        aria-label="Country filter"
+                        multiple
+                        placeholder="Country">
+
+                <md-content class="style-scroll">
+                    <md-option ng-repeat="country in countries" ng-value="country.name">{{ country.name }}</md-option>
+                </md-content>
+
+            </md-select>
+        </md-input-container>
+
+        <md-input-container layout="column" class="filter" ng-show="basedOn === 'department' || basedOn === 'country-department'">
+            <md-select  ng-disabled="!editMode"
+                        ng-model="selectedDepartments"
+                        aria-label="Department filter"
+                        multiple
+                        placeholder="Department">
+
+                <md-content class="style-scroll">
+                    <md-option ng-repeat="department in departments" ng-value="department.name">{{ department.name }}</md-option>
+                </md-content>
+
+            </md-select>
+        </md-input-container>
+
+        <table class="scope-table" ng-show="basedOn === 'country-department' && selectedCountries.length && selectedDepartments.length">
+            <thead>
+                <tr class="scope-header">
+                    <th>
+                        <div layout="row">
+                            <div>
+                                <div class="title">Department/ Country</div>
+                            </div>
+                        </div>
+                    </th>
+                    <th ng-repeat="country in selectedCountries">
+                        <div layout="row" class="head">
+                            <div>
+                                <div class="title">{{ country }}</div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="scope-data" ng-repeat="department in selectedDepartments">
+                    <td>
+                        <div layout="row" layout-align="start center">
+                            <div class="ml10">
+                                <div class="scope-name">{{ department }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-repeat="country in selectedCountries">
+                        <div layout="row" layout-align="start center">
+                            <div class="content">
+                                <md-checkbox class="check md-icon header" aria-label="true" ng-disabled="!editMode" ng-model="selectedItems[ country ][ department ]"></md-checkbox>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="btn-container" ng-show="editMode">
+            <md-button class="md-primary cancel" ng-click="cancel()">Cancel</md-button>
+            <md-button class="md-primary save" ng-click="save()">Save</md-button>
+        </div>
+
+    </md-card>
+
+</md-content>

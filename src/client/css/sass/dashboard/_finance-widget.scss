@@ -1,0 +1,124 @@
+finance-widget {
+    .trends {
+        margin-top: 5px;
+        .filters {
+            .trends-span {
+                margin:0;
+                margin-left: 30px;
+                margin-right: 10px;
+                padding-top: 15px;
+                md-icon {
+                    margin: 0;
+                    margin-right: 5px
+                }
+                .dot {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 25px;
+                    background: #6b2984;
+                    margin: auto 0;
+                    margin-bottom: -11px;
+                }
+                .left {
+                    left: 4px;
+                }
+                .double-arrow {
+                    font-size: 20px;
+                    margin-left: -10px;
+                }
+                .double-rotate45 {
+                    font-size: 20px;
+                }
+                .md-headline {
+                    font-family: Roboto;
+                    color:  #bfbfbf;
+                    font-size: 19.68px;
+                    font-weight: 300;
+                    line-height: 25px;
+                    text-align: left;
+                    transform: scaleY(1.0163);
+                    margin-left: -10px;
+                }
+            }
+        }
+    }
+    .second-trends {
+        .filters {
+            .trends-span {
+                margin:0;
+                margin-left: 30px;
+                margin-right: 10px;
+                padding-top: 15px;
+                md-icon {
+                    margin: 0;
+                    margin-right: 5px
+                }
+                .dot {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 25px;
+                    background: #17a7a6;
+                    margin: auto 0;
+                    margin-bottom: -11px;
+                }
+                .left {
+                    left: 4px;
+                }
+                .double-arrow {
+                    font-size: 20px;
+                    margin-left: -10px;
+                }
+                .double-rotate45 {
+                    font-size: 20px;
+                }
+                .md-headline {
+                    font-family: Roboto;
+                    color:  #bfbfbf;
+                    font-size: 19.68px;
+                    font-weight: 300;
+                    line-height: 25px;
+                    text-align: left;
+                    transform: scaleY(1.0163);
+                    margin-left: -10px;
+                }
+            }
+        }
+    }
+    svg {
+        margin-top: -25px;
+    }
+    section {
+        margin-top: -8px;
+    }
+    .line {
+        fill: none;
+        stroke: gray;
+        stroke-width: 1px;
+    }
+    .axis {
+        path, line {
+            fill: none;
+            stroke: none;
+        }
+        text {
+            fill: $slider-color;
+        }
+        &.y text {
+            fill: $content-font-color;
+        }
+    }
+    .tooltip {
+        table {
+            margin: 0;
+        }
+        .date {
+            padding-left: 0;
+        }
+    }
+
+    .area {
+        fill: url(#revenue-gradient);
+        stroke-width: 0;
+    }
+
+}

@@ -1,0 +1,66 @@
+.permission-edit-confirm {
+    width: 450px;
+    max-width: 450px;
+    md-toolbar {
+        color: #65666b;
+        background: #22242b;
+        display: flex;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        flex-direction: row;
+        span {
+            margin: 20px 0px 0px 20px;
+            font-size: 13px;
+        }
+        .md-icon-button {
+            margin: 10px 10px 0px 0px;
+            md-icon {
+                color: #65666b;
+            }
+        }
+    }
+    md-dialog-actions {
+        background: #292c33;
+        min-height: 150px;
+        display: flex;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        flex-direction: column;
+        .nick-name {
+            width: 100%;
+            margin: 17px 0px;
+            font-size: 14px;
+            color: #b8b8b8;
+            span {
+                font-size: 16px;
+                margin: 0px 5px 0px 5px;
+            }
+        }
+        .input-action {
+            width: 100%;
+            span {
+                color: #b8b8b8;
+                font-size: 16px;
+                margin: 0px 12px 0px 5px;
+            }
+            .password-input {
+                background-color: #22242b;
+                border-radius: 3px;
+                border: none;
+                height: 25px;
+                width: 70%;
+                padding: 10px;
+            }
+        }
+        .action-buttons {
+            margin: 20px 0px 20px 170px;
+            .ok-btn {
+                background-color: #18a9a8;
+            }
+            .cancel-btn {
+                color: #b8b8b8;
+                background-color: #292c33;
+            }
+        }
+    }
+}

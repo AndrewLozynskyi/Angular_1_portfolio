@@ -1,0 +1,104 @@
+
+<div class="mr20 headcount-table-wrapper">
+    <table class="main-table">
+        <thead>
+            <tr class="head-table">
+                <th>
+                    Country
+                </th>
+                <th>
+                    Current Headcount
+                </th>
+                <th>
+                    YTD Voluntary
+                </th>
+                <th>
+                    YTD Involuntary
+                </th>
+                <th>
+                    YTD Total Attrition
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="upperCase">Total</span>
+                </td>
+                <td>
+                    {{ act.total.headcount }}
+                </td>
+                <td>
+                    {{ act.total.voluntary }}%
+                </td>
+                <td>
+                    {{ act.total.involuntary }}%
+                </td>
+                <td>
+                    {{ act.total.attrition }}%
+                </td>
+            </tr>
+            <tr ng-repeat="country in act.countries">
+                <td ng-click="act.selectCell( country )">
+                    {{ country }}
+                </td>
+                <td ng-click="act.selectCell( country )">
+                    {{ setData[ country ].headcount }}
+                </td>
+                <td ng-click="act.selectCell( country )">
+                    {{ setData[ country ].voluntary }}%
+                </td>
+                <td ng-click="act.selectCell( country )">
+                    {{ setData[ country ].involuntary }}%
+                </td>
+                <td ng-click="act.selectCell( country )">
+                    {{ setData[ country ].attrition }}%
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="table-footer">
+
+        <div class="search" ng-hide="true">
+            <span><i class="fa fa-search" aria-hidden="true"></i></span>
+            <input type="text" ng-model="searchKeyword" placeholder="Search by key word" md-colors="{color: 'primary-400'}">
+        </div>
+
+        <pagination ng-show="act.maxPages > 1"
+                    class="pagination" flex
+                    cl-pages="act.maxPages"
+                    cl-steps="3"
+                    cl-page-changed="act.changePage()"
+                    cl-align="center center"
+                    cl-current-page="act.currentPage"></pagination>
+
+        <md-menu class="showby-dropdown" aria-label="Show by">
+            <md-button aria-label="Open menu" ng-click="$mdOpenMenu($event)">
+                <span class="value" hide-xs>Show {{ ( act.itemsPerPage == 'all' ) ? 'All' : 'by ' + act.itemsPerPage }}</span>
+                <md-icon hide-xs  md-font-set="fa fa-caret-down"></md-icon>
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ng-class="{{ ( act.itemsPerPage == 10 ) ? 'active' : '' }}" ng-click="act.setItemsPerPage(10)">
+                        Show by 10
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-class="{{ ( act.itemsPerPage == 20 ) ? 'active' : '' }}" ng-click="act.setItemsPerPage(20)">
+                        Show by 20
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-class="{{ ( act.itemsPerPage == 50 ) ? 'active' : '' }}" ng-click="act.setItemsPerPage(30)">
+                        Show by 50
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+
+        <div style="clear: both;"></div>
+
+    </div>
+
+</div>

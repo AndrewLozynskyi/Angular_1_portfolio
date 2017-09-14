@@ -1,0 +1,98 @@
+
+<md-content>
+
+    <md-card class="users-card">
+        <div class="header-title">
+            <md-card-title>
+                <md-card-title-media class="actions-btn">
+                    <div layout="row" class="group-btn mb15">
+                        <md-button class="action" type="button" ng-click="rdg.assignNewGroup($event)" title="Not done yet"><i class="fa fa-user-plus"></i>&nbsp; Assign New Group</md-button>
+                        <md-button class="action" type="button" ng-click="rdg.assignToRole( $event )" ng-disabled="rdg.isDisabled" title="Not done yet"><i class="fa fa-user-times"></i>&nbsp; Move to another role</md-button>
+                    </div>
+                </md-card-title-media>
+                <div class="input-block">
+                    <div class="search">
+                        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input class="search-contacts" type="text" placeholder="Search">
+                    </div>
+                </div>
+            </md-card-title>
+        </div>
+    </md-card>
+
+    <md-card class="users-card">
+        <div class="header-title">
+            <md-card-title class="mt30">
+                <md-card class="users-card">
+                    <table class="users-table">
+                        <thead>
+                            <th>
+                                <div class="head-row" layout="row">
+                                    <md-checkbox class="check md-icon" aria-label="true" ng-model="rdg.allGroupsSelected" ng-click="rdg.toggleAllSelection()"></md-checkbox>
+                                    <div class="select">
+                                        <div class="contacts-name">Group Name<i class="fa fa-sort-desc" aria-hidden="true"></i></div>
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="head-row" layout="row">
+                                    <div class="select">
+                                        <div class="contacts-name">Amount of Users</div>
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="head-row" layout="row">
+                                    <div class="select">
+                                        <div class="contacts-name">Description</div>
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="head-row" layout="row">
+                                    <div class="select">
+                                        <div class="contacts-name">GID</div>
+                                    </div>
+                                </div>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="group in rdg.groups" class="rows">
+                                <td class="users-data">
+                                    <div layout="row" layout-align="start" style="align-items: center;">
+                                        <md-checkbox class="check md-icon" aria-label="..." ng-model="group.selected" ng-change="rdg.toggleGroupSelection()"></md-checkbox>
+                                        <div class="ml10">
+                                            <div class="users-name">{{ group.name }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="users-data">
+                                    <div layout="row" layout-align="start" style="align-items: center;">
+                                        <div class="ml10">
+                                            <div class="users-name">{{ group.usersCount }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="users-data">
+                                    <div layout="row" layout-align="start" style="align-items: center;">
+                                        <div class="ml10">
+                                            <div class="users-name">{{ ( group.description ) ? group.description : 'No description provided' }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="users-data">
+                                    <div layout="row" layout-align="start" style="align-items: center;">
+                                        <div class="ml10">
+                                            <div class="users-name">{{ group.groupId }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-card>
+            </md-card-title>
+        </div>
+    </md-card>
+
+</md-content>

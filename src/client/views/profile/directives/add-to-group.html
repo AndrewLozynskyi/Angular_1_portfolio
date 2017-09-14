@@ -1,0 +1,64 @@
+
+<md-card class="mobile-add-to-group-btn">
+    <md-card-header>
+        <md-card-header-text class="header">
+            <md-title>
+                <p>Add to Group</p>
+                <md-subhead><i class="fa fa-times" aria-hidden="true" ng-click="atg.cancel()"></i></md-subhead>
+            </md-title>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card>
+        <form name="form" validate>
+            <md-input-container>
+                <p>Group:</p>
+                <md-select  ng-model="atg.selectedGroups"
+                            ng-change="atg.change( atg.selectedGroups, {{ atg.selectedGroups }} )"
+                            aria-label="..."
+                            placeholder="Select Group"
+                            multiple>
+
+                    <md-chips class="style-scroll"
+                              ng-show="atg.selectedGroups.length > 0"
+                              ng-model="atg.selectedGroups"
+                              readonly="atg.readonly">
+                    </md-chips>
+
+                    <md-content class="style-scroll">
+                        <md-option class="hover-group" ng-value="group.name" ng-repeat="group in atg.groupsList">
+                            {{ group.name }}
+                        </md-option>
+                    </md-content>
+
+                    <div class="bottom-block" ng-click="activeSlide = !activeSlide; atg.openNewGroupUI();">
+                        <md-button class="new-group" ng-hide="activeSlide">
+                            <span>+ New Group</span>
+                        </md-button>
+                    </div>
+
+                    <div class="activeSlide" ng-show="activeSlide">
+                        <md-select-header>
+                            <input class="div-input" onkeydown="mdSelectOnKeyDownOverride( event )">
+                        </md-select-header>
+                        <div class="btns">
+                            <md-button class="cancel" ng-click="activeSlide = false;">
+                                <span>Cancel</span>
+                            </md-button>
+                            <md-button class="save" ng-click="atg.createGroup()">
+                                <span>Save</span>
+                            </md-button>
+                        </div>
+                    </div>
+
+                </md-select>
+            </md-input-container>
+
+        </form>
+    </md-card>
+
+    <md-card-actions class="btn-container">
+        <md-button class="save-btn" ng-click="atg.save()">Save</md-button>
+        <md-button class="cancel-btn" ng-click="atg.cancel()">Cancel</md-button>
+    </md-card-actions>
+
+</md-card>

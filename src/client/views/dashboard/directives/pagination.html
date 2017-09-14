@@ -1,0 +1,21 @@
+
+<div layout="row" class="pagin" layout-align="{{ clAlign || clAlignModel }}">
+
+    <md-button  class="md-icon-button  md-button first" aria-label="First" ng-click="vm.gotoFirst()"><md-icon md-font-set="md">chevron_left</md-icon></md-button>
+
+    <md-button class="md-icon-button md-button" aria-label="Previous" ng-click="vm.gotoPrev()" ng-show="vm.index - 1 >= 0">&#8230;</md-button>
+
+    <md-button  class="md-icon-button md-button"
+                aria-label="Go to page {{ i }}"
+                ng-repeat="i in vm.stepInfo"
+                ng-click="vm.goto( vm.index + i - 1 )"
+                ng-show="vm.page[ vm.index + i - 1 ] != undefined"
+                ng-class="{ 'md-primary': vm.index + i == clCurrentPage }">
+        {{ vm.page[ vm.index + i - 1 ] }}
+    </md-button>
+
+    <md-button class="md-icon-button md-button" aria-label="Next" ng-click="vm.gotoNext()" ng-show="vm.index + vm.clSteps < clPages">&#8230;</md-button>
+
+    <md-button class="md-icon-button md-button last" aria-label="Last" ng-click="vm.gotoLast()"><md-icon md-font-set="md">chevron_right</md-icon></md-button>
+
+</div>

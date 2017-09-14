@@ -1,0 +1,98 @@
+
+<md-card-title class="mt20 mb20">
+    <md-card-title-text>
+        <div class="roles-header">
+            <div>
+                <span class="page-title">Roles.</span>
+            </div>
+            <span class="created">
+                {{ selected.length }} Roles created from 8 possible for current <span class="plan">Subscription plan.</span>
+            </span>
+        </div>
+    </md-card-title-text>
+    <div layout="row" class="top-button">
+        <md-button hide-xs class="md-raised create" ng-click="refreshRoles()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; Refresh</md-button>
+        <md-button hide-xs ng-disabled="isDisabled" class="md-raised create" ng-click="deleteRole(selected)"><i class="fa fa-user-times" aria-hidden="true"></i>&nbsp; Delete</md-button>
+        <md-button hide-xs class="md-raised create" ng-click="createEditRole( roleId, 'create' )"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Create</md-button>
+    </div>
+    <md-card-title-media></md-card-title-media>
+
+</md-card-title>
+
+<md-card-title class="header-item ml20 mr10 md-whiteframe-3dp">
+    <md-card-title-text>
+        <md-checkbox class="check md-icon"
+                    ng-checked="isChecked()"
+                    ng-click="toggleAll()" aria-label="All roles select checkbox">
+            <span class="check-text">Role ({{ selected.length }}/from {{ rt.dataTable.length }})</span>
+        </md-checkbox>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="md-headline">
+            Based on
+        </span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="md-headline second">Amount of users</span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="md-headline">Description</span>
+    </md-card-title-text>
+    <md-card-title-media hide-xs class="empty-block">
+        <md-menu md-offset="-220 0">
+            <md-button aria-label="Open more menu" class="open-more md-icon-button" ng-click="$mdOpenMenu($event)">
+                <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+            </md-button>
+            <md-menu-content></md-menu-content>
+        </md-menu>
+    </md-card-title-media>
+</md-card-title>
+
+<md-card-title class="item ml20 mr10 md-whiteframe-3dp" ng-repeat="item in rt.dataTable" >
+    <md-card-title-text layout="row">
+        <md-checkbox    class="check md-icon"
+                        ng-checked="exists(item.roleId, selected)"
+                        ng-click="toggle(item.roleId, selected)"
+                        aria-label="Checkbox 1"></md-checkbox>
+        <span ng-click="rt.showDetails(item)" class="check-text-right">{{ item.name }}</span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="show-info">
+            {{ item.basedOn }} role
+        </span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="show-info">{{ item.userCount }} users</span>
+    </md-card-title-text>
+    <md-card-title-text>
+        <span class="show-info">{{ item.description || 'No description provided' }}</span>
+    </md-card-title-text>
+
+    <md-card-title-media hide-xs class="pt5">
+        <md-menu md-offset="-110 0">
+            <md-button aria-label="Open more menu" class="open-more md-icon-button" ng-click="$mdOpenMenu($event)">
+                <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ng-click="rt.showDetails(item)">
+                        <i class="fa fa-binoculars" aria-hidden="true"></i>
+                            &nbsp;  View Details
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="createEditRole( item.roleId, 'edit' )">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            &nbsp;  Edit
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="deleteRole( item.roleId )">
+                        <i class="fa fa-user-times" aria-hidden="true"></i>
+                            &nbsp;  Delete Role
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-card-title-media>
+</md-card-title>

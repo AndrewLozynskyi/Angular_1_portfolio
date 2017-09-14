@@ -1,0 +1,61 @@
+.grade-title {
+    margin-left: 2%;
+    font-size: 14px;
+    color: #bfbfbf;
+}
+.team {
+    background-color: #292c33;
+    .team-table {
+        width: 97%;
+        margin: 0px auto;
+        border-bottom: 1px solid black;
+        margin-right: 20px;
+        thead {
+            background: #23252c;
+            th {
+                padding: 18px 10px;
+                font-size: 15px;
+                font-weight: 500;
+                color: #bfbfbf;
+                position: relative;
+                .head-row {
+                   align-items: center;
+                   .center-pos {
+                        margin: 0 auto;
+                   }
+                }
+            }
+            th:first-child {
+                border-right: 1px solid #1c1c1c;
+            }
+        }
+        tbody {
+            td:first-child {
+                border-right: 1px solid #1c1c1c;
+            }
+            tr {
+                border-bottom: 1px solid #1c1c1c;
+            }
+        }
+        .rows {
+            background-color: #292c33;
+            height: 35px;
+            &:hover {
+                background-color:#35383e;
+                cursor: pointer;
+            }
+            .team-data {
+                padding: 4px 9px;
+                font-size: 13px;
+                position: relative;
+                .center-pos {
+                    margin: 0 auto;
+                }
+                .team-name {
+                    font-size: 14px;
+                    color: $content-font-color;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,59 @@
+treemap-chart {
+    display: block;
+    section {
+        width: 100%;
+        background: inherit;
+    }
+    .wrap-legend {
+        padding-bottom: 5px;
+        .md-button {
+            margin-top: -12px;
+        }
+    }
+    .legend {
+        width: 96px;
+        position: relative;
+        .gradient, .involuntary  {
+            width: 14px;
+            position: absolute;
+            bottom: 0;
+            .title {
+                &-top, &-bottom {
+                    position: absolute;
+                    right: 100%;
+                    font-size: 10px;
+                    line-height: 10px;
+                }
+                &-top {
+                   top: 0;
+                }
+                &-bottom {
+                   bottom: 0;
+                }
+            }
+        }
+        .gradient {
+            background: linear-gradient(to top, #00fffc, #c3ee04, #ff8400);
+            height: 90%;
+            left: 63px;
+            .title-top {
+                right: 150%;
+            }
+        }
+        .involuntary {
+            background: rgba(0, 0, 0, 0.3);
+            height: 40%;
+            left: 56px;
+        }
+    }
+    .tooltip {
+        width: 150px;
+        transform: translate(-50%, -90%);
+        table {
+            margin: 0;
+            tr:last-child {
+                padding-top: 5px;
+            }
+        }
+    }
+}

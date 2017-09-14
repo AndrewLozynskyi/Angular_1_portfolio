@@ -1,0 +1,54 @@
+total-finance-table {
+    margin-top: 30px;
+    overflow: hidden;
+    .total-finance-table {
+        clear: both;
+        display: block;
+        overflow: hidden;
+        .table-header {
+            overflow: hidden;
+            float: left;
+            color: #a5a5a6;
+            font-size: 20px;
+            margin:40px 0;
+        }
+        .table {
+            display: flex;
+            overflow: hidden;
+            padding-bottom:20px;
+            padding-right: 15px;
+            table {
+                width:100%;
+                tr {
+                    height: 45px;
+                    td {
+                        border-bottom:1px #1b1c21 solid;
+                        text-align: center;
+                        color:#a0a0a2;
+                        &:first-child{
+                            font-weight: 600;
+                            border-right:1px #1b1c21 solid;
+                            max-width:40px;
+                            color:#50646d;
+                            text-align:left;
+                            padding: 0 10px;
+                        }
+                    }
+                    &:nth-child(1){
+                        font-weight: 600;
+                        background: #23252b;
+                        height:55px;
+                        td{
+                            &:nth-child(1){
+                                color:#a0a0a2;
+                            }
+                        }
+                    }
+                    &:nth-child(2){
+                        background: #23252b;
+                    }
+                }
+            }
+        }
+    }
+}

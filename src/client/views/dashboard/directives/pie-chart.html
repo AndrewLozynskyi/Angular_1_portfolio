@@ -1,0 +1,22 @@
+
+<section layout="row" fullscreen="isFullscreenPie">
+
+    <div flex class="pie-chart"></div>
+
+    <div flex class="legend pt50" layout="row" layout-align="center start">
+        <md-list flex="50">
+            <md-list-item ng-repeat="item in legend" layout="row" layout-align="center center">
+                <div flex="none" class="circle" ng-style="{background: item.color}"></div>
+                <div flex>{{item.person_type}}</div>
+                <div class="md-secondary">{{item.total}}</div>
+            </md-list-item>
+        </md-list>
+    </div>
+
+    <div class="pt50" ng-hide="true">
+        <md-button aria-label="Fullscreen for the chart" class="md-icon-button" ng-click="isFullscreenPie = !isFullscreenPie">
+            <md-icon md-font-set="md">{{isFullscreenPie ? 'fullscreen_exit': 'fullscreen'}}</md-icon>
+        </md-button>
+    </div>
+
+</section>

@@ -1,0 +1,66 @@
+<div id="dashboard-card">
+    <md-progress-circular ng-if="showBackground" md-diameter="40px"></md-progress-circular>
+</div>
+
+<md-card class="dashboard-card md-whiteframe-3dp ml20 mr10 bg-gray">
+
+    <md-card-title class="mt20 mb15">
+        <md-card-title-text>
+            <span class="md-headline">Finance</span>
+            <span class="md-subhead">For <span md-colors="{color: 'primary-500'}">{{selectedDate | date:'LLLL yyyy'}}</span>, comparing with previous month and against the first of the year.</span>
+        </md-card-title-text>
+        <md-card-title-media class="pt5">
+            <md-menu>
+                <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                    <md-icon class="container-dot">
+                        <img class="dots" src="/img/icons/3dot.png"/>
+                    </md-icon>
+                </md-button>
+            </md-menu>
+        </md-card-title-media>
+    </md-card-title>
+
+    <md-divider class="ml15 mr15"></md-divider>
+
+    <md-card-content class="ml15" layout-align="space-between">
+
+        <div layout="row" class="filters">
+            <md-icon flex="none" md-colors="{color: 'warn-600'}" md-font-set="md" class="rotate45">arrow_upward</md-icon>
+            <span flex="none" layout="row" layout-align="start center">
+                <span class="md-headline">18,254 %</span>
+                <span layout="column">
+                    <sup class="pb5" md-colors="{color: 'warn-600'}">+16 from September</sup>
+                    <sub> 161 in January</sub>
+                </span>
+            </span>
+            <span flex class="ml20">
+                <md-input-container>
+                    <md-select ng-model="fc.country" ng-change="fc.selectCountry(hc.country); fc.department = 'all'"
+                               aria-label="Countries filter">
+                        <md-option value="all">All Countries</md-option>
+                        <md-option ng-repeat="country in fc.countries()" ng-value="country">
+                            {{country}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container>
+                    <md-select ng-model="fc.department" ng-disabled="fc.country === 'all'"
+                               aria-label="Departments filter">
+                        <md-option value="all">All Departments</md-option>
+                        <md-option ng-repeat="department in fc.departments()" ng-value="department">
+                            {{department}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </span>
+        </div>
+
+        <radial-chart class="radial-chart-class"></radial-chart>
+
+        <multilinear-chart title-chart="Revenue for {{ selectedDate | date:'MMMM yyyy' }}" set-date="selectedDate" class="mt50mb25"  ></multilinear-chart>
+
+        <total-finance-table date="selectedDate" data="" ></total-finance-table>
+
+    </md-card-content>
+
+</md-card>

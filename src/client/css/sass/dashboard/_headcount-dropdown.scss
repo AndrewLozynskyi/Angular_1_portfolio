@@ -1,0 +1,46 @@
+
+#select_container_19, #select_container_24 {
+    min-width: 382px;
+    max-width: 382px;
+    .md-text {
+        color:#bfbfbf;
+    }
+    .md-container {
+        .md-icon {
+            border-color: #474d59;
+        }
+    }
+    .style-scroll {
+        background-color: #292c33;
+        overflow-x:hidden;
+    }
+    md-select-menu {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        max-height: 350px;
+        .all-countries, .all-departments {
+            border-bottom:1px solid #4d4d4d;
+        }
+        md-chips {
+            background-color: #292c33;
+        }
+    }
+}
+#_md-chips-wrapper-16, #_md-chips-wrapper-21  {
+    /*border-bottom: 1px solid #2fdcda;*/
+    .md-chip-input-container {
+        display: none;
+    }
+    md-chip {
+        background-color: #292c33;
+        md-icon {
+            color:#474d59;
+            svg {
+                width: 18px;
+                margin-left: 5px;
+            }
+        }
+        span {
+            color: #bfbfbf;
+        }
+    }
+}

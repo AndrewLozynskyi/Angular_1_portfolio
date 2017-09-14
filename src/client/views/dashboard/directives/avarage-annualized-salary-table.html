@@ -1,0 +1,165 @@
+<md-card class="avarage-annualised-country">
+    <div class="header">
+        Avarage Annualized Salary in Analitycs Departments by {{aast.date}}
+    </div>
+    <table class="annualized-salary">
+        <thead>
+        <th>
+            <div class="head-row" layout="row">
+                <div layout="row">
+                    <div class="contacts-name">Department</div>
+                </div>
+            </div>
+        </th>
+        <th>
+            <div class="head-row" layout="row">
+                <div class="center-pos" layout="row">
+                    <div class="contacts-name">Avarage <br>Salary &euro;</div>
+                </div>
+            </div>
+        </th>
+        <th>
+            <div class="head-row" layout="row">
+                <div class="center-pos" layout="row">
+                    <div layout="row" class="contacts-name">Avarage <br> annualised <br> salary % <br> from <br> Jun
+                        2016
+                    </div>
+                </div>
+            </div>
+        </th>
+        <th class="empty-data">
+        </th>
+        <th>
+            <div class="head-row" layout="row">
+                <div class="center-pos" layout="row">
+                    <div class="contacts-name">Total Salary <br>Bill &euro;</div>
+                </div>
+            </div>
+        </th>
+        <th>
+            <div class="head-row" layout="row">
+                <div class="center-pos" layout="row">
+                    <div layout="row" class="contacts-name">Total <br> salary bill % <br> from <br>Jun 2016</div>
+                </div>
+            </div>
+        </th>
+        <th class="empty-data">
+        </th>
+        <th>
+            <div class="head-row" layout="row">
+                <div class="center-pos last-tr" layout="row">
+                    <div layout="row" class="contacts-name">Dynamic on Salaries till current month</div>
+                </div>
+            </div>
+        </th>
+        </thead>
+        <tbody id="elem">
+        <tr>
+            <td>
+                <div class="head-row" layout="row">
+                    <div layout="row">
+                        <div class="contacts-name">TOTAL</div>
+                        <div class="range"></div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div class="avarage-name">{{aast.total.salary.avgSalary | number}}</div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div layout="row" class="avarage-per"
+                             ng-class="{red:aast.total.salary.avgSalaryVsJan, green: aast.total.salary.avgSalaryVsJan <= 0 }">{{aast.total.salary.avgSalaryVsJan}}%
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="empty-data">
+            </td>
+            <td>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div class="avarage-name">{{aast.total.salary.totalSalary | number}}&euro;</div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="head-row" layout="row">
+                    <div class="center-pos" layout="row">
+                        <div layout="row" class="avarage-per"
+                             ng-class="{red:aast.total.salary.totalSalaryVsJan, green: aast.total.salary.totalSalaryVsJan <= 0 }">{{aast.total.salary.totalSalaryVsJan}}%
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="empty-data">
+            </td>
+            <td>
+                <avarage-annulized-salary-chart set-data="aast.totalChart"></avarage-annulized-salary-chart>
+            </td>
+        </tr>
+        <tr ng-repeat="item in aast.avarageData" class="rows">
+            <td class="avarage-data">
+                <div layout="row" layout-align="start" style="align-items: center;">
+                    <div class="head">
+                        <div class="country-name">{{item.country}}</div>
+                    </div>
+                </div>
+            </td>
+            <td class="avarage-data">
+                <div layout="row" layout-align="start" style="align-items: center;">
+                    <div class="center-pos">
+                        <div class="avarage-name">{{ item.salary.avgSalary | number}}</div>
+                    </div>
+                </div>
+            </td>
+            <td class="avarage-data">
+                <div layout="row" layout-align="start" style="align-items: center;">
+                    <div class="center-pos">
+                        <div class="avarage-per" ng-class="{red:item.salary.avgSalaryVsJan, green: item.salary.avgSalaryVsJan <= 0 }">
+                            {{item.salary.avgSalaryVsJan}}%
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="empty-data">
+            </td>
+            <td class="avarage-data">
+                <div layout="row" layout-align="start" style="align-items: center;">
+                    <div class="center-pos">
+                        <div class="avarage-name">
+                            {{item.salary.totalSalary | number}}
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="avarage-data">
+                <div layout="row" layout-align="start" style="align-items: center;">
+                    <div class="center-pos">
+                        <div class="avarage-per" ng-class="{red:item.salary.totalSalaryVsJan, green: item.salary.totalSalaryVsJan <= 0 }">
+                            {{ item.salary.totalSalaryVsJan }}%
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="empty-data">
+            </td>
+            <td class="avarage-data" id="line-width">
+                <div layout="row" layout-align="start" style="align-items: center;width: 100px">
+                    <div class="center-pos">
+                        <div class="avarage-pers">
+                            <avarage-annulized-salary-chart set-data="item.salaryChart"></avarage-annulized-salary-chart>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</md-card>

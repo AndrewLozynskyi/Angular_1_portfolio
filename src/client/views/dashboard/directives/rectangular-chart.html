@@ -1,0 +1,27 @@
+
+<header layout="row" >
+    <div class="title">Attriction in Monaco, Support Department as at {{selectedDate | date:'MMMM yyyy'}}</div>
+    <span flex></span>
+    <div class="full-screen" ng-init=" close = '/img/icons/full-screen-icon.png'; open = '/img/icons/full-screen-exit-icon.png' ">
+        <md-button aria-label="Fullscreen for rectangular" class="md-icon-button dot" ng-click="isFullscreenRectangular = !isFullscreenRectangular">
+            <md-icon class="container-dot">
+                <img class="dots" ng-src="{{isFullscreenRectangular ? open : close}}" fullscreen="isFullscreenRectangular">
+            </md-icon>
+        </md-button>
+    </div>
+</header>
+
+<section layout="row" fullscreen="isFullscreenRectangular">
+
+    <div layout="row" id="rect" class="rect-container">
+        <div class="rectangular-chart" ></div>
+        <!-- <svg ></svg> -->
+        <div class="gradient" layout="row">
+            <div id="transporent-gradient-chart"></div>
+
+            <div id="gradient-chart"></div>
+        </div>
+    </div>
+    
+    
+</section>

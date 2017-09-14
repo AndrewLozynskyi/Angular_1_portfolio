@@ -1,0 +1,133 @@
+
+<div>
+    <md-card id="profile-header-content">
+        <section class="bg-gray pt5">
+            <md-card-header>
+                <div class="head-width" ng-mouseover="options = true" ng-mouseleave="options = false" ng-mouseenter="options=true">
+                    <div class="dot-top">
+                        <md-media hide-xs class="top-media">
+                            <md-menu md-offset="-70 0">
+                                <md-button aria-label="button" class="md-icon-button open-more" ng-click="$mdMenu.open($event)">
+                                    <img src="/img/profile-pics/more_vert.png" alt="">
+                                </md-button>
+                                <md-menu-content width="2">
+                                    <md-menu-item>
+                                        <md-button ng-click="null" aria-label="button">
+                                            <md-icon md-font-set="fa fa-refresh" aria-hidden="true">
+                                                <span class="dot-menu-item">&nbsp; Refresh</span>
+                                            </md-icon>
+                                        </md-button>
+                                    </md-menu-item>
+                                    <!-- <md-menu-item>
+                                        <md-button aria-label="button" ng-click="enableEditMode()">
+                                            <img class="edit-icon" src="/img/profile-pics/edit-icon.png" alt="">
+                                            <span>&nbsp; Edit</span>
+                                        </md-button>
+                                    </md-menu-item> -->
+                                </md-menu-content>
+                            </md-menu>
+                        </md-media>
+                    </div>
+                    <div class="avatar-top" layout="row" layout-xs="column" layout-sm="column">
+
+                        <div class="profile-avatar-border" ng-mouseenter="showCaption = true" ng-mouseleave="showCaption = false">
+                            <ng-letter-avatar dynamic="true" width="160" height="160" fontSize="72" charCount="2" data="{{ avatarSrc.src ? 'http:' + window.location.host + avatarSrc.src : user.firstName[0] + user.lastName[0] }}" shape="round"></ng-letter-avatar>
+                            <div ng-click="profilePhotoPopup($event)" class="profileEditBtn" ng-click="profilePhotoPopup($event)">
+                                <i ng-show="options" class="fa fa-pencil" aria-hidden="true" ></i>
+                            </div>
+                        </div>
+
+                        <md-card-header-text class="card-text">
+                            <span class="profile">
+                                {{ user.firstName }} {{ user.lastName }}
+                            </span>
+                            <span class="position">
+                                {{ user.history[ user.history.length - 1 ].jobTitle }}
+                            </span>
+                            <span hide-xs hide-sm class="md-subhead contacts">
+                                {{ user.contactInfo.country }}.{{ user.contactInfo.city }} | {{ user.history[ user.history.length - 1 ].jobStartDate | date: 'MMMM yyyy' }} - To date ({{ getDuration( user.history[ user.history.length - 1 ].jobStartDate, user.history[ user.history.length - 1 ].jobEndDate ) }})
+                            </span>
+                            <md-card-content class="total-data" layout="row">
+                                <div layout="column">
+                                    <span class="num md-headline">{{ user.stats.contacts }}</span>
+                                    <span class="text md-subhead">contacts</span>
+                                </div>
+                                <div layout="column">
+                                    <span class="num md-headline">{{ user.stats.follow }}</span>
+                                    <span class="text md-subhead">follow</span>
+                                </div>
+                                <div layout="column">
+                                    <span class="num md-headline">{{ user.stats.posts }}</span>
+                                    <span class="text md-subhead">posts</span>
+                                </div>
+                                <div layout="column">
+                                    <span class="num md-headline">{{ user.stats.likes }}</span>
+                                    <span class="text md-subhead">likes</span>
+                                </div>
+                            </md-card-content>
+                        </md-card-header-text>
+                        <md-card-actions>
+
+                            <!-- <md-media hide-xs hide-sm class="top-media">
+                                <md-menu md-offset="-70 0">
+                                    <md-button aria-label="button" class="md-icon-button open-more" ng-click="$mdMenu.open($event)">
+                                        <img src="/img/profile-pics/more_vert.png" alt="">
+                                    </md-button>
+                                    <md-menu-content width="2">
+                                        <md-menu-item>
+                                            <md-button ng-click="null" aria-label="button">
+                                                <md-icon md-font-set="fa fa-refresh" aria-hidden="true">
+                                                    <span class="dot-menu-item">&nbsp; Refresh</span>
+                                                </md-icon>
+                                            </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button aria-label="button" ng-click="enableEditMode()">
+                                                <img class="edit-icon" src="/img/profile-pics/edit-icon.png" alt="">
+                                                <span>&nbsp; Edit</span>
+                                            </md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </md-media> -->
+
+                            <md-card-content class="social-avatar">
+                                <md-list ng-repeat="( key, value ) in user.socialLinks" ng-if="value.enable">
+                                    <md-list-item>
+                                        <a href="{{ user.socialLinks[ key ].link }}">
+                                            <i ng-class="user.socialLinks[ key ].icon"></i>
+                                        </a>
+                                    </md-list-item>
+                                </md-list>
+                            </md-card-content>
+                            <md-card-content ng-if="showFollowButtons" class="right-bar">
+                                <md-button aria-label="button" class="md-raised add-contact" ng-click="addContact()">
+                                    {{ contactButtonTitle }}
+                                </md-button>
+                                <md-button aria-label="button" class="md-raised follow" ng-click="follow()">
+                                    {{ followButtonTitle }}
+                                </md-button>
+                            </md-card-content>
+
+                        </md-card-actions>
+                    </div>
+                    <div>
+                        <md-tabs flex class="up-tabs" >
+                            <md-tab label="About" md-active="$state.current.name === 'profile.about'" ui-sref="profile.about"></md-tab>
+                            <!-- <md-tab label="Wall" md-active="$state.current.name === 'profile.wall'" ui-sref="profile.wall"></md-tab>
+                            <md-tab label="Medias" md-active="$state.current.name === 'profile.medias'" ui-sref="profile.medias"></md-tab> -->
+                            <md-tab label="Contacts" md-active="$state.current.name === 'profile.contacts'" ui-sref="profile.contacts"></md-tab>
+                            <!-- <md-tab label="On/off boarding" md-active="$state.current.name === 'profile.On/off boarding'" ui-sref="profile.On/off boarding"></md-tab> -->
+                            <md-tab label="Teams" md-active="$state.current.name === 'profile.teams'" ui-sref="profile.teams"></md-tab>
+                            <md-tab label="User details" md-active="$state.current.name === 'profile.details'" ui-sref="profile.details"></md-tab>
+                        </md-tabs>
+                    </div>
+                </div>
+            </md-card-header>
+        </section>
+
+    </md-card>
+
+    <ui-view ng-if="user"></ui-view>
+
+</div>

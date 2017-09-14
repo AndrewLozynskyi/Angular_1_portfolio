@@ -1,0 +1,42 @@
+
+<md-card class="filter-list md-whiteframe-3dp ml20 mr10 bg-gray">
+    <md-card-title class="mt20 mb15">
+        <div class="title">Filtering</div>
+        <span flex></span>
+        <md-button ng-click="up.showNewFilterDialogue($event)">
+            <div class="new-filter">
+                <span>+</span>
+                <md-icon md-font-set="fa fa-filter" aria-hidden="true"></md-icon>
+                <span>New Filter</span>
+            </div>
+        </md-button>
+        <md-button ng-click="active = !active"  aria-label="Open more menu" class="toggle-arrow">
+            <md-icon ng-show="!active" md-font-set="md">keyboard_arrow_down</md-icon>
+            <md-icon ng-show="active" md-font-set="md">keyboard_arrow_up</md-icon>
+        </md-button>
+    </md-card-title>
+    <md-card-content class="ml15" layout-align="space-between" ng-hide="!active">
+        <md-radio-group>
+            <div class="radio-wrapper" ng-repeat="filter in up.filtersList">
+                <md-radio-button value="{{ filter.filterId }}" aria-label="..." class="md-primary"></md-radio-button>
+                <div class="filter-wrapper md-whiteframe-3dp">
+                    <div class="filter-menu">
+                        <span class="filter-name">{{ filter.title }}</span>
+                        <span flex></span>
+                        <md-button class="show-formula" ng-class="{toggled: toggle}" ng-click="toggleFormula()"><span class="filter-fx">f(x)</span> Show Formula</md-button>
+                        <md-button class="edit-builder" ng-click="up.showFilterDialogue($event)">
+                            <md-icon md-font-set="fa fa-pencil-square-o" aria-hidden="true"></md-icon>Edit in Builder
+                        </md-button>
+                        <md-button class="filter-delete md-icon-button" ng-click="up.removeFilter( filter.filterId )">
+                            <md-icon aria-label="Close dialog">close</md-icon>
+                        </md-button>
+                    </div>
+                    <div class="formula-wrapper" ng-show="toggle">
+                        <span class="formula-name">Filter's Formula</span>
+                        <div class="formula">if (Category <span class="formula-word">equal</span> ram) AND ((Category  <span class="formula-word">equal</span> 'ram') OR (if (Category  <span class="formula-word">equal</span> ram) AND (Category  <span class="formula-word">equal</span> ram))AND AND ((Category  <span class="formula-word">equal</span> 'ram')</div>
+                    </div>
+                </div>
+            </div>
+        </md-radio-group>
+    </md-card-content>
+</md-card>

@@ -1,0 +1,27 @@
+
+<md-input-container id="dep-dropdown">
+
+    <md-select  ng-model="activeParams.departments"
+                ng-change="dc.change( activeParams.departments, {{ activeParams.departments }} );"
+                aria-label="Departments filter"
+                multiple
+                placeholder="Select Department">
+
+        <md-chips class="style-scroll"
+                  ng-show="dc.one"
+                  ng-model="activeParams.departments"
+                  readonly="dc.readonly"
+                  ng-change="dc.change( activeParams.departments, {{ activeParams.departments }} );"
+                  ng-click="dc.getSelectedChipIndex( activeParams.departments ); dc.change( activeParams.departments, activeParams.departments )">
+        </md-chips>
+
+        <md-content class="style-scroll">
+            <md-option class="all-departments" value="all">All Departments</md-option>
+            <md-option ng-repeat="department in departmentList track by $index" ng-value="department">
+                {{ department }}
+            </md-option>
+        </md-content>
+
+    </md-select>
+
+</md-input-container>

@@ -1,0 +1,164 @@
+
+dynamic-salary-table{
+    margin-top:20px;
+    display:block;
+    width:100%;
+    .dynamic-salary{
+        font-family: Roboto;
+        margin:0px;
+        display:block;
+        .slary-table{
+            width: 97%;
+            margin: 0px auto;
+            margin-right: 20px;
+            thead{
+                display:block;
+                width:100%;
+                tr{
+                    display:block;
+                    width:100%;
+                    th{
+                        background: #23252b;
+                        color:#a9a8a8;
+                        padding: 4px 9px;
+                        min-height:80px;
+                        float:left;
+                        width:17%;
+                        display:flex;
+                        border-bottom: 1px solid #1f2125;
+                        font-weight:400;
+                        &:nth-child(1){
+                            border-right:1px solid #1f2125;
+                            width:25%;
+                            .head-row{
+                                width:100%;
+                            }
+                        }
+                        &:nth-last-child(1){
+                            border-right:none;
+                            width:40%
+                        }
+                        .head-row{
+                            float:left;
+                            display: flex;
+                            margin: auto;
+                            .buttons{
+                                display:block;
+                                button{
+                                    background: transparent;
+                                    border:none;
+                                    clear:both;
+                                    font-size:14px;
+                                    font-weight:500;
+                                }
+                                .experience-button{
+                                    color:#414651;
+                                    font-size:12px;
+                                    font-weight:300;
+                                }
+                            }
+                        }
+                        .dynamic-row{
+                            margin:auto 0;
+                        }
+                    }
+                }
+            }
+            tbody{
+                display:block;
+                width:100%;
+                clear:both;
+                tr{
+                    display:block;
+                    width:100%;
+                    th{
+                        color:#a9a8a8;
+                        padding: 4px 9px;
+                        min-height:70px;
+                        float:left;
+                        width:17%;
+                        display:flex;
+                        border-bottom: 1px solid #1f2125;
+                        font-weight:200;
+                        &:nth-child(1){
+                            border-right:1px solid #1f2125;
+                            width:25%;
+                            .head-row{
+                                width:100%;
+                            }
+                        }
+                        &:nth-last-child(1){
+                            border-right:none;
+                            width:40%;
+
+                        }
+                        .head-row{
+                            float:left;
+                            display: flex;
+                            margin: auto;
+                            font-size:14px;
+                            .chart-salary{
+                                .red{
+                                    color:#b81e1c;
+                                }
+                                .green{
+                                    color:#00C900;
+                                }
+                            }
+                            .user-info{
+                                .user-pic{
+                                    height: 45px;
+                                    width: 45px;
+                                    background: green;
+                                    overflow: hidden;
+                                    border-radius: 50%;
+                                    display:flex;
+                                    float: left;
+                                    img{
+                                        display:flex;
+                                        margin:auto;
+                                    }
+                                }
+                                @media screen and (max-width: 751px) {
+                                    .user-pic {
+                                        display:none;
+                                    }
+                                }
+                                .user-name-block{
+                                    margin:0 5px;
+                                    display:block;
+                                    overflow:hidden;
+                                    font-size:14px;
+                                    float:left;
+                                    .data{
+                                        .text{
+                                            display: block;
+                                            float: left;
+                                            clear: both;
+                                            font-weight: 400;
+                                            font-family: Roboto;
+                                        }
+                                        .visited{
+                                            font-weight:400;
+                                            font-size:10px;
+                                            color:#414651
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .chart-row{
+                            margin:auto 0;
+                        }
+                    }
+                }
+            }
+            thead{
+                display:flex;
+                width:100%;
+                clear:both;
+
+            }
+        }
+    }
+}

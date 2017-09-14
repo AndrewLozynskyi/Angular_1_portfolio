@@ -1,0 +1,350 @@
+.user-l {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #17a9a8;
+    min-width: 100%;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    .login-container {
+        opacity: 0;
+        transition: opacity 500ms ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 80;
+        overflow: hidden;
+        background-color:  #17a9a8;
+        @media (max-width: 750px) {
+            overflow-y: scroll;
+        }
+        .login-user {
+            box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.5);
+            width: 480px;
+            height: auto;
+            min-width: 310px;
+            background: #292c33;
+            .first-block {
+                width: 100%;
+                position: relative;
+                background-color: #262930;
+                padding: 0px 98px;
+                max-height: 117px;
+                padding-top: 40px;
+                padding-bottom: 2px;
+                overflow: hidden;
+                md-card-avatar {
+                    margin: 0 auto;
+                    position: static;
+                    .first-logo {
+                        position: absolute;
+                        margin: auto;
+                        right: 0;
+                        left: 0;
+                        top: 40px;
+                        text-align: center;
+                        transition: all linear 0.8s;
+                        width: 250px;
+                        &.ng-animate.ng-hide  {
+                            position: absolute;
+                            margin: auto;
+                            right: 0;
+                            left: 0;
+                            top: 20px;
+                            text-align: center;
+                            transition: all linear 1s;
+                            width: 144px;
+                        }
+                        img {
+                            width: 100%;
+                            transition: all linear 0.5s;
+                        }
+                    }
+                    .second-logo {
+                        position: absolute;
+                        top: 20px;
+                        transition: all linear 0.6s;
+                        height: 30px;
+                        left: 0;
+                        right: 0;
+                        opacity: 1;
+                        margin: auto;
+                        text-align: center;
+                        width: 144px;
+                        &.ng-animate {
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+            .second-block {
+                position: relative;
+                width: 100%;
+                background: rgb(41, 44, 51);
+                height: 100%;
+                padding: 0px 98px;
+                @media (max-width: 500px) {
+                    padding: 0;
+                    width: 285px;
+                    margin: 0 auto;
+                }
+                .show-avatar {
+                    position:absolute;
+                    top: -62px;
+                    transition: all linear 0.4s;
+                    width: 101px;
+                    height: 101px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    &.ng-animate {
+                        top: 50px;
+                    }
+                    img {
+                        width: 101px;
+                        border-radius: 50px;
+                    }
+                }
+                md-input-container {
+                    border-bottom: 1px solid #16181c;
+                    padding: 0;
+                    width: 100%;
+                    height: 45px;
+                    position: relative;
+                    margin: 6.5px 0;
+                    &:hover {
+                        background-color:#3f4249;
+                    }
+                    md-input-focused {
+                        color:transparent;
+                    }
+                    input {
+                        width: 100%;
+                        padding-right: 35px;
+                        padding-left: 11px;
+                        position: absolute;
+                        height: 48px;
+                        top: -3px;
+                        padding-top: 23px;
+                        font-family: Helvetica;
+                        color:  white;
+                        background: #292c33;
+                        border-color:  #292c33;
+                        border-bottom: 1px solid #16181c;
+                         &:hover {
+                            background-color:#3f4249;
+                        }
+                        &.user-password {
+                            font: 14px Verdana, sans-serif;
+                            font-size-adjust: 0.58;
+                        }
+                        &:-webkit-autofill,
+                        &:-webkit-autofill:hover,
+                        &:-webkit-autofill:focus,
+                        &:-webkit-autofill:active {
+                            -webkit-transition-delay: 9999s;
+                            -webkit-transition: color #292c33 ease-out, background-color #292c33 ease-out;
+                        }
+                    }
+                    label {
+                        padding-left: 11px;
+                        font-family: Roboto;
+                        color: #2fdcda;
+                        font-size: 14px;
+                        font-weight: 400;
+                        position: relative;
+                        height: 20px;
+                        bottom: 5px;
+                        &:after {
+                            color:transparent;
+                        }
+                    }
+                }
+                .ng-invalid.ng-dirty {
+                    border-color: red;
+                }
+                .login-btn {
+                    margin: 0;
+                    .login {
+                        border-radius: 4px;
+                        background-color:  #17a9a8;
+                        width: 100%;
+                        height: 40px;
+                        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+                        padding: 0;
+                    }
+                }
+                md-checkbox {
+                    margin-left: 11px;
+                    margin-right: 0;
+                    margin-bottom: 0;
+                    .md-icon {
+                        border-width: 1px;
+                        border-color: rgb(86, 88, 93);
+                        border-width: 1px;
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 0;
+                    }
+                    .md-ink-ripple {
+                        color: white;
+                        display: inline;
+                        width: 16px;
+                        height: 16px;
+                    }
+                    &.md-default-theme.md-checked .md-icon {
+                        background-color:  #17a9a8;
+                        border: transparent;
+                        &:after {
+                            border-color: white;
+                            left: 7px;
+                            top: 2px;
+                        }
+                        .md-ink-ripple {
+                            color: white;
+                        }
+                    }
+                    &.md-checked .md-icon {
+                        background-color:  #17a9a8;
+                        border: transparent;
+                        &:after {
+                            border-color: white;
+                            top: 0px;
+                            left: 5px;
+                        }
+                    }
+                }
+                md-checkbox.md-checked.md-focused .md-container:before {
+                    background-color: transparent;
+                }
+                .label-txt {
+                    margin: 0;
+                    font-family: Roboto;
+                    color: rgba(255, 255, 255, 0.3);
+                    font-size: 12px;
+                    font-weight: 400;
+                    display: flex;
+                    align-items: flex-end;
+                    vertical-align: bottom;
+                    line-height: 13px;
+                    cursor: default;
+                }
+                a {
+                    position: relative;
+                    display: inline-flex;
+                    align-items: flex-end;
+                    .forgot-password {
+                        margin: 0;
+                        font-family: Roboto;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: rgb(42, 84, 88);
+                        text-decoration: underline;
+                        float: right;
+                        padding-right: 13px;
+                        line-height: 13px;
+                    }
+                }
+            }
+            .container {
+                position: relative;
+                z-index: 5;
+                background: #292c33;
+                width: initial;
+                padding: 0;
+                .information {
+                    width: 100%;
+                    .errors {
+                    font-size: 11px;
+                    color: red;
+                    position: relative;
+                    top: 13px;
+                        .error-min {
+                            color: red;
+                        }
+                    }
+                    .image-container {
+                        position: absolute;
+                        right: 5px;
+                        left: initial;
+                        height: 100%;
+                        top: 0;
+                        .avatar {
+                            position: relative;
+                            color: #bfbfbf;
+                            display: block;
+                            margin: auto;
+                            top: 50%;
+                            right: 0;
+                            transform: translateX(-8%) translateY(34%);
+                            cursor: default;
+                        }
+                    }
+                }
+                .social {
+                    display: none;
+                    .social-block {
+                        position: relative;
+                        width: 100%;
+                        margin-bottom: 28px;
+                        margin-top: 3px;
+                        .line {
+                           position: relative;
+                            width: 100%;
+                            height: 1px;
+                            background-color: #16181c;
+                            &:before {
+                                position: relative;
+                                width: 100%;
+                                background-color: #16181c;
+                                height: 5px;
+                            }
+                        }
+                        .txt {
+                            position: absolute;
+                            top: -9px;
+                            z-index: 10;
+                            width: 30px;
+                            background: #292c33;
+                            right: 0;
+                            left: 0;
+                            margin: auto;
+                            text-align: center;
+                            color: rgb(151, 152, 153);
+                        }
+                    }
+                    .footer-btn {
+                        position: relative;
+                        width: 100%;
+                        overflow: hidden;
+                        margin-bottom: 25px;
+                        .block {
+                            margin-bottom: 5px;
+                            .btn {
+                                background-color: #4a505c;
+                                height: 42px;
+                                color: #bebebe;
+                                margin: 0 8px;
+                                min-width: 80px;
+                                border-radius: 4px;
+                                box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+                                border-top: 0.1px solid gray;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        md-card-actions {
+            margin: 0;
+            display: flex;
+        }
+    }
+}

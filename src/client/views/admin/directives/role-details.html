@@ -1,0 +1,41 @@
+
+<md-card-title class="mt20 mb20">
+    <md-card-title-text>
+        <div class="roles-header">
+            <div>
+                <md-button class="back-btn md-icon-button md-button md-ink-ripple" ng-click="pc.back()">
+                    <md-icon flex="none" md-font-set="md">arrow_back</md-icon>
+                </md-button>
+                <span class="page-title">Roles.</span>
+                <span class="page-title" >{{ ' ' + role.name }}</span>
+                <span class="edited" ng-hide="editMode">To make changes enable edit mode.</span>
+                <span class="edited" ng-show="editMode">You are in edit mode.</span>
+            </div>
+        </div>
+    </md-card-title-text>
+    <div layout="row" class="top-button" ng-hide="editMode">
+        <md-button hide-xs class="md-raised create" ng-click="enableEditMode()">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+            &nbsp; Edit
+        </md-button>
+    </div>
+    <md-card-title-media></md-card-title-media>
+
+</md-card-title>
+
+<div class="md-whiteframe-3dp ml20 mr10 bg-gray permissions-det">
+    <md-tabs flex md-dynamic-height="">
+        <md-tab label="PERMISSIONS">
+            <role-details-permissions role-data="role"></role-details-permissions>
+        </md-tab>
+        <md-tab label="USERS">
+            <role-details-users role-data="role"></role-details-users>
+        </md-tab>
+        <md-tab label="GROUPS">
+            <role-details-groups role-data="role"></role-details-groups>
+        </md-tab>
+        <md-tab label="SCOPE">
+            <role-details-scope role-data="role"></role-details-scope>
+        </md-tab>
+    </md-tabs>
+</div>

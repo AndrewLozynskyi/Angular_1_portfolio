@@ -1,0 +1,62 @@
+app-footer {
+    display: table-row;
+    vertical-align: bottom;
+    height: 1px;
+}
+.footer {
+    background-color: #17181d;
+    color: #2a2a2b;
+    padding: 5px 20px;
+    font-size: 12px;
+    width: 100%;
+    overflow: hidden;
+    @media (max-width: 525px) {
+        text-align: center;
+        padding: 15px 0;
+        display: flex;
+    }
+    .footer-container {
+        @media (max-width: 525px) {
+            margin: 0 auto;
+        }
+        .help-btn {
+            padding: 13px 0px;
+            border: 1px solid #6b6c6e;
+            color: #6b6c6e;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: roboto;
+            width: 200px;
+            height: 45px;
+            line-height: 10px;
+            @media (max-width: 525px) {
+                max-width: 134px;
+                float: left;
+                margin: 0;
+                width: inherit;
+                padding: 13px 7px;
+            }
+            i {
+                margin-left: 10px;
+                font-size: 15px;
+            }
+        }
+        .copy {
+            position: relative;
+            float: right;
+            padding: 11px 0;
+            margin: 0;
+            width: 257px;
+            color: rgb(62, 63, 66);
+            @media (max-width: 525px) {
+                float: right;
+                text-align: left;
+                padding: 0;
+                vertical-align: middle;
+                width: 185px;
+                font-size: 11px;
+                margin-left: 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,63 @@
+team-line-chart {
+    display: block;
+    width: 100%;
+    background: inherit;
+    min-height: 25px;
+    section {
+        width: 100%;
+        background: inherit;
+    }
+    .axis {
+        path, line {
+            fill: none;
+            stroke: #4b5764;
+        }
+        text {
+            fill: #72929c;
+        }
+        &.y text {
+            fill: #bfbfbf;
+        }
+    }
+    .line {
+        fill: none;
+        stroke: gray;
+        stroke-width: 1px;
+    }
+    .tick {
+        text {
+            font-size: 12px;
+        }
+        line {
+            opacity: 0.2;
+        }
+    }
+    .circle {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        box-shadow: 1px 1px 1px #000;
+        margin-left: 20px;
+        margin-right: 5px;
+    }
+    .legend {
+        text-transform: capitalize;
+    }
+    .legend {
+            float: right;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-right: 20px;
+            text-transform: capitalize;
+            font: 300 12px roboto;
+            color: $content-font-color;
+            @media (max-width: 740px) { 
+                float: left;
+                margin-right: 0;
+            }
+        }
+    .tooltip {
+        transform: translateY(-90%);
+    }
+}

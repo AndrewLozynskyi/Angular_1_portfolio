@@ -1,0 +1,25 @@
+
+<section layout="row" fullscreen="isFullscreenTree">
+    <div class="treemap-chart ml10" flex></div>
+    <div class="wrap-legend" layout="column" layout-align="start end">
+        <md-button aria-label="Fullscreen for the chart" class="md-icon-button"
+               ng-click="isFullscreenTree = !isFullscreenTree;">
+            <md-icon md-font-set="md">{{isFullscreenTree ? 'fullscreen_exit': 'fullscreen'}}</md-icon>
+        </md-button>
+        <div flex class="legend">
+            <div class="gradient">
+                <div class="title-top">
+                    170%
+                </div>
+            </div>
+            <div class="involuntary">
+                <div class="title-top">
+                    Involontary
+                </div>
+                <div class="title-bottom">
+                    0%
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

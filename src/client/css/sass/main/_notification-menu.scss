@@ -1,0 +1,251 @@
+/* Notification popup content */
+
+.menu-notifications-popup {
+    z-index: 1;
+    width: 335px;
+    max-height: 90vh;
+    position: absolute;
+    margin-top: 52px;
+    margin-left: -344px;
+    color: #fff;
+    opacity: 1;
+    font-size: 12px;
+    padding: 5px;
+    overflow-y: inherit;
+    border-width: 1px;
+    font-family: roboto !important;
+    background: transparent!important;
+    position: fixed;
+    top: 8px;
+    bottom: 0px;
+    width: 339px;
+    right: 17px;
+    @media all and (max-width: 600px) {
+        display: none;
+    }
+    md-tabs {
+        position: fixed;
+        top: 60px;
+        bottom: 0px;
+        width: 339px;
+        right: 17px;
+        md-tabs-wrapper {
+            md-tabs-canvas {
+                md-pagination-wrapper {
+                    background-color: #20232a;
+                    md-tab-item {
+                        max-width: 370px!important;
+                    }
+                }
+            }
+        }
+        md-tabs-content-wrapper {
+            md-tab-content {
+                div {
+                    md-content {
+                        background-color: #292c33;
+                        padding-right: 0px;
+                        padding-bottom: 0px;
+                        padding-left: 0px;
+                        .show_all_notification {
+                            position: relative;
+                            margin-top: 10px;
+                            border-top: 1px solid #87878a;
+                            p {
+                                width: 16%;
+                                margin-left: auto;
+                                margin-right: auto;
+                                bottom: 5px;
+                                margin-bottom: 7px;
+                                font-family: roboto;
+                                font-size: 12px;
+                                color: #969698;
+                            }
+                        }
+                        .table_notifications {
+                            position: relative;
+                            width: 100%;
+                            margin-top: 12px;
+                            tbody {
+                                tr {
+                                    .td_notifications {
+                                        padding: 11px 0px 11px 16px;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        div {
+                                            .status-icon {
+                                                margin-left: -12px;
+                                                margin-top: -31px;
+                                                border: 2px solid #20232a;
+                                                border-radius: 50%;
+                                                width: 16px;
+                                                height: 16px;
+                                                background-color: #cdec10;
+                                            }
+                                            div {
+                                                .contacts-name {
+                                                    color: #c4ccd4;
+                                                    font-family: roboto;
+                                                    font-size: 18px;
+                                                }
+                                                .shadow-title {
+                                                    color: #6e6e77;
+                                                    font-family: roboto;
+                                                    font-size: 12px;
+                                                    max-width: 170px;
+                                                    word-break: break-all;
+                                                }
+                                            }
+                                        }
+                                        .last_time_visite {
+                                            color: #6e6e77;
+                                            font-family: roboto;
+                                            font-size: 12px;
+                                            position: relative;
+                                            float: right;
+                                            right: 10px;
+                                            top: 6px;
+                                            color: #969698;
+                                        }
+                                        .time_visite_icon {
+                                            position: relative;
+                                            float: right;
+                                            left: 40px;
+                                            top: 25px;
+                                        }
+                                    }
+                                }
+                                tr:hover {
+                                    background-color: #1d1f25;
+                                }
+                            }
+                        }
+                        .alerts_recent_today {
+                            border-top: 1px solid #87878a;
+                        }
+                        p {
+                            font-family: roboto;
+                            font-size: 13px;
+                            color: #696465;
+                            margin-left: 15px;
+                            margin-bottom: 19px;
+                            position: relative;
+                            padding: 19px 0px 0px 0px;
+                        }
+                        .table_alerts_today {
+                            position: relative;
+                            width: 100%;
+                            p {
+                                font-family: roboto;
+                                font-size: 16px;
+                                color:#8b8587;
+                            }
+                            tbody {
+                                tr {
+                                    padding: 6px 0px 0px 16px;
+                                    &:first-child {
+                                        .shadow-title {
+                                            color: aquamarine;
+                                        }
+                                    }
+                                    &:nth-child(2) {
+                                        .shadow-title {
+                                            color: #00f3ff;
+                                        }
+                                    }
+                                    &:last-child {
+                                        .shadow-title {
+                                            color: #d42e45;
+                                        }
+                                    }
+                                    .td_notifications {
+                                        padding: 8px 0px 10px 16px;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        div {
+                                            i {
+                                                position: relative;
+                                                top: 0px;
+                                                color: aqua;
+                                            }
+                                            .status-icon {
+                                                margin-left: -12px;
+                                                margin-top: -31px;
+                                                border: 2px solid #20232a;
+                                                border-radius: 50%;
+                                                width: 16px;
+                                                height: 16px;
+                                                background-color: #cdec10;
+                                            }
+                                            div {
+                                                .contacts-name {
+                                                    color: #c4ccd4;
+                                                    font-family: roboto;
+                                                    font-size: 18px;
+                                                }
+                                                .shadow-title {
+                                                    font-family: roboto;
+                                                    font-size: 12px;
+                                                    max-width: 280px;
+                                                    word-break: break-all;
+                                                }
+                                            }
+                                        }
+                                        .time-block {
+                                            position: relative;
+                                            height: 42px;
+                                            width: 65px;
+                                            .last_time_visite {
+                                                position: absolute;
+                                                float: right;
+                                                right: 8px;
+                                                width: 60px;
+                                                color: #969698;
+                                            }
+                                            md-menu {
+                                                display: none;
+                                                button {
+                                                    top: 13px;
+                                                    img {
+                                                        border-radius: 0px;
+                                                        width: 3px;
+                                                        height: 15px;
+                                                        bottom: 0px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                tr:hover {
+                                    background: #1d1f25;
+                                    padding: 6px 0px 0px 16px;
+                                    .time-block {
+                                        position: relative;
+                                        md-menu {
+                                            display: block;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.menu-notifications-popup:after {
+    content: '';
+    width: 0;
+    height: 10px;
+    border: 5px solid rgba(148, 115, 115, 0);
+    border-right-color: #20232a;
+    border-bottom-color: #20232a;
+    display: block;
+    position: absolute;
+    left: 60.3%;
+    transform: rotate(225.5deg);
+    top: -4px;
+}

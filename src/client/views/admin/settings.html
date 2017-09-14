@@ -1,0 +1,408 @@
+<md-card class="admin-settings">
+
+    <md-card-title class="mt30">
+        <md-card-title-text class="title-text">Settings</md-card-title-text>
+    </md-card-title>
+
+    <md-content>
+
+        <md-list class="left-menu">
+            <md-list-item class="first-block" ng-click="goToElement('first-block')">
+                <div class="md-list-item-text">
+                    <md-icon md-font-set="fa fa-cloud icon-small"></md-icon>
+                    <span class="txt">GLOBAL SETTINGS</span>
+                </div>
+            </md-list-item>
+            <md-list-item class="second-block" ng-click="goToElement('second-block')">
+                <div class="md-list-item-text">
+                    <md-icon md-font-set="fa fa-shield icon-small"></md-icon>
+                    <span class="txt">SECURITY</span>
+                </div>
+            </md-list-item>
+            <md-list-item class="third-block" ng-click="goToElement('third-block')">
+                <div class="md-list-item-text">
+                    <md-icon md-font-set="fa fa-book icon-small"></md-icon>
+                    <span class="txt">USER MANAGEMENT</span>
+                </div>
+            </md-list-item>
+            <md-list-item class="four-block" ng-click="goToElement('four-block')">
+                <div class="md-list-item-text">
+                    <md-icon md-font-set="fa fa-exclamation-triangle icon-small"></md-icon>
+                    <span class="txt">ALERTS & NOTIFICATIONS</span>
+                </div>
+            </md-list-item>
+            <md-list-item class="five-block"  ng-click="goToElement('five-block')">
+                <div class="md-list-item-text">
+                    <md-icon md-font-set="fa fa-cc-mastercard icon-small"></md-icon>
+                    <span class="txt">PAYMENT LOGS</span>
+                </div>
+            </md-list-item>
+
+        </md-list>
+
+        <md-card class="right-menu">
+            <md-card-title layout="column" class="global-settings block md-whiteframe-3dp" id="first-block">
+                <md-card-title-text class="header">
+                  <span class="title mb25 mt25">Global Settings</span>
+                </md-card-title-text>
+                <md-card-title-text class="about" layout="row">
+                  <span class="group-title" layout="column">SMTP server</span>
+                  <span class="group-description" layout="column">Mail server to investigate subscription cost etc...</span>
+                </md-card-title-text>
+                <md-card-title-text class="input-block" layout="row">
+                    <div class="first-input-block">
+                        <span class="group-title">Address</span>
+                        <md-input-container md-no-float>
+                            <input type="text" ng-model="sa.settings.global.smtpServer.address" placeholder="address.. ">
+                        </md-input-container>
+                    </div>
+                    <div class="second-input-block" layout="row">
+                        <span layout="column" class="group-description">Port</span>
+                        <md-input-container md-no-float>
+                            <input type="text" ng-model="sa.settings.global.smtpServer.port"/>
+                        </md-input-container>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about mb35 mt50" layout="column">
+                    <div class="info-block">
+                        <span class="group-title">API enable</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.global.apiEnabled}" ng-model="sa.settings.global.apiEnabled" aria-label="Switch 1" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-card-title layout="column" class="security block md-whiteframe-3dp" id="second-block">
+                <md-card-title-text class="header">
+                  <span class="title mb25 mt25">Security Settings</span>
+                </md-card-title-text>
+                <md-card-title-text class="about" layout="row">
+                    <div class="security-notification">
+                        <span class="group-title" layout="column">Receive notification for new starters</span>
+                        <span class="group-description" layout="column">Specific roles (by unique id) as same user can have many roles</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.security.getNotificationsForStarters.enabled}"  ng-model="sa.settings.security.getNotificationsForStarters.enabled" aria-label="Switch 2" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="input-container mb20">
+                    <md-input-container>
+                        <md-select  ng-model="sa.selectedRolesStarters"
+                                    ng-change="sa.change( sa.selectedRolesStarters, {{ sa.selectedRolesStarters }} )"
+                                    aria-label="..."
+                                    placeholder="Role"
+                                    multiple
+                                    md-container-class="myclass">
+                            <md-chips class="style-scroll"
+                                      ng-show="sa.selectedRolesStarters.length > 0"
+                                      ng-model="sa.selectedRolesStarters"
+                                      readonly="sa.readonly">
+                            </md-chips>
+                            <md-content class="style-scroll">
+                                <md-option ng-repeat="role in sa.settings.security.getNotificationsForStarters.roles" ng-value="role" class="hover-group">
+                                    {{ role }}
+                                </md-option>
+                            </md-content>
+                        </md-select>
+                    </md-input-container>
+                </md-card-title-text>
+                <md-card-title-text class="about mb30 " layout="column">
+                    <div class="info-block">
+                        <div class="security-notification">
+                            <span class="group-title">Public key (pgp) - to be entered</span>
+                            <span class="group-description" layout="column">Specific roles (by unique id) as same user can have many roles</span>
+                        </div>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.security.requestPGP.enabled}"  ng-model="sa.settings.security.requestPGP.enabled" aria-label="Switch 2" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="input-container mb20">
+                    <md-input-container>
+                        <md-select  ng-model="sa.selectedRoles"
+                                    ng-change="sa.change( sa.selectedRoles, {{ sa.selectedRoles }} )"
+                                    aria-label="..."
+                                    placeholder="Role"
+                                    multiple>
+                            <md-chips class="style-scroll"
+                                      ng-show="sa.selectedRoles.length > 0"
+                                      ng-model="sa.selectedRoles"
+                                      readonly="sa.readonly">
+                            </md-chips>
+                            <md-content class="style-scroll">
+                                <md-option ng-repeat="role in sa.settings.security.requestPGP.roles" ng-value="role" class="hover-group">
+                                    {{ role }}
+                                </md-option>
+                            </md-content>
+                        </md-select>
+                    </md-input-container>
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-card-title layout="column" class="user-management block md-whiteframe-3dp" id="third-block">
+                <md-card-title-text class="header">
+                    <span class="title mb25 mt25">User Management</span>
+                </md-card-title-text>
+                <md-card-title-text class="about mb30 " layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Username</span>
+                        <span class="group-description" layout="column">Select Username field for authentication</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.userManagement.loginWithUsername}"  ng-model="sa.settings.userManagement.loginWithUsername" aria-label="Switch 3" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about mb30 " layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Work email address</span>
+                        <span class="group-description" layout="column">Select Work email address field for authentication</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.userManagement.loginWithWorkEmail}"  ng-model="sa.settings.userManagement.loginWithWorkEmail" aria-label="Switch 3" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about mb30 " layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Show avatar on log in screen</span>
+                        <span class="group-description" layout="column">Specific roles (by unique id) as same user can have many roles.</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.userManagement.showAvatarOnLogIn}"  ng-model="sa.settings.userManagement.showAvatarOnLogIn" aria-label="Switch 3" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about mb30 " layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Activate social Media login</span>
+                        <span class="group-description" layout="column">This will allow your employees to login from home or another devise using their facebook, linkedin or google+ account.</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled:sa.settings.userManagement.activateSocialLogin }"  ng-model="sa.settings.userManagement.activateSocialLogin" aria-label="Switch 4" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="radio-block mb30 " layout="column">
+                    <div class="info-block">
+                        <md-radio-group ng-model="select" layout="row">
+                            <md-radio-button layout="row" class="md-primary" ng-value="3" aria-label="3">SSO (AD FS)</md-radio-button>
+                            <md-radio-button layout="row" class="md-primary" ng-value="4" aria-label="4">AD inerface file patch</md-radio-button>
+                        </md-radio-group>
+                        <div class="browse-btn">
+                            <md-button class="btn" layout="row">Browse</md-button>
+                        </div>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about mb30 " layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Create password (Non SSO)</span>
+                        <span class="group-description" layout="column">if toggle is on then forgot password link on login screen is shown.</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.userManagement.forgotPassword}"  ng-model="sa.settings.userManagement.forgotPassword" aria-label="Switch 5" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about mb30 " layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Allow access for employees who leave the conpany</span>
+                        <span class="group-description" layout="column">During the negociation process for example.</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.userManagement.emploeesLeftAccess}"  ng-model="sa.settings.userManagement.emploeesLeftAccess" aria-label="Switch 6" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about mb30 " layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Status flags for Leavers</span>
+                        <span class="group-description" layout="column">For people on special leave it is considered as confidential data which company and the employee don't want others to know.</span>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="input-container mb20" layout="column">
+                    <div layout="row" class="select mt10 mb10">
+                        <p class="select-label">Voluntary leave</p>
+                        <md-input-container>
+                            <img class="offline-img ng-scope" src="/img/icons/offline-icon.png">
+                            <md-select  ng-model="selected"
+                                        aria-label="..."
+                                        placeholder="Unknown">
+                                <md-content class="style-scroll">
+                                    <md-option class="hover-group">unknown</md-option>
+                                    <md-option class="hover-group">unknown</md-option>
+                                    <md-option class="hover-group">unknown</md-option>
+                                </md-content>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" class="select mt10 mb10">
+                        <p class="select-label">On garden leave</p>
+                        <md-input-container>
+                            <img class="offline-img ng-scope" src="/img/icons/offline-icon.png">
+                            <md-select  ng-model="selected"
+                                        aria-label="..."
+                                        placeholder="Unknown">
+                                <md-content class="style-scroll">
+                                    <md-option class="hover-group">unknown</md-option>
+                                    <md-option class="hover-group">unknown</md-option>
+                                    <md-option class="hover-group">unknown</md-option>
+                                </md-content>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" class="select mt10 mb10">
+                        <p class="select-label">On maternity</p>
+                        <md-input-container>
+                            <img class="ng-scope offline-img" src="/img/icons/offline-icon.png">
+                            <md-select  ng-model="selected"
+                                        aria-label="..."
+                                        placeholder="Unknown">
+                                <md-content class="style-scroll">
+                                    <md-option class="hover-group">unknown</md-option>
+                                    <md-option class="hover-group">unknown</md-option>
+                                    <md-option class="hover-group">unknown</md-option>
+                                </md-content>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about mb30 " layout="column">
+                    <div class="info-block" layout="row">
+                        <md-button class="add-btn">+Add reason</md-button>
+                        <span class="btn-label" layout="column">Or it would be more logical to generate here all leaving reasons set by managers...</span>
+                    </div>
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-card-title layout="column" class="notification block md-whiteframe-3dp" id="four-block">
+                <md-card-title-text class="header">
+                  <span class="title mb25 mt25">Alerts and Notifications</span>
+                </md-card-title-text>
+                <md-card-title-text class="about mt20 mb20" layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Send notifications</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.alertAndNotifications.sendNotif}" ng-model="sa.settings.alertAndNotifications.sendNotif" aria-label="Switch 7" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about " layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Send email notifications</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.alertAndNotifications.sendEmailNotif}" ng-model="sa.settings.alertAndNotifications.sendEmailNotif" aria-label="Switch 8" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about mt50" layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Send alerts</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled: sa.settings.alertAndNotifications.sendAlerts}" ng-model="sa.settings.alertAndNotifications.sendAlerts" aria-label="Switch 9" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="about mt50" layout="column">
+                    <div class="info-block">
+                        <span class="group-title">500 page</span>
+                    </div>
+                    <div class="switch-block">
+                        <md-switch ng-class="{activeDisabled:sa.settings.alertAndNotifications.error500page }" ng-model="sa.settings.alertAndNotifications.error500page" aria-label="Switch 10" class="notifiaction-switch">
+                        </md-switch>
+                    </div>
+                    <span class="group-description mt20" layout="column">You can change the button name so system will use it in case of internal server error.</span>
+                </md-card-title-text>
+                <md-card-title-text class="input-block mb25" layout="column">
+                    <div class="first-input-block" layout="row">
+                        <span class="group-title report">Button name, max 20 symbols</span>
+                        <md-input-container md-no-float>
+                            <input type="text" placeholder="Report this problem" ng-model="sa.settings.alertAndNotifications.errReportingText">
+                        </md-input-container>
+                        <div class="img"><i class="fa fa-angle-double-right"></i></div>
+                        <div class="browse-btn">
+                            <md-button class="btn">Report this problem</md-button>
+                        </div>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="input-block mt10 mb45" layout="row">
+                    <div class="first-input-block" layout="column">
+                        <div layout="row">
+                            <i class="fa fa-envelope letter"></i>
+                            <span class="group-title">Enter the email address for messages reporting problem will be sent.</span>
+                        </div>
+                        <md-input-container md-no-float>
+                            <input class="email-addres" type="text" placeholder="Email address" ng-model="sa.settings.alertAndNotifications.errorReportingEmail">
+                        </md-input-container>
+                    </div>
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-card-title layout="column" class="payment-log last-block md-whiteframe-3dp" id="five-block">
+                <md-card-title-text class="about mb15 mt30" layout="column">
+                    <div class="info-block">
+                        <span class="group-title">Payment logs</span>
+                        <span class="group-description" layout="column">You can change the button name so system will use it in case of internal server error.</span>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="header">
+                  <span class="title mb25">Application owner</span>
+                </md-card-title-text>
+                <md-card-title-text class="input-block mb25" layout="row">
+                    <div class="input-conatainer" layout="column">
+                        <span class="group-title">Name</span>
+                        <md-input-container md-no-float>
+                            <input type="text" ng-model="sa.settings.paymentsLogs.owner.name">
+                        </md-input-container>
+                    </div>
+                    <div class="input-conatainer center" layout="column">
+                        <span class="group-title">Email address</span>
+                        <md-input-container md-no-float>
+                            <input type="text" ng-model="sa.settings.paymentsLogs.owner.email">
+                        </md-input-container>
+                    </div>
+                    <div class="input-conatainer" layout="column">
+                        <span class="group-title">Employee number</span>
+                        <md-input-container md-no-float>
+                            <input type="text" ng-model="sa.settings.paymentsLogs.owner.employeeNumber">
+                        </md-input-container>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-text class="header">
+                  <span class="title mb25">Payment processed by</span>
+                </md-card-title-text>
+                <md-card-title-text class="input-block mb40" layout="row">
+                    <div class="input-conatainer" layout="column">
+                        <span class="group-title">Name</span>
+                        <md-input-container md-no-float>
+                            <input type="text" ng-model="sa.settings.paymentsLogs.paymentProcessedBy.name">
+                        </md-input-container>
+                    </div>
+                    <div class="input-conatainer center" layout="column">
+                        <span class="group-title">Email address</span>
+                        <md-input-container md-no-float>
+                            <input type="text" ng-model="sa.settings.paymentsLogs.paymentProcessedBy.email">
+                        </md-input-container>
+                    </div>
+                    <div class="input-conatainer" layout="column">
+                        <span class="group-title">Employee number</span>
+                        <md-input-container md-no-float>
+                            <input type="text" ng-model="sa.settings.paymentsLogs.paymentProcessedBy.employeeNumber">
+                        </md-input-container>
+                    </div>
+                </md-card-title-text>
+                <md-button class="save" ng-click="sa.save()">Save</md-button>
+            </md-card-title>
+
+        </md-card>
+
+    </md-content>
+
+</md-card>

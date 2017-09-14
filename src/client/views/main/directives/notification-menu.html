@@ -1,0 +1,147 @@
+
+<md-menu hide-xs md-offset="-115 0">
+    <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open(); openMenu();">
+        <md-icon md-font-set="fa fa-bell"></md-icon>
+    </md-button>
+    <md-menu-content class="menu-notifications-popup" md-prevent-menu-close="md-prevent-menu-close">
+        <md-tabs>
+            <md-tab label="NOTIFICATIONS (8)" md-prevent-menu-close="md-prevent-menu-close">
+                <md-content class="md-padding">
+                    <table class="table_notifications">
+                        <tbody>
+                            <tr ng-repeat="item in [1, 2, 3, 4, 5, 6, 7, 8]">
+                                <td class="td_notifications">
+                                    <div layout="row" layout-align="start" style="align-items: center;">
+                                        <img class="avatar ng-scope" ng-if="item.userpic" src="../../usersData/{{item.uid}}/{{item.userpic}}"/>
+                                        <img class="avatar ng-scope" ng-if="!item.userpic" src="/img/profile-pics/user-icon.png"/>
+                                        <div class="circle-status status-icon"
+                                                ng-class="{'online':item.status === 'Online', 'away':item.status === 'Away', 'do-not-disturb':item.status === 'Do not Disturb', 'invisible':item.status === 'Invisible', 'offline':item.status === 'Offline' }">
+                                        </div>
+                                        <div>
+                                            <div class="contacts-name">Alice Lee</div>
+                                            <div class="shadow-title">Changed position!</div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="last_time_visite">20 min ago</div>
+                                        <div class="time_visite_icon">
+                                            <i class="fa fa-stack-overflow" aria-hidden="true"></i>
+                                        </div>
+                                    </div>    
+                                </td>                                    
+                            </tr>          
+                        <tbody>
+                    </table>
+                    <div class="show_all_notification">
+                        <p>Show all</p>
+                    </div>  
+                </md-content>
+            </md-tab>
+            <md-tab label="ALERTS (8)">
+                <md-content class="md-padding">
+                    <div>
+                        <p>Recent</p>
+                        <table class="table_alerts_today">
+                            <tbody>
+                                <tr ng-repeat="item in [1, 2, 3]">
+                                    <td class="td_notifications">
+                                        <div style="position:relative" layout="row" layout-align="start" style="align-items: center;">
+                                            <img class="avatar ng-scope" ng-if="item.userpic" src="../../usersData/{{item.uid}}/{{item.userpic}}"/>
+                                            <i class="material-icons">check_circle</i>
+                                            <div class="ml10">
+                                                <div class="contacts-name">Max Ott</div>
+                                                <div class="shadow-title">Wrong file format uploaded.</div>
+                                            </div>
+                                        </div>
+                                        <div class="time-block">
+                                            <div class="last_time_visite">20 min ago</div>
+                                            <md-menu md-offset="30 0">
+                                                <md-button aria-label="Open more menu" class="md-icon-button" ng-click="$mdOpenMenu($event)" id="optionTwo">
+                                                    <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+                                                </md-button>
+                                                <md-menu-content width="4">
+                                                    <md-menu-item>
+                                                        <md-button ng-click="null">
+                                                            <span>Hide post</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                    <md-menu-item>
+                                                        <md-button ng-click="null">
+                                                            <span>Unfollow Alice</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                    <md-menu-item>
+                                                        <md-button ng-click="null">
+                                                            <span>Stop seeing posts but stay friends</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                    <md-menu-item>
+                                                        <md-button ng-click="null">
+                                                            <span>turn off notifivation about this post</span>
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                </md-menu-content>
+                                            </md-menu>
+                                        </div>
+                                    </td>                                    
+                                </tr>  
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="alerts_recent_today">
+                        <p>Today</p>
+                            <table class="table_alerts_today">
+                                <tbody>
+                                    <tr ng-repeat="item in [1, 2, 3]">
+                                        <td class="td_notifications">
+                                            <div style="position:relative" layout="row" layout-align="start" style="align-items: center;">
+                                                <img class="avatar ng-scope" ng-if="item.userpic" src="../../usersData/{{item.uid}}/{{item.userpic}}"/>
+                                                <i class="material-icons">check_circle</i>
+                                                <div class="ml10">
+                                                    <div class="contacts-name">System Error</div>
+                                                    <div class="shadow-title">ocuper while file UserDataBase was uploading to the server. Error time 16:40 am </div>
+                                                </div>
+                                            </div>
+                                            <div class="time-block">
+                                                <div class="last_time_visite">20 min ago</div>
+                                                <md-menu md-offset="30 0">
+                                                    <md-button aria-label="Open more menu" class="md-icon-button" ng-click="$mdOpenMenu($event)" id="optionTwo">
+                                                        <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+                                                    </md-button>
+                                                    <md-menu-content width="4">
+                                                        <md-menu-item>
+                                                            <md-button ng-click="null">
+                                                                <span>Hide post</span>
+                                                            </md-button>
+                                                        </md-menu-item>
+                                                        <md-menu-item>
+                                                            <md-button ng-click="null">
+                                                                <span>Unfollow Alice</span>
+                                                            </md-button>
+                                                        </md-menu-item>
+                                                        <md-menu-item>
+                                                            <md-button ng-click="null">
+                                                                <span>Stop seeing posts but stay friends</span>
+                                                            </md-button>
+                                                        </md-menu-item>
+                                                        <md-menu-item>
+                                                            <md-button ng-click="null">
+                                                                <span>turn off notifivation about this post</span>
+                                                            </md-button>
+                                                        </md-menu-item>
+                                                    </md-menu-content>
+                                                </md-menu>
+                                            </div>
+                                        </td>                                                                   
+                                    </tr>   
+                                </tbody>
+                            </table>   
+                    </div>
+                    <div class="show_all_notification">
+                        <p>Show all</p>
+                    </div> 
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-menu-content>
+</md-menu>

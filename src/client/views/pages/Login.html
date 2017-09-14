@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="login-content" ng-app="hrTools">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HR tools</title>
+
+    <!-- CSS & fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- build:css /css/authAll.css -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- endbuild -->
+    <link href="/css/app_scss.css" rel="stylesheet">
+
+    <!-- build:js /js/authLibs.js -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-material/angular-material.min.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/angular-ui/build/angular-ui.js"></script>
+    <script src="/bower_components/ng-letter-avatar/dist/ngletteravatar.min.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js /js/authApp.js -->
+    <script src="/js/auth/app.js"></script>
+    <script src="/js/main/services/Auth.js"></script>
+    <script src="/js/main/services/Alert.js"></script>
+    <!-- endbuild -->
+
+</head>
+
+<body class="user-l">
+
+    <div class="login-container">
+        <md-card class="login-user">
+            <div class="first-block">
+                <md-card-avatar>
+                    <md-user-avatar class="first-logo" ng-hide="checked">
+                        <img src="/img/profile-pics/log.png"/>
+                    </md-user-avatar>
+                    <md-user-avatar class="second-logo" ng-show="checked">
+                        <img src="/img/icons/logo2.png"/>
+                    </md-user-avatar>
+                </md-card-avatar>
+            </div>
+            <div class="second-block">
+                <form ng-submit="login()" name="form" validate ng-class="{ 'ng-invalid ng-dirty': error.code == 2 }">
+                    <md-icon class="show-avatar" ng-show="checked">
+                        <ng-letter-avatar class="avatar" dynamic="true" width="32" height="32" fontSize="13" charCount="2" data="{{ loginAvatar ? loginAvatar : initials }}" shape="round"></ng-letter-avatar>
+                    </md-icon>
+                    <md-card-content class="mt40 container">
+                        <md-input-container class="information" ng-class="{ 'md-input-invalid': error.code == 1 || error.code == 3 }">
+                            <input  name="user"
+                                    ng-model="newUser.user"
+                                    class="user-email"
+                                    ng-class="{ 'ng-invalid ng-dirty': error.code == 1 }"
+                                    placeholder="User Name or Email"
+                                    type="text"
+                                    ng-maxlength="150">
+                            <div class="errors" ng-show="error.code == 1">
+                                 <div class="error-min">&nbsp; Email does not exist</div>
+                            </div>
+                            <div class="errors" ng-show="error.code == 3">
+                                <div class="error-min">&nbsp; Account is disabled</div>
+                            </div>
+                            <md-icon class="image-container">
+                                <img class="avatar" src="/img/profile-pics/list.png"/>
+                            </md-icon>
+                        </md-input-container>
+                        <md-input-container class="information" ng-class="{ 'ng-invalid ng-dirty': error.code == 2 }">
+                            <input  name="password"
+                                    ng-model="newUser.password"
+                                    ng-class="{ 'ng-invalid ng-dirty': error.code == 2 }"
+                                    class="user-password"
+                                    placeholder="Password"
+                                    type="password"
+                                    ng-maxlength="50"
+                                    ng-focus="ifUserExists()">
+                            <div class="errors" ng-show="error.code == 2">
+                                <div class="error-min">&nbsp; Wrong password</div>
+                            </div>
+                            <md-icon class="image-container">
+                                <img class="avatar" src="/img/profile-pics/lock.png"/>
+                            </md-icon>
+                        </md-input-container>
+                        <md-card-actions class="login-btn mt15">
+                            <md-button ng-click="login()" type="submit" class="login">LOGIN</md-button>
+                        </md-card-actions>
+                        <md-card-actions class="mt20 mb30">
+                            <md-checkbox class="check md-icon" aria-label="..."></md-checkbox>
+                            <p class="label-txt">Keep me signed in</p>
+                            <div flex class="flex"></div>
+                            <a href="#"><p class="forgot-password">Forgot Password</p></a>
+                        </md-card-actions>
+                        <div class="social">
+                            <div class="social-block">
+                                <div class="line"></div>
+                                <p class="txt">or</p>
+                            </div>
+                            <md-card-actions class="footer-btn">
+                                <a class="block" href="/api/auth/loginfb"><md-button aria-label="facebook" class="btn facebook"><i class="fa fa-facebook" aria-hidden="true"></i></md-button></a>
+                                <a class="block" href="/api/auth/loginli"><md-button aria-label="linkedin"  class="btn linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></md-button></a>
+                                <a class="block" href="/api/auth/logingg"><md-button aria-label="google" class="btn google"><i class="fa fa-google-plus" aria-hidden="true"></i></md-button></a>
+                            </md-card-actions>
+                        </div>
+                    </md-card-content>
+                </form>
+            </div>
+        </md-card>
+    </div>
+
+</body>
+
+</html>

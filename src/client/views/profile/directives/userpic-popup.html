@@ -1,0 +1,76 @@
+
+<div class="profile-popup">
+
+    <input type="file" id="file-input" />
+
+    <md-toolbar id="fileInput" class="header-block-profile">
+        <div class="upload-profile-header">
+            <label>
+                <md-icon class="material-icons cloud">backup</md-icon>
+                <span>Profile photo</span>
+            </label>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="closeWindowPopup($event)" area-label="close btn">
+                <md-icon class="close">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-actions class="img-container">
+        <md-button class="md-icon-button drop-avatar" ng-click="removeImage()" ng-hide="!selectedAvatar">
+            <md-icon class="close">close</md-icon>
+        </md-button>
+        <div class="upload-main">
+            <div class="drag-cont" ngf-drop ng-model="files" ngf-accept="'image/*'" ngf-drag-over-class="dragover">
+                <md-user-avatar class="img-block">
+                    <div ng-hide="selectedAvatar" class="drag-avatar">
+                        <md-icon class="fa fa-user"></md-icon>
+                    </div>
+                    <div ng-show="selectedAvatar" id="cropper"></div>
+                    <ng-letter-avatar style="position: absolute; top: 21px; transform: translateX( -50% );" dynamic="true" width="160" height="160" charCount="2" data="{{ username }}" shape="round" ng-hide="selectedAvatar"></ng-letter-avatar>
+                </md-user-avatar>
+                <span class="drop">Drop!</span>
+                <span ng-model="files" ngf-accept="'.png, .jpg, .jpeg'" class="upload-link" ngf-select>Click to upload image or Drag the file here</span>
+            </div>
+        </div>
+    </md-dialog-actions>
+
+    <md-dialog-content ng-show="selectedAvatar" class="scale-block">
+        <p>Scale using the slider.</p>
+        <div class="zoom-image">
+            <div class="minus-profile-btn"><i class="fa fa-minus-circle" aria-hidden="true"></i></div>
+            <div class="line"></div>
+            <div class="plus-profile-btn"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+        </div>
+    </md-dialog-content>
+
+    <div class="footer-container">
+        <div class="left-block">
+            <!-- <span ng-show="loading">Loading in progress</span> -->
+
+            <span ng-hide="file.showProgress === true">{{ file.uploadProgress }}% loaded</span>
+            <md-progress-circular ng-hide="file.uploadProgress == 100 || file.showProgress === true" md-mode="determinate" md-diameter="25" value="{{ file.uploadProgress }}"></md-progress-circular>
+            <md-button class="md-close-button" ng-hide="true">
+                <md-icon class="fa fa-times-circle close-icon" aria-hidden="true">
+                    <div class="close-background"></div>
+                </md-icon>
+            </md-button>
+            <md-button class="md-help-btn" ng-hide="true">
+                <md-icon class="material-icons help-icon">help
+                    <div class="background-white"></div>
+                </md-icon>
+            </md-button>
+            <md-button ng-hide="file.uploadProgress != 100" class="md-check-btn">
+                <md-icon class="material-icons check-icon">check_circle
+                    <div class="background-white"></div>
+                </md-icon>
+            </md-button>
+        </div>
+        <div class="right-block">
+            <md-button ng-click="cancel()" class="try-again" ng-hide="!selectedAvatar">Try Again</md-button>
+            <md-button ng-show="selectedAvatar" ng-click="showLoading()" class="apply save-image">Apply</md-button>
+            <md-button ng-show="!selectedAvatar" type="button" ng-click="clickUpload()" class="apply">Browse</md-button>
+        </div>
+    </div>
+
+</div>

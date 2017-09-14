@@ -1,0 +1,93 @@
+.customer-body {
+    background-color: #20232a;
+    .review {
+        background-color: #292c33;
+        .customer-header {
+            .back-btn {
+                margin: 0 5px 6px 6px;
+                height: 40px;
+                min-width: 0;
+            }
+            .header-title {
+                color: #bfbfbf;
+                font-weight: 400;
+                font-size: 22px;
+                padding-top: 5px;
+            }
+            .title {
+                font-family: Roboto;
+                color: #4f5055;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 25px;
+                text-align: left;
+                min-width: 100px;
+            }
+            .description {
+                font-family: Roboto;
+                color: #bfbfbf;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 25px;
+                text-align: left;
+            }
+            .date {
+                padding-left: 16px;
+            }
+            .date-line {
+                border: 0.1px solid #4f5055;
+                width: 97%;
+                margin-right: 20px;
+                margin-top: 30px;
+                margin: 30px 20px 0 auto;
+            }
+        }
+        md-list {
+            padding-top: 35px;
+            md-list-item {
+                min-height: 0;
+                max-height: 35px;
+                .md-list-item-text {
+                    margin: 0;
+                    .icon {
+                        color: #4f5055;
+                        margin: 0;
+                    }
+                    .title {
+                        font-family: Roboto;
+                        color: #4f5055;
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 25px;
+                        text-align: left;
+                        min-width: 100px;
+                    }
+                    .description {
+                        font-family: Roboto;
+                        color: #bfbfbf;
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 25px;
+                        text-align: left;
+                    }
+                    .updated {
+                        margin: 0 0 0 auto;
+                    }
+                    .descr {
+                        min-width: 123px;
+                    }
+                }
+            }
+        }
+    }
+    .total-description {
+        font-family: Roboto;
+        color: #bfbfbf;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 25px;
+        text-align: left;
+        margin-left: 15px;
+    }
+    
+}

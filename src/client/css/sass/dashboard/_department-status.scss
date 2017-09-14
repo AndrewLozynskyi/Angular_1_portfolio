@@ -1,0 +1,220 @@
+department-stats {
+    display: block;
+    margin-top: 40px;
+    .circle-status {
+        border: 4px solid #292c33;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+    }
+    .online {
+        background: #9dbf04;
+    }
+    .away {
+        background: #ff860f;
+    }
+    .do-not-disturb {
+        background: #ff0000;
+    }
+    .invisible {
+        background: #ffffff;
+    }
+    .offline {
+        background: #ffffff;
+    }
+    .status-icon {
+        margin-right: 9px;
+    }
+    .right-bar {
+        .title {
+            position: relative;
+            width: 100%;
+            background-color: #23252b;
+            padding: 20px 0px 15px 20px;
+            border-bottom: 1px solid #000;
+            color: $content-font-color;
+            .md-icon-button.dot {
+                .container-dot {
+                    display: inline;
+                    .dots {
+                      width: 3px;
+                      position: relative;
+                      margin: 0 auto;
+                    }
+                }
+            }
+        }
+        md-card-title-media {
+            position: absolute;
+            top: 5px;
+            right: 0px;
+        }
+        .schedule-block {
+            position: relative;
+            width: 100%;
+            height: 130px;
+            line-chart-mini {
+                width: calc( 100% );
+                padding-top: 15px;
+            }
+            &:before {
+                visibility: visible;
+                content: "";
+                display: block;
+                width: 100%;
+                height: 100%;
+                border-top: 1px solid rgba(255, 255, 255, 0.15);
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+            .schedule {
+                width: 81%;
+                height: 80px;
+                border: 1px solid gray;
+            }
+        }
+        .employee {
+            border-bottom: 1px solid #000;
+            &-header th {
+                padding: 15px 30px 9px;
+                text-align: left;
+                font-weight: normal;
+                color: #bfbfbf;
+                font-size: 16px;
+            }
+            &-table {
+                border-collapse: collapse;
+                width:100%;
+                .avatar {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+                td {
+                    padding: 10px 20px 10px;
+                    font-size: 13px;
+                    position: relative;
+                    border-bottom: 1px solid #000;
+                    border-top: 1px solid #000;
+                    &:before {
+                        content: "";
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        border-top: 1px solid rgba(255, 255, 255, 0.15);
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    }
+                }
+                thead tr {
+                    background-color: #23252b;
+                }
+                tr:last-child td {
+                    border-bottom: none;
+                }
+            }
+            &-data:hover {
+                background-color:#34373d;
+            }
+            &-name {
+                font-size:16px;
+                color:#bfbfbf;
+            }
+        }
+    }
+    .left-bar {
+        position: relative;
+        outline: none;
+        color:#72929c !important;
+        padding: 0 !important;
+        border-right: 1px solid #000;
+        &:before {
+            visibility: visible;
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .title {
+            width: 100%;
+            background-color: #23252b;
+            padding: 20px 0px 15px 16px;
+            color: $content-font-color;
+        }
+        md-list-item {
+            max-height: 40px;
+            min-height: 40px;
+            overflow: hidden;
+            span:last-child {
+                color:#474d59;
+                font-size:12px !important;
+                padding-right: 7px;
+            }
+            &.active {
+                background-color: #34373d;
+                color: #ffffff;
+                .data {
+                    color:#ffffff;
+                }
+            }
+            &:hover {
+                background-color: #34373d;
+                color: #ffffff;
+                cursor: pointer;
+            }
+            &:first-child {
+                border-right: none;
+                border-bottom: 1px solid #000;
+                min-height: 54px;
+                max-height: 56px;
+                padding: 0px 1px 0px 0px;
+                &:hover {
+                    background-color: inherit;
+                    cursor: default;
+                    color: #72929c;
+                }
+                .md-icon-button {
+                    position: absolute;
+                    right: 0px;
+                    .drop-down {
+                        color: $primary-color;
+                    }
+                }
+            }
+            &:nth-child(2) {
+                &:before {
+                    visibility: visible;
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    border-top: 1px solid rgba(255, 255, 255, 0.15);
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                }
+            }
+            &:hover .data {
+                color: #ffffff;
+            }
+        }
+    }
+    .shadow-title {
+        color:#474d59;
+        font-size:13px;
+    }
+    .footer-conteiner {
+        border-top: 1px solid rgba(255,255,255,0.15);
+        overflow: hidden;
+        .pagination {
+            display: inline-block;
+            float: right;
+        }
+    }
+}

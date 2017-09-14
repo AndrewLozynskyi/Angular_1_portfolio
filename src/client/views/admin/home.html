@@ -1,0 +1,143 @@
+
+<section layout="row" class="up-card flex-container">
+
+    <% if permissions.admin.home.rolesWidget %>
+    <section class="flex-item md-whiteframe-3dp fr-card bg-gray sectionCard" style="overflow: hidden;">
+        <md-menu md-offset="-220 0">
+            <md-button aria-label="Open more menu" class="md-icon-button">
+                <img class="more_vert" src="/img/admin-panel/more_vert.svg" alt="">
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ng-click="null" aria-label="Refresh" >
+                        <md-icon md-font-set="fa fa-refresh" aria-hidden="true"><span class="dot-menu-item">Refresh</span>
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        <md-card-title layout="row" class=" mrb40">
+            <md-card-title-text>
+                <md-list-item class=" md-2-line">
+                    <div class="image">
+                        <img src="/img/admin-panel/profiles-icon.png" class="avatar" alt=""/>
+                    </div>
+                    <div class="md-list-item-text item-text">
+                        <h3 class="text">Roles</h3>
+                        <p class="description" ng-controller="adminHome.controller">{{ widgetData.rolesCount }} created</p>
+                    </div>
+                </md-list-item>
+            </md-card-title-text>
+            <md-card-title-media hide-xs class="pt5">
+                <md-button ng-click="" ui-sref="admin.roles" aria-label="Open more menu" class="md-icon-button">
+                    <md-icon class="right" md-font-set="md">keyboard_arrow_right</md-icon>
+                </md-button>
+            </md-card-title-media>
+        </md-card-title>
+    </section>
+    <% endif %>
+
+    <% if permissions.admin.home.userWidget %>
+    <section class="flex-item md-whiteframe-3dp s-card bg-gray sectionCard" style="overflow: hidden;">
+        <md-menu md-offset="-220 0">
+            <md-button aria-label="Open more menu" class="md-icon-button">
+                <img class="more_vert" src="/img/admin-panel/more_vert.svg" alt="">
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ng-click="null" aria-label="Refresh">
+                        <md-icon md-font-set="fa fa-refresh" aria-hidden="true"><span class="dot-menu-item">Refresh</span>
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        <md-card-title layout="row" class=" mrb40">
+            <md-card-title-text>
+                <md-list-item class=" md-2-line">
+                    <div class="image">
+                        <img src="/img/admin-panel/users-icon.png" class="avatar" alt=""/>
+                    </div>
+                    <div class="md-list-item-text item-text">
+                        <h3 class="text">Users</h3>
+                        <p class="description">{{ widgetData.usersCount }} registered</p>
+                    </div>
+                </md-list-item>
+            </md-card-title-text>
+            <md-card-title-media hide-xs class="pt5">
+                <md-button ui-sref="admin.users" aria-label="Open more menu" class="md-icon-button">
+                    <md-icon class="right" md-font-set="md">keyboard_arrow_right</md-icon>
+                </md-button>
+            </md-card-title-media>
+        </md-card-title>
+    </section>
+    <% endif %>
+
+    <% if permissions.admin.home.permissionsWidget %>
+    <section class="flex-item md-whiteframe-3dp t-card bg-gray sectionCard" style="overflow: hidden;">
+        <md-menu md-offset="-220 0">
+            <md-button aria-label="Open more menu" class="md-icon-button">
+                <img class="more_vert" src="/img/admin-panel/more_vert.svg" alt="">
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ng-click="null" aria-label="Refresh">
+                        <md-icon md-font-set="fa fa-refresh" aria-hidden="true"><span class="dot-menu-item">Refresh</span>
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        <md-card-title layout="row" class="mrb40">
+            <md-card-title-text>
+                <md-list-item class=" md-2-line">
+                  <div class="image">
+                    <img src="/img/admin-panel/permissions-icon.png" class="avatar" alt=""/>
+                </div>
+                <div class="md-list-item-text item-text">
+                    <h3 class="text">Permissions</h3>
+                    <p class="description">of profiles</p>
+                </div>
+                </md-list-item>
+            </md-card-title-text>
+            <md-card-title-media hide-xs class="pt5">
+                <md-button ui-sref="admin.permissions" aria-label="Open more menu" class="md-icon-button">
+                    <md-icon class="right" md-font-set="md">keyboard_arrow_right</md-icon>
+                </md-button>
+            </md-card-title-media>
+        </md-card-title>
+    </section>
+    <% endif %>
+
+    <section class="flex-item md-whiteframe-3dp f-card bg-gray sectionCard" style="overflow: hidden;">
+        <md-menu md-offset="-220 0">
+            <md-button aria-label="Open more menu" class="md-icon-button">
+                <img class="more_vert" src="/img/admin-panel/more_vert.svg" alt="">
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ng-click="null" aria-label="Refresh">
+                        <md-icon md-font-set="fa fa-refresh" aria-hidden="true"><span class="dot-menu-item">Refresh</span>
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        <md-card-title layout="row" class="mrb40">
+            <md-card-title-text>
+                <md-list-item class=" md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>Activity on Server</h3>
+                    </div>
+                </md-list-item>
+            </md-card-title-text>
+            <md-card-title-media layout="column">
+<!--                 <md-button aria-label="Open more menu" class="md-icon-button">
+                    <img class="more_vert" src="/img/admin-panel/more_vert.svg" alt="">
+                </md-button> -->
+            <div class="md-list-item-text item-text">
+                <p class="users">Users 3,456</p>
+                <p class="entries">Entries 4,120</p>
+            </div>
+            </md-card-title-media>
+
+        </md-card-title>
+    </section>
+
+</section>

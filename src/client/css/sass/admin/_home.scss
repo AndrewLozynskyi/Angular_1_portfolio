@@ -1,0 +1,257 @@
+
+.up-card {
+    padding: 0;
+    margin: 0;
+    margin-top: 30px;
+    margin-left: 30px;
+    list-style: none;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    .flex-item {
+        flex: 20%;
+        margin-right: 30px;
+        margin-bottom: 30px;
+    }
+    @media ( max-width: 600px ) {
+        .flex-item {
+            flex: 50%;
+        }
+    }
+    @media ( min-width: 601px ) and ( max-width: 800px ) {
+        .flex-item {
+            flex: 35%;
+        }
+    }
+    @media ( min-width: 801px ) and ( max-width: 1000px ) {
+        .flex-item {
+            flex: 25%;
+        }
+    }
+    .avatar {
+        margin-top: 12px;
+        margin-left: 4px;
+    }
+    .fr-card {
+        background-color: #1a6843;
+        cursor: pointer;
+        md-menu {
+            display: flex;
+            justify-content: flex-end;
+            button {
+                left: 18px;
+            }
+        }
+        md-card-title {
+            display: flex;
+            justify-content:space-between;
+        }
+        md-card-title-text {
+            .image {
+                width: 50px;
+                height: 50px;
+                background-color: #bfbfbf;
+                border-radius: 50%;
+            }
+            .item-text {
+                margin: 7px 0 0 17px;
+                .text {
+                    font-family: Roboto;
+                    color: #bfbfbf;
+                    font-size: 21.64px;
+                    font-weight: 300;
+                    line-height: 25px;
+                }
+                .description {
+                    font-family: Roboto;
+                    color: #bfbfbf;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 25px;
+                }
+            }
+            md-list-item {
+                align-items: center;
+            }
+        }
+        md-card-title-media {
+            margin: auto 0;
+            .md-icon-button {
+                left: 30%;
+            }
+            button {
+                margin: 0;
+            }
+            .right {
+                color: #bfbfbf;
+            }
+        }
+    }
+    .s-card {
+        background-color: #1a6568;
+        md-menu {
+            display: flex;
+            justify-content: flex-end;
+            button {
+                left: 18px;
+            }
+        }
+        md-card-title {
+            md-card-title-text {
+                .image {
+                    width: 50px;
+                    height: 50px;
+                    background-color: #bfbfbf;
+                    border-radius: 50%;
+                }
+                .item-text {
+                    margin: 7px 0 0 17px;
+                    .text {
+                        font-family: Roboto;
+                        color: #bfbfbf;
+                        font-size: 21.64px;
+                        font-weight: 300;
+                        line-height: 25px;
+                    }
+                    .description {
+                        font-family: Roboto;
+                        color: #bfbfbf;
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 25px;
+                    }
+                }
+                md-list-item {
+                    align-items: center;
+                }
+            }
+            display: flex;
+            justify-content: space-between;
+            md-card-title-media {
+                .md-icon-button {
+                    left: 30%;
+                }
+                margin: auto 0;
+                button {
+                    margin: 0;
+                }
+                .right {
+                    color: #bfbfbf;
+                }
+            }
+        }
+    }
+    .t-card {
+        background-color: #795e0f;
+        md-menu {
+            display: flex;
+            justify-content: flex-end;
+            button {
+                left: 18px;
+            }
+        }
+        md-card-title {
+            md-card-title-text {
+                .image {
+                    width: 50px;
+                    height: 50px;
+                    background-color: #bfbfbf;
+                    border-radius: 50%;
+                }
+                .item-text {
+                    margin: 7px 0 0 17px;
+                    .text {
+                        font-family: Roboto;
+                        color: #bfbfbf;
+                        font-size: 21.64px;
+                        font-weight: 300;
+                        line-height: 25px;
+                    }
+                    .description {
+                        font-family: Roboto;
+                        color: #bfbfbf;
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 25px;
+                    }
+                }
+                md-list-item {
+                    align-items: center;
+                }
+            }
+            display: flex;
+            justify-content: space-between;
+            md-card-title-media {
+                margin: auto 0;
+                .md-icon-button {
+                    left: 30%;
+                }
+                button {
+                    margin: 0;
+                }
+                .right {
+                    color: #bfbfbf;
+                }
+            }
+        }
+    }
+    .f-card {
+        background-color: #292b32;
+        md-menu {
+            button {
+                float: right;
+                left: 18px;
+            }
+        }
+        md-card-title {
+            display: flex;
+            button {
+                left: 18px;
+            }
+            justify-content: space-between;
+            md-card-title-text {
+                .item-text {
+                    margin: 7px 0 0 17px;
+                }
+                md-list-item {
+                    .md-list-item-text {
+                        margin-top: 10px;
+                        font-family: Roboto;
+                        color: #bfbfbf;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 25px;
+                    }
+                }
+            }
+            md-card-title-media {
+                margin: auto 0;
+                .md-icon-button {
+                    left: 39px;
+                }
+                .item-text {
+                    text-align: end;
+                    margin-right: 6px;
+                    line-height: 13px;
+                    .users {
+                        font-family: Roboto;
+                        color: #2fdcda;
+                        font-size: 11.81px;
+                        font-weight: 300;
+                    }
+                    .entries {
+                        font-family: Roboto;
+                        color: #ffae00;
+                        font-size: 11.81px;
+                        font-weight: 300;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.md-fab.md-primary {
+    &.plus-btn {
+        z-index: 1;
+    }
+}

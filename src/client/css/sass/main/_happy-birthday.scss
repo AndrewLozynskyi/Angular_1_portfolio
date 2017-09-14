@@ -1,0 +1,80 @@
+.happy-birthday {
+    overflow: visible;
+    min-width: 580px;
+    .happy-birthday-popup {
+        width: 580px;
+        position: relative;
+        margin: 0;
+        md-card-header-text {
+            .name {
+                text-align: center;
+                color: #bebebe;
+                font: 400 25px Roboto;
+                margin-top: 30px;
+                margin-bottom: 0;
+            }
+            md-subhead {
+                position: absolute;
+                right: 20px;
+                top: 20px;
+                color: rgb(169, 169, 169);
+                font-size: 18px;
+                cursor: pointer;
+            }
+        }
+        .informations {
+            font: 400 20px Roboto;
+            text-align: center;
+            margin: 0 7%;
+            line-height: 35px;
+            color: rgb(77, 79, 83);
+            position: relative;
+            display: inline-grid;
+        }
+        .btn-container {
+            text-align: center;
+            margin-bottom: 40px;
+            .thanks-btn {
+                background-color: #19a8a8;
+                padding: 15px;
+                margin-right: 20px;
+                min-width: 350px;
+                color: rgb(190, 190, 190);
+                font: 400 17px Roboto;
+            }
+        }
+        .content {
+            margin: 25px 0 55px 0;
+            padding: 0;
+        }
+        .header-block {
+            width: 100%;
+            position: relative;
+            background-color: #262930;
+            padding: 0px 98px;
+            height: 117px;
+            overflow: hidden;
+            md-card-avatar {
+                margin: 0 auto;
+                position: static; 
+                .iamge-logo {
+                    position: absolute;
+                    margin: auto;
+                    right: 0;
+                    left: 0;
+                    text-align: center;
+                    width: 115px;
+                    height: 100%;
+                    .icon-gift {
+                        height: 100%;
+                        i {
+                            font-size: 70px;
+                            padding: 23px;
+                            color: rgb(252, 74, 75);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

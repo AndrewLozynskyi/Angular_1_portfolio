@@ -1,0 +1,77 @@
+geo-circles-chart {
+    position: relative;
+    display: inline-block;
+    flex: 50;
+    width: 48%;
+    .geo-circles-chart {
+    }
+    .datamap {
+        circle {
+            stroke-width: 0;
+        }
+    }
+    .map_container {
+        padding-top: 0px !important;
+        .map {
+            padding-right: 10px;
+            padding-top: 10px;
+            .zoomReset {
+                display: none;
+            }
+
+            .zoomIn {
+                height: 20px;
+                width: 20px;
+                font-size: 20px;
+                top: 80px;
+            }
+            .zoomOut {
+                height: 20px;
+                width: 20px;
+                font-size: 20px;
+                top: 105px;
+            }
+
+        }
+    }
+    .donut-label {
+        color: $content-font-color;
+        font: 300 16px roboto;
+        vertical-align: middle;
+        display: inline-block;
+        margin-bottom: auto;
+        margin-top: auto;
+        position: relative;
+        top: -36px;
+    }
+    .geo-circles-donut {
+        display: inline-block;
+    }
+}
+.chart-title {
+    .title {
+        color: #bfbfbf;
+    }
+}
+.even {
+    width: 48%;
+}
+.even:last-child {
+    border-bottom: none;
+}
+.odd:last-child {
+    width: 100%;
+    border-bottom: none;
+}
+geo-circles-chart:nth-child(odd) {
+    border-bottom: 2px solid #3d434d;
+    border-right: 2px solid #3d434d;
+    /*margin-right: 10px;*/
+}
+geo-circles-chart:nth-last-child(2) {
+    border-bottom: none;
+}
+geo-circles-chart:nth-child(even) {
+    border-bottom: 2px solid #3d434d;
+    /*margin-left: 10px;*/
+}

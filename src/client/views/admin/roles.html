@@ -1,0 +1,7 @@
+
+<md-card class="roles">
+
+    <role-table show-det="rc.showDet" ng-if="rc.showDet === false" delete-role="deleteRole" create-edit-role="createEditRole"></role-table>
+    <role-details show-det="rc.showDet" perm-arr="rc.permArr" ng-show="rc.showDet === true"></role-details>
+
+</md-card>

@@ -1,0 +1,193 @@
+
+<div class="employee" layout="row">
+    <md-list role="list" class="country-department" flex="20" layout="column" ng-click="em.getEmployees($event); em.mark($event)">
+        <md-list-item ng-repeat="item in setSidebarData"
+                      ng-class="{'department-header': $index === 0, active:item.name === activeParams.departments[0]}" md-ink-ripple="@{{ $index > 0 }}" ng-if="item.name !== 'total'">
+            <div>
+                <span class="department" ng-class="{ nameDepartment: $index > 0 }">{{ item.name }}</span>
+                <span class="md-secondary data second-block">{{ item.total }}</span>
+            </div>
+        </md-list-item>
+        <md-list-item ng-repeat="item in setSidebarData" ng-if="item.name === 'total'" ng-class="{ active: ! activeParams.departments.length }" md-ink-ripple="true">
+            <div>
+                <span class="department" ng-class="nameDepartment">Total</span>
+                <span class="md-secondary data second-block">{{ item.total }}</span>
+            </div>
+        </md-list-item>
+        <div class="empty-block" flex></div>
+    </md-list>
+    <div flex>
+        <div class="title">
+            {{ title }}
+            <md-card-title-media class="pt5" ng-hide="true">
+                <md-menu>
+                    <md-button aria-label="Open more menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                        <md-icon class="container-dot" md-font-set="md">
+                            <img class="dots" src="/img/icons/3dot.png"/>
+                        </md-icon>
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button ng-click="null">
+                                View profile
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="null">
+                                Add column
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="null">
+                                Save as
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </md-card-title-media>
+        </div>
+        <div class="schedule-block">
+            <line-chart-mini set-data="em.chartData" full-graph="true"></line-chart-mini>
+        </div>
+        <table class="employee-table">
+            <thead>
+                <tr class="employee-header">
+                    <th>
+                        <div layout="row">
+                            <div>
+                                Name
+                                <div class="shadow-title">Experience</div>
+                            </div>
+                            <md-button class="md-icon-button">
+                                <md-icon md-font-set="md">arrow_drop_down</md-icon>
+                            </md-button>
+                        </div>
+                    </th>
+                    <th>
+                        <div layout="row">
+                            <div>
+                                Company
+                                <div class="shadow-title">Country</div>
+                            </div>
+                            <md-button class="md-icon-button">
+                                <md-icon md-font-set="md">arrow_drop_down</md-icon>
+                            </md-button>
+                        </div>
+                    </th>
+                    <th>
+                        <div layout="row">
+                            <div>
+                                Job Title
+                                <div class="shadow-title">Manager Name</div>
+                            </div>
+                            <md-button class="md-icon-button">
+                                <md-icon md-font-set="md">arrow_drop_down</md-icon>
+                            </md-button>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in em.tableData" class="employee-data">
+                    <td>
+                        <div layout="row" layout-align="start center">
+                            <!--<img class="avatar" src="/img/profile-pics/user-icon.png"/>-->
+                            <!--<img class="avatar-grid ng-scope" ng-if="item.userpic" src="../../usersData/{{item.uid}}/{{item.userpic}}"/>
+                            <img class="avatar-grid ng-scope" ng-if="!item.userpic" src="/img/profile-pics/user-icon.png"/>-->
+                            <ng-letter-avatar class="avatar" width="40" height="40" fontSize="13" charCount="2" data="{{ userpic ? 'http://' + window.location.host + userpic : employee.name }}" shape="round"></ng-letter-avatar>
+                            <div class="circle-status status-icon offline"
+                                 ng-class="{'online':item.status === 'Online', 'away':item.status === 'Away', 'do-not-disturb':item.status === 'Do not Disturb', 'invisible':item.status === 'Invisible', 'offline':item.status === 'Offline' }">
+                            </div>
+                            <div class="ml10">
+                                <div class="employee-name">{{ employee.name }}</div>
+                                <div class="shadow-title">{{ employee.dateDiff }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div layout="row" layout-align="start center">
+                            <div class="ml10">
+                                <div class="employee-name">{{ employee.companyName }}</div>
+                                <div class="shadow-title">{{ employee.country }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div layout="row" layout-align="start center">
+                            <div class="ml10">
+                                <div class="employee-name">{{ employee.jobTitle }}</div>
+                                <div class="shadow-title">{{ employee.managerName }}</div>
+                            </div>
+                            <md-card-title-media class="pt5">
+                                <md-menu md-offset="-200 0">
+                                    <md-button aria-label="Open more menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                                        <md-icon class="container-dot" md-font-set="md">
+                                            <img class="dots" src="/img/icons/3dot.png"/>
+                                        </md-icon>
+                                    </md-button>
+                                    <md-menu-content width="4">
+                                        <md-menu-item>
+                                            <md-button ng-click="cc.getContactStats(item.uid)" onmouseover="this.style.backgroundColor='#35383e';" onmouseout="this.style.backgroundColor='#292c33';" ui-sref="profile.about({ username:item.username })" aria-label="View profile">
+                                                <md-icon class="bla" style="color: #bfbfbf;" md-font-set="fa fa-user" aria-hidden="true"><span style="font: 400 14px roboto;" class="dot-menu-item">&nbsp; View Profile</span></md-icon>
+                                            </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button ng-click="null">
+                                                <md-icon md-font-set="fa fa-user-plus" aria-hidden="true"  aria-label="Add to contacts">
+                                                    <span class="dot-menu-item">&nbsp;   Add To Contacts</span>
+                                                </md-icon>
+                                            </md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </md-card-title-media>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer>
+
+    <div class="search" ng-hide="true">
+        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+        <input type="text" ng-model="searchKeyword" placeholder="Search in departments" md-colors="{color: 'primary-400'}">
+    </div>
+
+    <pagination ng-if="em.maxPages > 1"
+                class="pagination" flex
+                cl-pages="em.maxPages"
+                cl-steps="3"
+                cl-page-changed="em.changePage()"
+                cl-align="center center"
+                cl-current-page="em.currentPage"></cl-paging>
+
+    <md-menu class="showby-dropdown" aria-label="Show by">
+        <md-button aria-label="Open menu" ng-click="$mdOpenMenu($event)">
+            <span class="value" hide-xs >Show {{ ( em.itemsPerPage == 'all' ) ? 'All' : 'by ' + em.itemsPerPage }}</span>
+            <md-icon hide-xs md-font-set="fa fa-caret-down"></md-icon>
+        </md-button>
+        <md-menu-content>
+            <md-menu-item>
+                <md-button ng-class="{{ ( em.itemsPerPage == 10 ) ? 'active' : '' }}" ng-click="em.setItemsPerPage(10)">
+                    Show by 10
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ng-class="{{ ( em.itemsPerPage == 20 ) ? 'active' : '' }}" ng-click="em.setItemsPerPage(20)">
+                    Show by 20
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ng-class="{{ ( em.itemsPerPage == 50 ) ? 'active' : '' }}" ng-click="em.setItemsPerPage(50)">
+                    Show by 50
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+
+    <div style="clear: both;"></div>
+
+</footer>

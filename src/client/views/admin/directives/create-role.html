@@ -1,0 +1,2134 @@
+
+<div ng-class="!permissions && !assign && !userScope ? 'up-line' : !newRole && !assign && !userScope? 'up-line second-circle' : !newRole && !assign && !permissions? 'up-line third-circle' : 'up-line fourth-circle' ">
+    <div layout="row">
+        <div flex class="create-filter">
+            <div class="date-line"></div>
+            <div class="slider" flex layout="row" layout-align="space-between center">
+                <div class="circle first">
+                    <div class="hover">
+                        <p>1</p>
+                    </div>
+                    <span class="role">Role</span>
+                </div>
+                <div class="circle second">
+                    <div class="hover">
+                        <p>2</p>
+                    </div>
+                    <span class="permission">Permissions</span>
+                </div>
+                <div class="circle third">
+                    <div class="hover">
+                        <p>3</p>
+                    </div>
+                    <span class="scope">Scope</span>
+                </div>
+                <div class="circle fourth">
+                    <div class="hover">
+                        <p>4</p>
+                    </div>
+                    <span class="assign">Assign Users</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FIRST MODAL WINDOW -->
+
+<md-toolbar ng-show="newRole" class="toolbar">
+    <div>
+        <h2>Create Role</h2>
+    </div>
+</md-toolbar>
+
+<md-card ng-show="newRole" class="body-card" >
+    <form name="roleForm" ng-submit='create()'>
+        <md-card-title class="role-name">
+            <md-card-title-text class="title">
+                <span>
+                    Role name:
+                </span>
+            </md-card-title-text>
+            <md-card-title-text class="input">
+                <md-input-container>
+                    <input  ng-class="{ 'has-error': roleForm.name.$invalid }"
+                            md-autofocus
+                            type="text"
+                            name="name"
+                            ng-model="roleParams.name"
+                            maxlength="50"
+                            ng-pattern="/^[a-zA-Z0-9\s\.\#\/]+$/"
+                            required>
+                    <div class="errors" ng-messages="roleForm.name.$error">
+                        <div ng-message="required" class="error-min" >
+                            Name should not be empty
+                        </div>
+                        <div ng-message="maxlength" class="error-max" >
+                            Name can not exceed 50 characters
+                        </div>
+                        <div ng-message="{{ createUser.message }}" class="error-min" >
+                            {{ createUser.message }}
+                        </div>
+                    </div>
+                </md-input-container>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-title class="mb30">
+            <md-card-title-text class="title">
+                <span class="select-title">
+                    Based on:
+                </span>
+            </md-card-title-text>
+            <md-card-title-text>
+                <md-input-container class="select ">
+                    <md-select name="role" ng-model="roleParams.parentRoleId" class="md-underline">
+                        <md-content class="style-scroll">
+                            <md-option ng-repeat="item in dataTable" value="{{ item.roleId }}">{{ item.name }}</md-option>
+                        </md-content>
+                    </md-select>
+                    <div class="errors" ng-messages="roleForm.role.$error">
+                        <div ng-message="required" class="error-min">Required</div>
+                    </div>
+                </md-input-container>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-title class="description">
+            <md-card-title-text class="title">
+                <span>
+                    Description:
+                </span>
+            </md-card-title-text>
+            <md-card-title-text>
+                <md-input-container>
+                    <input  ng-class="{ 'has-error': roleForm.description.$invalid && (roleForm.description.$touched) }"
+                            type="text"
+                            name="description"
+                            data-ng-model="roleParams.description"
+                            minlength="6"
+                            ng-maxlength="100"
+                            >
+                    <div class="errors" ng-messages="roleForm.description.$error">
+                        <div ng-message="required" class="error-min">
+                            Description must contain at least 6 characters
+                        </div>
+                        <div ng-message="minlength" class="error-min">
+                            Description must contain at least 6 characters
+                        </div>
+                    </div>
+                </md-input-container>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-title class="bottom-button">
+            <md-button ng-click="cancel()" class="md-raised cancel">
+                Cancel
+            </md-button>
+            <md-button ng-disabled="roleForm.$invalid" type="submit" class="md-raised next">
+                Next
+            </md-button>
+        </md-card-title>
+    </form>
+</md-card>
+
+<!-- SECOND MODAL WINDOW -->
+
+<div class="permissions">
+
+    <md-toolbar ng-show="permissions" class="toolbar">
+        <div>
+            <h2>Permissions</h2>
+        </div>
+    </md-toolbar>
+
+    <md-card ng-show="permissions" class="flexcroll permissions-card" ng-cloak>
+
+        <form id="myForm" ng-submit="updateRole()">
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="accounts =! accounts" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!accounts" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="accounts" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        Accounts
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.accounts.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!accounts">
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="userAccounts = !userAccounts">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!userAccounts" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="userAccounts" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            User Accounts
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    class="check md-icon"
+                                        ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )"
+                                        ng-model="role.permissions.accounts.user.all"
+                                        ng-click="cr.toggleAll( role.permissions.accounts.user )"
+                                        aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="slide-down-child overflow-menu" ng-hide="!userAccounts">
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Create user account</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.create" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Validate user account</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.validate" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Deactivate user account</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.deactivate" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>View own user profile data (Private) information</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.viewProfileOwnInfo" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>View user profile data (Corporate) information</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.viewInformation" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Edit own user profile data (Private) information</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.editProfileOwnInfo" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Edit user profile data (Corporate) information</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.editProfileInfo" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Delete own user profile data (Private) information</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.deleteProfileOwnInfo" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Delete user profile data (Corporate) Information</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.deleteProfileInfo" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Login / logout</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.login" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Send invites</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.user.sendInvites" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Activate notifications</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )"
+                            class="check md-icon" ng-model="role.permissions.accounts.user.activateNotif"  aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.user )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                </div>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="custumerAccounts = !custumerAccounts">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!custumerAccounts" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="custumerAccounts" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Custumer Accounts
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    class="check md-icon"
+                                        ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )"
+                                        aria-label="Checkbox 1"
+                                        ng-model="role.permissions.accounts.custumer.all"
+                                        ng-click="cr.toggleAll( role.permissions.accounts.custumer )"
+                                        ></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="slide-down-child overflow-menu" ng-hide="!custumerAccounts">
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Create customer account</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.create" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Stop customer account (deactivate)</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.stop" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Freeze / unfreeze customer account</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.freeze" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Update customer profile</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.updateProfile" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>View customer payment logs</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.viewPaymentLogs" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>View own payment logs</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.viewOwnPaymentLogs" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Enter / view / modify customer data</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.enterViewModifyData" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Delete user profile data</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.deleteProfileData" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Login / logout</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.login" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Get activities alerts</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.getActivitesAlerts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Activate notifications</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.accounts.moduleEnabled, 'green' : role.permissions.accounts.moduleEnabled || !role.permissions.accounts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.accounts.moduleEnabled )" ng-model="role.permissions.accounts.custumer.activeNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.accounts.custumer )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                </div>
+
+            </div>
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="activities =! activities" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!activities" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="activities" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        Activities
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.activities.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!activities">
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="set-left">
+                        <span>Set all</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.activities.moduleEnabled, 'green' : role.permissions.activities.moduleEnabled || !role.permissions.activities.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.activities.moduleEnabled )" class="check md-icon" aria-label="Checkbox 1" ng-model="role.permissions.activities.all" ng-click="cr.toggleAll( role.permissions.activities )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>View activities</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.activities.moduleEnabled, 'green' : role.permissions.activities.moduleEnabled || !role.permissions.activities.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.activities.moduleEnabled )" ng-model="role.permissions.activities.view" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.activities )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate notifications</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.activities.moduleEnabled, 'green' : role.permissions.activities.moduleEnabled || !role.permissions.activities.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.activities.moduleEnabled )" ng-model="role.permissions.activities.activateNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.activities )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate alerts</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.activities.moduleEnabled, 'green' : role.permissions.activities.moduleEnabled || !role.permissions.activities.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.activities.moduleEnabled )" ng-model="role.permissions.activities.activateAlerts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.activities )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+            </div>
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="sharingData =! sharingData" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!sharingData" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="sharingData" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        Sharing data
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.sharingData.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!sharingData">
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="set-left">
+                        <span>Set all</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.sharingData.moduleEnabled, 'green' : role.permissions.sharingData.moduleEnabled || !role.permissions.sharingData.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.sharingData.moduleEnabled )" ng-model="role.permissions.sharingData.all" class="check md-icon" aria-label="Checkbox 1" ng-click="cr.toggleAll( role.permissions.sharingData )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Grant / revoke dashboard share permissions</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.sharingData.moduleEnabled, 'green' : role.permissions.sharingData.moduleEnabled || !role.permissions.sharingData.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.sharingData.moduleEnabled )" ng-model="role.permissions.sharingData.enabled" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.sharingData )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate notifications</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.sharingData.moduleEnabled, 'green' : role.permissions.sharingData.moduleEnabled || !role.permissions.sharingData.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.sharingData.moduleEnabled )" ng-model="role.permissions.sharingData.activateNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.sharingData )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate alerts</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.sharingData.moduleEnabled, 'green' : role.permissions.sharingData.moduleEnabled || !role.permissions.sharingData.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.sharingData.moduleEnabled )" ng-model="role.permissions.sharingData.activateAlerts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.sharingData )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+            </div>
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="planSelector =! planSelector" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!planSelector" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="planSelector" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        Plan selector and invoicing
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check ">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.planSelectorInvoicing.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!planSelector">
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="set-left">
+                        <span>Set all</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.planSelectorInvoicing.moduleEnabled, 'green' : role.permissions.planSelectorInvoicing.moduleEnabled || !role.permissions.planSelectorInvoicing.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.planSelectorInvoicing.moduleEnabled )" ng-model="role.permissions.planSelectorInvoicing.all" class="check md-icon" aria-label="Checkbox 1" ng-click="cr.toggleAll( role.permissions.planSelectorInvoicing )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Stop subscriptions</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.planSelectorInvoicing.moduleEnabled, 'green' : role.permissions.planSelectorInvoicing.moduleEnabled || !role.permissions.planSelectorInvoicing.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.planSelectorInvoicing.moduleEnabled )" ng-model="role.permissions.planSelectorInvoicing.stopSubscriptions" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.planSelectorInvoicing )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Change subscription</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.planSelectorInvoicing.moduleEnabled, 'green' : role.permissions.planSelectorInvoicing.moduleEnabled || !role.permissions.planSelectorInvoicing.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.planSelectorInvoicing.moduleEnabled )" ng-model="role.permissions.planSelectorInvoicing.changeSubscription" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.planSelectorInvoicing )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate email subscriptions notifications</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.planSelectorInvoicing.moduleEnabled, 'green' : role.permissions.planSelectorInvoicing.moduleEnabled || !role.permissions.planSelectorInvoicing.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.planSelectorInvoicing.moduleEnabled )" ng-model="role.permissions.planSelectorInvoicing.activateEmailSubsNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.planSelectorInvoicing )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate notifications</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.planSelectorInvoicing.moduleEnabled, 'green' : role.permissions.planSelectorInvoicing.moduleEnabled || !role.permissions.planSelectorInvoicing.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.planSelectorInvoicing.moduleEnabled )" ng-model="role.permissions.planSelectorInvoicing.activateNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.planSelectorInvoicing )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate alerts</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.planSelectorInvoicing.moduleEnabled, 'green' : role.permissions.planSelectorInvoicing.moduleEnabled || !role.permissions.planSelectorInvoicing.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.planSelectorInvoicing.moduleEnabled )" ng-model="role.permissions.planSelectorInvoicing.activateAlerts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.planSelectorInvoicing )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+            </div>
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="dashboard =! dashboard" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!dashboard" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="dashboard" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        Dashboard
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.dashboard.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!dashboard">
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate notifications</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.activateNotif" class="check md-icon" aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate alerts</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.activateAlerts" class="check md-icon" aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                    <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="dashboardHome = !dashboardHome">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!dashboardHome" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="dashboardHome" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Home
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    class="check md-icon"
+                                        ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )"
+                                        aria-label="Checkbox 1"
+                                        ng-model="role.permissions.dashboard.home.all"
+                                        ng-click="cr.toggleAll( role.permissions.dashboard.home )"
+                                        ></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="slide-down-child overflow-menu" ng-hide="!dashboardHome">
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Set targets</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.setTarget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Set fileters</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.setFilter" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Weather widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.weatherWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Tasks widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.tasksWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Calendar widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.calendarWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Activities widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.activitiesWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Headcount widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.headcountWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Workforce widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.workforceWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Attrition widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.attritionWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Finance widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.financeWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Salary widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.salaryWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Resourcing widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.resourcingWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>E&OD widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.home.eodWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                </div>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="dashboardHeadcount = !dashboardHeadcount">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!dashboardHeadcount" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="dashboardHeadcount" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Headcount
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all" >
+                        <md-checkbox    class="check md-icon"
+                                        aria-label="Checkbox 1"
+                                        ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )"
+                                        ng-click="cr.toggleAll( role.permissions.dashboard.headcount )"
+                                        ng-model="role.permissions.dashboard.headcount.all"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="slide-down-child overflow-menu" ng-hide="!dashboardHeadcount">
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Departments Table</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.headcount.departmentsTable" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.headcount )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Donut Widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.headcount.donutWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.headcount )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Employee Table</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.headcount.employeeTable" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.headcount )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>General Chart</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.headcount.generalChart" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.headcount )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Headcount Table</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.headcount.headcountTable" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.headcount )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Map Widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.headcount.mapWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.headcount )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                </div>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="dashboardWorkforce = !dashboardWorkforce">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!dashboardWorkforce" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="dashboardWorkforce" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Workforce
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all" >
+                        <md-checkbox    ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )"
+                                        class="check md-icon"
+                                        aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="slide-down-child overflow-menu" ng-hide="!dashboardWorkforce">
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Departments Table Widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.workforce.departmentsTable" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.workforce )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Donut Widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.workforce.donutWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.workforce )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Pie Chart Widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.workforce.pieChart" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.workforce )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>General Chart</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.workforce.generalChart" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.workforce )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Headcount Table Widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.workforce.headcountTable" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.workforce )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Map Widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )" ng-model="role.permissions.dashboard.workforce.mapWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.dashboard.workforce )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                </div>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="dashboardAttrition = !dashboardAttrition">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!dashboardAttrition" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="dashboardAttrition" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Attrition
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )"
+                                        class="check md-icon"
+                                        aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="dashboardFinance = !dashboardFinance">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!dashboardFinance" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="dashboardFinance" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Finance
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )"
+                                        class="check md-icon"
+                                        aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="dashboardAbsence = !dashboardAbsence">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!dashboardAbsence" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="dashboardAbsence" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Absence
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all" >
+                        <md-checkbox    ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )"
+                                        class="check md-icon"
+                                        aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="dashboardSalary = !dashboardSalary">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!dashboardSalary" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="dashboardSalary" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Salary
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )"
+                                        class="check md-icon"
+                                        aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="dashboardResourcing = !dashboardResourcing">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!dashboardResourcing" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="dashboardResourcing" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Resourcing
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    ng-class = "{'red': role.permissions.dashboard.moduleEnabled, 'green' : role.permissions.dashboard.moduleEnabled || !role.permissions.dashboard.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.dashboard.moduleEnabled )"
+                                        class="check md-icon"
+                                        aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+            </div>
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="userProfile =! userProfile" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!userProfile" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="userProfile" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        User Profile
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.userProfile.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!userProfile">
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="set-left">
+                        <span>Set all</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" class="check md-icon" aria-label="Checkbox 1" ng-click="cr.toggleAll( role.permissions.userProfile )"
+                                        ng-model="role.permissions.userProfile.all"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>View profile</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled }" ng-model="role.permissions.userProfile.view" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Edit own (Private) information</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled }" ng-model="role.permissions.userProfile.editOwnInfo" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Edit user (Corporate) information</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled }" ng-model="role.permissions.userProfile.editUserInfo" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Edit profile</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled }" ng-model="role.permissions.userProfile.save" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Allow others to view own profile (Private) information</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled }" ng-model="role.permissions.userProfile.allowOtherViewOwnInfo" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Allow others to view user profile (Corporate) information</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled }" ng-model="role.permissions.userProfile.allowOtherViewUserOwnInfo" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Add contacts</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled }" ng-model="role.permissions.userProfile.addContacts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Follow users</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled }" ng-model="role.permissions.userProfile.followUsers" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Send message</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled }" ng-model="role.permissions.userProfile.sendMessage" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Send invites</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled }" ng-model="role.permissions.userProfile.sendInvites" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate notifications</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-model="role.permissions.userProfile.activateNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate alerts</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.userProfile.moduleEnabled, 'green' : role.permissions.userProfile.moduleEnabled || !role.permissions.userProfile.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.userProfile.moduleEnabled )" ng-model="role.permissions.userProfile.activateAlerts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.userProfile )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+            </div>
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="contacts =! contacts" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!contacts" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="contacts" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        Contacts
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.contacts.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!contacts">
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="set-left">
+                        <span>Set all</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.contacts.moduleEnabled, 'green' : role.permissions.contacts.moduleEnabled || !role.permissions.contacts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.contacts.moduleEnabled )" class="check md-icon" aria-label="Checkbox 1" ng-model="role.permissions.contacts.all" ng-click="cr.toggleAll( role.permissions.contacts )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Create groups</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.contacts.moduleEnabled, 'green' : role.permissions.contacts.moduleEnabled || !role.permissions.contacts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.contacts.moduleEnabled )" ng-model="role.permissions.contacts.createGroups" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.contacts )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Add users to group</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.contacts.moduleEnabled, 'green' : role.permissions.contacts.moduleEnabled || !role.permissions.contacts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.contacts.moduleEnabled )" ng-model="role.permissions.contacts.addUserToGroup" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.contacts )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Remove users from group</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.contacts.moduleEnabled, 'green' : role.permissions.contacts.moduleEnabled || !role.permissions.contacts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.contacts.moduleEnabled )" ng-model="role.permissions.contacts.removeUserFromGroup" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.contacts )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Send contact invites</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.contacts.moduleEnabled, 'green' : role.permissions.contacts.moduleEnabled || !role.permissions.contacts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.contacts.moduleEnabled )" ng-model="role.permissions.contacts.sendContactsInvites" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.contacts )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Send group invites</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.contacts.moduleEnabled, 'green' : role.permissions.contacts.moduleEnabled || !role.permissions.contacts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.contacts.moduleEnabled )" ng-model="role.permissions.contacts.sendGroupInvites" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.contacts )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate notifications</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.contacts.moduleEnabled, 'green' : role.permissions.contacts.moduleEnabled || !role.permissions.contacts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.contacts.moduleEnabled )" ng-model="role.permissions.contacts.activateNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.contacts )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate alerts</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.contacts.moduleEnabled, 'green' : role.permissions.contacts.moduleEnabled || !role.permissions.contacts.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.contacts.moduleEnabled )" ng-model="role.permissions.contacts.activateAlerts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.contacts )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+            </div>
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="chat =! chat" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!chat" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="chat" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        Chat
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.chat.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!chat">
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="set-left">
+                        <span>Set all</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.chat.moduleEnabled, 'green' : role.permissions.chat.moduleEnabled || !role.permissions.chat.moduleEnabled}" ng-disabled="isThisDisabled( role.permissions.chat.moduleEnabled )" class="check md-icon" aria-label="Checkbox 1" ng-model="role.permissions.chat.all" ng-click="cr.toggleAll( role.permissions.chat )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Create groups</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.chat.moduleEnabled, 'green' : role.permissions.chat.moduleEnabled || !role.permissions.chat.moduleEnabled}" ng-disabled="isThisDisabled( role.permissions.chat.moduleEnabled )" ng-model="role.permissions.chat.createGroups" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.chat )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Add users to group</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.chat.moduleEnabled, 'green' : role.permissions.chat.moduleEnabled || !role.permissions.chat.moduleEnabled}" ng-disabled="isThisDisabled( role.permissions.chat.moduleEnabled )" ng-model="role.permissions.chat.addUserToGroup" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.chat )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate notifications</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.chat.moduleEnabled, 'green' : role.permissions.chat.moduleEnabled || !role.permissions.chat.moduleEnabled}" ng-disabled="isThisDisabled( role.permissions.chat.moduleEnabled )" ng-model="role.permissions.chat.activateNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.chat )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate alerts</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.chat.moduleEnabled, 'green' : role.permissions.chat.moduleEnabled || !role.permissions.chat.moduleEnabled}" ng-disabled="isThisDisabled( role.permissions.chat.moduleEnabled )" ng-model="role.permissions.chat.activateAlerts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.chat )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+            </div>
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="admin =! admin" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!admin" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="admin" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        Admin
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.admin.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!admin">
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Create roles</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.createRoles" class="check md-icon" aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Create roles based on other roles</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}" ng-model="role.permissions.admin.createRolesBasedOnOtherRoles" class="check md-icon" aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="homeAdmin = !homeAdmin">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!homeAdmin" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="homeAdmin" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Home
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    class="check md-icon"
+                                        ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )"
+                                        aria-label="Checkbox 1"
+                                        ng-click="cr.toggleAll( role.permissions.admin.home )"
+                                        ng-model="role.permissions.admin.home.all"
+                                        ></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="slide-down-child overflow-menu" ng-hide="!homeAdmin">
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Roles widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.home.rolesWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Clients widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.home.clientWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>User widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.home.userWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Permissions widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.home.permissionsWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Live support widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.home.liveSupportWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Alerts and notifications widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.home.alertNotifWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Payment logs</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.home.paymentsLogsWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>ToDo widget</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.home.todoWidget" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.home )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                </div>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="permissionsAdmin = !permissionsAdmin">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!permissionsAdmin" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="permissionsAdmin" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Permissions
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    class="check md-icon"
+                                        ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )"
+                                        aria-label="Checkbox 1"
+                                        ng-click="cr.toggleAll( role.permissions.admin.permissions )"
+                                        ng-model="role.permissions.admin.permissions.all"
+                                        ></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="slide-down-child overflow-menu" ng-hide="!permissionsAdmin">
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Edit</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.permissions.edit" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.permissions )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                </div>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="settingsAdmin = !settingsAdmin">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!settingsAdmin" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="settingsAdmin" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Settings
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    class="check md-icon"
+                                        ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )"
+                                        aria-label="Checkbox 1"
+                                        ng-click="cr.toggleAll( role.permissions.admin.settings )"
+                                        ng-model="role.permissions.admin.settings.all"
+                                        ></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="slide-down-child overflow-menu" ng-hide="!settingsAdmin">
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Edit</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.settings.edit" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.settings )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                </div>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="userManagementAdmin = !userManagementAdmin">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!userManagementAdmin" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="userManagementAdmin" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            User management
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    class="check md-icon"
+                                        ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )"
+                                        aria-label="Checkbox 1"
+                                        ng-click="cr.toggleAll( role.permissions.admin.userManagement )"
+                                        ng-model="role.permissions.admin.userManagement.all"
+                                        ></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="slide-down-child overflow-menu" ng-hide="!userManagementAdmin">
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Create user</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.userManagement.create" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.userManagement )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Delete user</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.userManagement.delete" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.userManagement )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Update user</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.userManagement.update" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.userManagement )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Assign user to superuser role</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.userManagement.assignUserToSuperUserRole" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.userManagement )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Assign user to other roles (except superuser)</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.userManagement.assignUserToOtherRoles" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.userManagement )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Create groups</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.userManagement.createGroups" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.userManagement )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                </div>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="adminActivitiesOnServer = !adminActivitiesOnServer">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!adminActivitiesOnServer" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="adminActivitiesOnServer" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Activities on server
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    class="check md-icon"
+                                        ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )"
+                                        aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="adminAlertNotifications = !adminAlertNotifications">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!adminAlertNotifications" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="adminAlertNotifications" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Alert notifications
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    class="check md-icon"
+                                        ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )"
+                                        aria-label="Checkbox 1"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="left left-arrow" ng-click="paymentLogsAdmin = !paymentLogsAdmin">
+                        <span>
+                            <md-button aria-label="Open more menu" class="md-icon-button">
+                                <md-icon ng-show="!paymentLogsAdmin" md-font-set="md">keyboard_arrow_down</md-icon>
+                                <md-icon ng-show="paymentLogsAdmin" md-font-set="md">keyboard_arrow_up</md-icon>
+                            </md-button>
+                            Payments logs
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox    class="check md-icon"
+                                        ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )"
+                                        aria-label="Checkbox 1"
+                                        ng-click="cr.toggleAll( role.permissions.admin.paymentLogs )"
+                                        ng-model="role.permissions.admin.paymentLogs.all"
+                                        ></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <div class="slide-down-child overflow-menu" ng-hide="!paymentLogsAdmin">
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Set owner</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.paymentLogs.setOwner" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.paymentLogs )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>View payment details (invoices)</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.paymentLogs.viewDetailes" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.paymentLogs )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Make payment</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.paymentLogs.makePayment" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.paymentLogs )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>View customer details</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.paymentLogs.viewCustomerDetails" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.paymentLogs )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Activate notifications</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.paymentLogs.activateNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.paymentLogs )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-title class="no-border-bottom">
+                        <md-card-title-text class="left">
+                            <span>Activate alerts</span>
+                        </md-card-title-text>
+                        <md-card-title-text class="right-check">
+                            <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.admin.moduleEnabled, 'green' : role.permissions.admin.moduleEnabled || !role.permissions.admin.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.admin.moduleEnabled )" ng-model="role.permissions.admin.paymentLogs.activateAlerts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.admin.paymentLogs )"></md-checkbox>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                </div>
+
+            </div>
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="api =! api" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!api" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="api" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        Api
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.api.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!api">
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="set-left">
+                        <span>Set all</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.api.moduleEnabled, 'green' : role.permissions.api.moduleEnabled || !role.permissions.api.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.api.moduleEnabled )" class="check md-icon" aria-label="Checkbox 1" ng-click="cr.toggleAll( role.permissions.api )" ng-model="role.permissions.api.all"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate notifications</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.api.moduleEnabled, 'green' : role.permissions.api.moduleEnabled || !role.permissions.api.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.api.moduleEnabled )" ng-model="role.permissions.api.activateNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.api )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate alerts</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.api.moduleEnabled, 'green' : role.permissions.api.moduleEnabled || !role.permissions.api.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.api.moduleEnabled )" ng-model="role.permissions.api.activateAlerts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.api )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+            </div>
+
+            <md-card-title class="accounts">
+                <md-card-title-text ng-click="onOffBoarding =! onOffBoarding" class="left">
+                    <span>
+                        <md-button aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!onOffBoarding" md-font-set="md">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="onOffBoarding" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        On/Off Boarding
+                    </span>
+                </md-card-title-text>
+                <md-card-title-text class="create-check">
+                    <md-checkbox    class="red"
+                                    aria-label="Checkbox 1"
+                                    ng-click="activateCheckboxes()"
+                                    ng-model="role.permissions.onOffBoarding.moduleEnabled"></md-checkbox>
+                </md-card-title-text>
+            </md-card-title>
+
+            <div class="flex-accounts slide-down-child" ng-hide="!onOffBoarding">
+
+                <md-card-title class="permissions-item">
+                    <md-card-title-text class="set-left">
+                        <span>Set all</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check check-all">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.onOffBoarding.moduleEnabled, 'green' : role.permissions.onOffBoarding.moduleEnabled || !role.permissions.onOffBoarding.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.onOffBoarding.moduleEnabled )" class="check md-icon" aria-label="Checkbox 1" ng-click="cr.toggleAll( role.permissions.onOffBoarding )" ng-model="role.permissions.onOffBoarding.all"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate notifications</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.onOffBoarding.moduleEnabled, 'green' : role.permissions.onOffBoarding.moduleEnabled || !role.permissions.onOffBoarding.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.onOffBoarding.moduleEnabled )" ng-model="role.permissions.onOffBoarding.activateNotif" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.onOffBoarding )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-title class="no-border-bottom">
+                    <md-card-title-text class="left">
+                        <span>Activate alerts</span>
+                    </md-card-title-text>
+                    <md-card-title-text class="right-check">
+                        <md-checkbox type="Checkbox" ng-class = "{'red': role.permissions.onOffBoarding.moduleEnabled, 'green' : role.permissions.onOffBoarding.moduleEnabled || !role.permissions.onOffBoarding.moduleEnabled}"
+                                        ng-disabled="isThisDisabled( role.permissions.onOffBoarding.moduleEnabled )" ng-model="role.permissions.onOffBoarding.activateAlerts" class="check md-icon" aria-label="Checkbox 1" ng-change="cr.optionToggled( role.permissions.onOffBoarding )"></md-checkbox>
+                    </md-card-title-text>
+                </md-card-title>
+
+            </div>
+
+        </form>
+
+    </md-card>
+        <div ng-show="permissions" class="bottom-button">
+            <md-button ng-show="permissions" ng-click="permissions=false; newRole=true" class="md-raised cancel">
+                Previous
+            </md-button>
+            <md-button ng-show="permissions" type="submit" ng-click="updatePermissions()" form="myForm" class="md-raised next">
+                Next
+            </md-button>
+        </div>
+</div>
+
+<!-- THIRD MODAL WINDOW -->
+
+<div class="user-scope" country-list="">
+    <md-toolbar ng-show="userScope" class="toolbar">
+        <div>
+            <h2>Scope</h2>
+        </div>
+    </md-toolbar>
+    <md-card ng-show="userScope" class="scope-card">
+        <form class="scope-form" ng-submit="assignUser()">
+
+            <md-radio-group ng-model="scope.basedOn">
+                <md-radio-button ng-disabled="true" value="hierarchy" class="md-primary">Based on supervisory hierarchy</md-radio-button>
+                <md-radio-button value="country" class="md-primary">Country based </md-radio-button>
+                <md-radio-button value="country-department" class="md-primary">Country / Department based</md-radio-button>
+            </md-radio-group>
+
+            <md-input-container layout="column" class="filter" ng-show="scope.basedOn === 'country' || scope.basedOn === 'country-department'">
+                <md-select  ng-model="scope.selectedCountries"
+                            aria-label="Country filter"
+                            multiple
+                            placeholder="Country">
+
+                    <md-content class="style-scroll">
+                        <md-option ng-repeat="country in scope.countries" ng-value="country.name">{{ country.name }}</md-option>
+                    </md-content>
+
+                </md-select>
+            </md-input-container>
+
+            <md-input-container layout="column" class="filter" ng-show="scope.basedOn === 'department' || scope.basedOn === 'country-department'">
+                <md-select  ng-model="scope.selectedDepartments"
+                            aria-label="Department filter"
+                            multiple
+                            placeholder="Department">
+
+                    <md-content class="style-scroll">
+                        <md-option ng-repeat="department in scope.departments" ng-value="department.name">{{ department.name }}</md-option>
+                    </md-content>
+
+                </md-select>
+            </md-input-container>
+
+            <md-card-title class="bottom-button">
+                <md-button ng-show="userScope" ng-click="userScope=false; permissions=true" class="md-raised cancel">
+                    Previous
+                </md-button>
+                <md-button ng-show="userScope" type="submit" ng-click="updateScope()" class="md-raised next">
+                    Next
+                </md-button>
+            </md-card-title>
+
+        </form>
+    </md-card>
+</div>
+
+<!-- FOURTH MODAL WINDOW -->
+
+<div class="assign">
+    <md-toolbar ng-show="assign" class="toolbar">
+        <div>
+            <h2>Assign Users into {{ role.name }} role</h2>
+        </div>
+    </md-toolbar>
+
+    <md-card ng-show="assign" class="permissions-card">
+        <div layout="row">
+            <md-card-title>
+                <div ng-cloak class='check-item'>
+                    <md-content>
+                        <md-tabs md-dynamic-height md-border-bottom md-selected="selectedTab">
+                            <md-tab ng-click="activeUsers()" label="Users">
+                                <md-content class="flexcroll md-padding">
+                                    <md-card-title-text>
+                                        <div class="assign-input-block">
+                                            <div class="search" layout="row">
+                                                <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                                                <input ng-model="findAllUser"  class="search-contacts" type="text" placeholder="Search">
+                                            </div>
+                                        </div>
+                                        <div ng-repeat="user in users | filter:findAllUser">
+                                            <md-checkbox ng-click="addUsers( user )" ng-hide="user.isHide && isHide" ng-model="user.done" class="check md-icon" aria-label="Checkbox 1">
+                                                <span class="check-text">{{ user.username || user.email }}</span>
+                                            </md-checkbox>
+                                        </div>
+                                    </md-card-title-text>
+                                </md-content>
+                            </md-tab>
+                            <md-tab ng-click="activeGroups()" label="Groups">
+                                <md-content class="flexcroll md-padding">
+                                    <md-card-title-text>
+                                        <div class="assign-input-block">
+                                            <div class="search" layout="row">
+                                                <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                                                <input ng-model="findAllGroup" class="search-contacts" type="text" placeholder="Search">
+                                            </div>
+                                        </div>
+                                        <div ng-repeat="group in groups | filter:findAllGroup">
+                                            <md-checkbox ng-click="addGroups( group )" ng-hide="group.isHide && isHide" ng-model="group.done" class="check md-icon" aria-label="Checkbox 1">
+                                                <span class="check-text">{{ group.name }}</span>
+                                            </md-checkbox>
+                                        </div>
+                                    </md-card-title-text>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+                </div>
+            </md-card-title>
+            <div ng-show="!groupsActive" layout="column" class="button-bar">
+                <md-button ng-click="hideUser()" class="md-raised cancel">
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                </md-button>
+                <md-button ng-click="showUser()" class="md-raised next">
+                    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                </md-button>
+            </div>
+            <div ng-show="groupsActive" layout="column" class="button-bar">
+                <md-button ng-click="hideGroup()" class="md-raised cancel">
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                </md-button>
+                <md-button ng-click="showGroup()" class="md-raised next">
+                    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                </md-button>
+            </div>
+            <md-card-title>
+                <div ng-cloak class='check-item'>
+                    <md-content>
+                        <md-tabs md-dynamic-height md-border-bottom md-selected="selectedTab">
+                            <md-tab ng-click="activeUsers()" label="Users">
+                                <md-content class="flexcroll md-padding">
+                                    <md-card-title-text>
+                                        <div class="assign-input-block">
+                                            <div class="search" layout="row">
+                                                <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                                                <input ng-model="findUser" class="search-contacts" type="text" placeholder="Search">
+                                            </div>
+                                        </div>
+                                        <div ng-repeat="user in roleUsers | filter:findUser">
+                                            <md-checkbox ng-click="removeUsers( user )" ng-model="user.done" class="check md-icon" aria-label="Checkbox 1">
+                                                <span class="check-text">{{ user.username || user.email }}</span>
+                                            </md-checkbox>
+                                        </div>
+                                    </md-card-title-text>
+                                </md-content>
+                            </md-tab>
+                            <md-tab ng-click="activeGroups()" label="Groups">
+                                <md-content class="flexcroll md-padding">
+                                    <md-card-title-text>
+                                        <div class="assign-input-block">
+                                            <div class="search" layout="row">
+                                                <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                                                <input ng-model="findGroup" class="search-contacts" type="text" placeholder="Search">
+                                            </div>
+                                        </div>
+                                        <div ng-repeat="group in roleGroups | filter:findGroup ">
+                                            <md-checkbox ng-click="removeGroups( group )" ng-model="group.done" class="check md-icon" aria-label="Checkbox 1">
+                                                <span class="check-text">{{ group.name }}</span>
+                                            </md-checkbox>
+                                        </div>
+                                    </md-card-title-text>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+                </div>
+            </md-card-title>
+        </div>
+        <div class="bottom-button">
+            <md-button ng-show="assign" ng-click="assign=false;userScope=true" class="md-raised cancel">
+                Previous
+            </md-button>
+            <md-button ng-show="assign" ng-click="saveChanges();cancel()" class="md-raised next">
+                Finish
+            </md-button>
+        </div>
+    </md-card>
+</div>

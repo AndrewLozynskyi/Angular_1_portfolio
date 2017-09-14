@@ -1,0 +1,111 @@
+
+<div class="stats mr20" layout="row">
+
+    <table class="stats-table">
+        <thead>
+            <tr class="stats-header">
+                <th>
+                    <div layout="row">
+                        Department
+                    </div>
+                </th>
+                <th ng-repeat="title in titles">
+                    <div layout="row">
+                        {{ title }}
+                    </div>
+                </th>
+                <th>
+                    <div layout="row">
+                        Dynamic
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="departments-data head-table">
+                <td ng-click="dlt.selectDepartment( 'total' )">
+                    <div layout="row" layout-align="start center">
+                        <span class="upperCase">
+                            {{ totalDepartment.name }}
+                        </span>
+                    </div>
+                </td>
+                <td ng-repeat="item in totalDepartment.items">
+                    <div layout="row" layout-align="start center">
+                        {{ item.value }}
+                    </div>
+                </td>
+                <td>
+                    <div layout="row" layout-align="start center">
+                        <line-chart-mini set-data="totalDepartment.lineChart"></line-chart-mini>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-repeat="department in departments" class="departments-data">
+                <td ng-click="dlt.selectDepartment( department.name )">
+                    <div layout="row" layout-align="start center">
+                        {{ department.name }}
+                    </div>
+                </td>
+                <td ng-repeat="title in titles" ng-click="dlt.selectDepartment( department.name, title )">
+                    <div layout="row" layout-align="start center">
+                        {{ department.items[ title ].value || 0 }}
+                    </div>
+                </td>
+                <td>
+                    <div layout="row" layout-align="start center">
+                        <line-chart-mini set-data="department.lineChart"></line-chart-mini>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer>
+
+        <div class="search" ng-hide="true">
+            <span><i class="fa fa-search" aria-hidden="true"></i></span>
+            <input type="text" ng-model="searchKeyword" placeholder="Search in departments" md-colors="{color: 'primary-400'}">
+        </div>
+
+        <pagination ng-show="dlt.maxPages > 1"
+                    class="pagination" flex
+                    cl-pages="dlt.maxPages"
+                    cl-steps="3"
+                    cl-page-changed="dlt.changePage()"
+                    cl-align="center center"
+                    cl-current-page="dlt.currentPage"></pagination>
+
+        <md-menu class="showby-dropdown" aria-label="Show by">
+            <md-button aria-label="Open menu" ng-click="$mdOpenMenu($event)">
+                <span class="value" hide-xs >Show {{ ( dlt.itemsPerPage == 'all' ) ? 'All' : 'by ' + dlt.itemsPerPage }}</span>
+                <md-icon hide-xs  md-font-set="fa fa-caret-down"></md-icon>
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ng-class="{{ ( dlt.itemsPerPage == 10 ) ? 'active' : '' }}" ng-click="dlt.setItemsPerPage(10)">
+                        Show by 10
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-class="{{ ( dlt.itemsPerPage == 20 ) ? 'active' : '' }}" ng-click="dlt.setItemsPerPage(20)">
+                        Show by 20
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-class="{{ ( dlt.itemsPerPage == 50 ) ? 'active' : '' }}" ng-click="dlt.setItemsPerPage(30)">
+                        Show by 50
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-class="{{ ( dlt.itemsPerPage == 'all' ) ? 'active' : '' }}" ng-click="dlt.setItemsPerPage('all')">
+                        Show All
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+
+        <div style="clear: both;"></div>
+
+    </footer>
+</div>

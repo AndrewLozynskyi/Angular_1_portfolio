@@ -1,0 +1,66 @@
+
+.md-select-menu-container {
+    max-width: 25%;
+    .md-text {
+        color:#bfbfbf;
+    }
+    .md-container {
+        .md-icon {
+            border-color: #474d59;
+        }
+    }
+    .style-scroll {
+        background-color: #292c33;
+        overflow-x:hidden;
+    }
+    md-select-menu {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        max-height: 350px;
+        margin: 0px 13px 0px;
+        .all-countries, .all-departments {
+            border-bottom:1px solid #4d4d4d;
+        }
+        md-chips {
+            background-color: #292c33;
+            overflow: auto;
+            overflow-x: hidden;
+            max-height: 127px;
+            min-height: 127px;
+            .md-chips {
+                box-shadow: none;
+            }
+        }
+    }
+}
+.border {
+    border-top: 1px solid #2fdcda;
+}
+.md-select-menu-container md-chips-wrap  {
+    .md-chip-input-container {
+        display: none;
+    }
+    md-chip {
+        background-color: #292c33;
+        md-icon {
+            color:#474d59;
+            svg {
+                width: 18px;
+                margin-left: 5px;
+            }
+        }
+        span {
+            color: #bfbfbf;
+        }
+    }
+}
+
+.md-select-menu-container.hide-first md-chip:first-child, .md-select-menu-container.hide-first md-chip:first-child {
+    display: none;
+}
+#dep-dropdown, #countr-dropdown {
+    width: 355px;
+    margin-top: 5px;
+    .md-text {
+        color:#bfbfbf;
+    }
+}

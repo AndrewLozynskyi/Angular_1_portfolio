@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html data-ng-app="hrTools">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HR Tools</title>
+
+    <!-- CSS & fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- build:css /css/all.css -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="/bower_components/intl-tel-input/build/css/intlTelInput.css" rel="stylesheet">
+    <!-- endbuild -->
+
+    <link href="/css/app_scss.css" rel="stylesheet">
+
+    <!-- build:js /js/libs.js -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/jquery-extendext/jQuery.extendext.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/moment/min/moment.min.js"></script>
+    <script src="/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="/bower_components/fullcalendar/dist/gcal.js"></script>
+    <script src="/bower_components/d3/d3.min.js"></script>
+    <script src="/bower_components/topojson/topojson.min.js"></script>
+    <script src="/bower_components/datamaps/dist/datamaps.all.min.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-material/angular-material.min.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="/bower_components/angular-ui/build/angular-ui.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/dot/doT.min.js"></script>
+    <script src="/bower_components/angular-fullscreen/src/angular-fullscreen.js"></script>
+    <script src="/bower_components/ng-letter-avatar/dist/ngletteravatar.min.js"></script>
+    <script src="/bower_components/ng-intl-tel-input/dist/ng-intl-tel-input.min.js"></script>
+    <script src="/bower_components/intl-tel-input/build/js/utils.js"></script>
+    <script src="/bower_components/AngularJs-Toaster/toaster.min.js"></script>
+    <script src="/bower_components/socket.io-client/dist/socket.io.js"></script>
+
+    <script src="/js/libs/CountryList.js"></script>
+    <script src="/js/libs/query-builder.js"></script>
+    <script src="/js/libs/croppie.js"></script>
+    <script src="/js/libs/raphael.js"></script>
+    <script src="/js/libs/jquery.mapael.min.js"></script>
+    <script src="/js/libs/maps/world_countries_miller.js"></script>
+    <script src="/js/libs/intlTelInput.js"></script>
+    <script src="/js/libs/gmaps.js"></script>
+    <script src="/js/libs/jResize.js"></script>
+    <!-- endbuild -->
+
+    <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script async defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCdU9H38eF_RcqrxD7NmTNRv94RpMml1mA"></script>
+
+    <!-- build:js /js/core.js -->
+
+    <script src="/js/App.js"></script>
+    <script src="/js/Config.js"></script>
+
+    <script src="/js/dashboard/Dashboard.module.js"></script>
+    <script src="/js/admin/Admin.module.js"></script>
+    <script src="/js/contacts/Contacts.module.js"></script>
+    <script src="/js/profile/Profile.module.js"></script>
+
+    <script src="/js/main/controllers/Sidenav.js"></script>
+
+    <script src="/js/dashboard/controllers/Home.js"></script>
+    <script src="/js/dashboard/controllers/Slider.js"></script>
+    <script src="/js/dashboard/controllers/Calendar.js"></script>
+    <script src="/js/dashboard/controllers/Headcount.js"></script>
+    <script src="/js/dashboard/controllers/Workforce.js"></script>
+    <script src="/js/dashboard/controllers/Attrition.js"></script>
+    <script src="/js/dashboard/controllers/Finance.js"></script>
+    <script src="/js/dashboard/controllers/Absences.js"></script>
+    <script src="/js/dashboard/controllers/Resourcing.js"></script>
+    <script src="/js/dashboard/controllers/Salary.js"></script>
+    <script src="/js/dashboard/controllers/Eod.js"></script>
+    <script src="/js/dashboard/controllers/Fullscreen.js"></script>
+
+    <script src="/js/profile/controllers/Profile.js"></script>
+    <script src="/js/profile/controllers/About.js"></script>
+    <script src="/js/profile/controllers/Contacts.js"></script>
+    <script src="/js/profile/controllers/Teams.js"></script>
+
+    <script src="/js/admin/controllers/Home.js"></script>
+    <script src="/js/admin/controllers/Roles.js"></script>
+    <script src="/js/admin/controllers/Permissions.js"></script>
+    <script src="/js/admin/controllers/User.js"></script>
+    <script src="/js/admin/controllers/Settings.js"></script>
+
+    <script src="/js/contacts/controllers/Contacts.js"></script>
+
+    <script src="/js/admin/services/Roles.js"></script>
+    <script src="/js/admin/services/Settings.js"></script>
+    <script src="/js/admin/services/Admin.js"></script>
+
+    <script src="/js/main/services/Company.js"></script>
+    <script src="/js/main/services/AlertsNotifications.js"></script>
+    <script src="/js/main/services/Auth.js"></script>
+    <script src="/js/main/services/Users.js"></script>
+    <script src="/js/main/services/Groups.js"></script>
+    <script src="/js/main/services/Settings.js"></script>
+    <script src="/js/main/services/Teams.js"></script>
+
+    <script src="/js/contacts/services/Contacts.js"></script>
+
+    <script src="/js/profile/services/ProfileContacts.js"></script>
+
+    <script src="/js/contacts/directives/AddContactsToGroups.js"></script>
+
+    <script src="/js/dashboard/services/Utils.js"></script>
+    <script src="/js/dashboard/services/Salary.js"></script>
+    <script src="/js/dashboard/services/Filters.js"></script>
+    <script src="/js/dashboard/services/Targets.js"></script>
+    <script src="/js/dashboard/services/CalendarEvents.js"></script>
+    <script src="/js/dashboard/services/Headcount.js"></script>
+    <script src="/js/dashboard/services/Workforce.js"></script>
+    <script src="/js/dashboard/services/Attrition.js"></script>
+    <script src="/js/dashboard/services/Finance.js"></script>
+    <script src="/js/dashboard/services/Home.js"></script>
+
+    <script src="/js/dashboard/factories/Filters.js"></script>
+
+    <script src="/js/dashboard/directives/Calendar.js"></script>
+    <script src="/js/dashboard/directives/HeadcountTable.js"></script>
+    <script src="/js/dashboard/directives/AttritionCountryTable.js"></script>
+    <script src="/js/dashboard/directives/AttritionDepartmentStats.js"></script>
+    <script src="/js/dashboard/directives/Pagination.js"></script>
+    <script src="/js/dashboard/directives/GeoChart.js"></script>
+    <script src="/js/dashboard/directives/GeoCirclesChart.js"></script>
+    <script src="/js/dashboard/directives/LineChart.js"></script>
+    <script src="/js/dashboard/directives/LineChartMini.js"></script>
+    <script src="/js/dashboard/directives/SalaryLineChartMini.js"></script>
+    <script src="/js/dashboard/directives/AreaChart.js"></script>
+    <script src="/js/dashboard/directives/PieChart.js"></script>
+    <script src="/js/dashboard/directives/EmployeeTable.js"></script>
+    <script src="/js/dashboard/directives/DepartmentsListTable.js"></script>
+    <script src="/js/dashboard/directives/DepartmentStats.js"></script>
+    <script src="/js/dashboard/directives/DonutCharts.js"></script>
+    <script src="/js/dashboard/directives/AttritionDonutCharts.js"></script>
+    <script src="/js/dashboard/directives/SalaryDonutCharts.js"></script>
+    <script src="/js/dashboard/directives/AvarageSalary.js"></script>
+    <script src="/js/dashboard/directives/AvarageSalaryDepartments.js"></script>
+    <script src="/js/dashboard/directives/AvarageAnnualised.js"></script>
+    <script src="/js/dashboard/directives/AvarageAnnualisedDepartment.js"></script>
+    <script src="/js/dashboard/directives/DepartmentDropdown.js"></script>
+    <script src="/js/dashboard/directives/CountryDropdown.js"></script>
+    <script src="/js/dashboard/directives/TabTitle.js"></script>
+    <script src="/js/dashboard/directives/FilterList.js"></script>
+    <script src="/js/dashboard/directives/UploadPopup.js"></script>
+    <script src="/js/dashboard/directives/TargetPopup.js"></script>
+    <script src="/js/dashboard/directives/FilterPopup.js"></script>
+    <script src="/js/dashboard/directives/NewFilterPopup.js"></script>
+    <script src="/js/dashboard/directives/RectangularChart.js"></script>
+    <script src="/js/dashboard/directives/GradientChart.js"></script>
+    <script src="/js/dashboard/directives/radialChart.js"></script>
+    <script src="/js/dashboard/directives/MultiLineChart.js"></script>
+    <script src="/js/dashboard/directives/TotalFinanceTable.js"></script>
+    <script src="/js/dashboard/directives/SalaryDepartmentsTable.js"></script>
+    <script src="/js/dashboard/directives/HeadcountWidget.js"></script>
+    <script src="/js/dashboard/directives/WorkforceWidget.js"></script>
+    <script src="/js/dashboard/directives/AbsencesWidget.js"></script>
+    <script src="/js/dashboard/directives/AttritionWidget.js"></script>
+    <script src="/js/dashboard/directives/FinanceWidget.js"></script>
+    <script src="/js/dashboard/directives/DynamicSalary.js"></script>
+    <script src="/js/dashboard/directives/SimpleChartDynamicTable.js"></script>
+    <script src="/js/dashboard/directives/AvarageAnnualizedSalaryTable.js"></script>
+    <script src="/js/dashboard/directives/AvarageAnnulizedSalaryChart.js"></script>
+    <script src="/js/dashboard/directives/SalaryLineChart.js"></script>
+
+    <script src="/js/main/directives/AppLeftMenu.js"></script>
+    <script src="/js/main/directives/AppRightMenu.js"></script>
+    <script src="/js/main/directives/AppHeader.js"></script>
+    <script src="/js/main/directives/AppFooter.js"></script>
+    <script src="/js/main/directives/NotificationMenu.js"></script>
+    <script src="/js/main/directives/CloseAvatarPopup.js"></script>
+    <script src="/js/main/directives/ClientLogoPopup.js"></script>
+    <script src="/js/main/directives/HappyBirthday.js"></script>
+
+
+    <script src="/js/profile/directives/UserpicPopup.js"></script>
+    <script src="/js/profile/directives/SalaryGraph.js"></script>
+    <script src="/js/profile/directives/AddContactsToGroup.js"></script>
+    <script src="/js/profile/directives/TotalLinear.js"></script>
+    <script src="/js/profile/directives/AvarageAge.js"></script>
+    <script src="/js/profile/directives/AddSocialNetwork.js"></script>
+    <script src="/js/profile/directives/TeamTable.js"></script>
+    <script src="/js/profile/directives/TeamDetails.js"></script>
+    <script src="/js/profile/directives/NationalityChart.js"></script>
+    <script src="/js/profile/directives/Ethnicity.js"></script>
+    <script src="/js/profile/directives/Gender.js"></script>
+    <script src="/js/profile/directives/AddNewCourse.js"></script>
+    <script src="/js/profile/directives/AttachPopup.js"></script>
+    <script src="/js/profile/directives/GradesTeam.js"></script>
+    <script src="/js/profile/directives/TeamUsersTable.js"></script> 
+    <script src="/js/profile/directives/TeamLineChart.js"></script> 
+    
+    <script src="/js/admin/directives/CreateRole.js"></script>
+    <script src="/js/admin/directives/DeleteRole.js"></script>
+    <script src="/js/admin/directives/DeleteRoleTwo.js"></script>
+    <script src="/js/admin/directives/RoleTable.js"></script>
+    <script src="/js/admin/directives/RoleDetails.js"></script>
+    <script src="/js/admin/directives/RoleDetailsPermissions.js"></script>
+    <script src="/js/admin/directives/RoleDetailsUsers.js"></script>
+    <script src="/js/admin/directives/RoleDetailsGroups.js"></script>
+    <script src="/js/admin/directives/RoleDetailsScope.js"></script>
+    <script src="/js/admin/directives/AdminCountryDropdown.js"></script>
+    <script src="/js/admin/directives/AdminDepartmentDropdown.js"></script>
+    <script src="/js/admin/directives/PermissionEditConfirm.js"></script>
+    <script src="/js/admin/directives/Autofocus.js"></script>
+    <script src="/js/admin/directives/AssignToRole.js"></script>
+    <script src="/js/admin/directives/AssignNewGroup.js"></script>
+
+    <!-- endbuild -->
+
+    <script src="/views/templates.js"></script>
+
+    <script>
+
+        var userData = {
+
+            uid:        '<$ user.uid $>',
+            firstName:  '<$ user.firstName $>',
+            lastName:   '<$ user.lastName $>',
+            username:   '<$ user.username $>',
+            userpic:    '<$ user.userpic $>',
+            email:      '<$ user.email $>',
+            status:     '<$ user.status $>',
+
+        };
+
+    </script>
+
+</head>
+
+<body layout="row">
+
+    <section flex layout="row" ng-controller="sidenav.controller as sidenav">
+        <app-left-menu></app-left-menu>
+        <app-right-menu></app-right-menu>
+        <div flex layout="column" style="height: 100%; overflow: auto;">
+            <app-header></app-header>
+            <md-content class="app-content" ng-class="{contactsProfileScroll: enableContactsProfileLeftMenu.enable}">
+                <div class="app-content-wrapper">
+                    <div class="header-square"></div>
+                    <ui-view class="view"></ui-view>
+                    <app-footer></app-footer>
+                </div>
+                <div ng-click="topFunction()" class="btn-scroll-top">
+                    <div class="arrow"><i class="material-icons">&#xE316;</i></div>
+                </div>
+            </md-content>
+        </div>
+    </section>
+    <div class="toaster-block">
+        <toaster-container toaster-options="{'newest-on-top':true}"></toaster-container>
+    </div>
+</body>
+
+</html>

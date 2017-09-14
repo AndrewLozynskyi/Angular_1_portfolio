@@ -1,0 +1,9 @@
+<div id="teams-card">
+    <md-progress-circular ng-if="showBackground" md-diameter="40px"></md-progress-circular>
+</div>
+<md-card class="teams teams-card">
+
+    <team-table show-det="tc.showDet" ng-show="tc.showDet === false"></team-table>
+    <team-details employees-data="tc.employeesData" team-data="tc.teamData" show-det="tc.showDet" ng-if="tc.showDet === true"></team-details>
+
+</md-card>

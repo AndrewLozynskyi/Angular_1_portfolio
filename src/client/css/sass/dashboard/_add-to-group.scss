@@ -1,0 +1,169 @@
+
+.mobile-add {
+    height: 240px;
+    min-width: 400px;
+    background: #292e34;
+    .mobile-add-to-group-btn {
+        margin:0;
+        md-card-header {
+            padding: 21px 15px;
+            color: rgb(63, 68, 79);
+            background-color: rgb(34, 36, 43);
+            md-title {
+                display: inline-flex;
+                p {
+                    font: 400 14px Roboto;
+                    margin: 0;
+                }
+                md-subhead {
+                    position: absolute;
+                    right: 17px;
+                    font: 200 16px Roboto;
+                    cursor: pointer;
+                }
+            }
+        }
+        md-card {
+            margin: 0;
+            .containers {
+                display: flex;
+                color: rgb(191, 191, 191);
+                font: 15px Roboto;
+                margin: 0 11px;
+                p {
+                    float: left;
+                    margin: 0;
+                    line-height: 31px;
+                    margin-right: 13px;
+                }
+                .name {
+                    float: left;
+                    background-color: rgb(36, 37, 43);
+                    border: 0;
+                    width: 230px;
+                    padding: 6px 10px;
+                    border-radius: 4px;
+                }
+            }
+            md-input-container {
+                display: flex;
+                color: #bfbfbf;
+                font: 15px Roboto;
+                margin: 0 10px;
+                margin-top: 15px;
+                p {
+                    float: left;
+                    margin: 0;
+                    line-height: 45px;
+                    margin-right: 13px;
+                }
+                md-select {
+                    float: left;
+                    border: 0px;
+                    width: 330px;
+                    padding: 0;
+                    border-radius: 4px;
+                    font: 14px Roboto;
+                    padding: 6px 0;
+                    background-color: #292C33 !important;
+                    .inherit-text {
+                        white-space: inherit;
+                    }
+                    md-select-value {
+                        padding-left: 10px;
+                        padding-bottom: 10px;
+                        span {
+                            white-space: inherit;
+                            color: #bfbfbf;
+                        }
+                        .md-select-icon {
+                            color: rgb(48, 219, 218);
+                        }
+                    }
+                }
+            }
+        }
+        .btn-container {
+            width: 190px;
+            position: absolute;
+            right: 0;
+            bottom: 16px;
+            margin-right: 10px;
+            background-color: #292C33;
+            .save-btn {
+                background-color: rgb(27, 169, 169);
+                color: rgb(255, 255, 255);
+                cursor: pointer;
+            }
+            .cancel-btn {
+                background-color: rgb(34, 36, 43);
+                color: rgb(191, 191, 191);
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.activeSlide {
+    background-color: #292C33;
+}
+
+.bottom-block {
+    border-top: 1px solid rgb(64, 70, 80);
+    background-color: #292C33;
+    &:hover {
+        background-color: rgb(57, 60, 67);
+        cursor: pointer;
+    }
+    .new-group {
+        width: 100%;
+        padding: 10px;
+        margin: 0px;
+        text-align: left;
+        border-radius: 0px;
+        span {
+            color: #72929c;
+        }
+        &:hover {
+            background-color: rgb(57, 60, 67);
+        }
+        &:active {
+            background-color: rgb(57, 60, 67);;
+        }
+    }
+}
+
+.btns {
+    margin: 15px 0;
+    text-align: end;
+    position: relative;
+    right: 7px;
+    .cancel {
+        color: #fff;
+        background-color: rgb(36, 37, 43);
+    }
+    .save {
+        color: #fff;
+        background-color: rgb(23, 167, 167);
+    }
+}
+
+.div-input {
+    width: 93%;
+    border: 0;
+    background: #24252b;
+    color: gray;
+    margin: 13px 13px 0;
+    height: 28px;
+    border-radius: 4px;
+    padding: 0 10px 0 10px;
+    line-height: 28px;
+    &:empty {
+        content:attr(data-placeholder);
+        color:gray
+    }
+    &:before {
+        content:attr(data-placeholder);
+        color:gray
+    }
+}

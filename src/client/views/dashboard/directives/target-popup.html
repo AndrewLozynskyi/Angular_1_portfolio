@@ -1,0 +1,34 @@
+
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <span>Target and critical trend values monthly</span>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="tp.cancel()">
+            <md-icon aria-label="Close dialog">close</md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-dialog-content>
+    <div class="md-dialog-content">
+        <div class="target-title">Input Target Headcount</div>
+        <div class="date">17,234 - Headcount for June 2016</div>
+        <div class="select-year-container">
+            <div class="select-year">
+                <md-button ng-repeat="year in tp.years" ng-click="tp.selectYear($event)">{{ year }}</md-button>
+            </div>
+            <span flex></span>
+            <md-checkbox class="all-year" nd-model="tp.allYear" aria-label="Set for All Year">Set for All Year </md-checkbox>
+        </div>
+        <md-input-container ng-repeat="month in tp.months">
+            <input md-no-asterisk placeholder="{{month}}">
+        </md-input-container>
+        <md-checkbox class="notification" nd-model="tp.recNot" aria-label="Receive Notification">Receive Notifications about Critical Number of Headcount</md-checkbox>
+    </div>
+</md-dialog-content>
+
+<md-dialog-actions>
+    <span flex></span>
+    <md-button class="md-raised target-cancel" ng-click="tp.cancel()">Cancel</md-button>
+    <md-button class="target-save" ng-click="null">Save</md-button>
+</md-dialog-actions>

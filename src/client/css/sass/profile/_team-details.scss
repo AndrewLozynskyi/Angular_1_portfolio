@@ -1,0 +1,194 @@
+.nationality-chart {
+    margin-top: -90px;
+        max-width: none;
+    .geo-circles-chart {
+        .map_container {
+            padding-top: 5px;
+        }
+    }
+}
+
+.avarage-age {
+    margin-left: 120px;
+    margin-top: 35px;
+    margin-bottom: 150px;
+    .legend {
+        margin-left: 95px;
+        #age-item {
+            max-width: 100%;
+        }
+    }
+    .arrow-down-icon {
+        font-size: 20px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .arrow-number {
+        font-size: 8px;
+        margin-left: -15px;
+        color: #bfbfbf;
+        line-height: 11px;
+        font-weight: 700;
+    }
+    .avarage-title {
+        color: #bfbfbf;
+        font-size: 14 px;
+        padding: 0;
+    }
+    .avarage-circle {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 19px;
+        .circle {
+            border-radius: 50%;
+            margin-top: 3px;
+            width: 13px;
+            height: 13px;
+        }
+        .age-count {
+            color: #bfbfbf;
+        }
+    }
+    .age-list {
+        margin-left: -110px;
+        margin-top: -20px;
+    }
+    .pie-chart {
+        margin-top: -20px;
+        .slice {
+            &:hover {
+                .hover {
+                    fill: rgba(36, 169, 136, 0.1);
+                }
+            }
+        }
+        .hover {
+            fill: transparent;
+            -moz-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        section {
+            width: 100%;
+            background: inherit;
+        }
+        .tooltip {
+            width: 210px;
+            transform: translate(-50%, -120%);
+        }
+    }
+    .circle {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        margin-left: 20px;
+        margin-right: 5px;
+    }
+    .selected {
+        background: #33363d;
+    }
+    .un-selected {
+        background: transparent;
+    }
+}
+
+.team-map {
+    color: #bfbfbf;
+    font-weight: 400;
+    margin: 30px 0 3px 15px;
+    width: 430px;
+    .team-icon {
+        margin: 0;
+    }
+    .team-name {
+        color: #bfbfbf;
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
+.ethnicity-chart-body {
+    .ethnicity {
+        margin: -58px 0 0 129px;
+        .chart div {
+            font: 10px sans-serif;
+            background-color: #ce7182;
+            text-align: right;
+            padding: 3px;
+            margin: 22px;
+            color: white;
+            height: 12px
+        }
+        .chart p {
+            margin-left: -24px;
+            margin-top: -5px;
+            font-family: Roboto;
+            color: #4f5055;
+            font-size: 14px;
+        }
+        .chart span {
+            display: flex;
+            font-family: Roboto;
+            color: #bfbfbf;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 30px;
+            white-space: pre;
+        }
+
+    }
+    .ethnicity-title {
+        margin: -58px 0 78px 58px;
+       .ethnicity-icon {
+            margin: 0;
+        }
+        .ethnicity-name {
+            color: #bfbfbf;
+            font-size: 16px;
+            font-weight: 400;
+        }
+    }
+}
+.gender-chart-body {
+    .gender {
+        margin: -58px 0 0 129px;
+        .gender-chart div {
+            font: 10px sans-serif;
+            background-color:  #1f52ae;
+            text-align: right;
+            padding: 3px;
+            margin: 22px;
+            color: white;
+            height: 12px
+        }
+        .gender-chart p {
+            margin-left: -24px;
+            margin-top: -5px;
+            font-family: Roboto;
+            color: #4f5055;
+            font-size: 14px;
+        }
+        .gender-chart span {
+            display: flex;
+            font-family: Roboto;
+            color: #bfbfbf;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 30px;
+        }
+
+    }
+    .gender-title {
+        margin: -58px 0 78px 58px;
+        .gender-icon {
+            margin: 0;
+        }
+        .gender-name {
+            color: #bfbfbf;
+            font-size: 16px;
+            font-weight: 400;
+        }
+    }
+}
+

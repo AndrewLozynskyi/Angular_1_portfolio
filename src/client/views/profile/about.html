@@ -1,0 +1,543 @@
+
+<md-card>
+
+    <section hide-xs class="ink-color">
+        <div style="min-height:98px">
+        <div id="mainMenuBarAnchor"></div>
+            <md-card-title class ="stickyNavPanel mainMenuBar" id="sticky" >
+                <md-tabs flex md-selected="selectedTab">
+                    <md-tab id="sel1" label="Summary" ng-click="goToElement('summary');" ></md-tab>
+                    <md-tab id="sel2" label="Work Experience" ng-click="goToElement('workExp')"></md-tab>
+                    <md-tab id="sel3" label="Compensation history" ng-click="goToElement('sallary')"></md-tab>
+                    <md-tab id="sel4" label="Contacts" ng-click="goToElement('contacts')"></md-tab>
+                </md-tabs>
+            </md-card-title>
+        </div>
+    </section>
+
+    <section id="summary" class="md-whiteframe-3dp summary pb10 ml10 mr10 mrb35 bg-gray" style="overflow: hidden; min-height: 335px;">
+        <md-card-title class="mt20 mrb40">
+            <md-card-title-text>
+                <span class="md-headline show-info summary-title">Summary
+                    <md-button ng-if="isBlockEditing.summary"  hide-xs aria-label="Open more menu" class="save-summary md-icon-button" ng-click="saveSummary()">
+                        <i class="fa fa-floppy-o" aria-hidden="true" ng-if="isBlockEditing.summary"></i>
+                    </md-button>
+                    <md-button hide-gt-xs ng-click="active = !active" aria-label="Open more menu" class="md-icon-button">
+                        <md-icon ng-show="!active" md-font-set="md" class="arrow-down">keyboard_arrow_down</md-icon>
+                        <md-icon ng-show="active" md-font-set="md">keyboard_arrow_up</md-icon>
+                    </md-button>
+                </span>
+                <div class="slideDown" layout="column" ng-hide="!active">
+                    <span class="md-subhead" ng-if="!isBlockEditing.summary">{{ user.summary }}</span>
+                    <md-input-container ng-if="isBlockEditing.summary" style="width:100%; border: 1px solid grey; display: none">
+                        <textarea autofocus rows="4" ng-model="user.summary" required md-maxlength="500" ></textarea>
+                    </md-input-container>
+                    <div layout-xs="column" layout="row" class="summary-info">
+                        <div class="column" layout="column">
+                            <span class="title">ADDITIONAL</span>
+                        </div>    
+                    </div>
+                    <div layout-xs="column" layout="row" class="summary-info">
+                        <div class="column date-block" layout="row">
+                            <span class="description date-star">Date of birth<span class="star" ng-if="isBlockEditing.summary">*</span>:</span>
+                            <span class="description mounth" style="padding-left: 10px;" ng-if="!isBlockEditing.summary">
+                                {{ user.dateOfBirth | date: 'dd/MM/yyyy' }}
+                            </span>
+                            <md-datepicker class="" ng-model="user.dateOfBirth" md-min-date="minDate" md-max-date="maxDate" ng-if="isBlockEditing.summary"></md-datepicker>
+                        </div>
+                        <div ng-class = "{'edit-age': isBlockEditing.summary}" class="column age-block" layout="row">
+                            <span class="description">Age</span>
+                            <span class="description">
+                               &nbsp;{{user.age}}
+                            </span>
+                        </div>
+                    </div>
+                    <div layout-xs="column" layout="row" class="summary-info">
+                        <div class="column gender-width" layout="column" class="md-select-menu-container  hov md-active md-clickable material-status">
+                            <span class="title">Gender</span>
+                            <span class="description" ng-show="!isBlockEditing.summary">
+                                {{ ( user.gender == 'F' ) ? 'Female' : 'Male' }}
+                            </span>
+                            <md-select ng-model="user.gender" placeholder="Gender" class="md-no-underline seleMartMar" ng-hide="!isBlockEditing.summary">
+                                <md-content class="contents-option">
+                                    <md-option class="opt" value="M">Male</md-option>
+                                    <md-option class="opt" value="F">Female</md-option>
+                                </md-content>
+                            </md-select>
+                        </div>
+                        <div class="column ml60 gender-width" layout="column" class="md-select-menu-container hov md-active md-clickable material-status ">
+                            <span class="title">Marital Status</span>
+                            <span class="description" ng-show="!isBlockEditing.summary">
+                                {{ getMartialStatus( user.maritalStatus ) }}
+                            </span>
+                            <md-select ng-model="user.maritalStatus" placeholder="Martial status" class="md-no-underline seleMartMar" ng-hide="!isBlockEditing.summary">
+                                <md-content class="contents-option">
+                                    <md-option class="opt" value="S">Single</md-option>
+                                    <md-option class="opt" value="D">Divorced</md-option>
+                                    <md-option class="opt" value="W">Widowed</md-option>
+                                    <md-option class="opt" value="M">Married</md-option>
+                                </md-content>
+                            </md-select>
+                        </div>
+                        <div class="column ml60 gender-width" layout="column" class="md-select-menu-container hov md-active md-clickable material-status ">
+                            <span class="title">Nationality</span>
+                            <span class="description" ng-show="!isBlockEditing.summary">
+                                {{ user.nationality }}
+                            </span>
+                            <input type="text" class="inputE" ng-hide="!isBlockEditing.summary" ng-model="user.nationality" >
+                        </div>
+                    </div>
+                </div>
+            </md-card-title-text>
+            <md-card-title-media hide-xs class="pt5" ng-if="showEditButtons">
+                <md-menu md-offset="-60 0">
+                    <md-button aria-label="Open more menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                        <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+                    </md-button>
+                    <md-menu-content width="2">
+                        <md-menu-item>
+                            <md-button ng-click="editBlock('summary')" aria-label="button">
+                                <img class="edit-icon" src="/img/profile-pics/edit-icon.png" alt="">
+                                <span class="dot-menu-item">&nbsp; Edit</span>
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </md-card-title-media>
+        </md-card-title>
+    </section>
+
+    <section id="workExp" class="md-whiteframe-3dp ml10 mr10 mb2 mrb35 bg-gray work-experience" style="overflow: hidden;">
+        <md-card-title class="mt20">
+            <md-card-title-text>
+                <span class="md-headline show-info">Work Experience
+                    <md-button hide-gt-xs ng-click="activeWork = !activeWork" aria-label="Open more menu" class="md-icon-button">
+                        <md-icon ng-show="!activeWork" md-font-set="md" class="arrow-down">keyboard_arrow_down</md-icon>
+                        <md-icon ng-show="activeWork" md-font-set="md">keyboard_arrow_up</md-icon>
+                    </md-button>
+                </span>
+                <div ng-hide="!activeWork" class="slideDown work-experience-section" ng-repeat="job in workExpirience track by $index">
+                    <span class="md-headline work" >{{ job.jobTitle }}</span>
+                    <i class="fa fa-floppy-o save-btn" aria-hidden="true" ng-click="saveWorkExperiance( job )" hide-skills="hideSkillsContainer()" ng-show="job.editSkills" ></i>
+                    <md-menu md-offset="-60 0" ng-if="showEditButtons">
+                        <md-button aria-label="Open more menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                            <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+                        </md-button>
+                        <md-menu-content width="2">
+                            <md-menu-item>
+                                <md-button ng-click="job.editSkills = true" hide-skills="hideSkillsContainer()" hide-xs aria-label="Open more menu" class="threeDot-menu" ng-click="editBlock('workExp' + $index)">
+                                    <img class="edit-icon" src="/img/profile-pics/edit-icon.png" alt="">
+                                    <span class="dot-menu-item">&nbsp; Edit</span>
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                    <div layout="row" class="mt20">
+                        <span class="title">Company</span>
+                        <span class="description company" ng-if="!isBlockEditing['workExp' + $index]">{{ job.company }}</span>
+                        <input type="text" class="inputE" ng-if="isBlockEditing['workExp' + $index]" ng-model="job.company">
+                    </div>
+                    <div layout="row">
+                        <span class="title">Location</span>
+                        <span class="description" ng-if="!isBlockEditing['workExp' + $index]">{{ job.city }}, {{ job.country }}</span>
+                        <input type="text" class="inputE" ng-if="isBlockEditing['workExp' + $index]" ng-model="job.officeLocationCode">
+                    </div>
+                    <div layout="row">
+                        <span class="title">Duration</span>
+                        <span class="description">
+                            {{ job.jobStartDate | date: 'MMMM yyyy' }}
+                            -
+                            {{ ( job.jobEndDate ) ? ( job.jobEndDate | date : 'MMMM yyyy' ) : 'To date' }}
+                            ({{ getDuration( job.jobStartDate, job.jobEndDate ) }})
+                        </span>
+                    </div><br>
+                    <div layout="row">
+                        <span class="title">Department</span>
+                        <span class="description" ng-if="!isBlockEditing['workExp' + $index]">{{ job.department }}</span>
+                        <input type="text" class = "inputE" ng-if="isBlockEditing['workExp' + $index]" ng-model="job.department" >
+                    </div>
+                    <div layout="row">
+                        <span class="title">Contact type</span>
+                        <span class="description" ng-if="!isBlockEditing['workExp' + $index]">{{ job.perm }}</span>
+                        <input type="text" class = "inputE" ng-if="isBlockEditing['workExp' + $index]" ng-model="job.perm" >
+                    </div>
+                    <div layout="row">
+                        <span class="title">Person type</span>
+                        <span class="description" ng-if="!isBlockEditing['workExp' + $index]">{{ job.personType }}</span>
+                        <input type="text" class = "inputE" ng-if="isBlockEditing['workExp' + $index]" ng-model="job.personType" >
+                    </div>
+                    <div layout="row" ng-show="job.agileJobTitle">
+                        <span class="title">Agile title</span>
+                        <span class="description" ng-if="!isBlockEditing['workExp' + $index]">{{ job.agileJobTitle }}</span>
+                        <input type="text" class = "inputE" ng-if="isBlockEditing['workExp' + $index]" ng-model="job.agileJobTitle" >
+                    </div><br>
+                    <div class="mb20" layout-xs="column" layout="row">
+                        <span class="title skills">Skills</span>
+                        <div class="description">
+                            <span ng-show="!job.editSkills" hide-skills="hideSkillsContainer()">{{ getSkills( job.skills ) }}</span>
+                            <div layout="row" ng-cloak>
+                                <md-chips hide-skills="hideSkillsContainer()" class="loginBox md-chips-wrap" ng-show="job.editSkills" id="main" ng-model="job.skills" name="skillName" readonly="readonly" md-removable="removable">
+                                    <md-chip-template>
+                                        <strong>{{ $chip }}</strong>
+                                    </md-chip-template>
+                                </md-chips>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="work-down">Manager</span>
+                    <div layout="row" class="work-info mt20">
+                        <div flex layout="column" class="left-avatar">
+                            <ng-letter-avatar dynamic="true" width="50" height="50" fontSize="18" charCount="2" data="{{ job.supervisorName }}" shape="round"></ng-letter-avatar>
+                        </div>
+                        <div flex layout="column">
+                            <span layout-xs="column" class="md-title mini-profile">
+                                <span name><b>{{ job.supervisorName }}</b></span>
+                                <span show-gt-xs>|</span>
+                                <span mini-work>{{ job.managerStartDate | date : 'MMMM yyyy' }} - {{ ( job.managerEndDate ) ? ( job.managerEndDate | date : 'MMMM yyyy' ): 'To date' }}</span>
+                            </span>
+                            <span class="mini-data">{{ job.managerStartDate | date : 'MMMM yyyy' }}</span><br>
+                            <span class="md-headline mini-description" ng-show="job.managerFeedback">{{ job.managerFeedback }}</span><br>
+                        </div>
+                    </div>
+                </div>
+            </md-card-title-text>
+        </md-card-title>
+
+    </section>
+
+    <section id="courses">
+
+        <section class="md-whiteframe-3dp ml10 mr10 bg-gray courses">
+            <md-card-title class="card-courses mt20 mbr30">
+                <md-card-title-text>
+                    <span class="md-headline show-info" layout="row">
+                        <p>Courses</p>
+                        <md-button hide-gt-xs ng-click="activeCourse = !activeCourse" aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!activeCourse" md-font-set="md" class="arrow-down">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="activeCourse" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        <md-button ng-if="isBlockEditing.courses" hide-xs aria-label="Open more menu" class="md-icon-button save-btn" ng-click="saveCourses()">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                        </md-button>
+                    </span>
+                </md-card-title-text>
+                <md-card-title-media hide-xs class="pt5" ng-if="showEditButtons">
+                    <md-menu md-offset="-60 0">
+                        <md-button aria-label="Open more menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                            <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+                        </md-button>
+                        <md-menu-content width="2">
+                            <md-menu-item>
+                                <md-button ng-click="isBlockEditing.courses = true" aria-label="button">
+                                    <img class="edit-icon" src="/img/profile-pics/edit-icon.png" alt="">
+                                    <span class="dot-menu-item">&nbsp; Edit</span>
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-card-title-media>
+            </md-card-title>
+        </section>
+
+        <section class="md-whiteframe-3dp ml10 mr10 mb2 bg-gray courses" style="overflow: hidden;" ng-repeat="n in courses track by $index">
+            <md-card-title class="mt20 mrb20 card-courses">
+                <md-card-title-text>
+                    <div layout='column' class="slideDown" ng-hide="!activeCourse">
+                        <div layout="row">
+                            <span class="title">Course Name</span>
+                            <span class="courses name" ng-if="!isBlockEditing.courses" >{{ n.coursName }}</span>
+                            <input type="text" class="inputE" ng-model="courses[$index].coursName" ng-if="isBlockEditing.courses">
+                        </div>
+                        <div layout="row">
+                            <span class="title provider-title">Provider</span>
+                            <span class="courses provider" ng-if="!isBlockEditing.courses">{{ n.provider }}</span>
+                            <input type="text" class="inputE" ng-model="courses[$index].provider" ng-if="isBlockEditing.courses">
+                        </div>
+                        <div layout="row">
+                            <span class="title webSite-title">Website</span>
+                            <span class="courses webSite" ng-if="!isBlockEditing.courses">{{ n.webSite }}</span>
+                            <input type="text" class="inputE" ng-model="courses[$index].webSite" ng-if="isBlockEditing.courses">
+                        </div>
+                        <div layout="row">
+                            <span class="title finished-title">Finished</span>
+                            <span class="courses finished" ng-if="!isBlockEditing.courses">{{ n.finished | date:'MMMM yyyy' }}</span>
+                            <md-datepicker ng-if="isBlockEditing.courses" class="blink datePickerMarg" ng-model="courses[$index].finished" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+                        </div>
+                        <md-button class="attach-btn" aria-label="button" ng-click="null">
+                            <i class="fa fa-upload" aria-hidden="true"></i>
+                            <span>Attach Certificate</span>
+                        </md-button>
+                    </div>
+                </md-card-title-text>
+                <i class="fa fa-times" ng-if="isBlockEditing.courses" aria-hidden="true" ng-click="removeCourse( $index )"></i>
+            </md-card-title>
+        </section>
+
+        <section id="add-course" class="md-whiteframe-3dp ml10 mr10 mrb35 bg-gray courses">
+            <md-list class="flex-item" ng-show="addCourseshowAddOneButton">
+                <md-card-title class="mrb15 card-courses">
+                    <md-card-title-text>
+                        <md-button ng-click="addCourse()" class="headline add-course-btn" aria-label="button">+ Add course</md-button>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-list>
+            <add-new-course show="addnewCourse" ng-show="addCourseshowDirective"></add-new-course>
+        </section>
+
+    </section>
+
+    <section id="sallary" class="md-whiteframe-3dp ml10 mr10 mrb35 bg-gray courses salary-graph" style="overflow: hidden;">
+        <md-card-title class="mt20 mbr30">
+            <md-card-title-text>
+                <p class="md-headline show-info">Compensation history
+                    <md-button hide-gt-xs ng-click="activeSalary = !activeSalary" aria-label="Open more menu" class="md-icon-button">
+                        <md-icon ng-show="!activeSalary" md-font-set="md" class="arrow-down">keyboard_arrow_down</md-icon>
+                        <md-icon ng-show="activeSalary" md-font-set="md">keyboard_arrow_up</md-icon>
+                    </md-button>
+                </p>
+                <div ng-hide="!activeSalary" class="slideDown">
+                    <salary-graph set-data="salaryData"></salary-graph>
+                </div>
+            </md-card-title-text>
+            <md-card-title-media class="pt5" ng-if="showEditButtons">
+                <md-menu hide-xs md-offset="-60 0">
+                    <md-button aria-label="Open more menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                        <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+                    </md-button>
+                    <md-menu-content width="2"></md-menu-content>
+                </md-menu>
+            </md-card-title-media>
+        </md-card-title>
+    </section>
+
+    <section>
+
+        <section id="contacts" class="md-whiteframe-3dp ml10 mr10 mb2 bg-gray contact-info">
+            <md-card-title class="mt20 mbr30">
+                <md-card-title-text>
+                    <p class="md-headline show-info">
+                        Contact Info
+                        <md-button hide-gt-xs ng-click="activeContact = !activeContact;addClass()" aria-label="Open more menu" class="md-icon-button">
+                            <md-icon ng-show="!activeContact" md-font-set="md" class="arrow-down">keyboard_arrow_down</md-icon>
+                            <md-icon ng-show="activeContact" md-font-set="md">keyboard_arrow_up</md-icon>
+                        </md-button>
+                        <md-button id="save-icon-button" ng-if="isBlockEditing.contactInfo" aria-label="Open more menu" class="md-icon-button save-icon-button" ng-click="saveContacts();removeClass()">
+                            <i class="fa fa-floppy-o" aria-hidden="true" ng-if="isBlockEditing.contactInfo"></i>
+                        </md-button>
+                    </p>
+                    <div class="slideDown" ng-hide="!activeContact" layout-xs="column" layout="row">
+                        <md-list>
+                            <div class="work-contacts contacts-area">
+                                <div class="contacts-area-header">WORK CONTACTS</div>
+                                <md-list-item class="md-2-line" >
+                                    <div class="md-list-item-text">
+                                        <h3 class="title">Work Email</h3>
+                                        <a href="" class="description link" ng-hide="isBlockEditing.contactInfo">
+                                            {{ user.contactInfo.workEmail }}
+                                        </a>
+                                        <input type="text" class="inputEs" ng-model="user.contactInfo.workEmail" ng-show="isBlockEditing.contactInfo">
+                                        <md-icon class="icon-info" md-font-set="md" style="position:absolute">mail_outline</md-icon>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line md-list-picker" >
+                                    <div class="md-list-item-text">
+                                        <md-icon class="icon-info" md-font-set="md">phone</md-icon>
+                                        <h3 class="title">Work Phone</h3>
+                                        <form class="work-phone-input">
+                                            <div class="form-group">
+                                                <input type="text"  id="wfn" class="form-control" ng-model="user.contactInfo.fullWorkPhone" ng-intl-tel-input ng-disabled="!isBlockEditing.contactInfo">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </md-list-item>
+                            </div>
+                            <div class="personal-phone contacts-area">
+                                <div class="contacts-area-header">PERSONAL CONTACTS</div>
+                                <md-list-item class="md-2-line" >
+                                    <md-icon class="icon-info" md-font-set="md">email</md-icon>
+                                    <div class="md-list-item-text">
+                                        <h3 class="title">Personal Email</h3>
+                                        <a href="" class="description link" ng-hide="isBlockEditing.contactInfo">
+                                            {{ user.contactInfo.personalEmail }}
+                                        </a>
+                                        <input type="text" class="inputEs" ng-model="user.contactInfo.personalEmail" ng-show="isBlockEditing.contactInfo">
+                                    </div>
+                                </md-list-item>
+
+                                <md-list-item class="md-2-line md-list-picker">
+                                    <md-icon class="icon-info" md-font-set="md">phone</md-icon>
+                                    <div class="md-list-item-text">
+                                        <h3 class="title">Mobile Phone number</h3>
+                                        <form class="work-phone-input">
+                                            <div class="form-group">
+                                                <input type="text" id="HomePhone" class="form-control" ng-model="user.contactInfo.fullMobilePhone" ng-disabled="!isBlockEditing.contactInfo" class="flg-input pn" ng-intl-tel-input ng-disabled="!isBlockEditing.contactInfo">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </md-list-item>
+
+                                <md-list-item class="md-2-line md-list-picker">
+                                    <md-icon class="icon-info" md-font-set="md">phone</md-icon>
+                                    <div class="md-list-item-text">
+                                        <h3 class="title">Home Phone number</h3>
+                                        <form class="work-phone-input">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" ng-model="user.contactInfo.fullHomePhone" ng-disabled="!isBlockEditing.contactInfo" class="flg-input pn" ng-intl-tel-input ng-disabled="!isBlockEditing.contactInfo">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </md-list-item>
+                            </div>
+                        </md-list>
+                        <md-list class="right-column">
+                            <div class="home-address contacts-area">
+                                <div class="contacts-area-header">HOME ADDRESS</div>
+                                <md-list-item class="md-2-line">
+                                    <div class="md-list-item-text">
+                                        <h3 class="title">Zip Code</h3>
+                                        <p class="description">
+                                        <span ng-hide="isBlockEditing.contactInfo" class="zip-code-span">
+                                            {{ user.contactInfo.zipCode }}
+                                        </span>
+                                            <input type="text" class="inputEs zipCode" ng-model="user.contactInfo.zipCode" ng-disabled="!isBlockEditing.contactInfo" ng-hide="!isBlockEditing.contactInfo">
+                                        </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line">
+                                    <div class="md-list-item-text">
+                                        <h3 class="title">Country</h3>
+                                        <form class="form-country-picker">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" ng-model="rawCountryData" data-initial-country="{{ ( user.contactInfo.country === 'UK' ) ? 'gb' : user.contactInfo.country }}" ng-disabled="!isBlockEditing.contactInfo" class="flg-input pn" ng-intl-tel-input>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line">
+                                    <div class="md-list-item-text">
+                                        <h3 class="title">City</h3>
+                                        <p class="description">
+                                        <span ng-hide="isBlockEditing.contactInfo" class="city-span">
+                                            {{ user.contactInfo.city }}
+                                        </span>
+                                            <input type="text" class="inputEs city-input" ng-model="user.contactInfo.city" ng-show="isBlockEditing.contactInfo">
+                                        </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line" >
+                                    <md-icon class="icon-info" md-font-set="md">home</md-icon>
+                                    <div class="md-list-item-text">
+                                        <h3 class="title">Adress line 1</h3>
+                                        <p class="description">
+                                        <span ng-hide="isBlockEditing.contactInfo">
+                                            {{ user.contactInfo.address[0] }}
+                                        </span>
+                                            <input type="text" class="inputEs" ng-model="user.contactInfo.address[0]" ng-disabled="!isBlockEditing.contactInfo" ng-hide="!isBlockEditing.contactInfo">
+                                        </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line" >
+                                    <md-icon class="icon-info" md-font-set="md">home</md-icon>
+                                    <div class="md-list-item-text">
+                                        <h3 class="title">Adress line 2</h3>
+                                        <p class="description">
+                                        <span ng-hide="isBlockEditing.contactInfo">
+                                            {{ user.contactInfo.address[1] }}
+                                        </span>
+                                            <input type="text" class="inputEs" ng-model="user.contactInfo.address[1]" ng-disabled="!isBlockEditing.contactInfo" ng-hide="!isBlockEditing.contactInfo">
+                                        </p>
+                                    </div>
+                                </md-list-item>
+                                <md-list-item class="md-2-line" >
+                                <md-icon class="icon-info" md-font-set="md">home</md-icon>
+                                    <div class="md-list-item-text">
+                                        <h3 class="title">Adress line 3</h3>
+                                        <p class="description">
+                                            <span ng-hide="isBlockEditing.contactInfo">
+                                            {{ user.contactInfo.address[2] }}
+                                            </span>
+                                            <input type="text" class="inputEs" ng-model="user.contactInfo.address[2]" ng-disabled="!isBlockEditing.contactInfo" ng-hide="!isBlockEditing.contactInfo">
+                                        </p>
+                                    </div>
+                                </md-list-item>
+                            </div>
+                        </md-list>
+                    </div>
+                </md-card-title-text>
+                <md-card-title-media hide-xs class="pt5" ng-if="showEditButtons">
+                    <md-menu md-offset="-60 0">
+                        <md-button aria-label="Open more menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                            <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+                        </md-button>
+                        <md-menu-content width="2">
+                            <md-menu-item>
+                                <md-button ng-click="isBlockEditing.contactInfo = true;addClass()" aria-label="button">
+                                    <img class="edit-icon" src="/img/profile-pics/edit-icon.png" alt="">
+                                    <span class="dot-menu-item">&nbsp; Edit</span>
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-card-title-media>
+            </md-card-title>
+        </section>
+
+        <section id="socialNetworks" ng-hide="!activeContact" ng-if="showEditButtons" class="slideDown md-whiteframe-3dp ml10 mr10 bg-gray contact-info" style="overflow: hidden;">
+            <md-card-title class="mt20 mb30">
+
+                <md-card-title-text>
+                    <p class="md-headline">Social Networks
+                        <md-button ng-if="isBlockEditing.socialLinks" aria-label="x" class="md-icon-button" ng-click="saveSocialLinks()">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                        </md-button>
+                    </p>
+                    <div layout="row" class="flex-container">
+                        <md-list class="flex-item" ng-repeat="( key, value ) in user.socialLinks" ng-if="value.enable">
+                            <md-list-item class="md-2-line">
+                                <p hide-xs class="title">{{ socialLinkParams[ key ].name }}</p>
+                                <div class="md-list-item-text soc-text">
+                                    <i ng-class="socialLinkParams[ key ].icon" class="social-network-icon"></i>
+                                    <a href="{{ value.link }}" class="description link" ng-if="!isBlockEditing.socialLinks">
+                                        {{ value.link }}
+                                    </a>
+                                    <input type="text" class="inputEs" ng-model="user.socialLinks[ key ].link" ng-if="isBlockEditing.socialLinks">
+                                    <i class="fa fa-times" ng-if="isBlockEditing.socialLinks" aria-hidden="true" ng-click="exitSocialLink( key )"></i>
+                                </div>
+
+                            </md-list-item>
+                        </md-list>
+                        <md-list class="flex-item" ng-show="!addingNewSocialLink">
+                            <md-list-item class="md-2-line">
+                                <md-button class="headline add-title" aria-label="button" ng-click="addingNewSocialLink = true">+ Add one more</button>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                    <add-social-networks show="socialNetworks" ng-show="addingNewSocialLink" class="SN"></add-social-networks>
+                </md-card-title-text>
+
+                <md-card-title-media hide-xs class="pt5">
+                    <md-menu md-offset="-60 0">
+                        <md-button aria-label="Open more menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                            <img class="more_vert" src="/img/profile-pics/more_vert.png" alt="">
+                        </md-button>
+                        <md-menu-content width="2">
+                            <md-menu-item>
+                                <md-button ng-click="isBlockEditing.socialLinks = true" aria-label="button">
+                                    <img class="edit-icon" src="/img/profile-pics/edit-icon.png" alt="">
+                                    <span class="dot-menu-item">&nbsp; Edit</span>
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-card-title-media>
+            </md-card-title>
+
+        </section>
+
+    </section>
+
+    <section layout="row" class="down-media">
+        <md-button hide-xs class="md-raised save" aria-label="button"><i class="material-icons print">print</i>Save PDF</md-button>
+    </section>
+
+</md-card>

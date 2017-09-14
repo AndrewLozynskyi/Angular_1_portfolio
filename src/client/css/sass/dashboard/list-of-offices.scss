@@ -1,0 +1,39 @@
+.home-calendar {
+    margin-left: 15px;
+    min-width: 400px;
+    margin-right: 5px;
+    margin-bottom: 20px;
+    @media(max-width: 740px) {
+        min-width: 275px;
+        margin-left: 30px!important;
+        margin-right: 30px!important;
+    }
+    .md-icon-button.dot {
+        .container-dot {
+            display: inline;
+            .dots {
+                width: 3px;
+                position: relative;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+list-of-offices {
+    min-width: 400px !important;
+    .office-location {
+        margin-left: 15px;
+        margin-right: 5px;
+        margin-bottom: 20px;
+        .md-icon-button.dot {
+            .container-dot {
+                display: inline;
+                .dots {
+                    width: 3px;
+                    position: relative;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}

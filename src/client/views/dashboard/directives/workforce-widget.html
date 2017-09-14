@@ -1,0 +1,31 @@
+<div class="trends" >
+    <div  class="filters" ng-cloak>
+        <span flex="none" layout="row" layout-align="start center" class="trends-span">
+            <span flex hide-gt-xs></span>
+            <md-icon flex="none" md-font-set="md" ng-class="ww.generalInfo.workforceTrends.month < 0 ? 'rotate45' : ww.generalInfo.workforceTrends.month > 0 ? 'rotate225' : 'double-rotate45' ">arrow_upward</md-icon>
+            <md-icon flex="none" ng-show="ww.generalInfo.workforceTrends.month === 0" md-font-set="md" class="double-arrow">arrow_upward</md-icon>
+            <span class="md-headline rotate-gray">{{ ww.generalInfo.workforceTrends.value }}&ensp;</span>
+
+            <span layout="column" >
+                <sup ng-class="ww.generalInfo.workforceTrends.month < 0 ? 'rotate-red' : ww.generalInfo.workforceTrends.month > 0 ? 'rotate-green' : 'rotate-gray'">{{ ww.generalInfo.workforceTrends.month }} from {{ selectedDate | date:'MMMM' }}</sup>
+                <sub>{{ ww.generalInfo.workforceTrends.year }} in January</sub>
+            </span>
+            <span flex hide-gt-xs></span>
+        </span>
+    </div>
+</div>
+<div class="workforce-pie">
+
+    <section layout="row" class="age-list">
+        <div flex class="legend" layout="row" layout-align=" start">
+            <md-list id='age-item' >
+                <md-list-item ng-repeat="item in legend |limitTo:4" class="legend-age" layout="row" layout-align="start">
+                    <div class="circle" ng-style="{background: item.color}"></div>
+                    <div class="avarage-title md-secondary">{{ item.name }}</div>
+                </md-list-item>
+            </md-list>
+        </div>
+        <div flex class="pie-chart"></div>
+    </section>
+
+</div>

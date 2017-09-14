@@ -1,0 +1,61 @@
+
+<div class="headcount-line">
+    <div class="progress-data" layout="row">
+        <md-icon class="progress-icon" md-font-set="fa fa-users"></md-icon>
+        <span class="progress-name">Headcount</span>
+        <span class="progress-total">{{tlc.teamData.headcount[ 0 ]}}
+            <span class="total">/ {{tlc.teamData.headcount[ 1 ]}}</span>
+        </span>
+    </div>
+    <div class="progress-line">
+        <span ng-style="tlc.setCurrentWidth(tlc.teamData.headcount[ 1 ], tlc.teamData.headcount[ 0 ] )" class="up-line"></span>
+    </div>
+</div>
+<div class="avarage-line">
+    <div class="progress-data" layout="row">
+        <md-icon class="progress-icon" md-font-set="fa fa-money"></md-icon>
+        <span class="progress-name">Avarage salary</span>
+        <span class="progress-total">{{tlc.teamData.salary[ 0 ]}}
+            <span class="total">/ ${{tlc.teamData.salary[ 1 ]}}k</span>
+        </span>
+    </div>
+    <div class="progress-line">
+        <span ng-style="tlc.setCurrentWidth(tlc.teamData.salary[ 1 ], tlc.teamData.salary[ 0 ] )" class="up-line"></span>
+    </div>
+</div>
+<div class="total-line">
+    <div class="progress-data" layout="row">
+        <md-icon class="progress-icon" md-font-set="fa fa-balance-scale"></md-icon>
+        <span class="progress-name">Total salary bill (in 2016)</span>
+        <span class="progress-total">{{tlc.teamData.salaryBill[ 0 ]}}
+            <span class="total">/ ${{tlc.teamData.salaryBill[ 1 ]}}k</span>
+        </span>
+    </div>
+    <div class="progress-line">
+        <span ng-style="tlc.setCurrentWidth(tlc.teamData.salaryBill[ 1 ], tlc.teamData.salaryBill[ 0 ] )" class="up-line"></span>
+    </div>
+</div>
+<div class="seniority-line">
+    <div class="progress-data" layout="row">
+        <md-icon class="progress-icon" md-font-set="fa fa-shield"></md-icon>
+        <span class="progress-name">Avarage seniority</span>
+        <span class="progress-total">{{tlc.teamData.seniority[ 0 ]}}
+            <span class="total">/ {{tlc.teamData.seniority[ 1 ]}} yrs</span>
+        </span>
+    </div>
+    <div class="progress-line">
+        <span ng-style="tlc.setCurrentWidth(tlc.teamData.seniority[ 1 ], tlc.teamData.seniority[ 0 ] )" class="up-line"></span>
+    </div>
+</div>
+<div class="turnover-line">
+    <div class="progress-data" layout="row">
+        <md-icon class="progress-icon" md-font-set="fa fa-star-half-o"></md-icon>
+        <span class="progress-name">Avarage turnover</span>
+        <span class="progress-total">{{tlc.teamData.turnover[ 0 ]}}
+            <span class="total">/ {{tlc.teamData.turnover[ 1 ]}}%</span>
+        </span>
+    </div>
+    <div class="progress-line">
+        <span ng-style="tlc.setCurrentWidth(tlc.teamData.turnover[ 1 ], tlc.teamData.turnover[ 0 ] )" class="up-line"></span>
+    </div>
+</div>

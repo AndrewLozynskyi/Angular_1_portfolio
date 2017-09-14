@@ -1,0 +1,56 @@
+
+<header layout="row" >
+    <div class="title">Department Headcount in selected areas for {{ selectedDate | date:'MMMM yyyy' }}</div>
+    <span flex></span>
+    <div ng-init=" close = '/img/icons/full-screen-icon.png'; open = '/img/icons/full-screen-exit-icon.png' ">
+        <md-button aria-label="Fullscreen for map" class="md-icon-button dot" ng-click="isFullscreenGeo = !isFullscreenGeo">
+            <md-icon class="container-dot">
+                <img class="dots" ng-src="{{isFullscreenGeo ? open : close}}" fullscreen="isFullscreenGeo">
+            </md-icon>
+        </md-button>
+    </div>
+</header>
+
+<div layout="row" class="geo-chart-info">
+    <span flex="none" layout="row" layout-align="start center" class="info-span">
+        <span class="md-headline rotate-gray title">4</span>
+        <span layout="column" >
+            <sup class="top-title">Countries</sup>
+            <sub class="bottom-title">selected</sub>
+        </span>
+    </span>
+    <span flex="none" layout="row" layout-align="start center" class="info-span">
+        <span class="md-headline rotate-gray title">6</span>
+        <span layout="column" >
+            <sup class="top-title">Offices</sup>
+            <sub class="bottom-title">selected</sub>
+        </span>
+    </span>
+    <span flex="none" layout="row" layout-align="start center" class="info-span">
+        <span class="md-headline rotate-gray title">598</span>
+        <span layout="column" >
+            <sup class="top-title">Employees</sup>
+            <sub class="bottom-title">as headcount</sub>
+        </span>
+    </span>
+</div>
+
+<section layout="row" fullscreen="isFullscreenGeo">
+    
+    <div class="map_container">
+        <div flex class="map">Alternative content</div>
+    </div>
+
+    <div layout="column" class="histogram">
+        <div class="scale" layout="column" flex layout-margin>
+            <center class="scale-label max"></center>
+            <center flex="80">
+                <div class="scale-body">
+                    <div class="arrow-tooltip"></div>
+                </div>
+            </center>
+            <center class="scale-label min"></center>
+        </div>
+    </div>
+
+</section>

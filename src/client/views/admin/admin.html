@@ -1,0 +1,22 @@
+
+<% if permissions.admin.home.rolesWidget %>
+
+    <div>
+        <md-tabs flex class="admin-tabs">
+            <md-tab label="Home" md-active="$state.current.name === 'admin.home'" ui-sref="admin.home"></md-tab>
+            <md-tab label="Roles" md-active="$state.current.name === 'admin.roles'" ui-sref="admin.roles"></md-tab>
+            <md-tab label="Users" md-active="$state.current.name === 'admin.users'" ui-sref="admin.users"></md-tab>
+            <md-tab label="Permissions" md-active="$state.current.name === 'admin.permissions'" ui-sref="admin.permissions"></md-tab>
+            <md-tab label="Activity on Server" md-active="$state.current.name === 'admin.activity'" ui-sref="admin.activity"></md-tab>
+            <md-tab label="Alert Notifications" md-active="$state.current.name === 'admin.notifications'" ui-sref="admin.notifications"></md-tab>
+            <md-tab label="Payments Logs" md-active="$state.current.name === 'admin.paymentslogs'" ui-sref="admin.paymentslogs"></md-tab>
+            <md-tab label="Settings" md-active="$state.current.name === 'admin.settings'" ui-sref="admin.settings"></md-tab>
+        </md-tabs>
+        <ui-view></ui-view>
+    </div>
+
+<% endif %>
+
+<% if permissions.admin.home.rolesWidget == false %>
+    You have no permission to this page.
+<% endif %>

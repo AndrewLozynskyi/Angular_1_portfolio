@@ -1,0 +1,50 @@
+
+<md-toolbar>
+    <div class="upload-header">
+        <md-icon class="material-icons">backup</md-icon>
+        <span>Upload Files</span>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon aria-label="Close dialog">close</md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-dialog-actions>
+    <div class="upload-main">
+        <div class="drag-cont">
+            <span>Drag files here or click Browse to upload</span>
+            <div ng-show="selectedAvatar" id="cropper"></div>
+            <md-button class="btn md-primary" ngf-select="upload($files)">
+                <span>Browse</span>
+            </md-button>
+            <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true">
+            </div>
+        </div>
+    </div>
+</md-dialog-actions>
+
+<md-list>
+    <md-list-item class="uploading-file-list" ng-repeat="file in fileList">
+        <md-icon class="material-icons insert-file-icon">insert_drive_file</md-icon>
+        <span>{{ file.name }}</span>
+        <span class="wrong-format" ng-hide="true">Wrong file format</span>
+        <md-progress-circular ng-hide="file.uploadProgress == 100" md-mode="determinate" class="background" md-diameter="25" value="100"></md-progress-circular>
+        <md-progress-circular ng-hide="file.uploadProgress == 100" md-mode="determinate" md-diameter="25" value="{{ file.uploadProgress }}"></md-progress-circular>
+        <md-button class="md-close-button" ng-hide="true">
+            <md-icon class="fa fa-times-circle close-icon" aria-hidden="true">
+                <div class="close-background"></div>
+            </md-icon>
+        </md-button>
+        <md-button class="md-help-btn" ng-hide="true">
+            <md-icon class="material-icons help-icon">help
+                <div class="background-white"></div>
+            </md-icon>
+        </md-button>
+        <md-button ng-hide="file.uploadProgress != 100" class="md-check-btn">
+            <md-icon class="material-icons check-icon">check_circle
+                <div class="background-white"></div>
+            </md-icon>
+        </md-button>
+    </md-list-item>
+</md-list>

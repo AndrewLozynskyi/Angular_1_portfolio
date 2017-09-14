@@ -1,0 +1,52 @@
+
+radial-chart {
+    md-grid-list {
+        md-grid-tile {
+            .donut-label {
+                color: #a0a1a2;
+            }
+            &:last-child{
+                .donut-label {
+                    text-decoration: underline;
+                    @media (max-width: 740px) {
+                        top: -14px;
+                    }
+                }
+            }
+            &:nth-child(4){
+            .donut-label {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    section {
+        height: 120px;
+        @media (max-width: 740px) {
+            margin-top: 40px;
+        }
+        figure {
+            height: 120px;
+            .donut-label {
+                color: $content-font-color;
+                font: 300 16px roboto;
+                vertical-align: middle;
+                display: block;
+                margin-bottom: auto;
+                margin-top: auto;
+                padding-bottom: 5px;
+                @media (max-width: 740px) {
+                    font-size: 12px;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    text-align: center;
+                }
+            }
+            @media all and ( max-width: $break-xsmall ) {
+                justify-content: flex-start !important;
+            }
+        }
+    }
+}

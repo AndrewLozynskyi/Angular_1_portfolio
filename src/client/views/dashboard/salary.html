@@ -1,0 +1,114 @@
+
+<div id="dashboard-card">
+    <md-progress-circular ng-if="showBackground" md-diameter="40px"></md-progress-circular>
+</div>
+
+<md-card class="dashboard md-whiteframe-3dp ml20 mr10 bg-gray" style="overflow: hidden;">
+
+    <md-card-title class="mt20 mb15">
+        <tab-title active-params="sl.activeParams" select-countries="sl.selectCountries" select-departments="sl.selectDepartments" tab-title="'Salary'" selected-date="selectedDate" get-countries="sl.getCountries", get-departments="sl.getDepartments"></tab-title>
+        <md-card-title-media class="pt5">
+            <md-menu md-offset="-220 0">
+                <md-button aria-label="Open demo menu" class="md-icon-button dot" ng-click="$mdOpenMenu($event)">
+                    <md-icon class="container-dot">
+                        <img class="dots" src="/img/icons/3dot.png"/>
+                    </md-icon>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Refresh">
+                            <md-icon md-font-set="fa fa-refresh" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Refresh</span>
+                        </md-button>
+                    </md-menu-item>
+                    <% if permissions.dashboard.home.setTarget %>
+                        <md-menu-item>
+                            <md-button ng-click="sl.showTargetDialogue($event)" aria-label="Target">
+                                <md-icon md-font-set="fa fa-crosshairs" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Target..</span>
+                            </md-button>
+                        </md-menu-item>
+                    <% endif %>
+                    <% if permissions.dashboard.home.setFilter %>
+                        <md-menu-item>
+                            <md-button ng-click="sl.showFilters()" aria-label="Add filter">
+                                <md-icon md-font-set="fa fa-filter" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Add Filter</span>
+                            </md-button>
+                        </md-menu-item>
+                    <% endif %>
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Show on Home">
+                            <md-icon md-font-set="fa fa-eye" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Show on Homepage</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="null" aria-label="Hide on Home">
+                            <md-icon md-font-set="fa fa-eye-slash" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Hide from Homepage</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="sl.showUploadDialogue($event)" aria-label="Upload">
+                            <md-icon md-font-set="fa fa-upload" aria-hidden="true"><span class="dot-menu-item">&nbsp;  Upload</span>
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </md-card-title-media>
+    </md-card-title>
+
+    <md-divider class="ml15 mr15"></md-divider>
+
+    <md-card-content class="ml15" layout-align="space-between">
+        <div layout="row" class="filters">
+            <span flex="none" layout="row" layout-align="start center" class="trends-span">
+                <span flex hide-gt-xs></span>
+                <md-icon flex="none" md-colors="{ color: 'warn-500' }" md-font-set="md" class="rotate45">arrow_upward</md-icon>
+                <span class="md-headline">{{ sl.trends.total }}$&ensp;</span>
+                <span layout="column">
+                    <sup md-colors="{ color: 'warn-500' }">{{ sl.trends.month }}% from {{ selectedDate | date:'MMMM' }}</sup>
+                    <sub>{{ sl.trends.year }}% in January</sub>
+                </span>
+                <span flex hide-gt-xs></span>
+            </span>
+            <span flex class="ml20">
+                <country-dropdown active-params="sl.activeParams" country-list="sl.getCountries()" get-countries="sl.getCountries" select-countries="sl.selectCountries"></country-dropdown>
+                <department-dropdown active-params="sl.activeParams" department-list="sl.getDepartments()" get-departments="sl.getDepartments" select-departments="sl.selectDepartments"></department-dropdown>
+            </span>
+        </div>
+    </md-card-content>
+
+    <salary-donut-charts get-departments="sl.getActiveDepartments()" set-data="sl.getDataDonutChart()"></salary-donut-charts>
+
+    <avarage-salary color-bar="#947119" 
+                    bar-hover="#ffb600"
+                    ng-if="sl.activeParams.countries.length == 0 && sl.activeParams.departments.length == 0 || sl.activeParams.countries.length == 0 && sl.activeParams.departments.length != 0"
+                    set-data="sl.getActiveCountries()"></avarage-salary>    
+    
+    <avarage-annualised ng-if="sl.activeParams.countries.length == 0 && sl.activeParams.departments.length == 0"
+                        set-data='sl.getCountriesSales()'></avarage-annualised>
+    
+    <avarage-salary-departments color-bar-dep="rgba(23, 169, 168, 0.5)" 
+                                bar-hover-dep="#17a9a8"
+                                ng-if="sl.activeParams.countries.length == 0 && sl.activeParams.departments.length == 0 || sl.activeParams.countries.length != 0 && sl.activeParams.departments.length == 0"
+                                set-data="sl.getActiveDepartments()"
+                                ></avarage-salary-departments>
+    
+    <avarage-annualised-department set-data='sl.getDepartmentsSales()'
+                                   ng-if="sl.activeParams.countries.length == 0 && sl.activeParams.departments.length == 0"></avarage-annualised-department>
+
+    <salary-departments-table set-data='sl.getDepartmentsSales()'
+                              get-countries="sl.getActiveCountries()" 
+                              ng-if="sl.activeParams.countries.length != 0 && sl.activeParams.departments.length == 0"></salary-departments-table>
+
+    <avarage-annualized-salary-table ng-if="sl.activeParams.countries.length == 0 && sl.activeParams.departments.length != 0"
+                                     set-data='sl.getCountriesSales()'
+                                     get-countries="sl.getActiveDepartments()" ></avarage-annualized-salary-table>
+
+    <salary-line-chart title-chart="Average annualized Salary in {{sl.getCountriesSales()[ 0 ].country}}, {{sl.getDepartmentsSales()[ 0 ].department}} Department for October 2016"  
+                       set-date="selectedDate" 
+                       class="mt50mb25"
+                       ng-if="sl.activeParams.countries.length != 0 && sl.activeParams.departments.length != 0"
+                       set-data="sl.getCountriesSales()"></salary-line-chart>
+
+    <dynamic-salary-table ng-if="sl.activeParams.countries.length != 0 && sl.activeParams.departments.length != 0"
+                          set-data="sl.getEmployeesList()"></dynamic-salary-table>
+    
+</md-card>

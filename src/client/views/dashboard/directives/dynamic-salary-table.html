@@ -1,0 +1,84 @@
+<md-card class="dynamic-salary">
+    <table class="slary-table">
+        <thead>
+        <th>
+            <div class="head-row" layout="row">
+                <div layout="row" class="buttons">
+                    <button class="name-button">Name</button><br>
+                    <button  class="experience-button">Experience</button>
+                </div>
+            </div>
+        </th>
+        <th>
+            <div class="head-row " layout="row">
+                <div class="center-pos" layout="row">
+                    <div class="contacts-name">Salary &euro;</div>
+                </div>
+            </div>
+        </th>
+        <th>
+            <div class="head-row" layout="row">
+                <div class="center-pos" layout="row">
+                    <div layout="row" class="contacts-name">% from<br> Jun 2016
+                    </div>
+                </div>
+            </div>
+        </th>
+        <th>
+            <div class="head-row dynamic-row" layout="row">
+                <div class="chart-salary" layout="row">
+                    <div layout="row" class="contacts-name">Dynamic Salary
+                    </div>
+                </div>
+            </div>
+        </th>
+        </thead>
+
+        <tbody id="elem">
+        <tr ng-repeat="item in dst.employees.list">
+        <th >
+            <div class="head-row" layout="row">
+                <div class="user-info">
+                    <div class="user-pic">
+                        <!-- <img src="{{data.img}}"> -->
+                    </div>
+                    <div class="user-name-block">
+                        <div class="data">
+                            <div class="name text">{{ item.name }}</div>
+                            <div class="visited text">{{ item.dateDiff }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th>
+        <th>
+            <div class="head-row" layout="row">
+                <div class="chart-salary" layout="row">
+                    <div layout="row" class="contacts-name">
+                        0
+                    </div>
+                </div>
+            </div>
+        </th>
+        <th>
+            <div class="head-row" layout="row">
+                <div class="chart-salary" layout="row">
+                    <div layout="row" class="contacts-name" ng-class=" data.from>0?'red':'green'">
+                        {{ item.salaryVsJan  }} %
+                    </div>
+                </div>
+            </div>
+        </th>
+        <th id="line-width">
+            <div class="head-row chart-row" layout="row">
+                <div class="chart-salary" layout="row">
+                    <div layout="row" class="contacts-name" id="line-chart-salary-table">
+                        <simple-line-chart set-data="item.salary"></simple-line-chart>
+                    </div>
+                </div>
+            </div>
+        </th>
+        </tr>
+        </tbody>
+    </table>
+</md-card>
